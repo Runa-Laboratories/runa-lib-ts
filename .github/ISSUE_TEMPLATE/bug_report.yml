@@ -1,0 +1,23 @@
+name: Bug report
+description: Something in the SDK behaves incorrectly
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected, what you got. Redact any real API key.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: SDK version
+    validations:
+      required: true
+  - type: input
+    id: runtime
+    attributes:
+      label: Node version
+    validations:
+      required: true
