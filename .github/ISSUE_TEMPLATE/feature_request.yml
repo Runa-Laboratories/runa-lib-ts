@@ -1,0 +1,16 @@
+name: Feature request
+description: Suggest an improvement to the SDK
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What are you trying to do that the SDK makes hard today?
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: Proposed API
+      description: Sketch the call you wish you could write.
