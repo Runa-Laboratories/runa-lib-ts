@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "synthetic": true,
+  "journeys": {
+    "ttfc": 30,
+    "records": 30,
+    "first-session": 30,
+    "first-exec": 30,
+    "lifecycle-open": 30
+  },
+  "cleanup_deletions": 90,
+  "public_network_dispatches": 0
+}
