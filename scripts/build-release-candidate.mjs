@@ -13,9 +13,22 @@ const [metadata] = JSON.parse(npmPack.stdout);
 const archive = await readFile(`release-artifacts/${metadata.filename}`);
 const sourceCommit = process.env.GITHUB_SHA ??
   execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim();
-const sourceTreeClean = execFileSync("git", ["status", "--porcelain"], {
-  encoding: "utf8"
-}).trim() === "";
+const generatedOutputRoots = ["evidence/", "release-artifacts/"];
+const worktreeEntries = execFileSync(
+  "git",
+  ["status", "--porcelain", "--untracked-files=all"],
+  { encoding: "utf8" },
+).split(/\r?\n/u).filter(Boolean);
+const sourceTreeChanges = worktreeEntries.filter((entry) => {
+  const renderedPath = entry.slice(3).replaceAll("\\", "/");
+  const paths = renderedPath.includes(" -> ")
+    ? renderedPath.split(" -> ")
+    : [renderedPath];
+  return paths.some((candidatePath) =>
+    !generatedOutputRoots.some((root) => candidatePath.startsWith(root))
+  );
+});
+const sourceTreeClean = sourceTreeChanges.length === 0;
 const manifest = {
   schema_version: 1,
   package: metadata.name,
@@ -24,7 +37,9 @@ const manifest = {
   size: archive.byteLength,
   sha256: createHash("sha256").update(archive).digest("hex"),
   source_commit: sourceCommit,
-  source_tree_clean: sourceTreeClean
+  source_tree_clean: sourceTreeClean,
+  source_change_count: sourceTreeChanges.length,
+  generated_output_roots: generatedOutputRoots,
 };
 await writeFile("release-artifacts/candidate.json", `${JSON.stringify(manifest, null, 2)}\n`);
 console.log(`${manifest.filename} ${manifest.sha256}`);
