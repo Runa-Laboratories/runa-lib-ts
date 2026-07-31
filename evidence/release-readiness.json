@@ -2,7 +2,7 @@
   "schema_version": 2,
   "decision": "BLOCKED",
   "projection_sha256": "02a554b22592f0267475b847a2bb1c7df64e2b688cdb69b0a4a8b392695e1c55",
-  "candidate_sha256": "005e4396e01b260ecfe06a5fd9d7ebc3c5f703721612ff2b102254871124f7bd",
+  "candidate_sha256": "0674b6808331db4ffbf4637404780be322f2e2f14ceffeb1752ad4ae9139e831",
   "blockers": [
     {
       "id": "TS-REL-001",
@@ -16,41 +16,36 @@
     },
     {
       "id": "TS-REL-003",
-      "gate": "candidate-identity",
-      "reason": "Candidate is not bound to a clean source commit."
-    },
-    {
-      "id": "TS-REL-004",
       "gate": "quality",
       "reason": "Quality evidence is not bound to the candidate source commit."
     },
     {
-      "id": "TS-REL-005",
+      "id": "TS-REL-004",
       "gate": "compatibility-matrix",
       "reason": "Missing or invalid evidence: evidence/compatibility-matrix.json"
     },
     {
-      "id": "TS-REL-006",
+      "id": "TS-REL-005",
       "gate": "repository-controls",
       "reason": "Missing or invalid evidence: evidence/repository-controls.json"
     },
     {
-      "id": "TS-REL-007",
+      "id": "TS-REL-006",
       "gate": "cross-language",
       "reason": "Missing or invalid evidence: evidence/cross-language.json"
     },
     {
-      "id": "TS-REL-008",
+      "id": "TS-REL-007",
       "gate": "publication-readiness",
       "reason": "Missing or invalid evidence: evidence/publication-readiness.json"
     },
     {
-      "id": "TS-REL-009",
+      "id": "TS-REL-008",
       "gate": "sbom-validation",
       "reason": "No accepted release trust root is configured."
     },
     {
-      "id": "TS-REL-010",
+      "id": "TS-REL-009",
       "gate": "external-release-interfaces",
       "reason": "No accepted release trust root is configured."
     }
