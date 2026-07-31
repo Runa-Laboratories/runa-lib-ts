@@ -24,7 +24,7 @@
     "typecheck": "tsc --project tsconfig.json --noEmit",
     "build": "npm run clean && tsc --project tsconfig.build.json",
     "test": "npm run build && vitest run --maxWorkers=1 --no-file-parallelism",
-    "docs:api": "node scripts/generate-api-docs.mjs",
+    "docs:api": "npm run build && typedoc --options docs/reference.config.json && node scripts/generate-api-docs.mjs",
     "lint": "node scripts/lint.mjs",
     "contract:verify": "node scripts/verify-contract.mjs",
     "surface:verify": "node scripts/verify-surface.mjs",
@@ -39,6 +39,7 @@
     "@types/node": "22.15.3",
     "esbuild": "0.25.5",
     "typescript": "5.8.3",
-    "vitest": "3.2.4"
+    "typedoc": "0.28.20",
+    "vitest": "3.2.7"
   }
 }

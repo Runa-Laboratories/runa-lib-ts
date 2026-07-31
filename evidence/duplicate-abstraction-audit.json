@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "decisions": [
+    {
+      "concept": "wire-decoding",
+      "disposition": "centralized",
+      "owner": "src/domain.ts"
+    },
+    {
+      "concept": "request-policy",
+      "disposition": "centralized",
+      "owner": "src/internal/transport.ts"
+    },
+    {
+      "concept": "own-property checks",
+      "disposition": "intentional-local",
+      "reason": "separate input boundaries; no public abstraction"
+    }
+  ]
+}

@@ -12,26 +12,26 @@ export type SessionStatus =
 export type SessionAgent = "claude-code" | "codex" | "openclaw";
 
 export interface SessionSnapshot {
-  readonly id: OpaqueWireValue;
-  readonly userId: OpaqueWireValue;
-  readonly slug: OpaqueWireValue;
-  readonly name: OpaqueWireValue;
+  readonly id: string;
+  readonly userId: string;
+  readonly slug: string;
+  readonly name: string;
   readonly agent?: SessionAgent;
-  readonly vcpus: OpaqueWireValue;
-  readonly memoryMiB: OpaqueWireValue;
+  readonly vcpus: number;
+  readonly memoryMiB: number;
   readonly status: SessionStatus;
-  readonly runningSeconds: OpaqueWireValue;
-  readonly createdAt: OpaqueWireValue;
-  readonly updatedAt: OpaqueWireValue;
+  readonly runningSeconds: number;
+  readonly createdAt: string;
+  readonly updatedAt: string;
   readonly url: string;
 }
 
 export interface SessionCreateOptions {
   readonly agent?: SessionAgent;
-  readonly vcpus?: OpaqueWireValue;
-  readonly memoryMiB?: OpaqueWireValue;
-  readonly allowedHosts?: OpaqueWireValue;
-  readonly runtimePort?: OpaqueWireValue;
+  readonly vcpus?: number;
+  readonly memoryMiB?: number;
+  readonly allowedHosts?: readonly string[];
+  readonly runtimePort?: number;
 }
 
 export interface ExecOptions {
@@ -40,12 +40,12 @@ export interface ExecOptions {
 }
 
 export interface ExecResult {
-  readonly exitCode: OpaqueWireValue;
-  readonly stdout: OpaqueWireValue;
-  readonly stderr: OpaqueWireValue;
-  readonly durationMs: OpaqueWireValue;
-  readonly stdoutTruncated: OpaqueWireValue;
-  readonly stderrTruncated: OpaqueWireValue;
+  readonly exitCode: number;
+  readonly stdout: string;
+  readonly stderr: string;
+  readonly durationMs: number;
+  readonly stdoutTruncated: boolean;
+  readonly stderrTruncated: boolean;
 }
 
 export interface Acknowledgement {
@@ -57,18 +57,18 @@ export interface OpenSessionResult {
 }
 
 export interface Record {
-  readonly id: OpaqueWireValue;
-  readonly sessionId: OpaqueWireValue;
-  readonly kind: OpaqueWireValue;
-  readonly summary: OpaqueWireValue;
+  readonly id: string;
+  readonly sessionId: string;
+  readonly kind: string;
+  readonly summary: string;
   readonly detail: OpaqueWireValue;
-  readonly createdAt: OpaqueWireValue;
+  readonly createdAt: string;
 }
 
 export interface EstimatedUsage {
-  readonly estimatedSpendUsd: OpaqueWireValue;
-  readonly estimatedRemainingUsd: OpaqueWireValue;
-  readonly note: OpaqueWireValue;
+  readonly estimatedSpendUsd: number;
+  readonly estimatedRemainingUsd: number;
+  readonly note: string;
 }
 
 export interface AssignedWorkspace {
@@ -79,15 +79,15 @@ export interface AssignedWorkspace {
 
 export interface UnassignedWorkspace {
   readonly assigned: false;
-  readonly waitlistPosition: OpaqueWireValue;
+  readonly waitlistPosition: number;
   readonly usage?: never;
 }
 
 export type Workspace = AssignedWorkspace | UnassignedWorkspace;
 
 export interface Me {
-  readonly id: OpaqueWireValue;
-  readonly email: OpaqueWireValue;
+  readonly id: string;
+  readonly email: string;
   readonly workspace: Workspace;
 }
 

@@ -28,6 +28,7 @@ function prepareExec(
 ): { readonly body: globalThis.Record<string, unknown>; readonly timeoutSecs?: number } {
   const body: globalThis.Record<string, unknown> = {};
   if (typeof command === "string") {
+    if (command.length === 0) throw new TypeError("Invalid session command.");
     body.command = command;
   } else if (Array.isArray(command)) {
     if (
@@ -164,6 +165,9 @@ export class Session {
   }
 
   async checkpoint(name: string): Promise<Acknowledgement> {
+    if (typeof name !== "string" || name.length < 1 || name.length > 80) {
+      throw new TypeError("Invalid checkpoint name.");
+    }
     const id = this.#snapshot.id;
     assertUuid(id);
     return (await this.#owner.invoke("sessions.checkpoint", {

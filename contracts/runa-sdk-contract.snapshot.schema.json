@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "contractVersion",
+    "operations",
+    "schemas",
+    "wire"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "contractVersion": {
+      "type": "string"
+    },
+    "operations": {
+      "type": "object",
+      "minProperties": 13,
+      "maxProperties": 13
+    },
+    "schemas": {
+      "type": "object"
+    },
+    "wire": {
+      "type": "object"
+    }
+  }
+}

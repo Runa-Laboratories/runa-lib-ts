@@ -1,203 +1,150 @@
 import type {
-  Acknowledgement,
-  ExecResult,
-  Me,
-  OpenSessionResult,
-  Record,
-  SessionAgent,
-  SessionSnapshot,
-  SessionStatus,
+  Acknowledgement, ExecResult, Me, OpenSessionResult, Record, SessionAgent,
+  SessionSnapshot, SessionStatus
 } from "./types.js";
 
-const UUID =
-  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
-const OPEN_URL =
-  /^https:\/\/[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.runacode\.cloud\/__runa\/auth\?t=[^&#]+$/;
-const STATUSES = new Set<SessionStatus>([
-  "creating",
-  "running",
-  "paused",
-  "suspended",
-  "stopped",
-  "deleted",
-  "error",
-]);
-const AGENTS = new Set<SessionAgent>([
-  "claude-code",
-  "codex",
-  "openclaw",
-]);
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
+const SLUG = /^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/;
+const RUNTIME_URL = /^https:\/\/[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.runacode\.cloud$/;
+const OPEN_URL = /^https:\/\/[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.runacode\.cloud\/__runa\/auth\?t=[^&#]+$/;
+const RFC3339 = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/;
+const STATUSES = new Set<SessionStatus>(["creating", "running", "paused", "suspended", "stopped", "deleted", "error"]);
+const AGENTS = new Set<SessionAgent>(["claude-code", "codex", "openclaw"]);
 
 export class DecodeFailure {
   readonly kind = "decode_failure";
 }
-
-function malformed(): never {
-  throw new DecodeFailure();
-}
-
+function malformed(): never { throw new DecodeFailure(); }
 function object(value: unknown): globalThis.Record<string, unknown> {
-  if (value === null || typeof value !== "object" || Array.isArray(value)) {
-    malformed();
-  }
+  if (value === null || typeof value !== "object" || Array.isArray(value)) malformed();
   return value as globalThis.Record<string, unknown>;
 }
-
-function required(
-  source: globalThis.Record<string, unknown>,
-  key: string,
-): unknown {
-  if (!Object.hasOwn(source, key)) malformed();
-  return source[key];
+function exact(source: globalThis.Record<string, unknown>, required: readonly string[], optional: readonly string[] = []): void {
+  const allowed = new Set([...required, ...optional]);
+  if (required.some((key) => !Object.hasOwn(source, key)) || Object.keys(source).some((key) => !allowed.has(key))) malformed();
 }
-
-function optional(
-  source: globalThis.Record<string, unknown>,
-  key: string,
-): unknown | undefined {
-  return Object.hasOwn(source, key) ? source[key] : undefined;
+function string(value: unknown): string {
+  if (typeof value !== "string") malformed();
+  return value;
 }
-
+function integer(value: unknown, minimum = Number.MIN_SAFE_INTEGER): number {
+  if (!Number.isInteger(value) || (value as number) < minimum) malformed();
+  return value as number;
+}
+function number(value: unknown): number {
+  if (typeof value !== "number" || !Number.isFinite(value)) malformed();
+  return value;
+}
+function uuid(value: unknown): string {
+  const result = string(value);
+  if (!UUID.test(result)) malformed();
+  return result;
+}
+function dateTime(value: unknown): string {
+  const result = string(value);
+  if (!RFC3339.test(result) || Number.isNaN(Date.parse(result))) malformed();
+  return result;
+}
 export function assertUuid(value: unknown): asserts value is string {
-  if (typeof value !== "string" || !UUID.test(value)) {
-    throw new TypeError("Invalid session ID.");
-  }
+  if (typeof value !== "string" || !UUID.test(value)) throw new TypeError("Invalid session ID.");
 }
 
 export function decodeSession(value: unknown): SessionSnapshot {
   const source = object(value);
-  const id = required(source, "id");
-  const userId = required(source, "user_id");
-  const slug = required(source, "slug");
-  const name = required(source, "name");
-  const vcpus = required(source, "vcpus");
-  const memoryMiB = required(source, "memory_mib");
-  const status = required(source, "status");
-  const runningSeconds = required(source, "running_seconds");
-  const createdAt = required(source, "created_at");
-  const updatedAt = required(source, "updated_at");
-  const url = required(source, "url");
-  const agent = optional(source, "agent");
-  if (
-    typeof status !== "string" ||
-    !STATUSES.has(status as SessionStatus) ||
-    typeof url !== "string" ||
-    (agent !== undefined &&
-      (typeof agent !== "string" || !AGENTS.has(agent as SessionAgent)))
-  ) {
-    malformed();
+  exact(source, ["id", "user_id", "slug", "name", "vcpus", "memory_mib", "status", "running_seconds", "created_at", "updated_at", "url"], ["agent"]);
+  const slug = string(source.slug);
+  const status = string(source.status);
+  const url = string(source.url);
+  if (!SLUG.test(slug) || !STATUSES.has(status as SessionStatus) || !RUNTIME_URL.test(url)) malformed();
+  let agent: SessionAgent | undefined;
+  if (Object.hasOwn(source, "agent")) {
+    if (typeof source.agent !== "string" || !AGENTS.has(source.agent as SessionAgent)) malformed();
+    agent = source.agent as SessionAgent;
   }
   return Object.freeze({
-    id,
-    userId,
-    slug,
-    name,
-    ...(agent === undefined ? {} : { agent: agent as SessionAgent }),
-    vcpus,
-    memoryMiB,
-    status: status as SessionStatus,
-    runningSeconds,
-    createdAt,
-    updatedAt,
-    url,
+    id: uuid(source.id), userId: uuid(source.user_id), slug, name: string(source.name),
+    ...(agent === undefined ? {} : { agent }),
+    vcpus: integer(source.vcpus, 0), memoryMiB: integer(source.memory_mib, 0),
+    status: status as SessionStatus, runningSeconds: integer(source.running_seconds, 0),
+    createdAt: dateTime(source.created_at), updatedAt: dateTime(source.updated_at), url
   });
 }
-
 export function decodeSessions(value: unknown): readonly SessionSnapshot[] {
   if (!Array.isArray(value)) malformed();
-  return Object.freeze(value.map((item) => decodeSession(item)));
+  return Object.freeze(value.map(decodeSession));
 }
-
 export function decodeExec(value: unknown): ExecResult {
   const source = object(value);
+  exact(source, ["exit_code", "stdout", "stderr", "duration_ms", "stdout_truncated", "stderr_truncated"]);
+  if (typeof source.stdout_truncated !== "boolean" || typeof source.stderr_truncated !== "boolean") malformed();
   return Object.freeze({
-    exitCode: required(source, "exit_code"),
-    stdout: required(source, "stdout"),
-    stderr: required(source, "stderr"),
-    durationMs: required(source, "duration_ms"),
-    stdoutTruncated: required(source, "stdout_truncated"),
-    stderrTruncated: required(source, "stderr_truncated"),
+    exitCode: integer(source.exit_code), stdout: string(source.stdout), stderr: string(source.stderr),
+    durationMs: integer(source.duration_ms, 0), stdoutTruncated: source.stdout_truncated,
+    stderrTruncated: source.stderr_truncated
   });
 }
-
 export function decodeAcknowledgement(value: unknown): Acknowledgement {
   const source = object(value);
-  if (required(source, "ok") !== true) malformed();
+  exact(source, ["ok"]);
+  if (source.ok !== true) malformed();
   return Object.freeze({ ok: true });
 }
-
 export function decodeOpen(value: unknown): OpenSessionResult {
   const source = object(value);
-  const url = required(source, "url");
-  if (typeof url !== "string" || !OPEN_URL.test(url)) malformed();
+  exact(source, ["url"]);
+  const url = string(source.url);
+  if (!OPEN_URL.test(url)) malformed();
   try {
     const parsed = new URL(url);
-    if (
-      parsed.protocol !== "https:" ||
-      parsed.username !== "" ||
-      parsed.password !== "" ||
-      parsed.port !== "" ||
-      parsed.hash !== "" ||
-      parsed.pathname !== "/__runa/auth" ||
-      [...parsed.searchParams.keys()].length !== 1 ||
-      parsed.searchParams.get("t") === null ||
-      parsed.searchParams.get("t") === ""
-    ) {
-      malformed();
-    }
+    if (parsed.protocol !== "https:" || parsed.username !== "" || parsed.password !== "" || parsed.port !== "" ||
+        parsed.hash !== "" || parsed.pathname !== "/__runa/auth" || [...parsed.searchParams.keys()].length !== 1 ||
+        parsed.searchParams.get("t") === null || parsed.searchParams.get("t") === "") malformed();
   } catch (error) {
     if (error instanceof DecodeFailure) throw error;
     malformed();
   }
   return Object.freeze({ url });
 }
-
 export function decodeRecords(value: unknown): readonly Record[] {
   if (!Array.isArray(value)) malformed();
-  return Object.freeze(
-    value.map((item) => {
-      const source = object(item);
-      return Object.freeze({
-        id: required(source, "id"),
-        sessionId: required(source, "session_id"),
-        kind: required(source, "kind"),
-        summary: required(source, "summary"),
-        detail: required(source, "detail"),
-        createdAt: required(source, "created_at"),
-      });
-    }),
-  );
+  return Object.freeze(value.map((item) => {
+    const source = object(item);
+    exact(source, ["id", "session_id", "kind", "summary", "detail", "created_at"]);
+    return Object.freeze({
+      id: uuid(source.id), sessionId: uuid(source.session_id), kind: string(source.kind),
+      summary: string(source.summary), detail: source.detail, createdAt: dateTime(source.created_at)
+    });
+  }));
 }
-
 export function decodeMe(value: unknown): Me {
   const source = object(value);
-  const id = required(source, "id");
-  const email = required(source, "email");
-  const workspaceSource = object(required(source, "workspace"));
-  const assigned = required(workspaceSource, "assigned");
-  if (typeof assigned !== "boolean") malformed();
-  if (Object.hasOwn(workspaceSource, "usage")) {
-    const usageSource = object(required(workspaceSource, "usage"));
+  exact(source, ["id", "email", "workspace"]);
+  const id = uuid(source.id);
+  const email = string(source.email);
+  const workspace = object(source.workspace);
+  if (workspace.assigned === true) {
+    exact(workspace, ["assigned", "usage"]);
+    const usage = object(workspace.usage);
+    exact(usage, ["est_spend_usd", "est_remaining_usd", "note"]);
     return Object.freeze({
-      id,
-      email,
-      workspace: Object.freeze({
-        assigned,
+      id, email, workspace: Object.freeze({
+        assigned: true as const,
         usage: Object.freeze({
-          estimatedSpendUsd: required(usageSource, "est_spend_usd"),
-          estimatedRemainingUsd: required(usageSource, "est_remaining_usd"),
-          note: required(usageSource, "note"),
-        }),
-      }),
+          estimatedSpendUsd: number(usage.est_spend_usd),
+          estimatedRemainingUsd: number(usage.est_remaining_usd),
+          note: string(usage.note)
+        })
+      })
     });
   }
-  if (assigned !== false) malformed();
-  return Object.freeze({
-      id,
-      email,
-      workspace: Object.freeze({
-      assigned: false as const,
-      waitlistPosition: required(workspaceSource, "waitlist_position"),
-    }),
-  });
+  if (workspace.assigned === false) {
+    exact(workspace, ["assigned", "waitlist_position"]);
+    return Object.freeze({
+      id, email, workspace: Object.freeze({
+        assigned: false as const,
+        waitlistPosition: integer(workspace.waitlist_position, 0)
+      })
+    });
+  }
+  malformed();
 }

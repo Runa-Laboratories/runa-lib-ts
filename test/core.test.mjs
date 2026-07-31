@@ -80,6 +80,17 @@ test("PRD-023 resolves terminal precedence and strict files", () => {
   }
 });
 
+test("PRD-023 rejects non-object runtime configuration safely", () => {
+  for (const value of [null, false, 1, "invalid", []]) {
+    assert.throws(
+      () => resolveConfig(value),
+      (error) =>
+        error instanceof ConfigError &&
+        error.stack === `${error.name}: ${error.message}`,
+    );
+  }
+});
+
 test("PRD-001 and PRD-023 reject prohibited hosts including trailing dot", () => {
   const label = upstreamName();
   assert.equal(containsProhibitedMarker(label), true);
@@ -149,55 +160,24 @@ test("PRD-024 exposes the closed error surface", () => {
   );
 });
 
-test("PRD-022 preserves opaque scalars and detail identity", () => {
-  const opaqueName = { preserved: true };
-  const opaqueScalar = Symbol("opaque");
-  const snapshot = decodeSession(
-    sessionFixture({
-      id: SESSION_ID,
-      user_id: USER_ID,
-      name: opaqueName,
-      vcpus: opaqueScalar,
-      memory_mib: null,
-      running_seconds: "opaque",
-      created_at: 7,
-      updated_at: false,
-    }),
-  );
-  assert.equal(snapshot.name, opaqueName);
-  assert.equal(snapshot.vcpus, opaqueScalar);
-  assert.equal(snapshot.memoryMiB, null);
-  assert.equal(snapshot.createdAt, 7);
-
+test("PRD-022 enforces the canonical schema and preserves only detail identity", () => {
   const detail = { nested_key: ["value"] };
   const [record] = decodeRecords([recordFixture({ detail })]);
   assert.equal(record.detail, detail);
-
-  const result = decodeExec({
-    exit_code: opaqueScalar,
-    stdout: opaqueName,
-    stderr: null,
-    duration_ms: "opaque",
-    stdout_truncated: 1,
-    stderr_truncated: 0,
-  });
-  assert.equal(result.exitCode, opaqueScalar);
-  assert.equal(result.stdout, opaqueName);
-  assert.equal(stdoutText(result), undefined);
-  assert.equal(stderrText(result), undefined);
-
-  const me = decodeMe({
-    id: opaqueName,
-    email: opaqueScalar,
-    workspace: {
-      assigned: true,
-      usage: {
-        est_spend_usd: opaqueName,
-        est_remaining_usd: opaqueScalar,
-        note: null,
-      },
-    },
-  });
-  assert.equal(me.id, opaqueName);
-  assert.equal(me.workspace.usage.estimatedRemainingUsd, opaqueScalar);
+  for (const invalid of [
+    sessionFixture({ id: SESSION_ID.toUpperCase() }),
+    sessionFixture({ vcpus: -1 }),
+    sessionFixture({ created_at: "not-a-date" }),
+    sessionFixture({ unknown: true }),
+  ]) {
+    assert.throws(() => decodeSession(invalid));
+  }
+  assert.throws(() => decodeExec({
+    exit_code: 0, stdout: "out", stderr: "err", duration_ms: -1,
+    stdout_truncated: false, stderr_truncated: false,
+  }));
+  assert.throws(() => decodeMe({
+    ...meFixture(),
+    unknown: true,
+  }));
 });
