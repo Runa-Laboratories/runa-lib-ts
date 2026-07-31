@@ -13,8 +13,8 @@
     "BLOCKED": 0
   },
   "acceptance_status_summary": {
-    "PASS": 47,
-    "NOT_RUN": 475
+    "PASS": 17,
+    "NOT_RUN": 505
   },
   "acceptance_test_ids": [
     "TC-001-01",
@@ -1458,38 +1458,38 @@
     },
     {
       "test_id": "TC-017-02",
-      "status": "NOT_RUN",
-      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
+      "status": "PASS",
+      "evidence": "evidence/performance-local.json"
     },
     {
       "test_id": "TC-017-03",
-      "status": "NOT_RUN",
-      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
+      "status": "PASS",
+      "evidence": "evidence/performance-local.json"
     },
     {
       "test_id": "TC-017-04",
-      "status": "NOT_RUN",
-      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
+      "status": "PASS",
+      "evidence": "evidence/performance-local.json"
     },
     {
       "test_id": "TC-017-05",
-      "status": "NOT_RUN",
-      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
+      "status": "PASS",
+      "evidence": "evidence/performance-local.json"
     },
     {
       "test_id": "TC-017-06",
-      "status": "NOT_RUN",
-      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
+      "status": "PASS",
+      "evidence": "evidence/performance-local.json"
     },
     {
       "test_id": "TC-017-07",
-      "status": "NOT_RUN",
-      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
+      "status": "PASS",
+      "evidence": "evidence/performance-local.json"
     },
     {
       "test_id": "TC-017-08",
-      "status": "NOT_RUN",
-      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
+      "status": "PASS",
+      "evidence": "evidence/performance-local.json"
     },
     {
       "test_id": "TC-017-09",
@@ -1603,8 +1603,8 @@
     },
     {
       "test_id": "TC-020-01",
-      "status": "PASS",
-      "evidence": "scripts/verify-surface.mjs + scripts/verify-pack.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-020-02",
@@ -1613,8 +1613,8 @@
     },
     {
       "test_id": "TC-020-03",
-      "status": "PASS",
-      "evidence": "build output inspection + scripts/verify-security.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-020-04",
@@ -1623,8 +1623,8 @@
     },
     {
       "test_id": "TC-020-05",
-      "status": "PASS",
-      "evidence": "scripts/verify-pack.mjs + dynamic release license gate"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-020-06",
@@ -1643,18 +1643,18 @@
     },
     {
       "test_id": "TC-021-01",
-      "status": "PASS",
-      "evidence": "scripts/verify-contract.mjs + test/transport.test.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-021-02",
-      "status": "PASS",
-      "evidence": "test/transport.test.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-021-03",
-      "status": "PASS",
-      "evidence": "test/core.test.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-021-04",
@@ -1663,13 +1663,13 @@
     },
     {
       "test_id": "TC-021-05",
-      "status": "PASS",
-      "evidence": "scripts/verify-surface.mjs + import probe"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-021-06",
-      "status": "PASS",
-      "evidence": "scripts/verify-security.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-021-07",
@@ -1688,38 +1688,38 @@
     },
     {
       "test_id": "TC-022-02",
-      "status": "PASS",
-      "evidence": "test/core.test.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-022-03",
-      "status": "PASS",
-      "evidence": "test/transport.test.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-022-04",
-      "status": "PASS",
-      "evidence": "test/core.test.mjs + test/types/public-surface.mts"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-022-05",
-      "status": "PASS",
-      "evidence": "test/core.test.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-022-06",
-      "status": "PASS",
-      "evidence": "test/core.test.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-022-07",
-      "status": "PASS",
-      "evidence": "test/resources.test.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-022-08",
-      "status": "PASS",
-      "evidence": "test/core.test.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-022-09",
@@ -1733,8 +1733,8 @@
     },
     {
       "test_id": "TC-023-01",
-      "status": "PASS",
-      "evidence": "test/core.test.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-023-02",
@@ -1748,18 +1748,18 @@
     },
     {
       "test_id": "TC-023-04",
-      "status": "PASS",
-      "evidence": "test/core.test.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-023-05",
-      "status": "PASS",
-      "evidence": "test/core.test.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-023-06",
-      "status": "PASS",
-      "evidence": "test/core.test.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-023-07",
@@ -1778,18 +1778,18 @@
     },
     {
       "test_id": "TC-024-01",
-      "status": "PASS",
-      "evidence": "scripts/verify-surface.mjs + test/core.test.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-024-02",
-      "status": "PASS",
-      "evidence": "test/core.test.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-024-03",
-      "status": "PASS",
-      "evidence": "test/transport.test.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-024-04",
@@ -1798,8 +1798,8 @@
     },
     {
       "test_id": "TC-024-05",
-      "status": "PASS",
-      "evidence": "test/resources.test.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-024-06",
@@ -1808,38 +1808,38 @@
     },
     {
       "test_id": "TC-025-01",
-      "status": "PASS",
-      "evidence": "test/transport.test.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-025-02",
-      "status": "PASS",
-      "evidence": "test/transport.test.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-025-03",
-      "status": "PASS",
-      "evidence": "test/transport.test.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-025-04",
-      "status": "PASS",
-      "evidence": "test/transport.test.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-025-05",
-      "status": "PASS",
-      "evidence": "test/transport.test.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-025-06",
-      "status": "PASS",
-      "evidence": "test/transport.test.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-025-07",
-      "status": "PASS",
-      "evidence": "test/transport.test.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-025-08",
@@ -1848,13 +1848,13 @@
     },
     {
       "test_id": "TC-026-01",
-      "status": "PASS",
-      "evidence": "test/resilience.test.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-026-02",
-      "status": "PASS",
-      "evidence": "test/resilience.test.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-026-03",
@@ -1878,8 +1878,8 @@
     },
     {
       "test_id": "TC-026-07",
-      "status": "PASS",
-      "evidence": "test/resilience.test.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-026-08",
@@ -1893,8 +1893,8 @@
     },
     {
       "test_id": "TC-027-02",
-      "status": "PASS",
-      "evidence": "test/resources.test.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-027-03",
@@ -1918,8 +1918,8 @@
     },
     {
       "test_id": "TC-027-07",
-      "status": "PASS",
-      "evidence": "test/resources.test.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-027-08",
@@ -1933,8 +1933,8 @@
     },
     {
       "test_id": "TC-027-10",
-      "status": "PASS",
-      "evidence": "test/resources.test.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-027-11",
@@ -2198,8 +2198,8 @@
     },
     {
       "test_id": "TC-035-01",
-      "status": "PASS",
-      "evidence": "test/resources.test.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-035-02",
@@ -2208,8 +2208,8 @@
     },
     {
       "test_id": "TC-035-03",
-      "status": "PASS",
-      "evidence": "test/resources.test.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-035-04",
@@ -2228,8 +2228,8 @@
     },
     {
       "test_id": "TC-036-01",
-      "status": "PASS",
-      "evidence": "test/resources.test.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-036-02",
@@ -2273,8 +2273,8 @@
     },
     {
       "test_id": "TC-037-01",
-      "status": "PASS",
-      "evidence": "test/resources.test.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-037-02",
@@ -2343,8 +2343,8 @@
     },
     {
       "test_id": "TC-039-01",
-      "status": "PASS",
-      "evidence": "test/resilience.test.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-039-02",
@@ -2393,8 +2393,8 @@
     },
     {
       "test_id": "TC-040-01",
-      "status": "PASS",
-      "evidence": "scripts/verify-security.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-040-02",
@@ -2744,42 +2744,42 @@
     {
       "test_id": "TC-048-01",
       "status": "PASS",
-      "evidence": "npm run docs:api + scripts/verify-docs.mjs"
+      "evidence": "evidence/docs-readiness.json"
     },
     {
       "test_id": "TC-048-02",
-      "status": "NOT_RUN",
-      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
+      "status": "PASS",
+      "evidence": "evidence/docs-readiness.json"
     },
     {
       "test_id": "TC-048-03",
-      "status": "NOT_RUN",
-      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
+      "status": "PASS",
+      "evidence": "evidence/docs-readiness.json"
     },
     {
       "test_id": "TC-048-04",
-      "status": "NOT_RUN",
-      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
+      "status": "PASS",
+      "evidence": "evidence/docs-readiness.json"
     },
     {
       "test_id": "TC-048-05",
-      "status": "NOT_RUN",
-      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
+      "status": "PASS",
+      "evidence": "evidence/docs-readiness.json"
     },
     {
       "test_id": "TC-048-06",
-      "status": "NOT_RUN",
-      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
+      "status": "PASS",
+      "evidence": "evidence/docs-readiness.json"
     },
     {
       "test_id": "TC-048-07",
-      "status": "NOT_RUN",
-      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
+      "status": "PASS",
+      "evidence": "evidence/docs-readiness.json"
     },
     {
       "test_id": "TC-049-01",
-      "status": "PASS",
-      "evidence": "scripts/verify-docs.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-049-02",
@@ -2803,8 +2803,8 @@
     },
     {
       "test_id": "TC-049-06",
-      "status": "PASS",
-      "evidence": "scripts/verify-docs.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-049-07",
@@ -2833,13 +2833,13 @@
     },
     {
       "test_id": "TC-050-05",
-      "status": "NOT_RUN",
-      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
+      "status": "PASS",
+      "evidence": "evidence/performance-local.json"
     },
     {
       "test_id": "TC-050-06",
-      "status": "NOT_RUN",
-      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
+      "status": "PASS",
+      "evidence": "evidence/performance-local.json"
     },
     {
       "test_id": "TC-050-07",
@@ -2848,8 +2848,8 @@
     },
     {
       "test_id": "TC-050-08",
-      "status": "NOT_RUN",
-      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
+      "status": "PASS",
+      "evidence": "evidence/performance-local.json"
     },
     {
       "test_id": "TC-051-01",
@@ -2863,8 +2863,8 @@
     },
     {
       "test_id": "TC-051-03",
-      "status": "PASS",
-      "evidence": "scripts/verify-pack.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-051-04",
@@ -2878,8 +2878,8 @@
     },
     {
       "test_id": "TC-051-06",
-      "status": "PASS",
-      "evidence": "scripts/verify-security.mjs"
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
       "test_id": "TC-051-07",

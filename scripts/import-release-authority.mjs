@@ -4,6 +4,10 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { validateContractProvenance } from "./contract-generation.mjs";
 import { verifyTrustedEnvelope } from "./trusted-evidence.mjs";
 import { validateTrustedRolePayload } from "./release-authority-schema.mjs";
+import {
+  resolveReleaseChannel,
+  validateReleaseMapping,
+} from "./postpublish-policy.mjs";
 
 const encoded = process.env.RUNA_RELEASE_AUTHORITY_BUNDLE_BASE64;
 if (encoded === undefined || encoded === "") {
@@ -31,6 +35,11 @@ assert.deepEqual(Object.keys(bundle).sort(), exact);
 
 const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const candidate = JSON.parse(await readFile("release-artifacts/candidate.json", "utf8"));
+const releaseMapping = JSON.parse(
+  await readFile("governance/release-mapping.json", "utf8"),
+);
+validateReleaseMapping(releaseMapping);
+const releaseChannel = resolveReleaseChannel(releaseMapping, candidate.version);
 const projection = await readFile("contracts/runa-sdk.projection.json");
 const openapi = await readFile("contracts/runa-api.openapi.json");
 const canonical = (await readFile("contracts/runa-api.openapi.sha256", "utf8"))
@@ -48,7 +57,11 @@ const entries = [
   ["cross_language", "cross-language", "cross-language",
     (payload) => payload.canonical_contract_sha256 === canonical],
   ["publication_readiness", "publication", "publication-readiness",
-    (payload) => payload.candidate_sha256 === candidate.sha256],
+    (payload) => payload.candidate_sha256 === candidate.sha256 &&
+      payload.package_name === releaseMapping.package_name &&
+      payload.version === candidate.version &&
+      payload.registry === releaseMapping.registry &&
+      payload.dist_tag === releaseChannel.dist_tag],
   ["sbom_validation", "sbom-validation", "sbom-validation",
     (payload) => payload.candidate_sha256 === candidate.sha256],
   ["external_release_interfaces", "external-interfaces", "external-release-interfaces",

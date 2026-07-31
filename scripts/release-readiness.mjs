@@ -2,6 +2,10 @@ import { createHash } from "node:crypto";
 import { readFile, writeFile } from "node:fs/promises";
 import { verifyTrustedEnvelope } from "./trusted-evidence.mjs";
 import { validateTrustedRolePayload } from "./release-authority-schema.mjs";
+import {
+  resolveReleaseChannel,
+  validateReleaseMapping,
+} from "./postpublish-policy.mjs";
 
 const blockers = [];
 const readJson = async (file, gate) => {
@@ -113,6 +117,24 @@ if (crossLanguage !== undefined && provenance !== undefined &&
 const publication = await requireTrusted("evidence/publication-readiness.json", "publication-readiness", "publication");
 if (publication !== undefined && candidate !== undefined && publication.candidate_sha256 !== candidate.sha256) {
   blockers.push({ gate: "publication-readiness", reason: "Publication evidence is not bound to the candidate archive." });
+}
+if (publication !== undefined && candidate !== undefined) {
+  try {
+    const mapping = JSON.parse(
+      await readFile("governance/release-mapping.json", "utf8"),
+    );
+    validateReleaseMapping(mapping);
+    const release = resolveReleaseChannel(mapping, candidate.version);
+    if (publication.package_name !== mapping.package_name ||
+        publication.version !== candidate.version ||
+        publication.registry !== mapping.registry ||
+        publication.dist_tag !== release.dist_tag) throw new Error();
+  } catch {
+    blockers.push({
+      gate: "publication-readiness",
+      reason: "Publication authority does not match the closed release mapping.",
+    });
+  }
 }
 const dependency = await requirePass("evidence/dependency-audit.json", "dependencies");
 if (dependency !== undefined && ((dependency.vulnerabilities?.critical ?? 0) > 0 ||

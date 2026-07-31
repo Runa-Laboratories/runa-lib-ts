@@ -9,6 +9,7 @@ import {
   validatePostpublishReceipt,
   validateReleaseMapping,
 } from "./postpublish-policy.mjs";
+import { validateAttestationJsonl } from "./attestation-bundle.mjs";
 
 const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const mapping = JSON.parse(await readFile("governance/release-mapping.json", "utf8"));
@@ -76,7 +77,10 @@ try {
     `repos/${repository}/attestations/sha256:${candidate.sha256}`,
   ], { encoding: "utf8" });
   assert.equal(apiResult.status, 0, "R-018-12: GitHub Attestations API lookup failed");
-  assert((await readFile(bundle, "utf8")).trim().length > 0);
+  assert.equal(validateAttestationJsonl(
+    await readFile(bundle, "utf8"),
+    candidate,
+  ), true);
   transitions.push("handoff");
   const receipt = {
     schema_version: 1,
