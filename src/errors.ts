@@ -13,10 +13,10 @@ export abstract class RunaError extends Error {
 export class ConfigError extends RunaError {
   override readonly name = "ConfigError";
   readonly code = "config_error";
-  override readonly message = "The Runa SDK configuration is invalid.";
+  override readonly message = "Runa SDK configuration is invalid.";
 
   constructor() {
-    super("The Runa SDK configuration is invalid.");
+    super("Runa SDK configuration is invalid.");
     Object.setPrototypeOf(this, new.target.prototype);
   }
 }
@@ -25,17 +25,23 @@ export class ApiError extends RunaError {
   override readonly name = "ApiError";
   readonly code: "api_error" | "malformed_response";
   readonly status: number;
-  override readonly message: "The Runa API request failed.";
+  override readonly message:
+    | "The Runa API request failed."
+    | "The Runa API returned an invalid response.";
 
   constructor(
     status: number,
     code: "api_error" | "malformed_response" = "api_error",
   ) {
-    super("The Runa API request failed.");
+    const message =
+      code === "malformed_response"
+        ? "The Runa API returned an invalid response."
+        : "The Runa API request failed.";
+    super(message);
     Object.setPrototypeOf(this, new.target.prototype);
     this.status = Number.isInteger(status) ? status : 0;
     this.code = code;
-    this.message = "The Runa API request failed.";
+    this.message = message;
   }
 }
 
@@ -47,5 +53,6 @@ export class CommandError extends RunaError {
   private constructor() {
     super("The session command failed.");
     Object.setPrototypeOf(this, new.target.prototype);
+    throw new TypeError("CommandError cannot be constructed directly.");
   }
 }
