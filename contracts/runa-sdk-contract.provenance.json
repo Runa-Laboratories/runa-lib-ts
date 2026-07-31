@@ -1,6 +1,7 @@
 {
   "schema_version": 1,
   "status": "BLOCKED",
+  "canonical_contract_sha256": "be686d0e1246365d7fde6aa2a9b7ff027ea18e74801ed00340d634ef8921f433",
   "projection_sha256": "02a554b22592f0267475b847a2bb1c7df64e2b688cdb69b0a4a8b392695e1c55",
   "openapi_sha256": "de2cf711b1148457eb6fda8b094c0a07fc3890c096de984b9cf13407c5f08937",
   "canonical_repository": "Runa-Laboratories/runa-sdk-contract",

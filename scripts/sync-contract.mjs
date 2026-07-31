@@ -5,6 +5,9 @@ import path from "node:path";
 const infra = path.resolve("../../infra/contracts");
 const projectionBytes = await readFile(path.join(infra, "runa-sdk.projection.json"));
 const openapiBytes = await readFile(path.join(infra, "runa-api.openapi.json"));
+const digestFile = await readFile(path.join(infra, "runa-api.openapi.sha256"), "utf8");
+const canonicalDigest = digestFile.trim().split(/\s+/, 1)[0];
+if (!/^[0-9a-f]{64}$/.test(canonicalDigest)) throw new Error("Invalid canonical digest artifact.");
 const projection = JSON.parse(projectionBytes);
 const digest = (bytes) => createHash("sha256").update(bytes).digest("hex");
 await mkdir("contracts", { recursive: true });
@@ -30,6 +33,7 @@ await writeFile("contracts/runa-sdk-baseline.expectation.json", `${JSON.stringif
 await writeFile("contracts/runa-sdk-contract.provenance.json", `${JSON.stringify({
   schema_version: 1,
   status: "BLOCKED",
+  canonical_contract_sha256: canonicalDigest,
   projection_sha256: digest(projectionBytes),
   openapi_sha256: digest(openapiBytes),
   canonical_repository: "Runa-Laboratories/runa-sdk-contract",

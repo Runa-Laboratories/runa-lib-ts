@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-22.04
+            node: 22.17.1
+            npm: 10.9.2
+          - os: windows-2022
+            node: 22.17.1
+            npm: 10.9.2
+          - os: macos-14
+            node: 22.17.1
+            npm: 10.9.2
+          - os: ubuntu-22.04
+            node: 24.4.1
+            npm: 11.4.2
+          - os: windows-2022
+            node: 24.4.1
+            npm: 11.4.2
+          - os: macos-14
+            node: 24.4.1
+            npm: 11.4.2
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm install --global npm@${{ matrix.npm }}
+      - run: node --version
+      - run: npm --version
+      - run: npm ci
+      - run: npm run quality
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: evidence-${{ runner.os }}-node-${{ matrix.node }}
+          path: evidence/
+          if-no-files-found: error

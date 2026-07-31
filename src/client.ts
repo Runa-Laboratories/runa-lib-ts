@@ -98,7 +98,7 @@ function createBody(
   name: string,
   options?: SessionCreateOptions,
 ): Readonly<globalThis.Record<string, unknown>> {
-  if (typeof name !== "string" || name.length < 1 || name.length > 80) {
+  if (typeof name !== "string" || [...name].length < 1 || [...name].length > 80) {
     throw new TypeError("Invalid session create options.");
   }
   const body: globalThis.Record<string, unknown> = { name };

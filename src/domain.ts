@@ -7,7 +7,7 @@ const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 const SLUG = /^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/;
 const RUNTIME_URL = /^https:\/\/[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.runacode\.cloud$/;
 const OPEN_URL = /^https:\/\/[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.runacode\.cloud\/__runa\/auth\?t=[^&#]+$/;
-const RFC3339 = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/;
+const RFC3339 = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.\d+)?(?:Z|([+-])(\d{2}):(\d{2}))$/;
 const STATUSES = new Set<SessionStatus>(["creating", "running", "paused", "suspended", "stopped", "deleted", "error"]);
 const AGENTS = new Set<SessionAgent>(["claude-code", "codex", "openclaw"]);
 
@@ -42,7 +42,22 @@ function uuid(value: unknown): string {
 }
 function dateTime(value: unknown): string {
   const result = string(value);
-  if (!RFC3339.test(result) || Number.isNaN(Date.parse(result))) malformed();
+  const match = RFC3339.exec(result);
+  if (match === null) malformed();
+  const year = Number(match[1]);
+  const month = Number(match[2]);
+  const day = Number(match[3]);
+  const hour = Number(match[4]);
+  const minute = Number(match[5]);
+  const second = Number(match[6]);
+  const offsetHour = match[8] === undefined ? 0 : Number(match[8]);
+  const offsetMinute = match[9] === undefined ? 0 : Number(match[9]);
+  const days = month === 2
+    ? ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0 ? 29 : 28)
+    : ([4, 6, 9, 11].includes(month) ? 30 : 31);
+  if (month < 1 || month > 12 || day < 1 || day > days || hour > 23 ||
+      minute > 59 || second > 59 || offsetHour > 23 || offsetMinute > 59 ||
+      Number.isNaN(Date.parse(result))) malformed();
   return result;
 }
 export function assertUuid(value: unknown): asserts value is string {
