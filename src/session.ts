@@ -75,6 +75,10 @@ function prepareExec(
   return Object.freeze({ body: Object.freeze(body) });
 }
 
+/**
+ * Client-owned session handle with an immutable current snapshot and bounded operations.
+ * @runa-contract session-summary PRD-031#R-031-01
+ */
 export class Session {
   readonly #owner: ClientPort;
   #snapshot: SessionSnapshot;
@@ -91,10 +95,12 @@ export class Session {
     this.#snapshot = initialSnapshot;
   }
 
+  /** Canonical lowercase UUID of this session. */
   get id(): SessionSnapshot["id"] {
     return this.#snapshot.id;
   }
 
+  /** Current immutable snapshot owned by this session handle. */
   get snapshot(): SessionSnapshot {
     return this.#snapshot;
   }
@@ -123,26 +129,86 @@ export class Session {
     return this;
   }
 
+  /**
+   * Refreshes this handle from the canonical session item read.
+   * @returns The same session handle after an atomic successful refresh.
+   * @throws ApiError when the API rejects the operation or returns an invalid response.
+   * @example docs/reference/examples/workflows.ts#session-refresh
+   * @runa-contract session-refresh-description PRD-031#R-031-05
+   * @runa-contract session-refresh-returns PRD-031#R-031-05
+   * @runa-contract session-refresh-throws-api PRD-024#R-024-03
+   * @runa-contract session-refresh-example PRD-031#R-031-05
+   */
   refresh(): Promise<this> {
     return this.#replace("sessions.get");
   }
 
+  /**
+   * Starts the owning session.
+   * @returns The same session handle after a successful start response.
+   * @throws ApiError when the API rejects the operation or returns an invalid response.
+   * @example docs/reference/examples/workflows.ts#session-start
+   * @runa-contract session-start-description PRD-032#R-032-01
+   * @runa-contract session-start-returns PRD-032#R-032-01
+   * @runa-contract session-start-throws-api PRD-024#R-024-03
+   * @runa-contract session-start-example PRD-032#R-032-01
+   */
   start(): Promise<this> {
     return this.#replace("sessions.start");
   }
 
+  /**
+   * Pauses the owning session.
+   * @returns The same session handle after a successful pause response.
+   * @throws ApiError when the API rejects the operation or returns an invalid response.
+   * @example docs/reference/examples/workflows.ts#session-pause
+   * @runa-contract session-pause-description PRD-032#R-032-01
+   * @runa-contract session-pause-returns PRD-032#R-032-01
+   * @runa-contract session-pause-throws-api PRD-024#R-024-03
+   * @runa-contract session-pause-example PRD-032#R-032-01
+   */
   pause(): Promise<this> {
     return this.#replace("sessions.pause");
   }
 
+  /**
+   * Resumes the owning session.
+   * @returns The same session handle after a successful resume response.
+   * @throws ApiError when the API rejects the operation or returns an invalid response.
+   * @example docs/reference/examples/workflows.ts#session-resume
+   * @runa-contract session-resume-description PRD-032#R-032-01
+   * @runa-contract session-resume-returns PRD-032#R-032-01
+   * @runa-contract session-resume-throws-api PRD-024#R-024-03
+   * @runa-contract session-resume-example PRD-032#R-032-01
+   */
   resume(): Promise<this> {
     return this.#replace("sessions.resume");
   }
 
+  /**
+   * Stops the owning session.
+   * @returns The same session handle after a successful stop response.
+   * @throws ApiError when the API rejects the operation or returns an invalid response.
+   * @example docs/reference/examples/workflows.ts#session-stop
+   * @runa-contract session-stop-description PRD-032#R-032-01
+   * @runa-contract session-stop-returns PRD-032#R-032-01
+   * @runa-contract session-stop-throws-api PRD-024#R-024-03
+   * @runa-contract session-stop-example PRD-032#R-032-01
+   */
   stop(): Promise<this> {
     return this.#replace("sessions.stop");
   }
 
+  /**
+   * Deletes the owning session.
+   * @returns An acknowledgement whose ok member is literal true.
+   * @throws ApiError when the API rejects the operation or returns an invalid response.
+   * @example docs/reference/examples/workflows.ts#session-delete
+   * @runa-contract session-delete-description PRD-032#R-032-06
+   * @runa-contract session-delete-returns PRD-032#R-032-06
+   * @runa-contract session-delete-throws-api PRD-024#R-024-03
+   * @runa-contract session-delete-example PRD-032#R-032-06
+   */
   async delete(): Promise<Acknowledgement> {
     const id = this.#snapshot.id;
     assertUuid(id);
@@ -151,6 +217,20 @@ export class Session {
     })) as Acknowledgement;
   }
 
+  /**
+   * Runs one buffered command through the owning session handle.
+   * @param command Non-empty command string or non-empty ordered string argument vector.
+   * @param options Optional working directory and integer timeout.
+   * @returns The complete buffered execution result.
+   * @throws ApiError when the API rejects the operation or returns an invalid response.
+   * @example docs/reference/examples/workflows.ts#session-exec
+   * @runa-contract session-exec-description PRD-033#R-033-01
+   * @runa-contract session-exec-param-command PRD-033#R-033-01
+   * @runa-contract session-exec-param-options PRD-033#R-033-04
+   * @runa-contract session-exec-returns PRD-033#R-033-01
+   * @runa-contract session-exec-throws-api PRD-024#R-024-03
+   * @runa-contract session-exec-example PRD-033#R-033-01
+   */
   async exec(
     command: string | readonly string[],
     options?: ExecOptions,
@@ -167,6 +247,18 @@ export class Session {
     })) as ExecResult;
   }
 
+  /**
+   * Creates one named checkpoint through the owning session handle.
+   * @param name Checkpoint name containing between one and eighty characters.
+   * @returns An acknowledgement whose ok member is literal true.
+   * @throws ApiError when the API rejects the operation or returns an invalid response.
+   * @example docs/reference/examples/workflows.ts#session-checkpoint
+   * @runa-contract session-checkpoint-description PRD-034#R-034-01
+   * @runa-contract session-checkpoint-param-name PRD-034#R-034-01
+   * @runa-contract session-checkpoint-returns PRD-034#R-034-01
+   * @runa-contract session-checkpoint-throws-api PRD-024#R-024-03
+   * @runa-contract session-checkpoint-example PRD-034#R-034-01
+   */
   async checkpoint(name: string): Promise<Acknowledgement> {
     if (typeof name !== "string" || [...name].length < 1 || [...name].length > 80) {
       throw new TypeError("Invalid checkpoint name.");
@@ -179,6 +271,16 @@ export class Session {
     })) as Acknowledgement;
   }
 
+  /**
+   * Acquires and returns a validated session handoff without using it automatically.
+   * @returns A validated handoff result returned without automatic use.
+   * @throws ApiError when the API rejects the operation or returns an invalid response.
+   * @example docs/reference/examples/workflows.ts#session-open
+   * @runa-contract session-open-description PRD-035#R-035-01
+   * @runa-contract session-open-returns PRD-035#R-035-01
+   * @runa-contract session-open-throws-api PRD-024#R-024-03
+   * @runa-contract session-open-example PRD-035#R-035-01
+   */
   async open(): Promise<OpenSessionResult> {
     const id = this.#snapshot.id;
     assertUuid(id);
