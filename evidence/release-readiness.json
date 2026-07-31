@@ -16,36 +16,31 @@
     },
     {
       "id": "TS-REL-003",
-      "gate": "quality",
-      "reason": "Quality evidence is not bound to the candidate source commit."
-    },
-    {
-      "id": "TS-REL-004",
       "gate": "compatibility-matrix",
       "reason": "Missing or invalid evidence: evidence/compatibility-matrix.json"
     },
     {
-      "id": "TS-REL-005",
+      "id": "TS-REL-004",
       "gate": "repository-controls",
       "reason": "Missing or invalid evidence: evidence/repository-controls.json"
     },
     {
-      "id": "TS-REL-006",
+      "id": "TS-REL-005",
       "gate": "cross-language",
       "reason": "Missing or invalid evidence: evidence/cross-language.json"
     },
     {
-      "id": "TS-REL-007",
+      "id": "TS-REL-006",
       "gate": "publication-readiness",
       "reason": "Missing or invalid evidence: evidence/publication-readiness.json"
     },
     {
-      "id": "TS-REL-008",
+      "id": "TS-REL-007",
       "gate": "sbom-validation",
       "reason": "No accepted release trust root is configured."
     },
     {
-      "id": "TS-REL-009",
+      "id": "TS-REL-008",
       "gate": "external-release-interfaces",
       "reason": "No accepted release trust root is configured."
     }
