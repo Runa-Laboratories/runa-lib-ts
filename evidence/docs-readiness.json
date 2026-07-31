@@ -1,14 +1,69 @@
 {
-  "schema_version": 1,
-  "status": "BLOCKED",
-  "structural_checks": "PASS",
+  "schema_version": 2,
+  "status": "PASS",
+  "reflection_source": "dist/index.d.ts",
   "runtime_export_count": 8,
   "type_export_count": 18,
-  "blockers": [
-    "R-048-03..09: rendered signatures, members, parameter/return/throw contracts are not verified from TypeDoc reflection",
-    "R-048-13: claimRegistry and errorMatrix coverage is not implemented",
-    "R-048-15: examples are not bound to executable test identifiers",
-    "R-048-17: deterministic rendering and hostile documentation mutations are not implemented",
-    "R-048-18: complete reference-link validation is not implemented"
+  "operation_count": 20,
+  "claim_count": 108,
+  "source_claims_sha256": "ae42b2f44c21deaa3c206a6442d7e461189240122279c4f923fe5aa57c740cf2",
+  "source_claims_owner": "docs/reference/claims.runa-contract",
+  "error_matrix_count": 20,
+  "example_count": 16,
+  "deterministic_output_sha256": "42484f73502b73994da7108a50f714a498111a81e6d11253cdae728369e42afc",
+  "mutations": [
+    {
+      "name": "missing",
+      "status": "REJECTED"
+    },
+    {
+      "name": "extra",
+      "status": "REJECTED"
+    },
+    {
+      "name": "alias",
+      "status": "REJECTED"
+    },
+    {
+      "name": "page-ownership",
+      "status": "REJECTED"
+    },
+    {
+      "name": "signature",
+      "status": "REJECTED"
+    },
+    {
+      "name": "private-source",
+      "status": "REJECTED"
+    },
+    {
+      "name": "link",
+      "status": "REJECTED"
+    },
+    {
+      "name": "safety",
+      "status": "REJECTED"
+    },
+    {
+      "name": "throws",
+      "status": "REJECTED"
+    },
+    {
+      "name": "example",
+      "status": "REJECTED"
+    },
+    {
+      "name": "claim-tag",
+      "status": "REJECTED"
+    }
+  ],
+  "acceptance_tests": [
+    "TC-048-01",
+    "TC-048-02",
+    "TC-048-03",
+    "TC-048-04",
+    "TC-048-05",
+    "TC-048-06",
+    "TC-048-07"
   ]
 }

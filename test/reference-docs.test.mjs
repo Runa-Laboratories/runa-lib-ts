@@ -8,7 +8,7 @@ test("PRD-048 reference pipeline covers the exact surface and rejects mutations"
   assert.equal(result.model.entries.filter((entry) => entry.kind === "runtime").length, 8);
   assert.equal(result.model.entries.filter((entry) => entry.kind === "type").length, 18);
   assert.deepEqual(result.mutations, [
-    "missing", "extra", "alias", "moved", "signature",
-    "private-source", "link", "safety", "throws", "example",
+    "missing", "extra", "alias", "page-ownership", "signature",
+    "private-source", "link", "safety", "throws", "example", "claim-tag",
   ]);
 });

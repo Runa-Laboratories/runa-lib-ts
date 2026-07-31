@@ -1,8 +1,8 @@
 const pages = Object.freeze({
-  "Core.md": ["Runa", "RunaConfig", "ConfigError", "ApiError", "CommandError", "RunaError"],
+  "Core.md": ["Runa", "RunaConfig"],
   "Sessions.md": ["Session", "SessionsManager", "SessionAgent", "SessionCreateOptions", "SessionSnapshot", "SessionStatus", "ExecOptions", "ExecResult", "Acknowledgement", "OpenSessionResult"],
   "Account-and-records.md": ["Me", "Workspace", "AssignedWorkspace", "UnassignedWorkspace", "EstimatedUsage", "RecordsManager", "Record"],
-  "Shared.md": ["OpaqueWireValue", "stdoutText", "stderrText"],
+  "Shared.md": ["ConfigError", "ApiError", "CommandError", "RunaError", "OpaqueWireValue", "stdoutText", "stderrText"],
 });
 
 const summaries = Object.freeze({
@@ -206,6 +206,3 @@ export const claimRegistry = Object.freeze([
 ]);
 
 export const conceptualPages = pages;
-export const sourceTags = Object.freeze(claimRegistry.flatMap((row) =>
-  row.contractRefs.map((contractRef) =>
-    `@runa-contract ${row.claimId} ${contractRef}`)));

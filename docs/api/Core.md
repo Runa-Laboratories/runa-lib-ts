@@ -1,28 +1,177 @@
 # Core
 
-Generated from the packed root declaration. Do not edit by hand.
+Generated from the released public TypeScript declarations.
 
+<a id="runa"></a>
 ## Runa
 
-Constructible client. Owns resources and closes deterministically.
+Constructible Runa client that owns managers, transport lifecycle, and cleanup.
 
+**Kind:** runtime
+
+**Signature**
+
+```ts
+class Runa
+```
+
+### Public members
+
+#### constructor
+
+Constructs the documented public value.
+
+```ts
+constructor(config?: RunaConfig): Runa
+```
+
+#### sessions
+
+Stable sessions manager owned by this client.
+
+```ts
+sessions: SessionsManager
+```
+
+#### records
+
+Stable records manager owned by this client.
+
+```ts
+records: RecordsManager
+```
+
+#### me
+
+Reads the caller profile and workspace state.
+
+```ts
+me(): Promise<Me>
+```
+
+#### close
+
+Closes this client after already admitted work completes.
+
+```ts
+close(): Promise<void>
+```
+
+### Runa#constructor
+
+Invokes the accepted public `constructor` operation owned by `Runa`.
+
+**Returns:** A configured Runa client.
+
+- **config:** Optional client configuration resolved under the documented precedence rules.
+
+**Throws**
+
+- `ConfigError` when the contract-backed failure condition applies.
+
+**Example**
+
+```ts
+const apiKey = process.env.RUNA_API_KEY;
+if (apiKey === undefined) throw new Error("RUNA_API_KEY is required.");
+const client = new Runa({ apiKey });
+await client.close();
+```
+
+Source: [docs/reference/examples/workflows.ts](../reference/examples/workflows.ts) - Test: `TC-048-EXAMPLE-RUNA_CONSTRUCTOR`
+
+### Runa#me
+
+Invokes the accepted public `me` operation owned by `Runa`.
+
+**Returns:** The caller profile and workspace state.
+
+**Throws**
+
+- `ApiError` when the contract-backed failure condition applies.
+
+**Example**
+
+```ts
+await runa.me();
+```
+
+Source: [docs/reference/examples/workflows.ts](../reference/examples/workflows.ts) - Test: `TC-048-EXAMPLE-RUNA_ME`
+
+### Runa#close
+
+Invokes the accepted public `close` operation owned by `Runa`.
+
+**Returns:** A promise that resolves after client-owned cleanup completes.
+
+**Example**
+
+```ts
+await runa.close();
+```
+
+Source: [docs/reference/examples/workflows.ts](../reference/examples/workflows.ts) - Test: `TC-048-EXAMPLE-RUNA_CLOSE`
+
+<a id="runaconfig"></a>
 ## RunaConfig
 
-Public TypeScript type `RunaConfig`.
+Configuration accepted while constructing a Runa client.
 
-## ConfigError
+**Kind:** type
 
-Fixed, safe configuration error.
+**Signature**
 
-## ApiError
+```ts
+interface RunaConfig
+```
 
-Fixed, safe HTTP or malformed-response error.
+### Public members
 
-## CommandError
+#### apiKey
 
-Reserved non-constructible command error marker.
+Optional constructor API key selected before environment or explicit-file sources.
 
-## RunaError
+```ts
+apiKey?: string
+```
 
-Base class for normalized public SDK errors.
+#### baseUrl
+
+Optional normalized HTTPS API origin override.
+
+```ts
+baseUrl?: string
+```
+
+#### configFile
+
+Optional explicit JSON configuration file, or null to disable file loading.
+
+```ts
+configFile?: string | null
+```
+
+#### fetch
+
+Optional caller-owned fetch-compatible transport function.
+
+```ts
+fetch?: (input: RequestInfo | URL, init?: RequestInit) => Promise<Response> | (input: string | Request | URL, init?: RequestInit) => Promise<Response>
+```
+
+#### diagnostics
+
+Optional caller-owned diagnostic sink.
+
+```ts
+diagnostics?: DiagnosticSink
+```
+
+#### tracing
+
+Optional caller-owned tracing sink.
+
+```ts
+tracing?: TraceSink
+```
 

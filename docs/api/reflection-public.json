@@ -1,0 +1,1214 @@
+[
+  {
+    "name": "Acknowledgement",
+    "kind": "type",
+    "declarationKind": "interface",
+    "page": "Sessions.md",
+    "source": "dist/index.d.ts",
+    "signature": "interface Acknowledgement",
+    "members": [
+      {
+        "name": "ok",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "ok: true"
+        ]
+      }
+    ],
+    "operations": []
+  },
+  {
+    "name": "ApiError",
+    "kind": "runtime",
+    "declarationKind": "class",
+    "page": "Shared.md",
+    "source": "dist/index.d.ts",
+    "signature": "class ApiError",
+    "members": [
+      {
+        "name": "name",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "name: \"ApiError\""
+        ]
+      },
+      {
+        "name": "code",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "code: \"api_error\" | \"malformed_response\""
+        ]
+      },
+      {
+        "name": "status",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "status: number"
+        ]
+      },
+      {
+        "name": "message",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "message: \"The Runa API request failed.\" | \"The Runa API returned an invalid response.\""
+        ]
+      },
+      {
+        "name": "constructor",
+        "kind": "constructor",
+        "optional": false,
+        "readonly": false,
+        "signatures": [
+          "constructor(status: number, code?: \"api_error\" | \"malformed_response\"): ApiError"
+        ]
+      }
+    ],
+    "operations": [
+      {
+        "operationKey": "ApiError#constructor",
+        "name": "constructor",
+        "signature": "constructor(status: number, code?: \"api_error\" | \"malformed_response\"): ApiError",
+        "parameters": [
+          "status",
+          "code"
+        ],
+        "returns": "ApiError"
+      }
+    ]
+  },
+  {
+    "name": "AssignedWorkspace",
+    "kind": "type",
+    "declarationKind": "interface",
+    "page": "Account-and-records.md",
+    "source": "dist/index.d.ts",
+    "signature": "interface AssignedWorkspace",
+    "members": [
+      {
+        "name": "assigned",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "assigned: true"
+        ]
+      },
+      {
+        "name": "usage",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "usage: EstimatedUsage"
+        ]
+      },
+      {
+        "name": "waitlistPosition",
+        "kind": "property",
+        "optional": true,
+        "readonly": true,
+        "signatures": [
+          "waitlistPosition?: undefined"
+        ]
+      }
+    ],
+    "operations": []
+  },
+  {
+    "name": "CommandError",
+    "kind": "runtime",
+    "declarationKind": "class",
+    "page": "Shared.md",
+    "source": "dist/index.d.ts",
+    "signature": "class CommandError",
+    "members": [
+      {
+        "name": "name",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "name: \"CommandError\""
+        ]
+      },
+      {
+        "name": "code",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "code: \"command_error\""
+        ]
+      },
+      {
+        "name": "message",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "message: \"The session command failed.\""
+        ]
+      }
+    ],
+    "operations": []
+  },
+  {
+    "name": "ConfigError",
+    "kind": "runtime",
+    "declarationKind": "class",
+    "page": "Shared.md",
+    "source": "dist/index.d.ts",
+    "signature": "class ConfigError",
+    "members": [
+      {
+        "name": "name",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "name: \"ConfigError\""
+        ]
+      },
+      {
+        "name": "code",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "code: \"config_error\""
+        ]
+      },
+      {
+        "name": "message",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "message: \"Runa SDK configuration is invalid.\""
+        ]
+      },
+      {
+        "name": "constructor",
+        "kind": "constructor",
+        "optional": false,
+        "readonly": false,
+        "signatures": [
+          "constructor(): ConfigError"
+        ]
+      }
+    ],
+    "operations": [
+      {
+        "operationKey": "ConfigError#constructor",
+        "name": "constructor",
+        "signature": "constructor(): ConfigError",
+        "parameters": [],
+        "returns": "ConfigError"
+      }
+    ]
+  },
+  {
+    "name": "EstimatedUsage",
+    "kind": "type",
+    "declarationKind": "interface",
+    "page": "Account-and-records.md",
+    "source": "dist/index.d.ts",
+    "signature": "interface EstimatedUsage",
+    "members": [
+      {
+        "name": "estimatedSpendUsd",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "estimatedSpendUsd: number"
+        ]
+      },
+      {
+        "name": "estimatedRemainingUsd",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "estimatedRemainingUsd: number"
+        ]
+      },
+      {
+        "name": "note",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "note: string"
+        ]
+      }
+    ],
+    "operations": []
+  },
+  {
+    "name": "ExecOptions",
+    "kind": "type",
+    "declarationKind": "interface",
+    "page": "Sessions.md",
+    "source": "dist/index.d.ts",
+    "signature": "interface ExecOptions",
+    "members": [
+      {
+        "name": "cwd",
+        "kind": "property",
+        "optional": true,
+        "readonly": true,
+        "signatures": [
+          "cwd?: string"
+        ]
+      },
+      {
+        "name": "timeoutSecs",
+        "kind": "property",
+        "optional": true,
+        "readonly": true,
+        "signatures": [
+          "timeoutSecs?: number"
+        ]
+      }
+    ],
+    "operations": []
+  },
+  {
+    "name": "ExecResult",
+    "kind": "type",
+    "declarationKind": "interface",
+    "page": "Sessions.md",
+    "source": "dist/index.d.ts",
+    "signature": "interface ExecResult",
+    "members": [
+      {
+        "name": "exitCode",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "exitCode: number"
+        ]
+      },
+      {
+        "name": "stdout",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "stdout: string"
+        ]
+      },
+      {
+        "name": "stderr",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "stderr: string"
+        ]
+      },
+      {
+        "name": "durationMs",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "durationMs: number"
+        ]
+      },
+      {
+        "name": "stdoutTruncated",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "stdoutTruncated: boolean"
+        ]
+      },
+      {
+        "name": "stderrTruncated",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "stderrTruncated: boolean"
+        ]
+      }
+    ],
+    "operations": []
+  },
+  {
+    "name": "Me",
+    "kind": "type",
+    "declarationKind": "interface",
+    "page": "Account-and-records.md",
+    "source": "dist/index.d.ts",
+    "signature": "interface Me",
+    "members": [
+      {
+        "name": "id",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "id: string"
+        ]
+      },
+      {
+        "name": "email",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "email: string"
+        ]
+      },
+      {
+        "name": "workspace",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "workspace: Workspace"
+        ]
+      }
+    ],
+    "operations": []
+  },
+  {
+    "name": "OpaqueWireValue",
+    "kind": "type",
+    "declarationKind": "type",
+    "page": "Shared.md",
+    "source": "dist/index.d.ts",
+    "signature": "type OpaqueWireValue = unknown",
+    "members": [],
+    "operations": []
+  },
+  {
+    "name": "OpenSessionResult",
+    "kind": "type",
+    "declarationKind": "interface",
+    "page": "Sessions.md",
+    "source": "dist/index.d.ts",
+    "signature": "interface OpenSessionResult",
+    "members": [
+      {
+        "name": "url",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "url: string"
+        ]
+      }
+    ],
+    "operations": []
+  },
+  {
+    "name": "Record",
+    "kind": "type",
+    "declarationKind": "interface",
+    "page": "Account-and-records.md",
+    "source": "dist/index.d.ts",
+    "signature": "interface Record",
+    "members": [
+      {
+        "name": "id",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "id: string"
+        ]
+      },
+      {
+        "name": "sessionId",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "sessionId: string"
+        ]
+      },
+      {
+        "name": "kind",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "kind: string"
+        ]
+      },
+      {
+        "name": "summary",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "summary: string"
+        ]
+      },
+      {
+        "name": "detail",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "detail: unknown"
+        ]
+      },
+      {
+        "name": "createdAt",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "createdAt: string"
+        ]
+      }
+    ],
+    "operations": []
+  },
+  {
+    "name": "RecordsManager",
+    "kind": "type",
+    "declarationKind": "interface",
+    "page": "Account-and-records.md",
+    "source": "dist/index.d.ts",
+    "signature": "interface RecordsManager",
+    "members": [
+      {
+        "name": "list",
+        "kind": "method",
+        "optional": false,
+        "readonly": false,
+        "signatures": [
+          "list(): Promise<readonly Record[]>"
+        ]
+      }
+    ],
+    "operations": [
+      {
+        "operationKey": "RecordsManager#list",
+        "name": "list",
+        "signature": "list(): Promise<readonly Record[]>",
+        "parameters": [],
+        "returns": "Promise<readonly Record[]>"
+      }
+    ]
+  },
+  {
+    "name": "Runa",
+    "kind": "runtime",
+    "declarationKind": "class",
+    "page": "Core.md",
+    "source": "dist/index.d.ts",
+    "signature": "class Runa",
+    "members": [
+      {
+        "name": "constructor",
+        "kind": "constructor",
+        "optional": false,
+        "readonly": false,
+        "signatures": [
+          "constructor(config?: RunaConfig): Runa"
+        ]
+      },
+      {
+        "name": "sessions",
+        "kind": "accessor",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "sessions: SessionsManager"
+        ]
+      },
+      {
+        "name": "records",
+        "kind": "accessor",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "records: RecordsManager"
+        ]
+      },
+      {
+        "name": "me",
+        "kind": "method",
+        "optional": false,
+        "readonly": false,
+        "signatures": [
+          "me(): Promise<Me>"
+        ]
+      },
+      {
+        "name": "close",
+        "kind": "method",
+        "optional": false,
+        "readonly": false,
+        "signatures": [
+          "close(): Promise<void>"
+        ]
+      }
+    ],
+    "operations": [
+      {
+        "operationKey": "Runa#constructor",
+        "name": "constructor",
+        "signature": "constructor(config?: RunaConfig): Runa",
+        "parameters": [
+          "config"
+        ],
+        "returns": "Runa"
+      },
+      {
+        "operationKey": "Runa#me",
+        "name": "me",
+        "signature": "me(): Promise<Me>",
+        "parameters": [],
+        "returns": "Promise<Me>"
+      },
+      {
+        "operationKey": "Runa#close",
+        "name": "close",
+        "signature": "close(): Promise<void>",
+        "parameters": [],
+        "returns": "Promise<void>"
+      }
+    ]
+  },
+  {
+    "name": "RunaConfig",
+    "kind": "type",
+    "declarationKind": "interface",
+    "page": "Core.md",
+    "source": "dist/index.d.ts",
+    "signature": "interface RunaConfig",
+    "members": [
+      {
+        "name": "apiKey",
+        "kind": "property",
+        "optional": true,
+        "readonly": true,
+        "signatures": [
+          "apiKey?: string"
+        ]
+      },
+      {
+        "name": "baseUrl",
+        "kind": "property",
+        "optional": true,
+        "readonly": true,
+        "signatures": [
+          "baseUrl?: string"
+        ]
+      },
+      {
+        "name": "configFile",
+        "kind": "property",
+        "optional": true,
+        "readonly": true,
+        "signatures": [
+          "configFile?: string | null"
+        ]
+      },
+      {
+        "name": "fetch",
+        "kind": "property",
+        "optional": true,
+        "readonly": true,
+        "signatures": [
+          "fetch?: (input: RequestInfo | URL, init?: RequestInit) => Promise<Response> | (input: string | Request | URL, init?: RequestInit) => Promise<Response>"
+        ]
+      },
+      {
+        "name": "diagnostics",
+        "kind": "property",
+        "optional": true,
+        "readonly": true,
+        "signatures": [
+          "diagnostics?: DiagnosticSink"
+        ]
+      },
+      {
+        "name": "tracing",
+        "kind": "property",
+        "optional": true,
+        "readonly": true,
+        "signatures": [
+          "tracing?: TraceSink"
+        ]
+      }
+    ],
+    "operations": []
+  },
+  {
+    "name": "RunaError",
+    "kind": "runtime",
+    "declarationKind": "class",
+    "page": "Shared.md",
+    "source": "dist/index.d.ts",
+    "signature": "class RunaError",
+    "members": [
+      {
+        "name": "name",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "name: \"ConfigError\" | \"ApiError\" | \"CommandError\""
+        ]
+      },
+      {
+        "name": "code",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "code: \"config_error\" | \"api_error\" | \"malformed_response\" | \"command_error\""
+        ]
+      }
+    ],
+    "operations": []
+  },
+  {
+    "name": "Session",
+    "kind": "runtime",
+    "declarationKind": "class",
+    "page": "Sessions.md",
+    "source": "dist/index.d.ts",
+    "signature": "class Session",
+    "members": [
+      {
+        "name": "id",
+        "kind": "accessor",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "id: string"
+        ]
+      },
+      {
+        "name": "snapshot",
+        "kind": "accessor",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "snapshot: SessionSnapshot"
+        ]
+      },
+      {
+        "name": "refresh",
+        "kind": "method",
+        "optional": false,
+        "readonly": false,
+        "signatures": [
+          "refresh(): Promise<Session>"
+        ]
+      },
+      {
+        "name": "start",
+        "kind": "method",
+        "optional": false,
+        "readonly": false,
+        "signatures": [
+          "start(): Promise<Session>"
+        ]
+      },
+      {
+        "name": "pause",
+        "kind": "method",
+        "optional": false,
+        "readonly": false,
+        "signatures": [
+          "pause(): Promise<Session>"
+        ]
+      },
+      {
+        "name": "resume",
+        "kind": "method",
+        "optional": false,
+        "readonly": false,
+        "signatures": [
+          "resume(): Promise<Session>"
+        ]
+      },
+      {
+        "name": "stop",
+        "kind": "method",
+        "optional": false,
+        "readonly": false,
+        "signatures": [
+          "stop(): Promise<Session>"
+        ]
+      },
+      {
+        "name": "delete",
+        "kind": "method",
+        "optional": false,
+        "readonly": false,
+        "signatures": [
+          "delete(): Promise<Acknowledgement>"
+        ]
+      },
+      {
+        "name": "exec",
+        "kind": "method",
+        "optional": false,
+        "readonly": false,
+        "signatures": [
+          "exec(command: string | readonly string[], options?: ExecOptions): Promise<ExecResult>"
+        ]
+      },
+      {
+        "name": "checkpoint",
+        "kind": "method",
+        "optional": false,
+        "readonly": false,
+        "signatures": [
+          "checkpoint(name: string): Promise<Acknowledgement>"
+        ]
+      },
+      {
+        "name": "open",
+        "kind": "method",
+        "optional": false,
+        "readonly": false,
+        "signatures": [
+          "open(): Promise<OpenSessionResult>"
+        ]
+      }
+    ],
+    "operations": [
+      {
+        "operationKey": "Session#refresh",
+        "name": "refresh",
+        "signature": "refresh(): Promise<Session>",
+        "parameters": [],
+        "returns": "Promise<Session>"
+      },
+      {
+        "operationKey": "Session#start",
+        "name": "start",
+        "signature": "start(): Promise<Session>",
+        "parameters": [],
+        "returns": "Promise<Session>"
+      },
+      {
+        "operationKey": "Session#pause",
+        "name": "pause",
+        "signature": "pause(): Promise<Session>",
+        "parameters": [],
+        "returns": "Promise<Session>"
+      },
+      {
+        "operationKey": "Session#resume",
+        "name": "resume",
+        "signature": "resume(): Promise<Session>",
+        "parameters": [],
+        "returns": "Promise<Session>"
+      },
+      {
+        "operationKey": "Session#stop",
+        "name": "stop",
+        "signature": "stop(): Promise<Session>",
+        "parameters": [],
+        "returns": "Promise<Session>"
+      },
+      {
+        "operationKey": "Session#delete",
+        "name": "delete",
+        "signature": "delete(): Promise<Acknowledgement>",
+        "parameters": [],
+        "returns": "Promise<Acknowledgement>"
+      },
+      {
+        "operationKey": "Session#exec",
+        "name": "exec",
+        "signature": "exec(command: string | readonly string[], options?: ExecOptions): Promise<ExecResult>",
+        "parameters": [
+          "command",
+          "options"
+        ],
+        "returns": "Promise<ExecResult>"
+      },
+      {
+        "operationKey": "Session#checkpoint",
+        "name": "checkpoint",
+        "signature": "checkpoint(name: string): Promise<Acknowledgement>",
+        "parameters": [
+          "name"
+        ],
+        "returns": "Promise<Acknowledgement>"
+      },
+      {
+        "operationKey": "Session#open",
+        "name": "open",
+        "signature": "open(): Promise<OpenSessionResult>",
+        "parameters": [],
+        "returns": "Promise<OpenSessionResult>"
+      }
+    ]
+  },
+  {
+    "name": "SessionAgent",
+    "kind": "type",
+    "declarationKind": "type",
+    "page": "Sessions.md",
+    "source": "dist/index.d.ts",
+    "signature": "type SessionAgent = \"claude-code\" | \"codex\" | \"openclaw\"",
+    "members": [],
+    "operations": []
+  },
+  {
+    "name": "SessionCreateOptions",
+    "kind": "type",
+    "declarationKind": "interface",
+    "page": "Sessions.md",
+    "source": "dist/index.d.ts",
+    "signature": "interface SessionCreateOptions",
+    "members": [
+      {
+        "name": "agent",
+        "kind": "property",
+        "optional": true,
+        "readonly": true,
+        "signatures": [
+          "agent?: SessionAgent"
+        ]
+      },
+      {
+        "name": "vcpus",
+        "kind": "property",
+        "optional": true,
+        "readonly": true,
+        "signatures": [
+          "vcpus?: number"
+        ]
+      },
+      {
+        "name": "memoryMiB",
+        "kind": "property",
+        "optional": true,
+        "readonly": true,
+        "signatures": [
+          "memoryMiB?: number"
+        ]
+      },
+      {
+        "name": "allowedHosts",
+        "kind": "property",
+        "optional": true,
+        "readonly": true,
+        "signatures": [
+          "allowedHosts?: readonly string[]"
+        ]
+      },
+      {
+        "name": "runtimePort",
+        "kind": "property",
+        "optional": true,
+        "readonly": true,
+        "signatures": [
+          "runtimePort?: number"
+        ]
+      }
+    ],
+    "operations": []
+  },
+  {
+    "name": "SessionsManager",
+    "kind": "type",
+    "declarationKind": "interface",
+    "page": "Sessions.md",
+    "source": "dist/index.d.ts",
+    "signature": "interface SessionsManager",
+    "members": [
+      {
+        "name": "create",
+        "kind": "method",
+        "optional": false,
+        "readonly": false,
+        "signatures": [
+          "create(name: string, options?: SessionCreateOptions): Promise<Session>"
+        ]
+      },
+      {
+        "name": "list",
+        "kind": "method",
+        "optional": false,
+        "readonly": false,
+        "signatures": [
+          "list(): Promise<readonly Session[]>"
+        ]
+      },
+      {
+        "name": "get",
+        "kind": "method",
+        "optional": false,
+        "readonly": false,
+        "signatures": [
+          "get(id: string): Promise<Session>"
+        ]
+      }
+    ],
+    "operations": [
+      {
+        "operationKey": "SessionsManager#create",
+        "name": "create",
+        "signature": "create(name: string, options?: SessionCreateOptions): Promise<Session>",
+        "parameters": [
+          "name",
+          "options"
+        ],
+        "returns": "Promise<Session>"
+      },
+      {
+        "operationKey": "SessionsManager#list",
+        "name": "list",
+        "signature": "list(): Promise<readonly Session[]>",
+        "parameters": [],
+        "returns": "Promise<readonly Session[]>"
+      },
+      {
+        "operationKey": "SessionsManager#get",
+        "name": "get",
+        "signature": "get(id: string): Promise<Session>",
+        "parameters": [
+          "id"
+        ],
+        "returns": "Promise<Session>"
+      }
+    ]
+  },
+  {
+    "name": "SessionSnapshot",
+    "kind": "type",
+    "declarationKind": "interface",
+    "page": "Sessions.md",
+    "source": "dist/index.d.ts",
+    "signature": "interface SessionSnapshot",
+    "members": [
+      {
+        "name": "id",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "id: string"
+        ]
+      },
+      {
+        "name": "userId",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "userId: string"
+        ]
+      },
+      {
+        "name": "slug",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "slug: string"
+        ]
+      },
+      {
+        "name": "name",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "name: string"
+        ]
+      },
+      {
+        "name": "agent",
+        "kind": "property",
+        "optional": true,
+        "readonly": true,
+        "signatures": [
+          "agent?: SessionAgent"
+        ]
+      },
+      {
+        "name": "vcpus",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "vcpus: number"
+        ]
+      },
+      {
+        "name": "memoryMiB",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "memoryMiB: number"
+        ]
+      },
+      {
+        "name": "status",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "status: SessionStatus"
+        ]
+      },
+      {
+        "name": "runningSeconds",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "runningSeconds: number"
+        ]
+      },
+      {
+        "name": "createdAt",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "createdAt: string"
+        ]
+      },
+      {
+        "name": "updatedAt",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "updatedAt: string"
+        ]
+      },
+      {
+        "name": "url",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "url: string"
+        ]
+      }
+    ],
+    "operations": []
+  },
+  {
+    "name": "SessionStatus",
+    "kind": "type",
+    "declarationKind": "type",
+    "page": "Sessions.md",
+    "source": "dist/index.d.ts",
+    "signature": "type SessionStatus = \"creating\" | \"running\" | \"paused\" | \"suspended\" | \"stopped\" | \"deleted\" | \"error\"",
+    "members": [],
+    "operations": []
+  },
+  {
+    "name": "stderrText",
+    "kind": "runtime",
+    "declarationKind": "function",
+    "page": "Shared.md",
+    "source": "dist/index.d.ts",
+    "signature": "function stderrText(result: ExecResult): string | undefined",
+    "members": [],
+    "operations": [
+      {
+        "operationKey": "stderrText#stderrText",
+        "name": "stderrText",
+        "signature": "stderrText(result: ExecResult): string | undefined",
+        "parameters": [
+          "result"
+        ],
+        "returns": "string | undefined"
+      }
+    ]
+  },
+  {
+    "name": "stdoutText",
+    "kind": "runtime",
+    "declarationKind": "function",
+    "page": "Shared.md",
+    "source": "dist/index.d.ts",
+    "signature": "function stdoutText(result: ExecResult): string | undefined",
+    "members": [],
+    "operations": [
+      {
+        "operationKey": "stdoutText#stdoutText",
+        "name": "stdoutText",
+        "signature": "stdoutText(result: ExecResult): string | undefined",
+        "parameters": [
+          "result"
+        ],
+        "returns": "string | undefined"
+      }
+    ]
+  },
+  {
+    "name": "UnassignedWorkspace",
+    "kind": "type",
+    "declarationKind": "interface",
+    "page": "Account-and-records.md",
+    "source": "dist/index.d.ts",
+    "signature": "interface UnassignedWorkspace",
+    "members": [
+      {
+        "name": "assigned",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "assigned: false"
+        ]
+      },
+      {
+        "name": "waitlistPosition",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "waitlistPosition: number"
+        ]
+      },
+      {
+        "name": "usage",
+        "kind": "property",
+        "optional": true,
+        "readonly": true,
+        "signatures": [
+          "usage?: undefined"
+        ]
+      }
+    ],
+    "operations": []
+  },
+  {
+    "name": "Workspace",
+    "kind": "type",
+    "declarationKind": "type",
+    "page": "Account-and-records.md",
+    "source": "dist/index.d.ts",
+    "signature": "type Workspace = AssignedWorkspace | UnassignedWorkspace",
+    "members": [],
+    "operations": []
+  }
+]

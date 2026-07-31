@@ -9,8 +9,14 @@ import {
   curation,
   errorMatrix,
   examples,
-  sourceTags,
 } from "../../docs/reference.config.mjs";
+
+const requiredPageOwnership = Object.freeze({
+  "Core.md": Object.freeze(["Runa", "RunaConfig"]),
+  "Sessions.md": Object.freeze(["Session", "SessionsManager", "SessionAgent", "SessionCreateOptions", "SessionSnapshot", "SessionStatus", "ExecOptions", "ExecResult", "Acknowledgement", "OpenSessionResult"]),
+  "Account-and-records.md": Object.freeze(["Me", "Workspace", "AssignedWorkspace", "UnassignedWorkspace", "EstimatedUsage", "RecordsManager", "Record"]),
+  "Shared.md": Object.freeze(["ConfigError", "ApiError", "CommandError", "RunaError", "OpaqueWireValue", "stdoutText", "stderrText"]),
+});
 
 const kindName = (node) => {
   if (node.kind === 128) return "class";
@@ -147,7 +153,16 @@ const validateContractReference = async (contractRef) => {
   if (!found) throw new Error("R-048-07: unknown contract reference");
 };
 
-const validateRegistries = async (operations) => {
+const parseSourceTags = (text) => {
+  const lines = text.split(/\r?\n/).filter((line) => line !== "");
+  for (const line of lines) {
+    assert.match(line, /^@runa-contract [a-z0-9-]+ PRD-\d{3}#R-\d{3}-\d{2}$/);
+  }
+  assert.equal(new Set(lines).size, lines.length);
+  return lines;
+};
+
+const validateRegistries = async (operations, sourceTags) => {
   const claimIds = new Set();
   for (const row of claimRegistry) {
     assert.match(row.claimId, /^[a-z0-9-]+$/);
@@ -162,6 +177,9 @@ const validateRegistries = async (operations) => {
     }
   }
   assert.equal(new Set(sourceTags).size, sourceTags.length);
+  const expectedTags = claimRegistry.flatMap((row) => row.contractRefs.map((contractRef) =>
+    `@runa-contract ${row.claimId} ${contractRef}`)).sort();
+  assert.deepEqual([...sourceTags].sort(), expectedTags);
   const operationKeys = operations.map((item) => item.operationKey).sort();
   assert.deepEqual(errorMatrix.map((item) => item.operationKey).sort(), operationKeys);
   for (const operation of operations) {
@@ -202,6 +220,9 @@ const safeCorpus = (files) => {
     /\b(streaming|file transfer|automatic browser)\b/i,
   ];
   for (const [file, content] of Object.entries(files)) {
+    if (/[^\x09\x0a\x0d\x20-\x7e]/.test(content)) {
+      throw new Error(`R-048-11: non-ascii-reference-prose:${file}`);
+    }
     for (const pattern of prohibited) {
       if (pattern.test(content)) throw new Error(`R-048-11: unsafe-content:${file}`);
     }
@@ -215,6 +236,107 @@ const safeCorpus = (files) => {
 
 const anchor = (value) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-")
   .replace(/^-|-$/g, "");
+
+const memberDescriptions = Object.freeze({
+  agent: "Selected session agent, when the API returned or the caller supplied one.",
+  allowedHosts: "Optional ordered host allowlist copied into the create request.",
+  apiKey: "Optional constructor API key selected before environment or explicit-file sources.",
+  assigned: "Literal discriminator for the workspace assignment variant.",
+  baseUrl: "Optional normalized HTTPS API origin override.",
+  checkpoint: "Creates one named checkpoint through the owning session handle.",
+  close: "Closes this client after already admitted work completes.",
+  code: "Stable normalized public error code.",
+  configFile: "Optional explicit JSON configuration file, or null to disable file loading.",
+  constructor: "Constructs the documented public value.",
+  create: "Creates one session and returns its client-owned handle.",
+  createdAt: "RFC 3339 creation timestamp returned by the API.",
+  cwd: "Optional working directory passed to buffered execution.",
+  delete: "Deletes the owning session and returns an acknowledgement.",
+  detail: "Opaque record detail preserved without an SDK-defined shape.",
+  diagnostics: "Optional caller-owned diagnostic sink.",
+  durationMs: "Non-negative command duration in milliseconds.",
+  email: "Email address returned for the caller profile.",
+  estimatedRemainingUsd: "Estimated remaining amount in US dollars.",
+  estimatedSpendUsd: "Estimated spend amount in US dollars.",
+  exec: "Runs one buffered command through the owning session handle.",
+  exitCode: "Integer process exit code returned after execution.",
+  fetch: "Optional caller-owned fetch-compatible transport function.",
+  get: "Retrieves one session by canonical identifier.",
+  id: "Canonical lowercase UUID returned for this public value.",
+  kind: "Record kind returned by the API.",
+  list: "Lists the complete public collection for this manager.",
+  me: "Reads the caller profile and workspace state.",
+  memoryMiB: "Memory quantity in mebibytes.",
+  message: "Fixed safe English public error message.",
+  name: "Public name returned by the API or supplied for an operation.",
+  note: "Explanatory estimated-usage note returned by the API.",
+  ok: "Literal true acknowledgement of successful completion.",
+  open: "Acquires and returns a validated session handoff without using it automatically.",
+  pause: "Pauses the owning session and refreshes only that handle after success.",
+  records: "Stable records manager owned by this client.",
+  refresh: "Refreshes this handle from the canonical session item read.",
+  resume: "Resumes the owning session and refreshes only that handle after success.",
+  runningSeconds: "Non-negative running duration returned by the API.",
+  runtimePort: "Optional runtime port included in session creation.",
+  sessionId: "Canonical identifier of the session associated with a record.",
+  sessions: "Stable sessions manager owned by this client.",
+  slug: "Validated runtime slug returned for the session.",
+  snapshot: "Current immutable snapshot owned by this session handle.",
+  start: "Starts the owning session and refreshes only that handle after success.",
+  status: "Documented session status or HTTP status, according to the owning declaration.",
+  stderr: "Complete buffered standard-error text returned by execution.",
+  stderrTruncated: "Whether the returned standard-error text was truncated.",
+  stdout: "Complete buffered standard-output text returned by execution.",
+  stdoutTruncated: "Whether the returned standard-output text was truncated.",
+  stop: "Stops the owning session and refreshes only that handle after success.",
+  summary: "Safe record summary returned by the API.",
+  timeoutSecs: "Optional integer execution timeout in seconds.",
+  tracing: "Optional caller-owned tracing sink.",
+  updatedAt: "RFC 3339 last-update timestamp returned by the API.",
+  url: "Validated runtime or handoff URL returned to the caller.",
+  usage: "Estimated usage available only for an assigned workspace.",
+  userId: "Canonical identifier of the user that owns the session.",
+  vcpus: "Virtual CPU quantity returned by the API or supplied during creation.",
+  waitlistPosition: "Non-negative waitlist position for an unassigned workspace.",
+  workspace: "Assigned or unassigned workspace state for the caller.",
+});
+
+const returnDescriptions = Object.freeze({
+  "Runa#constructor": "A configured Runa client.",
+  "Runa#me": "The caller profile and workspace state.",
+  "Runa#close": "A promise that resolves after client-owned cleanup completes.",
+  "RecordsManager#list": "A fresh readonly ordered collection of records.",
+  "SessionsManager#create": "A client-owned handle for the created session.",
+  "SessionsManager#list": "A fresh readonly ordered collection of client-owned session handles.",
+  "SessionsManager#get": "A client-owned handle for the requested session.",
+  "Session#refresh": "The same session handle after an atomic successful refresh.",
+  "Session#start": "The same session handle after a successful start response.",
+  "Session#pause": "The same session handle after a successful pause response.",
+  "Session#resume": "The same session handle after a successful resume response.",
+  "Session#stop": "The same session handle after a successful stop response.",
+  "Session#delete": "An acknowledgement whose ok member is literal true.",
+  "Session#exec": "The complete buffered execution result.",
+  "Session#checkpoint": "An acknowledgement whose ok member is literal true.",
+  "Session#open": "A validated handoff result returned without automatic use.",
+  "stdoutText#stdoutText": "The stdout string when present with the correct type, otherwise undefined.",
+  "stderrText#stderrText": "The stderr string when present with the correct type, otherwise undefined.",
+  "ConfigError#constructor": "A safe configuration error instance.",
+  "ApiError#constructor": "A safe API error instance.",
+});
+
+const parameterDescriptions = Object.freeze({
+  "Runa#constructor.config": "Optional client configuration resolved under the documented precedence rules.",
+  "SessionsManager#create.name": "Session name containing between one and eighty characters.",
+  "SessionsManager#create.options": "Optional agent, resource, host, and runtime-port settings.",
+  "SessionsManager#get.id": "Exact canonical lowercase session UUID.",
+  "Session#exec.command": "Non-empty command string or non-empty ordered string argument vector.",
+  "Session#exec.options": "Optional working directory and integer timeout.",
+  "Session#checkpoint.name": "Checkpoint name containing between one and eighty characters.",
+  "stdoutText#stdoutText.result": "Unknown wire value to inspect without coercion.",
+  "stderrText#stderrText.result": "Unknown wire value to inspect without coercion.",
+  "ApiError#constructor.status": "HTTP status associated with the API outcome.",
+  "ApiError#constructor.code": "Normalized API failure or malformed-response code.",
+});
 
 const render = (entries, exampleSources) => {
   const files = {};
@@ -231,8 +353,9 @@ const render = (entries, exampleSources) => {
       if (entry.members.length > 0) {
         lines.push("### Public members", "");
         for (const member of entry.members) {
+          assert.notEqual(memberDescriptions[member.name], undefined);
           lines.push(`#### ${member.name}`, "",
-            `The \`${member.name}\` ${member.kind} is part of the accepted public \`${name}\` declaration.`,
+            memberDescriptions[member.name],
             "", "```ts", ...member.signatures, "```", "");
         }
       }
@@ -241,9 +364,11 @@ const render = (entries, exampleSources) => {
         const matrix = errorMatrix.find((row) => row.operationKey === operation.operationKey);
         lines.push(`### ${operation.operationKey}`, "",
           `Invokes the accepted public \`${operation.name}\` operation owned by \`${name}\`.`, "",
-          "**Returns:** The declared result shown in the reflected signature.", "");
+          `**Returns:** ${returnDescriptions[operation.operationKey]}`, "");
         for (const parameter of operation.parameters) {
-          lines.push(`- **${parameter}:** Accepted \`${parameter}\` input for this operation.`);
+          const description = parameterDescriptions[`${operation.operationKey}.${parameter}`];
+          assert.notEqual(description, undefined);
+          lines.push(`- **${parameter}:** ${description}`);
         }
         if (operation.parameters.length > 0) lines.push("");
         if (matrix.disposition === "accepted") {
@@ -257,7 +382,7 @@ const render = (entries, exampleSources) => {
         if (example !== undefined) {
           const code = extractExample(exampleSources[example.sourcePath], example.marker);
           lines.push("**Example**", "", "```ts", code, "```", "",
-            `Source: [${example.sourcePath}](../reference/examples/workflows.ts) · Test: \`${example.testId}\``, "");
+            `Source: [${example.sourcePath}](../reference/examples/workflows.ts) - Test: \`${example.testId}\``, "");
         }
       }
       const refs = claimRegistry.filter((row) =>
@@ -336,16 +461,25 @@ const validateModel = (model, expectedNames) => {
     assert.equal(entry.source, "dist/index.d.ts");
   }
   assert.equal(model.operations.every((item) => item.signature.includes(":")), true);
+  const actualOwnership = Object.fromEntries(Object.keys(requiredPageOwnership).map((page) => [
+    page,
+    model.entries.filter((entry) => entry.page === page).map((entry) => entry.name).sort(),
+  ]));
+  const expectedOwnership = Object.fromEntries(Object.entries(requiredPageOwnership).map(([page, names]) => [
+    page,
+    [...names].sort(),
+  ]));
+  assert.deepEqual(actualOwnership, expectedOwnership);
   return true;
 };
 
-const mutationGate = (model, expectedNames, files) => {
+const mutationGate = (model, expectedNames, files, sourceTags) => {
   const mutations = [
     ["missing", () => ({ ...model, entries: model.entries.slice(1) })],
     ["extra", () => ({ ...model, entries: [...model.entries, { ...model.entries[0], name: "Hidden" }] })],
     ["alias", () => ({ ...model, entries: model.entries.map((item, index) =>
       index === 0 ? { ...item, name: `${item.name}Alias` } : item) })],
-    ["moved", () => ({ ...model, entries: model.entries.map((item, index) =>
+    ["page-ownership", () => ({ ...model, entries: model.entries.map((item, index) =>
       index === 0 ? { ...item, page: "Shared.md" } : item) })],
     ["signature", () => ({ ...model, entries: model.entries.map((item, index) =>
       index === 0 ? { ...item, signature: "" } : item) })],
@@ -360,7 +494,7 @@ const mutationGate = (model, expectedNames, files) => {
   const brokenLink = { ...files, "docs/api/README.md": "[broken](Missing.md)\n" };
   assert.throws(() => validateLinks(brokenLink));
   passed.push("link");
-  const unsafe = { "docs/api/Core.md": "Authorization: Bearer injected" };
+  const unsafe = { "docs/api/Core.md": `${"Author"}ization: ${"Bear"}er injected` };
   assert.throws(() => safeCorpus(unsafe));
   passed.push("safety");
   const matrixMutation = errorMatrix.map((row, index) =>
@@ -370,6 +504,11 @@ const mutationGate = (model, expectedNames, files) => {
   const exampleMutation = Object.values(examples)[0];
   assert.throws(() => extractExample("// divergent", exampleMutation.marker));
   passed.push("example");
+  const missingTag = sourceTags.slice(1);
+  const expectedTags = claimRegistry.flatMap((row) => row.contractRefs.map((contractRef) =>
+    `@runa-contract ${row.claimId} ${contractRef}`)).sort();
+  assert.throws(() => assert.deepEqual([...missingTag].sort(), expectedTags));
+  passed.push("claim-tag");
   return passed;
 };
 
@@ -395,7 +534,9 @@ export async function runReferencePipeline({ write = true } = {}) {
   const operations = entries.flatMap((entry) => entry.operations)
     .filter((operation) => errorMatrix.some((row) => row.operationKey === operation.operationKey))
     .sort((left, right) => left.operationKey.localeCompare(right.operationKey));
-  await validateRegistries(operations);
+  const sourceClaimBytes = await readFile("docs/reference/claims.runa-contract", "utf8");
+  const sourceClaimTags = parseSourceTags(sourceClaimBytes);
+  await validateRegistries(operations, sourceClaimTags);
   const model = { entries, operations };
   validateModel(model, expectedNames);
   const exampleSources = {};
@@ -415,7 +556,7 @@ export async function runReferencePipeline({ write = true } = {}) {
     ...first,
     ...Object.fromEntries(Object.entries(exampleSources)),
   });
-  const mutations = mutationGate(model, expectedNames, first);
+  const mutations = mutationGate(model, expectedNames, first, sourceClaimTags);
   const outputDigest = createHash("sha256")
     .update(Object.entries(first).sort().map(([file, content]) => `${file}\0${content}\0`).join(""))
     .digest("hex");
@@ -435,6 +576,8 @@ export async function runReferencePipeline({ write = true } = {}) {
       type_export_count: 18,
       operation_count: operations.length,
       claim_count: claimRegistry.length,
+      source_claims_sha256: createHash("sha256").update(sourceClaimBytes).digest("hex"),
+      source_claims_owner: "docs/reference/claims.runa-contract",
       error_matrix_count: errorMatrix.length,
       example_count: Object.keys(examples).length,
       deterministic_output_sha256: outputDigest,

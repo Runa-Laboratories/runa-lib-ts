@@ -6,7 +6,9 @@ declare const session: Session;
 declare const sessionId: string;
 
 // example:runa-constructor
-const client = new Runa({ apiKey: process.env.RUNA_API_KEY });
+const apiKey = process.env.RUNA_API_KEY;
+if (apiKey === undefined) throw new Error("RUNA_API_KEY is required.");
+const client = new Runa({ apiKey });
 await client.close();
 // end-example
 
