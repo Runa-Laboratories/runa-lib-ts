@@ -33,6 +33,7 @@
     "dependencies:verify": "node scripts/verify-dependencies.mjs",
     "pack:verify": "npm run build && node scripts/verify-pack.mjs",
     "compatibility:verify": "node scripts/verify-compatibility.mjs",
+    "compatibility:aggregate": "node scripts/aggregate-compatibility.mjs",
     "release:readiness": "node scripts/release-readiness.mjs",
     "release:candidate": "node scripts/build-release-candidate.mjs",
     "evidence": "node scripts/build-evidence.mjs",
