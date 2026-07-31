@@ -105,6 +105,14 @@ try {
   const key = ["runa", "sk", "synthetic"].join("_");
   const requestSamples = [];
   const allocationSamples = [];
+  for (let warmup = 0; warmup < 25; warmup += 1) {
+    const client = new sdk.Runa({
+      apiKey: key,
+      baseUrl: "https://api.runacode.io",
+    });
+    await client.sessions.list();
+    await client.close();
+  }
   for (let sample = 0; sample < 20; sample += 1) {
     const client = new sdk.Runa({
       apiKey: key,
@@ -449,7 +457,7 @@ try {
       "request_overhead_p95_ms", "allocation_delta_bytes_max",
       "connection_establishments", "retained_memory_delta_bytes_p95",
     ]) assert(report.metrics[metric] <= accepted.metrics[metric],
-      `R-017-05: regression from accepted baseline:${metric}`);
+      `R-017-05: deterioration from accepted baseline:${metric}`);
     baselineStatus = "ACCEPTED";
   } catch (error) {
     if (error?.code !== "ENOENT") throw error;

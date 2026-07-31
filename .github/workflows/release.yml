@@ -106,14 +106,39 @@ jobs:
     permissions:
       contents: read
       id-token: write
+      attestations: write
+      artifact-metadata: write
     steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: 22.17.1
           registry-url: https://registry.npmjs.org
       - run: npm install --global npm@10.9.2
+      - run: npm ci
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
           name: admitted-npm-release-candidate
       - run: node -e "const fs=require('node:fs');const c=require('./release-artifacts/candidate.json');const h=require('node:crypto').createHash('sha256').update(fs.readFileSync('./release-artifacts/'+c.filename)).digest('hex');if(h!==c.sha256)process.exit(1)"
-      - run: npm publish "release-artifacts/${{ needs.admission.outputs.filename }}" --provenance --access public
+      - id: mapping
+        run: node scripts/resolve-release-channel.mjs
+      - id: attest
+        uses: actions/attest-build-provenance@v4
+        with:
+          subject-path: release-artifacts/${{ needs.admission.outputs.filename }}
+      - run: npm publish "release-artifacts/${{ needs.admission.outputs.filename }}" --provenance --access public --tag "${{ steps.mapping.outputs.dist_tag }}"
+      - run: npm run release:postpublish:verify
+        env:
+          RUNA_ATTESTATION_BUNDLE: ${{ steps.attest.outputs.bundle-path }}
+          GH_TOKEN: ${{ github.token }}
+      - if: failure()
+        run: npm run release:recovery:plan
+      - if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: npm-postpublish-receipts
+          path: |
+            evidence/*.intoto.jsonl
+            evidence/postpublish-receipt.json
+            evidence/release-recovery-plan.json
+          if-no-files-found: warn
