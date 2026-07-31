@@ -14,15 +14,25 @@ function containsMarker(value: unknown): boolean {
 
 export function sanitizeWire(value: unknown): unknown {
   if (Array.isArray(value)) {
-    return value.map((item) => sanitizeWire(item));
+    for (let index = value.length - 1; index >= 0; index -= 1) {
+      if (containsMarker(value[index])) {
+        value.splice(index, 1);
+      } else {
+        sanitizeWire(value[index]);
+      }
+    }
+    return value;
   }
   if (value === null || typeof value !== "object") return value;
   const source = value as globalThis.Record<string, unknown>;
-  const output: globalThis.Record<string, unknown> = {};
   for (const [key, nested] of Object.entries(source)) {
-    if (containsProhibitedMarker(key) || containsMarker(nested)) continue;
-    // detail is opaque and must preserve its exact received identity.
-    output[key] = key === "detail" ? nested : sanitizeWire(nested);
+    if (containsProhibitedMarker(key) || containsMarker(nested)) {
+      delete source[key];
+      continue;
+    }
+    // Parsed response objects are private to this SDK, so in-place sanitizing
+    // preserves opaque field identity while preventing boundary leakage.
+    if (key !== "detail") sanitizeWire(nested);
   }
-  return output;
+  return source;
 }
