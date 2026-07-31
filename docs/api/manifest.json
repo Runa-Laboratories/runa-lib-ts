@@ -1,70 +1,1553 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
+  "status": "PASS",
   "source": "dist/index.d.ts",
-  "runtime": [
-    "Runa",
-    "Session",
-    "ConfigError",
-    "ApiError",
-    "CommandError",
-    "RunaError",
-    "stdoutText",
-    "stderrText"
+  "runtime_export_count": 8,
+  "type_export_count": 18,
+  "entries": [
+    {
+      "name": "Runa",
+      "kind": "runtime",
+      "page": "Core.md",
+      "anchor": "runa",
+      "signature": "class Runa",
+      "documentation": "complete",
+      "examples": [
+        {
+          "operationKey": "Runa#constructor",
+          "sourcePath": "docs/reference/examples/workflows.ts",
+          "testId": "TC-048-EXAMPLE-RUNA_CONSTRUCTOR"
+        },
+        {
+          "operationKey": "Runa#me",
+          "sourcePath": "docs/reference/examples/workflows.ts",
+          "testId": "TC-048-EXAMPLE-RUNA_ME"
+        },
+        {
+          "operationKey": "Runa#close",
+          "sourcePath": "docs/reference/examples/workflows.ts",
+          "testId": "TC-048-EXAMPLE-RUNA_CLOSE"
+        }
+      ],
+      "contractRefs": [
+        "PRD-023#R-023-01",
+        "PRD-036#R-036-01",
+        "PRD-027#R-027-10",
+        "PRD-023#R-023-06",
+        "PRD-024#R-024-03"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "RunaConfig",
+      "kind": "type",
+      "page": "Core.md",
+      "anchor": "runaconfig",
+      "signature": "interface RunaConfig",
+      "documentation": "complete",
+      "examples": [],
+      "contractRefs": [
+        "PRD-023#R-023-01"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "Session",
+      "kind": "runtime",
+      "page": "Sessions.md",
+      "anchor": "session",
+      "signature": "class Session",
+      "documentation": "complete",
+      "examples": [
+        {
+          "operationKey": "Session#refresh",
+          "sourcePath": "docs/reference/examples/workflows.ts",
+          "testId": "TC-048-EXAMPLE-SESSION_REFRESH"
+        },
+        {
+          "operationKey": "Session#start",
+          "sourcePath": "docs/reference/examples/workflows.ts",
+          "testId": "TC-048-EXAMPLE-SESSION_START"
+        },
+        {
+          "operationKey": "Session#pause",
+          "sourcePath": "docs/reference/examples/workflows.ts",
+          "testId": "TC-048-EXAMPLE-SESSION_PAUSE"
+        },
+        {
+          "operationKey": "Session#resume",
+          "sourcePath": "docs/reference/examples/workflows.ts",
+          "testId": "TC-048-EXAMPLE-SESSION_RESUME"
+        },
+        {
+          "operationKey": "Session#stop",
+          "sourcePath": "docs/reference/examples/workflows.ts",
+          "testId": "TC-048-EXAMPLE-SESSION_STOP"
+        },
+        {
+          "operationKey": "Session#delete",
+          "sourcePath": "docs/reference/examples/workflows.ts",
+          "testId": "TC-048-EXAMPLE-SESSION_DELETE"
+        },
+        {
+          "operationKey": "Session#exec",
+          "sourcePath": "docs/reference/examples/workflows.ts",
+          "testId": "TC-048-EXAMPLE-SESSION_EXEC"
+        },
+        {
+          "operationKey": "Session#checkpoint",
+          "sourcePath": "docs/reference/examples/workflows.ts",
+          "testId": "TC-048-EXAMPLE-SESSION_CHECKPOINT"
+        },
+        {
+          "operationKey": "Session#open",
+          "sourcePath": "docs/reference/examples/workflows.ts",
+          "testId": "TC-048-EXAMPLE-SESSION_OPEN"
+        }
+      ],
+      "contractRefs": [
+        "PRD-031#R-031-01",
+        "PRD-031#R-031-05",
+        "PRD-032#R-032-01",
+        "PRD-032#R-032-06",
+        "PRD-033#R-033-01",
+        "PRD-034#R-034-01",
+        "PRD-035#R-035-01",
+        "PRD-033#R-033-04",
+        "PRD-024#R-024-03"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "SessionsManager",
+      "kind": "type",
+      "page": "Sessions.md",
+      "anchor": "sessionsmanager",
+      "signature": "interface SessionsManager",
+      "documentation": "complete",
+      "examples": [
+        {
+          "operationKey": "SessionsManager#create",
+          "sourcePath": "docs/reference/examples/workflows.ts",
+          "testId": "TC-048-EXAMPLE-SESSIONS_CREATE"
+        },
+        {
+          "operationKey": "SessionsManager#list",
+          "sourcePath": "docs/reference/examples/workflows.ts",
+          "testId": "TC-048-EXAMPLE-SESSIONS_LIST"
+        },
+        {
+          "operationKey": "SessionsManager#get",
+          "sourcePath": "docs/reference/examples/workflows.ts",
+          "testId": "TC-048-EXAMPLE-SESSIONS_GET"
+        }
+      ],
+      "contractRefs": [
+        "PRD-027#R-027-01",
+        "PRD-028#R-028-01",
+        "PRD-029#R-029-01",
+        "PRD-030#R-030-01",
+        "PRD-024#R-024-03"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "SessionAgent",
+      "kind": "type",
+      "page": "Sessions.md",
+      "anchor": "sessionagent",
+      "signature": "type SessionAgent = \"claude-code\" | \"codex\" | \"openclaw\"",
+      "documentation": "complete",
+      "examples": [],
+      "contractRefs": [
+        "PRD-022#R-022-02"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "SessionCreateOptions",
+      "kind": "type",
+      "page": "Sessions.md",
+      "anchor": "sessioncreateoptions",
+      "signature": "interface SessionCreateOptions",
+      "documentation": "complete",
+      "examples": [],
+      "contractRefs": [
+        "PRD-028#R-028-01"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "SessionSnapshot",
+      "kind": "type",
+      "page": "Sessions.md",
+      "anchor": "sessionsnapshot",
+      "signature": "interface SessionSnapshot",
+      "documentation": "complete",
+      "examples": [],
+      "contractRefs": [
+        "PRD-022#R-022-02"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "SessionStatus",
+      "kind": "type",
+      "page": "Sessions.md",
+      "anchor": "sessionstatus",
+      "signature": "type SessionStatus = \"creating\" | \"running\" | \"paused\" | \"suspended\" | \"stopped\" | \"deleted\" | \"error\"",
+      "documentation": "complete",
+      "examples": [],
+      "contractRefs": [
+        "PRD-022#R-022-02"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "ExecOptions",
+      "kind": "type",
+      "page": "Sessions.md",
+      "anchor": "execoptions",
+      "signature": "interface ExecOptions",
+      "documentation": "complete",
+      "examples": [],
+      "contractRefs": [
+        "PRD-033#R-033-04"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "ExecResult",
+      "kind": "type",
+      "page": "Sessions.md",
+      "anchor": "execresult",
+      "signature": "interface ExecResult",
+      "documentation": "complete",
+      "examples": [],
+      "contractRefs": [
+        "PRD-033#R-033-09"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "Acknowledgement",
+      "kind": "type",
+      "page": "Sessions.md",
+      "anchor": "acknowledgement",
+      "signature": "interface Acknowledgement",
+      "documentation": "complete",
+      "examples": [],
+      "contractRefs": [
+        "PRD-034#R-034-03"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "OpenSessionResult",
+      "kind": "type",
+      "page": "Sessions.md",
+      "anchor": "opensessionresult",
+      "signature": "interface OpenSessionResult",
+      "documentation": "complete",
+      "examples": [],
+      "contractRefs": [
+        "PRD-035#R-035-02"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "Me",
+      "kind": "type",
+      "page": "Account-and-records.md",
+      "anchor": "me",
+      "signature": "interface Me",
+      "documentation": "complete",
+      "examples": [],
+      "contractRefs": [
+        "PRD-036#R-036-01"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "Workspace",
+      "kind": "type",
+      "page": "Account-and-records.md",
+      "anchor": "workspace",
+      "signature": "type Workspace = AssignedWorkspace | UnassignedWorkspace",
+      "documentation": "complete",
+      "examples": [],
+      "contractRefs": [
+        "PRD-036#R-036-01"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "AssignedWorkspace",
+      "kind": "type",
+      "page": "Account-and-records.md",
+      "anchor": "assignedworkspace",
+      "signature": "interface AssignedWorkspace",
+      "documentation": "complete",
+      "examples": [],
+      "contractRefs": [
+        "PRD-036#R-036-01"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "UnassignedWorkspace",
+      "kind": "type",
+      "page": "Account-and-records.md",
+      "anchor": "unassignedworkspace",
+      "signature": "interface UnassignedWorkspace",
+      "documentation": "complete",
+      "examples": [],
+      "contractRefs": [
+        "PRD-036#R-036-01"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "EstimatedUsage",
+      "kind": "type",
+      "page": "Account-and-records.md",
+      "anchor": "estimatedusage",
+      "signature": "interface EstimatedUsage",
+      "documentation": "complete",
+      "examples": [],
+      "contractRefs": [
+        "PRD-036#R-036-01"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "RecordsManager",
+      "kind": "type",
+      "page": "Account-and-records.md",
+      "anchor": "recordsmanager",
+      "signature": "interface RecordsManager",
+      "documentation": "complete",
+      "examples": [
+        {
+          "operationKey": "RecordsManager#list",
+          "sourcePath": "docs/reference/examples/workflows.ts",
+          "testId": "TC-048-EXAMPLE-RECORDS_LIST"
+        }
+      ],
+      "contractRefs": [
+        "PRD-027#R-027-01",
+        "PRD-037#R-037-01",
+        "PRD-024#R-024-03"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "Record",
+      "kind": "type",
+      "page": "Account-and-records.md",
+      "anchor": "record",
+      "signature": "interface Record",
+      "documentation": "complete",
+      "examples": [],
+      "contractRefs": [
+        "PRD-037#R-037-01"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "ConfigError",
+      "kind": "runtime",
+      "page": "Shared.md",
+      "anchor": "configerror",
+      "signature": "class ConfigError",
+      "documentation": "complete",
+      "examples": [],
+      "contractRefs": [
+        "PRD-024#R-024-01"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "ApiError",
+      "kind": "runtime",
+      "page": "Shared.md",
+      "anchor": "apierror",
+      "signature": "class ApiError",
+      "documentation": "complete",
+      "examples": [],
+      "contractRefs": [
+        "PRD-024#R-024-01",
+        "PRD-024#R-024-03"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "CommandError",
+      "kind": "runtime",
+      "page": "Shared.md",
+      "anchor": "commanderror",
+      "signature": "class CommandError",
+      "documentation": "complete",
+      "examples": [],
+      "contractRefs": [
+        "PRD-024#R-024-01"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "RunaError",
+      "kind": "runtime",
+      "page": "Shared.md",
+      "anchor": "runaerror",
+      "signature": "class RunaError",
+      "documentation": "complete",
+      "examples": [],
+      "contractRefs": [
+        "PRD-024#R-024-01"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "OpaqueWireValue",
+      "kind": "type",
+      "page": "Shared.md",
+      "anchor": "opaquewirevalue",
+      "signature": "type OpaqueWireValue = unknown",
+      "documentation": "complete",
+      "examples": [],
+      "contractRefs": [
+        "PRD-022#R-022-02"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "stdoutText",
+      "kind": "runtime",
+      "page": "Shared.md",
+      "anchor": "stdouttext",
+      "signature": "function stdoutText(result: ExecResult): string | undefined",
+      "documentation": "complete",
+      "examples": [],
+      "contractRefs": [
+        "PRD-022#R-022-02"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "stderrText",
+      "kind": "runtime",
+      "page": "Shared.md",
+      "anchor": "stderrtext",
+      "signature": "function stderrText(result: ExecResult): string | undefined",
+      "documentation": "complete",
+      "examples": [],
+      "contractRefs": [
+        "PRD-022#R-022-02"
+      ],
+      "status": "PASS"
+    }
   ],
-  "types": [
-    "RecordsManager",
-    "SessionsManager",
-    "Acknowledgement",
-    "AssignedWorkspace",
-    "EstimatedUsage",
-    "ExecOptions",
-    "ExecResult",
-    "Me",
-    "OpaqueWireValue",
-    "OpenSessionResult",
-    "Record",
-    "RunaConfig",
-    "SessionAgent",
-    "SessionCreateOptions",
-    "SessionSnapshot",
-    "SessionStatus",
-    "UnassignedWorkspace",
-    "Workspace"
+  "claimRegistry": [
+    {
+      "claimId": "runa-summary",
+      "subjectKey": "Runa",
+      "fragment": "summary",
+      "contractRefs": [
+        "PRD-023#R-023-01"
+      ]
+    },
+    {
+      "claimId": "runaconfig-summary",
+      "subjectKey": "RunaConfig",
+      "fragment": "summary",
+      "contractRefs": [
+        "PRD-023#R-023-01"
+      ]
+    },
+    {
+      "claimId": "session-summary",
+      "subjectKey": "Session",
+      "fragment": "summary",
+      "contractRefs": [
+        "PRD-031#R-031-01"
+      ]
+    },
+    {
+      "claimId": "sessionsmanager-summary",
+      "subjectKey": "SessionsManager",
+      "fragment": "summary",
+      "contractRefs": [
+        "PRD-027#R-027-01"
+      ]
+    },
+    {
+      "claimId": "sessionagent-summary",
+      "subjectKey": "SessionAgent",
+      "fragment": "summary",
+      "contractRefs": [
+        "PRD-022#R-022-02"
+      ]
+    },
+    {
+      "claimId": "sessioncreateoptions-summary",
+      "subjectKey": "SessionCreateOptions",
+      "fragment": "summary",
+      "contractRefs": [
+        "PRD-028#R-028-01"
+      ]
+    },
+    {
+      "claimId": "sessionsnapshot-summary",
+      "subjectKey": "SessionSnapshot",
+      "fragment": "summary",
+      "contractRefs": [
+        "PRD-022#R-022-02"
+      ]
+    },
+    {
+      "claimId": "sessionstatus-summary",
+      "subjectKey": "SessionStatus",
+      "fragment": "summary",
+      "contractRefs": [
+        "PRD-022#R-022-02"
+      ]
+    },
+    {
+      "claimId": "execoptions-summary",
+      "subjectKey": "ExecOptions",
+      "fragment": "summary",
+      "contractRefs": [
+        "PRD-033#R-033-04"
+      ]
+    },
+    {
+      "claimId": "execresult-summary",
+      "subjectKey": "ExecResult",
+      "fragment": "summary",
+      "contractRefs": [
+        "PRD-033#R-033-09"
+      ]
+    },
+    {
+      "claimId": "acknowledgement-summary",
+      "subjectKey": "Acknowledgement",
+      "fragment": "summary",
+      "contractRefs": [
+        "PRD-034#R-034-03"
+      ]
+    },
+    {
+      "claimId": "opensessionresult-summary",
+      "subjectKey": "OpenSessionResult",
+      "fragment": "summary",
+      "contractRefs": [
+        "PRD-035#R-035-02"
+      ]
+    },
+    {
+      "claimId": "me-summary",
+      "subjectKey": "Me",
+      "fragment": "summary",
+      "contractRefs": [
+        "PRD-036#R-036-01"
+      ]
+    },
+    {
+      "claimId": "workspace-summary",
+      "subjectKey": "Workspace",
+      "fragment": "summary",
+      "contractRefs": [
+        "PRD-036#R-036-01"
+      ]
+    },
+    {
+      "claimId": "assignedworkspace-summary",
+      "subjectKey": "AssignedWorkspace",
+      "fragment": "summary",
+      "contractRefs": [
+        "PRD-036#R-036-01"
+      ]
+    },
+    {
+      "claimId": "unassignedworkspace-summary",
+      "subjectKey": "UnassignedWorkspace",
+      "fragment": "summary",
+      "contractRefs": [
+        "PRD-036#R-036-01"
+      ]
+    },
+    {
+      "claimId": "estimatedusage-summary",
+      "subjectKey": "EstimatedUsage",
+      "fragment": "summary",
+      "contractRefs": [
+        "PRD-036#R-036-01"
+      ]
+    },
+    {
+      "claimId": "recordsmanager-summary",
+      "subjectKey": "RecordsManager",
+      "fragment": "summary",
+      "contractRefs": [
+        "PRD-027#R-027-01"
+      ]
+    },
+    {
+      "claimId": "record-summary",
+      "subjectKey": "Record",
+      "fragment": "summary",
+      "contractRefs": [
+        "PRD-037#R-037-01"
+      ]
+    },
+    {
+      "claimId": "configerror-summary",
+      "subjectKey": "ConfigError",
+      "fragment": "summary",
+      "contractRefs": [
+        "PRD-024#R-024-01"
+      ]
+    },
+    {
+      "claimId": "apierror-summary",
+      "subjectKey": "ApiError",
+      "fragment": "summary",
+      "contractRefs": [
+        "PRD-024#R-024-01"
+      ]
+    },
+    {
+      "claimId": "commanderror-summary",
+      "subjectKey": "CommandError",
+      "fragment": "summary",
+      "contractRefs": [
+        "PRD-024#R-024-01"
+      ]
+    },
+    {
+      "claimId": "runaerror-summary",
+      "subjectKey": "RunaError",
+      "fragment": "summary",
+      "contractRefs": [
+        "PRD-024#R-024-01"
+      ]
+    },
+    {
+      "claimId": "opaquewirevalue-summary",
+      "subjectKey": "OpaqueWireValue",
+      "fragment": "summary",
+      "contractRefs": [
+        "PRD-022#R-022-02"
+      ]
+    },
+    {
+      "claimId": "stdouttext-summary",
+      "subjectKey": "stdoutText",
+      "fragment": "summary",
+      "contractRefs": [
+        "PRD-022#R-022-02"
+      ]
+    },
+    {
+      "claimId": "stderrtext-summary",
+      "subjectKey": "stderrText",
+      "fragment": "summary",
+      "contractRefs": [
+        "PRD-022#R-022-02"
+      ]
+    },
+    {
+      "claimId": "runa-constructor-description",
+      "subjectKey": "Runa#constructor",
+      "fragment": "description",
+      "contractRefs": [
+        "PRD-023#R-023-01"
+      ]
+    },
+    {
+      "claimId": "runa-constructor-returns",
+      "subjectKey": "Runa#constructor",
+      "fragment": "returns",
+      "contractRefs": [
+        "PRD-023#R-023-01"
+      ]
+    },
+    {
+      "claimId": "runa-constructor-example",
+      "subjectKey": "Runa#constructor",
+      "fragment": "example",
+      "contractRefs": [
+        "PRD-023#R-023-01"
+      ]
+    },
+    {
+      "claimId": "runa-me-description",
+      "subjectKey": "Runa#me",
+      "fragment": "description",
+      "contractRefs": [
+        "PRD-036#R-036-01"
+      ]
+    },
+    {
+      "claimId": "runa-me-returns",
+      "subjectKey": "Runa#me",
+      "fragment": "returns",
+      "contractRefs": [
+        "PRD-036#R-036-01"
+      ]
+    },
+    {
+      "claimId": "runa-me-example",
+      "subjectKey": "Runa#me",
+      "fragment": "example",
+      "contractRefs": [
+        "PRD-036#R-036-01"
+      ]
+    },
+    {
+      "claimId": "runa-close-description",
+      "subjectKey": "Runa#close",
+      "fragment": "description",
+      "contractRefs": [
+        "PRD-027#R-027-10"
+      ]
+    },
+    {
+      "claimId": "runa-close-returns",
+      "subjectKey": "Runa#close",
+      "fragment": "returns",
+      "contractRefs": [
+        "PRD-027#R-027-10"
+      ]
+    },
+    {
+      "claimId": "runa-close-example",
+      "subjectKey": "Runa#close",
+      "fragment": "example",
+      "contractRefs": [
+        "PRD-027#R-027-10"
+      ]
+    },
+    {
+      "claimId": "recordsmanager-list-description",
+      "subjectKey": "RecordsManager#list",
+      "fragment": "description",
+      "contractRefs": [
+        "PRD-037#R-037-01"
+      ]
+    },
+    {
+      "claimId": "recordsmanager-list-returns",
+      "subjectKey": "RecordsManager#list",
+      "fragment": "returns",
+      "contractRefs": [
+        "PRD-037#R-037-01"
+      ]
+    },
+    {
+      "claimId": "recordsmanager-list-example",
+      "subjectKey": "RecordsManager#list",
+      "fragment": "example",
+      "contractRefs": [
+        "PRD-037#R-037-01"
+      ]
+    },
+    {
+      "claimId": "sessionsmanager-create-description",
+      "subjectKey": "SessionsManager#create",
+      "fragment": "description",
+      "contractRefs": [
+        "PRD-028#R-028-01"
+      ]
+    },
+    {
+      "claimId": "sessionsmanager-create-returns",
+      "subjectKey": "SessionsManager#create",
+      "fragment": "returns",
+      "contractRefs": [
+        "PRD-028#R-028-01"
+      ]
+    },
+    {
+      "claimId": "sessionsmanager-create-example",
+      "subjectKey": "SessionsManager#create",
+      "fragment": "example",
+      "contractRefs": [
+        "PRD-028#R-028-01"
+      ]
+    },
+    {
+      "claimId": "sessionsmanager-list-description",
+      "subjectKey": "SessionsManager#list",
+      "fragment": "description",
+      "contractRefs": [
+        "PRD-029#R-029-01"
+      ]
+    },
+    {
+      "claimId": "sessionsmanager-list-returns",
+      "subjectKey": "SessionsManager#list",
+      "fragment": "returns",
+      "contractRefs": [
+        "PRD-029#R-029-01"
+      ]
+    },
+    {
+      "claimId": "sessionsmanager-list-example",
+      "subjectKey": "SessionsManager#list",
+      "fragment": "example",
+      "contractRefs": [
+        "PRD-029#R-029-01"
+      ]
+    },
+    {
+      "claimId": "sessionsmanager-get-description",
+      "subjectKey": "SessionsManager#get",
+      "fragment": "description",
+      "contractRefs": [
+        "PRD-030#R-030-01"
+      ]
+    },
+    {
+      "claimId": "sessionsmanager-get-returns",
+      "subjectKey": "SessionsManager#get",
+      "fragment": "returns",
+      "contractRefs": [
+        "PRD-030#R-030-01"
+      ]
+    },
+    {
+      "claimId": "sessionsmanager-get-example",
+      "subjectKey": "SessionsManager#get",
+      "fragment": "example",
+      "contractRefs": [
+        "PRD-030#R-030-01"
+      ]
+    },
+    {
+      "claimId": "session-refresh-description",
+      "subjectKey": "Session#refresh",
+      "fragment": "description",
+      "contractRefs": [
+        "PRD-031#R-031-05"
+      ]
+    },
+    {
+      "claimId": "session-refresh-returns",
+      "subjectKey": "Session#refresh",
+      "fragment": "returns",
+      "contractRefs": [
+        "PRD-031#R-031-05"
+      ]
+    },
+    {
+      "claimId": "session-refresh-example",
+      "subjectKey": "Session#refresh",
+      "fragment": "example",
+      "contractRefs": [
+        "PRD-031#R-031-05"
+      ]
+    },
+    {
+      "claimId": "session-start-description",
+      "subjectKey": "Session#start",
+      "fragment": "description",
+      "contractRefs": [
+        "PRD-032#R-032-01"
+      ]
+    },
+    {
+      "claimId": "session-start-returns",
+      "subjectKey": "Session#start",
+      "fragment": "returns",
+      "contractRefs": [
+        "PRD-032#R-032-01"
+      ]
+    },
+    {
+      "claimId": "session-start-example",
+      "subjectKey": "Session#start",
+      "fragment": "example",
+      "contractRefs": [
+        "PRD-032#R-032-01"
+      ]
+    },
+    {
+      "claimId": "session-pause-description",
+      "subjectKey": "Session#pause",
+      "fragment": "description",
+      "contractRefs": [
+        "PRD-032#R-032-01"
+      ]
+    },
+    {
+      "claimId": "session-pause-returns",
+      "subjectKey": "Session#pause",
+      "fragment": "returns",
+      "contractRefs": [
+        "PRD-032#R-032-01"
+      ]
+    },
+    {
+      "claimId": "session-pause-example",
+      "subjectKey": "Session#pause",
+      "fragment": "example",
+      "contractRefs": [
+        "PRD-032#R-032-01"
+      ]
+    },
+    {
+      "claimId": "session-resume-description",
+      "subjectKey": "Session#resume",
+      "fragment": "description",
+      "contractRefs": [
+        "PRD-032#R-032-01"
+      ]
+    },
+    {
+      "claimId": "session-resume-returns",
+      "subjectKey": "Session#resume",
+      "fragment": "returns",
+      "contractRefs": [
+        "PRD-032#R-032-01"
+      ]
+    },
+    {
+      "claimId": "session-resume-example",
+      "subjectKey": "Session#resume",
+      "fragment": "example",
+      "contractRefs": [
+        "PRD-032#R-032-01"
+      ]
+    },
+    {
+      "claimId": "session-stop-description",
+      "subjectKey": "Session#stop",
+      "fragment": "description",
+      "contractRefs": [
+        "PRD-032#R-032-01"
+      ]
+    },
+    {
+      "claimId": "session-stop-returns",
+      "subjectKey": "Session#stop",
+      "fragment": "returns",
+      "contractRefs": [
+        "PRD-032#R-032-01"
+      ]
+    },
+    {
+      "claimId": "session-stop-example",
+      "subjectKey": "Session#stop",
+      "fragment": "example",
+      "contractRefs": [
+        "PRD-032#R-032-01"
+      ]
+    },
+    {
+      "claimId": "session-delete-description",
+      "subjectKey": "Session#delete",
+      "fragment": "description",
+      "contractRefs": [
+        "PRD-032#R-032-06"
+      ]
+    },
+    {
+      "claimId": "session-delete-returns",
+      "subjectKey": "Session#delete",
+      "fragment": "returns",
+      "contractRefs": [
+        "PRD-032#R-032-06"
+      ]
+    },
+    {
+      "claimId": "session-delete-example",
+      "subjectKey": "Session#delete",
+      "fragment": "example",
+      "contractRefs": [
+        "PRD-032#R-032-06"
+      ]
+    },
+    {
+      "claimId": "session-exec-description",
+      "subjectKey": "Session#exec",
+      "fragment": "description",
+      "contractRefs": [
+        "PRD-033#R-033-01"
+      ]
+    },
+    {
+      "claimId": "session-exec-returns",
+      "subjectKey": "Session#exec",
+      "fragment": "returns",
+      "contractRefs": [
+        "PRD-033#R-033-01"
+      ]
+    },
+    {
+      "claimId": "session-exec-example",
+      "subjectKey": "Session#exec",
+      "fragment": "example",
+      "contractRefs": [
+        "PRD-033#R-033-01"
+      ]
+    },
+    {
+      "claimId": "session-checkpoint-description",
+      "subjectKey": "Session#checkpoint",
+      "fragment": "description",
+      "contractRefs": [
+        "PRD-034#R-034-01"
+      ]
+    },
+    {
+      "claimId": "session-checkpoint-returns",
+      "subjectKey": "Session#checkpoint",
+      "fragment": "returns",
+      "contractRefs": [
+        "PRD-034#R-034-01"
+      ]
+    },
+    {
+      "claimId": "session-checkpoint-example",
+      "subjectKey": "Session#checkpoint",
+      "fragment": "example",
+      "contractRefs": [
+        "PRD-034#R-034-01"
+      ]
+    },
+    {
+      "claimId": "session-open-description",
+      "subjectKey": "Session#open",
+      "fragment": "description",
+      "contractRefs": [
+        "PRD-035#R-035-01"
+      ]
+    },
+    {
+      "claimId": "session-open-returns",
+      "subjectKey": "Session#open",
+      "fragment": "returns",
+      "contractRefs": [
+        "PRD-035#R-035-01"
+      ]
+    },
+    {
+      "claimId": "session-open-example",
+      "subjectKey": "Session#open",
+      "fragment": "example",
+      "contractRefs": [
+        "PRD-035#R-035-01"
+      ]
+    },
+    {
+      "claimId": "stdouttext-stdouttext-description",
+      "subjectKey": "stdoutText#stdoutText",
+      "fragment": "description",
+      "contractRefs": [
+        "PRD-022#R-022-02"
+      ]
+    },
+    {
+      "claimId": "stdouttext-stdouttext-returns",
+      "subjectKey": "stdoutText#stdoutText",
+      "fragment": "returns",
+      "contractRefs": [
+        "PRD-022#R-022-02"
+      ]
+    },
+    {
+      "claimId": "stderrtext-stderrtext-description",
+      "subjectKey": "stderrText#stderrText",
+      "fragment": "description",
+      "contractRefs": [
+        "PRD-022#R-022-02"
+      ]
+    },
+    {
+      "claimId": "stderrtext-stderrtext-returns",
+      "subjectKey": "stderrText#stderrText",
+      "fragment": "returns",
+      "contractRefs": [
+        "PRD-022#R-022-02"
+      ]
+    },
+    {
+      "claimId": "configerror-constructor-description",
+      "subjectKey": "ConfigError#constructor",
+      "fragment": "description",
+      "contractRefs": [
+        "PRD-024#R-024-01"
+      ]
+    },
+    {
+      "claimId": "configerror-constructor-returns",
+      "subjectKey": "ConfigError#constructor",
+      "fragment": "returns",
+      "contractRefs": [
+        "PRD-024#R-024-01"
+      ]
+    },
+    {
+      "claimId": "apierror-constructor-description",
+      "subjectKey": "ApiError#constructor",
+      "fragment": "description",
+      "contractRefs": [
+        "PRD-024#R-024-01"
+      ]
+    },
+    {
+      "claimId": "apierror-constructor-returns",
+      "subjectKey": "ApiError#constructor",
+      "fragment": "returns",
+      "contractRefs": [
+        "PRD-024#R-024-01"
+      ]
+    },
+    {
+      "claimId": "runa-constructor-param-config",
+      "subjectKey": "Runa#constructor",
+      "fragment": "param.config",
+      "contractRefs": [
+        "PRD-023#R-023-01"
+      ]
+    },
+    {
+      "claimId": "sessionsmanager-create-param-name",
+      "subjectKey": "SessionsManager#create",
+      "fragment": "param.name",
+      "contractRefs": [
+        "PRD-028#R-028-01"
+      ]
+    },
+    {
+      "claimId": "sessionsmanager-create-param-options",
+      "subjectKey": "SessionsManager#create",
+      "fragment": "param.options",
+      "contractRefs": [
+        "PRD-028#R-028-01"
+      ]
+    },
+    {
+      "claimId": "sessionsmanager-get-param-id",
+      "subjectKey": "SessionsManager#get",
+      "fragment": "param.id",
+      "contractRefs": [
+        "PRD-030#R-030-01"
+      ]
+    },
+    {
+      "claimId": "session-exec-param-command",
+      "subjectKey": "Session#exec",
+      "fragment": "param.command",
+      "contractRefs": [
+        "PRD-033#R-033-01"
+      ]
+    },
+    {
+      "claimId": "session-exec-param-options",
+      "subjectKey": "Session#exec",
+      "fragment": "param.options",
+      "contractRefs": [
+        "PRD-033#R-033-04"
+      ]
+    },
+    {
+      "claimId": "session-checkpoint-param-name",
+      "subjectKey": "Session#checkpoint",
+      "fragment": "param.name",
+      "contractRefs": [
+        "PRD-034#R-034-01"
+      ]
+    },
+    {
+      "claimId": "stdouttext-stdouttext-param-result",
+      "subjectKey": "stdoutText#stdoutText",
+      "fragment": "param.result",
+      "contractRefs": [
+        "PRD-022#R-022-02"
+      ]
+    },
+    {
+      "claimId": "stderrtext-stderrtext-param-result",
+      "subjectKey": "stderrText#stderrText",
+      "fragment": "param.result",
+      "contractRefs": [
+        "PRD-022#R-022-02"
+      ]
+    },
+    {
+      "claimId": "apierror-constructor-param-status",
+      "subjectKey": "ApiError#constructor",
+      "fragment": "param.status",
+      "contractRefs": [
+        "PRD-024#R-024-03"
+      ]
+    },
+    {
+      "claimId": "apierror-constructor-param-code",
+      "subjectKey": "ApiError#constructor",
+      "fragment": "param.code",
+      "contractRefs": [
+        "PRD-024#R-024-03"
+      ]
+    },
+    {
+      "claimId": "runa-constructor-throws-config",
+      "subjectKey": "Runa#constructor",
+      "fragment": "throws.ConfigError",
+      "contractRefs": [
+        "PRD-023#R-023-06"
+      ]
+    },
+    {
+      "claimId": "runa-me-throws-api",
+      "subjectKey": "Runa#me",
+      "fragment": "throws.ApiError",
+      "contractRefs": [
+        "PRD-024#R-024-03"
+      ]
+    },
+    {
+      "claimId": "recordsmanager-list-throws-api",
+      "subjectKey": "RecordsManager#list",
+      "fragment": "throws.ApiError",
+      "contractRefs": [
+        "PRD-024#R-024-03"
+      ]
+    },
+    {
+      "claimId": "sessionsmanager-create-throws-api",
+      "subjectKey": "SessionsManager#create",
+      "fragment": "throws.ApiError",
+      "contractRefs": [
+        "PRD-024#R-024-03"
+      ]
+    },
+    {
+      "claimId": "sessionsmanager-list-throws-api",
+      "subjectKey": "SessionsManager#list",
+      "fragment": "throws.ApiError",
+      "contractRefs": [
+        "PRD-024#R-024-03"
+      ]
+    },
+    {
+      "claimId": "sessionsmanager-get-throws-api",
+      "subjectKey": "SessionsManager#get",
+      "fragment": "throws.ApiError",
+      "contractRefs": [
+        "PRD-024#R-024-03"
+      ]
+    },
+    {
+      "claimId": "session-refresh-throws-api",
+      "subjectKey": "Session#refresh",
+      "fragment": "throws.ApiError",
+      "contractRefs": [
+        "PRD-024#R-024-03"
+      ]
+    },
+    {
+      "claimId": "session-start-throws-api",
+      "subjectKey": "Session#start",
+      "fragment": "throws.ApiError",
+      "contractRefs": [
+        "PRD-024#R-024-03"
+      ]
+    },
+    {
+      "claimId": "session-pause-throws-api",
+      "subjectKey": "Session#pause",
+      "fragment": "throws.ApiError",
+      "contractRefs": [
+        "PRD-024#R-024-03"
+      ]
+    },
+    {
+      "claimId": "session-resume-throws-api",
+      "subjectKey": "Session#resume",
+      "fragment": "throws.ApiError",
+      "contractRefs": [
+        "PRD-024#R-024-03"
+      ]
+    },
+    {
+      "claimId": "session-stop-throws-api",
+      "subjectKey": "Session#stop",
+      "fragment": "throws.ApiError",
+      "contractRefs": [
+        "PRD-024#R-024-03"
+      ]
+    },
+    {
+      "claimId": "session-delete-throws-api",
+      "subjectKey": "Session#delete",
+      "fragment": "throws.ApiError",
+      "contractRefs": [
+        "PRD-024#R-024-03"
+      ]
+    },
+    {
+      "claimId": "session-exec-throws-api",
+      "subjectKey": "Session#exec",
+      "fragment": "throws.ApiError",
+      "contractRefs": [
+        "PRD-024#R-024-03"
+      ]
+    },
+    {
+      "claimId": "session-checkpoint-throws-api",
+      "subjectKey": "Session#checkpoint",
+      "fragment": "throws.ApiError",
+      "contractRefs": [
+        "PRD-024#R-024-03"
+      ]
+    },
+    {
+      "claimId": "session-open-throws-api",
+      "subjectKey": "Session#open",
+      "fragment": "throws.ApiError",
+      "contractRefs": [
+        "PRD-024#R-024-03"
+      ]
+    }
   ],
-  "pages": {
-    "Core.md": [
-      "Runa",
-      "RunaConfig",
-      "ConfigError",
-      "ApiError",
-      "CommandError",
-      "RunaError"
-    ],
-    "Sessions.md": [
-      "Session",
-      "SessionsManager",
-      "SessionAgent",
-      "SessionCreateOptions",
-      "SessionSnapshot",
-      "SessionStatus",
-      "ExecOptions",
-      "ExecResult",
-      "Acknowledgement",
-      "OpenSessionResult"
-    ],
-    "Account-and-records.md": [
-      "Me",
-      "Workspace",
-      "AssignedWorkspace",
-      "UnassignedWorkspace",
-      "EstimatedUsage",
-      "RecordsManager",
-      "Record"
-    ],
-    "Shared.md": [
-      "OpaqueWireValue",
-      "stdoutText",
-      "stderrText"
-    ]
-  }
+  "errorMatrix": [
+    {
+      "operationKey": "Runa#constructor",
+      "disposition": "accepted",
+      "cases": [
+        {
+          "errorType": "ConfigError",
+          "conditionClaimId": "runa-constructor-throws-config",
+          "contractRefs": [
+            "PRD-023#R-023-06"
+          ]
+        }
+      ]
+    },
+    {
+      "operationKey": "Runa#me",
+      "disposition": "accepted",
+      "cases": [
+        {
+          "errorType": "ApiError",
+          "conditionClaimId": "runa-me-throws-api",
+          "contractRefs": [
+            "PRD-024#R-024-03"
+          ]
+        }
+      ]
+    },
+    {
+      "operationKey": "Runa#close",
+      "disposition": "none",
+      "cases": [],
+      "contractRefs": [
+        "PRD-027#R-027-10"
+      ]
+    },
+    {
+      "operationKey": "RecordsManager#list",
+      "disposition": "accepted",
+      "cases": [
+        {
+          "errorType": "ApiError",
+          "conditionClaimId": "recordsmanager-list-throws-api",
+          "contractRefs": [
+            "PRD-024#R-024-03"
+          ]
+        }
+      ]
+    },
+    {
+      "operationKey": "SessionsManager#create",
+      "disposition": "accepted",
+      "cases": [
+        {
+          "errorType": "ApiError",
+          "conditionClaimId": "sessionsmanager-create-throws-api",
+          "contractRefs": [
+            "PRD-024#R-024-03"
+          ]
+        }
+      ]
+    },
+    {
+      "operationKey": "SessionsManager#list",
+      "disposition": "accepted",
+      "cases": [
+        {
+          "errorType": "ApiError",
+          "conditionClaimId": "sessionsmanager-list-throws-api",
+          "contractRefs": [
+            "PRD-024#R-024-03"
+          ]
+        }
+      ]
+    },
+    {
+      "operationKey": "SessionsManager#get",
+      "disposition": "accepted",
+      "cases": [
+        {
+          "errorType": "ApiError",
+          "conditionClaimId": "sessionsmanager-get-throws-api",
+          "contractRefs": [
+            "PRD-024#R-024-03"
+          ]
+        }
+      ]
+    },
+    {
+      "operationKey": "Session#refresh",
+      "disposition": "accepted",
+      "cases": [
+        {
+          "errorType": "ApiError",
+          "conditionClaimId": "session-refresh-throws-api",
+          "contractRefs": [
+            "PRD-024#R-024-03"
+          ]
+        }
+      ]
+    },
+    {
+      "operationKey": "Session#start",
+      "disposition": "accepted",
+      "cases": [
+        {
+          "errorType": "ApiError",
+          "conditionClaimId": "session-start-throws-api",
+          "contractRefs": [
+            "PRD-024#R-024-03"
+          ]
+        }
+      ]
+    },
+    {
+      "operationKey": "Session#pause",
+      "disposition": "accepted",
+      "cases": [
+        {
+          "errorType": "ApiError",
+          "conditionClaimId": "session-pause-throws-api",
+          "contractRefs": [
+            "PRD-024#R-024-03"
+          ]
+        }
+      ]
+    },
+    {
+      "operationKey": "Session#resume",
+      "disposition": "accepted",
+      "cases": [
+        {
+          "errorType": "ApiError",
+          "conditionClaimId": "session-resume-throws-api",
+          "contractRefs": [
+            "PRD-024#R-024-03"
+          ]
+        }
+      ]
+    },
+    {
+      "operationKey": "Session#stop",
+      "disposition": "accepted",
+      "cases": [
+        {
+          "errorType": "ApiError",
+          "conditionClaimId": "session-stop-throws-api",
+          "contractRefs": [
+            "PRD-024#R-024-03"
+          ]
+        }
+      ]
+    },
+    {
+      "operationKey": "Session#delete",
+      "disposition": "accepted",
+      "cases": [
+        {
+          "errorType": "ApiError",
+          "conditionClaimId": "session-delete-throws-api",
+          "contractRefs": [
+            "PRD-024#R-024-03"
+          ]
+        }
+      ]
+    },
+    {
+      "operationKey": "Session#exec",
+      "disposition": "accepted",
+      "cases": [
+        {
+          "errorType": "ApiError",
+          "conditionClaimId": "session-exec-throws-api",
+          "contractRefs": [
+            "PRD-024#R-024-03"
+          ]
+        }
+      ]
+    },
+    {
+      "operationKey": "Session#checkpoint",
+      "disposition": "accepted",
+      "cases": [
+        {
+          "errorType": "ApiError",
+          "conditionClaimId": "session-checkpoint-throws-api",
+          "contractRefs": [
+            "PRD-024#R-024-03"
+          ]
+        }
+      ]
+    },
+    {
+      "operationKey": "Session#open",
+      "disposition": "accepted",
+      "cases": [
+        {
+          "errorType": "ApiError",
+          "conditionClaimId": "session-open-throws-api",
+          "contractRefs": [
+            "PRD-024#R-024-03"
+          ]
+        }
+      ]
+    },
+    {
+      "operationKey": "stdoutText#stdoutText",
+      "disposition": "none",
+      "cases": [],
+      "contractRefs": [
+        "PRD-022#R-022-02"
+      ]
+    },
+    {
+      "operationKey": "stderrText#stderrText",
+      "disposition": "none",
+      "cases": [],
+      "contractRefs": [
+        "PRD-022#R-022-02"
+      ]
+    },
+    {
+      "operationKey": "ConfigError#constructor",
+      "disposition": "none",
+      "cases": [],
+      "contractRefs": [
+        "PRD-024#R-024-01"
+      ]
+    },
+    {
+      "operationKey": "ApiError#constructor",
+      "disposition": "none",
+      "cases": [],
+      "contractRefs": [
+        "PRD-024#R-024-01"
+      ]
+    }
+  ]
 }
