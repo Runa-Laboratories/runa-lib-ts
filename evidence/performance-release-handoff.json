@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "status": "BLOCKED",
+  "local_measurements": "PASS",
+  "blocker": {
+    "id": "TS-050-AUTH-001",
+    "decision": "Approve exact six-cell execution, the security-remediated Vitest substitution, and bootstrap baseline promotion.",
+    "owner": "Runa SDK technical and release owners"
+  },
+  "artifact_sha256": "2e3f8e3bbd0669cf9b731bd1b4d25d5c48390086f31f8c53316672ab39b4c6f2",
+  "catalog_sha256": "aa502e0df11c142f21e6d251abb0965f5996abcc183e0b7e82f409ad84f7537f"
+}

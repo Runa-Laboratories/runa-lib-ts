@@ -30,6 +30,11 @@ import {
 import { OperationObserver } from "./observer.js";
 import { sanitizeWire } from "./sanitize.js";
 import { SDK_VERSION } from "../version.js";
+import {
+  takePrivateNodeTransportHarness,
+  type OwnedNodeAgent,
+  type PrivateNodeTransportHarness,
+} from "./node-transport-seam.js";
 
 const MAX_RESPONSE_BYTES = 8_388_608;
 const READS = new Set<OperationKey>([
@@ -75,19 +80,29 @@ interface PreparedRequest {
 }
 
 class ClientOwnedFetch {
-  readonly #agent = new HttpsAgent({ keepAlive: true });
+  readonly #harness: PrivateNodeTransportHarness | undefined;
+  readonly #agent: OwnedNodeAgent;
   #closed = false;
+
+  constructor() {
+    this.#harness = takePrivateNodeTransportHarness();
+    this.#agent = this.#harness?.createAgent() ??
+      new HttpsAgent({ keepAlive: true });
+  }
 
   fetch(
     input: string,
     init: RequestInit,
   ): Promise<Response> {
     if (this.#closed) return Promise.reject(safeTransportFailure());
+    if (this.#harness !== undefined) {
+      return this.#harness.dispatch(input, init, this.#agent);
+    }
     return new Promise((resolve, reject) => {
       const request = httpsRequest(input, {
         method: init.method,
         headers: init.headers as globalThis.Record<string, string>,
-        agent: this.#agent,
+        agent: this.#agent as HttpsAgent,
         signal: init.signal ?? undefined,
       }, (response) => {
         const headers = new Headers();
