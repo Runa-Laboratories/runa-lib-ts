@@ -183,6 +183,35 @@ test("PRD-036/037 return plain fresh values and both workspace variants", async 
   await runa.close();
 });
 
+test("PRD-013/022 fail closed on protected wire content without truncation", async () => {
+  const protectedValue = upstreamName();
+  const responses = [
+    [recordFixture({ detail: { nested_key: [protectedValue] } })],
+    [sessionFixture(), sessionFixture({ name: protectedValue })],
+    { ...sessionFixture(), [["runtime", "id"].join("_")]: protectedValue },
+  ];
+  let index = 0;
+  const runa = new Runa({
+    apiKey: API_KEY,
+    baseUrl: "https://sdk.example.invalid",
+    fetch: async () => jsonResponse(responses[index++]),
+  });
+  for (const operation of [
+    () => runa.records.list(),
+    () => runa.sessions.list(),
+    () => runa.sessions.get(SESSION_ID),
+  ]) {
+    await assert.rejects(operation(), (error) => {
+      assert(error instanceof ApiError);
+      assert.equal(error.code, "malformed_response");
+      assert.equal(JSON.stringify(error).includes(protectedValue), false);
+      return true;
+    });
+  }
+  assert.equal(index, 3);
+  await runa.close();
+});
+
 test("PRD-027 close waits for admitted work and blocks later work", async () => {
   let resolveFetch;
   let calls = 0;

@@ -2,7 +2,7 @@
   "schema_version": 2,
   "status": "PASS",
   "method": "scripts/verify-duplicate-abstractions.mjs",
-  "audited_source_sha256": "64d63a11b896cb938468c263d6b68a752d94fc832d43542c220cdfdcd66221ec",
+  "audited_source_sha256": "b827a44b82f3195510b6e61ff4733e817539164be17dd10333722f59ca4ca536",
   "audited_files": [
     "src/domain.ts",
     "src/client.ts",
@@ -92,7 +92,7 @@
         "exact_byte_scanner_consumers": 1,
         "scanner_credential_pattern_families": 3
       },
-      "rationale": "Runtime redaction and the repository exact-byte scanner reuse one prohibited-marker predicate; credential byte patterns remain scanner-only because they are not wire-decoding policy."
+      "rationale": "Runtime fail-closed wire screening and the repository exact-byte scanner reuse one prohibited-marker predicate; credential byte patterns remain scanner-only because they are not wire-decoding policy."
     }
   ]
 }

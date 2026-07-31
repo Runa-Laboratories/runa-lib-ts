@@ -156,6 +156,8 @@ const journeys = [
 const results = Object.fromEntries(journeys.map((journey) => [journey, []]));
 let cleanRooms = 0;
 const installManifest = `${JSON.stringify({
+  name: "runa-release-smoke-room",
+  version: "0.0.0",
   private: true,
   type: "module",
   dependencies: { "@runa/sdk": `file:${archivePath.replaceAll("\\", "/")}` },

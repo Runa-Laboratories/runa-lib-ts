@@ -23,6 +23,7 @@ for (let run = 0; run < 2; run += 1) {
     const cache = path.join(workspace, "cache");
     await mkdir(cache);
     await writeFile(path.join(workspace, "package.json"), `${JSON.stringify({
+      name: "runa-release-clean-room", version: "0.0.0",
       private: true, type: "module",
       dependencies: { "@runa/sdk": `file:${archivePath.replaceAll("\\", "/")}` }
     })}\n`);
@@ -55,6 +56,7 @@ for (let run = 0; run < 2; run += 1) {
   }
 }
 assert.equal(closures[0], closures[1]);
+assert.equal(installs[0].lock_sha256, installs[1].lock_sha256);
 const sbom = {
   bomFormat: "CycloneDX",
   specVersion: "1.6",

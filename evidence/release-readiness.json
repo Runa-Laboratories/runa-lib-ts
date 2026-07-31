@@ -2,12 +2,12 @@
   "schema_version": 2,
   "decision": "BLOCKED",
   "projection_sha256": "02a554b22592f0267475b847a2bb1c7df64e2b688cdb69b0a4a8b392695e1c55",
-  "candidate_sha256": "9652419b7fb5836a747909eeb93dc27bb85c1ff2fee64d67d4a58a83af30bdac",
+  "candidate_sha256": "005e4396e01b260ecfe06a5fd9d7ebc3c5f703721612ff2b102254871124f7bd",
   "blockers": [
     {
       "id": "TS-REL-001",
       "gate": "canonical-contract-provenance",
-      "reason": "contracts/runa-sdk-contract.provenance.json does not record PASS."
+      "reason": "Canonical repository provenance is not approved."
     },
     {
       "id": "TS-REL-002",
@@ -22,27 +22,47 @@
     {
       "id": "TS-REL-004",
       "gate": "quality",
-      "reason": "Missing or invalid evidence: evidence/quality-gate.json"
+      "reason": "evidence/quality-gate.json does not record PASS."
     },
     {
       "id": "TS-REL-005",
+      "gate": "quality",
+      "reason": "Quality evidence is not bound to the candidate source commit."
+    },
+    {
+      "id": "TS-REL-006",
+      "gate": "documentation",
+      "reason": "evidence/docs-readiness.json does not record PASS."
+    },
+    {
+      "id": "TS-REL-007",
       "gate": "compatibility-matrix",
       "reason": "Missing or invalid evidence: evidence/compatibility-matrix.json"
     },
     {
-      "id": "TS-REL-006",
+      "id": "TS-REL-008",
       "gate": "repository-controls",
       "reason": "Missing or invalid evidence: evidence/repository-controls.json"
     },
     {
-      "id": "TS-REL-007",
+      "id": "TS-REL-009",
       "gate": "cross-language",
       "reason": "Missing or invalid evidence: evidence/cross-language.json"
     },
     {
-      "id": "TS-REL-008",
+      "id": "TS-REL-010",
       "gate": "publication-readiness",
       "reason": "Missing or invalid evidence: evidence/publication-readiness.json"
+    },
+    {
+      "id": "TS-REL-011",
+      "gate": "sbom-validation",
+      "reason": "No accepted release trust root is configured."
+    },
+    {
+      "id": "TS-REL-012",
+      "gate": "external-release-interfaces",
+      "reason": "No accepted release trust root is configured."
     }
   ]
 }

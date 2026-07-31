@@ -96,7 +96,7 @@ const decisions = [
       scanner_credential_pattern_families: occurrences(/new RegExp\(|PRIVATE KEY|Authorization\\s/g,
         ["scripts/verify-security.mjs"]),
     },
-    rationale: "Runtime redaction and the repository exact-byte scanner reuse one prohibited-marker predicate; credential byte patterns remain scanner-only because they are not wire-decoding policy.",
+    rationale: "Runtime fail-closed wire screening and the repository exact-byte scanner reuse one prohibited-marker predicate; credential byte patterns remain scanner-only because they are not wire-decoding policy.",
   },
 ];
 
