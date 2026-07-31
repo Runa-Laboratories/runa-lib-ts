@@ -102,13 +102,4 @@ await writeFile("evidence/requirement-test-map.json", `${JSON.stringify({
   acceptance_results: acceptanceResults,
   rows
 }, null, 2)}\n`);
-await writeFile("evidence/duplicate-abstraction-audit.json", `${JSON.stringify({
-  schema_version: 1,
-  status: "PASS",
-  decisions: [
-    { concept: "wire-decoding", disposition: "centralized", owner: "src/domain.ts" },
-    { concept: "request-policy", disposition: "centralized", owner: "src/internal/transport.ts" },
-    { concept: "own-property checks", disposition: "intentional-local", reason: "separate input boundaries; no public abstraction" }
-  ]
-}, null, 2)}\n`);
 console.log(`evidence: ${rows.length} requirements; ${passedCount}/${acceptanceTestIds.size} exact TC IDs have retained local evidence`);

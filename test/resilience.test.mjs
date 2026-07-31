@@ -229,17 +229,24 @@ test("PRD-008 timeout cancels a response body that hangs after headers", async (
     requestId: () => `runa_req_${"0".repeat(32)}`,
   };
   const transport = new FetchTransport(
-    config(async () => new Response(new ReadableStream({
-      pull() {
-        reads += 1;
-        fireDeadline();
-      },
-      cancel() {
-        bodyCancelled += 1;
-      },
-    }), {
+    config(async () => ({
       status: 200,
-      headers: { "content-type": "application/json" },
+      headers: new Headers({ "content-type": "application/json" }),
+      body: {
+        getReader() {
+          return {
+            read() {
+              reads += 1;
+              fireDeadline();
+              return new Promise(() => {});
+            },
+            async cancel() {
+              bodyCancelled += 1;
+            },
+            releaseLock() {},
+          };
+        },
+      },
     })),
     runtime,
   );
@@ -255,33 +262,37 @@ test("PRD-008 caller abort cancels a hung post-headers body without late decode"
   const caller = new AbortController();
   let bodyCancelled = 0;
   let decodeReached = 0;
-  let bodyController;
+  let resolveLateRead;
   const transport = new FetchTransport(
-    config(async () => new Response(new ReadableStream({
-      start(controller) {
-        bodyController = controller;
-      },
-      pull() {
-        caller.abort();
-      },
-      cancel() {
-        bodyCancelled += 1;
-      },
-    }), {
+    config(async () => ({
       status: 200,
-      headers: { "content-type": "application/json" },
+      headers: new Headers({ "content-type": "application/json" }),
+      body: {
+        getReader() {
+          return {
+            read() {
+              caller.abort();
+              return new Promise((resolve) => {
+                resolveLateRead = resolve;
+              });
+            },
+            async cancel() {
+              bodyCancelled += 1;
+            },
+            releaseLock() {},
+          };
+        },
+      },
     })),
   );
   await assert.rejects(
     transport.execute("me.get", { signal: caller.signal }),
     (error) => error instanceof DOMException && error.name === "AbortError",
   );
-  try {
-    bodyController.enqueue(new TextEncoder().encode(JSON.stringify(meFixture())));
-    decodeReached += 1;
-  } catch {
-    // Cancellation closes the controller; late chunks are rejected.
-  }
+  resolveLateRead({
+    done: false,
+    value: new TextEncoder().encode(JSON.stringify(meFixture())),
+  });
   await Promise.resolve();
   assert.equal(bodyCancelled, 1);
   assert.equal(decodeReached, 0);

@@ -35,6 +35,7 @@ const performanceBlockers = [
 try {
   await mkdir(cache);
   await writeFile(path.join(workspace, "package.json"), `${JSON.stringify({
+    name: "runa-compatibility-clean-room", version: "0.0.0",
     private: true, type: "module",
     dependencies: { "@runa/sdk": `file:${archivePath.replaceAll("\\", "/")}` }
   })}\n`);

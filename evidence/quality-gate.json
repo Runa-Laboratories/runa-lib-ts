@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "status": "BLOCKED",
+  "commit_sha": null,
+  "workflow_run_id": null,
+  "blockers": [
+    {
+      "gate": "documentation",
+      "evidence": "evidence/docs-readiness.json"
+    }
+  ]
+}
