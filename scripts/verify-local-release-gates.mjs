@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { execFileSync, spawnSync } from "node:child_process";
+import { spawnSync } from "node:child_process";
 import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
@@ -16,6 +16,7 @@ assert.deepEqual(policy.runtime_dependencies, []);
 assert.equal(advisory.status, "PASS");
 assert.equal(advisory.high + advisory.critical, 0);
 const closures = [];
+const installs = [];
 for (let run = 0; run < 2; run += 1) {
   const workspace = await mkdtemp(path.join(tmpdir(), `runa-clean-${run}-`));
   try {
@@ -25,38 +26,87 @@ for (let run = 0; run < 2; run += 1) {
       private: true, type: "module",
       dependencies: { "@runa/sdk": `file:${archivePath.replaceAll("\\", "/")}` }
     })}\n`);
-    const command = `npm install --ignore-scripts --offline --cache ${cache} --no-audit --no-fund`;
-    const install = process.platform === "win32"
-      ? spawnSync(process.env.ComSpec ?? "cmd.exe", ["/d", "/s", "/c", command], { cwd: workspace, encoding: "utf8" })
-      : spawnSync("sh", ["-c", command], { cwd: workspace, encoding: "utf8" });
-    if (install.status !== 0) throw new Error("Isolated offline install failed.");
+    const runNpm = (arguments_) => process.platform === "win32"
+      ? spawnSync(process.env.ComSpec ?? "cmd.exe",
+          ["/d", "/s", "/c", `npm ${arguments_.join(" ")}`],
+          { cwd: workspace, encoding: "utf8" })
+      : spawnSync("npm", arguments_, { cwd: workspace, encoding: "utf8" });
+    const lock = runNpm(["install", "--package-lock-only", "--ignore-scripts",
+      "--offline", "--cache", cache, "--no-audit", "--no-fund"]);
+    if (lock.status !== 0) throw new Error("Isolated offline lock creation failed.");
+    const lockBefore = await readFile(path.join(workspace, "package-lock.json"));
+    const install = runNpm(["ci", "--ignore-scripts", "--offline", "--cache",
+      cache, "--no-audit", "--no-fund"]);
+    if (install.status !== 0) throw new Error("Isolated immutable offline install failed.");
+    assert.deepEqual(await readFile(path.join(workspace, "package-lock.json")), lockBefore);
     const installed = JSON.parse(await readFile(path.join(workspace, "node_modules/@runa/sdk/package.json"), "utf8"));
     assert.equal(installed.name, "@runa/sdk");
+    assert.equal(installed.version, candidate.version);
     assert.equal(Object.keys(installed.dependencies ?? {}).length, 0);
-    closures.push(hash(Buffer.from(JSON.stringify({ name: installed.name, version: installed.version, runtime: [] }))));
+    const closure = hash(Buffer.from(JSON.stringify({
+      name: installed.name, version: installed.version, runtime: [],
+    })));
+    closures.push(closure);
+    installs.push({
+      run: run + 1,
+      lock_sha256: hash(lockBefore),
+      closure_sha256: closure,
+      immutable: true,
+      offline: true,
+    });
   } finally {
     await rm(workspace, { recursive: true, force: true });
   }
 }
 assert.equal(closures[0], closures[1]);
 const sbom = {
-  bomFormat: "CycloneDX", specVersion: "1.6", version: 1,
-  metadata: { component: { type: "library", name: "@runa/sdk", version: candidate.version,
-    hashes: [{ alg: "SHA-256", content: candidate.sha256 }] } },
-  components: []
+  bomFormat: "CycloneDX",
+  specVersion: "1.6",
+  serialNumber: `urn:uuid:${candidate.sha256.slice(0, 8)}-${candidate.sha256.slice(8, 12)}-${candidate.sha256.slice(12, 16)}-${candidate.sha256.slice(16, 20)}-${candidate.sha256.slice(20, 32)}`,
+  version: 1,
+  metadata: {
+    component: {
+      "bom-ref": `pkg:npm/%40runa/sdk@${candidate.version}`,
+      type: "library",
+      name: "@runa/sdk",
+      version: candidate.version,
+      purl: `pkg:npm/%40runa/sdk@${candidate.version}`,
+      hashes: [{ alg: "SHA-256", content: candidate.sha256 }],
+    },
+  },
+  components: [],
+  dependencies: [{
+    ref: `pkg:npm/%40runa/sdk@${candidate.version}`,
+    dependsOn: [],
+  }],
 };
 assert.equal(sbom.bomFormat, "CycloneDX");
 assert.equal(sbom.specVersion, "1.6");
 await mkdir("evidence", { recursive: true });
 await writeFile("evidence/sbom.cdx.json", `${JSON.stringify(sbom, null, 2)}\n`);
+await writeFile("evidence/sbom-validation.json", `${JSON.stringify({
+  schema_version: 1,
+  status: "BLOCKED",
+  candidate_sha256: candidate.sha256,
+  local_structural_checks: "PASS",
+  required_validator: "cyclonedx-cli validate --input-format json",
+  reason: "The accepted CycloneDX 1.6 schema and validator receipt are not configured locally.",
+}, null, 2)}\n`);
 await writeFile("evidence/runtime-closure.json", `${JSON.stringify({
   schema_version: 1, status: "PASS", candidate_sha256: candidate.sha256,
   clean_install_count: 2, closure_sha256: closures[0], runtime_dependencies: [],
+  installs,
   reason_ledger: [{ decision: "empty-runtime-closure", reason: "The package manifest and both installed artifacts declare no runtime dependencies." }]
 }, null, 2)}\n`);
 const external = {
   schema_version: 1, status: "BLOCKED",
-  required_interfaces: ["OIDC trusted publisher", "GitHub attestation verification", "npm registry retrieval", "dist-tag verification"],
+  required_interfaces: [
+    "CycloneDX 1.6 schema validation receipt",
+    "OIDC trusted publisher",
+    "GitHub attestation verification",
+    "npm registry retrieval",
+    "dist-tag verification",
+  ],
   candidate_sha256: candidate.sha256
 };
 await writeFile("evidence/external-release-interfaces.json", `${JSON.stringify(external, null, 2)}\n`);

@@ -1,0 +1,1126 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Runa API",
+    "version": "1.0.0",
+    "description": "Authoritative Runa control-plane contract. JSON responses are UTF-8, redirects are not API successes, and x-sdk-exposed defaults to false."
+  },
+  "servers": [
+    {
+      "url": "https://api.runacode.io"
+    }
+  ],
+  "security": [
+    {
+      "SupabaseJwt": []
+    },
+    {
+      "RunaApiKey": []
+    }
+  ],
+  "paths": {
+    "/v1/me": {
+      "get": {
+        "operationId": "me.get",
+        "x-sdk-exposed": true,
+        "responses": {
+          "200": {
+            "description": "Caller profile and workspace",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Me"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/v1/sessions": {
+      "get": {
+        "operationId": "sessions.list",
+        "x-sdk-exposed": true,
+        "responses": {
+          "200": {
+            "description": "Owned sessions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Session"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "operationId": "sessions.create",
+        "x-sdk-exposed": true,
+        "x-sdk-request-schema": {
+          "$ref": "#/components/schemas/SdkCreateSession"
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json; charset=utf-8": {
+              "schema": {
+                "$ref": "#/components/schemas/ConsoleCreateSession"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Completed session observation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Session"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/v1/sessions/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/SessionId"
+        }
+      ],
+      "get": {
+        "operationId": "sessions.get",
+        "x-sdk-exposed": true,
+        "responses": {
+          "200": {
+            "description": "Owned session",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Session"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "sessions.delete",
+        "x-sdk-exposed": true,
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/v1/sessions/{id}/pause": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/SessionId"
+        }
+      ],
+      "post": {
+        "operationId": "sessions.pause",
+        "x-sdk-exposed": true,
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Session"
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/v1/sessions/{id}/resume": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/SessionId"
+        }
+      ],
+      "post": {
+        "operationId": "sessions.resume",
+        "x-sdk-exposed": true,
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Session"
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/v1/sessions/{id}/stop": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/SessionId"
+        }
+      ],
+      "post": {
+        "operationId": "sessions.stop",
+        "x-sdk-exposed": true,
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Session"
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/v1/sessions/{id}/start": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/SessionId"
+        }
+      ],
+      "post": {
+        "operationId": "sessions.start",
+        "x-sdk-exposed": true,
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Session"
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/v1/sessions/{id}/exec": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/SessionId"
+        }
+      ],
+      "post": {
+        "operationId": "sessions.exec",
+        "x-sdk-exposed": true,
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json; charset=utf-8": {
+              "schema": {
+                "$ref": "#/components/schemas/ExecRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Buffered command result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExecResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/v1/sessions/{id}/checkpoint": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/SessionId"
+        }
+      ],
+      "post": {
+        "operationId": "sessions.checkpoint",
+        "x-sdk-exposed": true,
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json; charset=utf-8": {
+              "schema": {
+                "$ref": "#/components/schemas/CheckpointRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/v1/sessions/{id}/open": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/SessionId"
+        }
+      ],
+      "post": {
+        "operationId": "sessions.open",
+        "x-sdk-exposed": true,
+        "responses": {
+          "200": {
+            "description": "Single-use 60-second handoff capability",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/v1/records": {
+      "get": {
+        "operationId": "records.list",
+        "x-sdk-exposed": true,
+        "responses": {
+          "200": {
+            "description": "Owned record entries",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Record"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/v1/api-keys": {
+      "security": [
+        {
+          "SupabaseJwt": []
+        }
+      ],
+      "get": {
+        "operationId": "apiKeys.list",
+        "x-sdk-exposed": false,
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Json"
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "operationId": "apiKeys.create",
+        "x-sdk-exposed": false,
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json; charset=utf-8": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "name"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 80
+                  },
+                  "expires_at": {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/Json"
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/v1/api-keys/{id}": {
+      "security": [
+        {
+          "SupabaseJwt": []
+        }
+      ],
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/SessionId"
+        }
+      ],
+      "delete": {
+        "operationId": "apiKeys.delete",
+        "x-sdk-exposed": false,
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/v1/sessions/{id}/token-analyze": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/SessionId"
+        }
+      ],
+      "get": {
+        "operationId": "console.sessionTokenAnalyze",
+        "x-sdk-exposed": false,
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Json"
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/v1/token-analyze": {
+      "get": {
+        "operationId": "console.tokenAnalyze",
+        "x-sdk-exposed": false,
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Json"
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/v1/credentials": {
+      "get": {
+        "operationId": "console.credentials.list",
+        "x-sdk-exposed": false,
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Json"
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/v1/credentials/{name}": {
+      "put": {
+        "operationId": "console.credentials.put",
+        "x-sdk-exposed": false,
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json; charset=utf-8": {
+              "schema": {
+                "$ref": "#/components/schemas/CredentialValue"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Json"
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "console.credentials.delete",
+        "x-sdk-exposed": false,
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/v1/credential-rules": {
+      "get": {
+        "operationId": "console.credentialRules.list",
+        "x-sdk-exposed": false,
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Json"
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "operationId": "console.credentialRules.create",
+        "x-sdk-exposed": false,
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json; charset=utf-8": {
+              "schema": {
+                "$ref": "#/components/schemas/CredentialRule"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/Json"
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/v1/credential-rules/{id}": {
+      "delete": {
+        "operationId": "console.credentialRules.delete",
+        "x-sdk-exposed": false,
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/v1/sessions/{id}/authorizations": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/SessionId"
+        }
+      ],
+      "get": {
+        "operationId": "console.sessionAuthorizations.list",
+        "x-sdk-exposed": false,
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Json"
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "SupabaseJwt": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "Supabase JWT",
+        "description": "Console user JWT."
+      },
+      "RunaApiKey": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "runa_sk_",
+        "description": "Programmatic Runa API key. Not valid for key-management operations."
+      }
+    },
+    "parameters": {
+      "SessionId": {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/Uuid"
+        }
+      }
+    },
+    "responses": {
+      "Error": {
+        "description": "Safe error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Ok": {
+        "description": "Acknowledgement",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Ok"
+            }
+          }
+        }
+      },
+      "Session": {
+        "description": "Session observation",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Session"
+            }
+          }
+        }
+      },
+      "Json": {
+        "description": "UTF-8 JSON response",
+        "content": {
+          "application/json": {
+            "schema": {}
+          }
+        }
+      }
+    },
+    "schemas": {
+    "Uuid": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "RuntimeUrl": {
+      "type": "string",
+      "pattern": "^https://[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\\.runacode\\.cloud$"
+    },
+    "Error": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "type": "string"
+        }
+      }
+    },
+    "Ok": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ok"
+      ],
+      "properties": {
+        "ok": {
+          "const": true
+        }
+      }
+    },
+    "Session": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "user_id",
+        "slug",
+        "name",
+        "vcpus",
+        "memory_mib",
+        "status",
+        "running_seconds",
+        "created_at",
+        "updated_at",
+        "url"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/components/schemas/Uuid"
+        },
+        "user_id": {
+          "$ref": "#/components/schemas/Uuid"
+        },
+        "slug": {
+          "type": "string",
+          "pattern": "^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$"
+        },
+        "name": {
+          "type": "string"
+        },
+        "agent": {
+          "enum": [
+            "claude-code",
+            "codex",
+            "openclaw"
+          ]
+        },
+        "vcpus": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "memory_mib": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "status": {
+          "enum": [
+            "creating",
+            "running",
+            "paused",
+            "suspended",
+            "stopped",
+            "deleted",
+            "error"
+          ]
+        },
+        "running_seconds": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "url": {
+          "$ref": "#/components/schemas/RuntimeUrl"
+        }
+      }
+    },
+    "SdkCreateSession": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "agent": {
+          "enum": [
+            "claude-code",
+            "codex",
+            "openclaw"
+          ]
+        },
+        "vcpus": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8
+        },
+        "memory_mib": {
+          "type": "integer",
+          "minimum": 512,
+          "maximum": 16384
+        },
+        "allowed_hosts": {
+          "type": "array",
+          "maxItems": 128,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "runtime_port": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535
+        }
+      }
+    },
+    "ConsoleCreateSession": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "agent": {
+          "enum": [
+            "claude-code",
+            "codex",
+            "openclaw"
+          ]
+        },
+        "vcpus": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8
+        },
+        "memory_mib": {
+          "type": "integer",
+          "minimum": 512,
+          "maximum": 16384
+        },
+        "allowed_hosts": {
+          "type": "array",
+          "maxItems": 128,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "runtime_port": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "api_key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096,
+          "writeOnly": true
+        },
+        "terminal": {
+          "type": "boolean"
+        },
+        "background": {
+          "type": "boolean"
+        },
+        "token_saving": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "json_array": {
+              "type": "boolean"
+            },
+            "logs": {
+              "type": "boolean"
+            },
+            "search_results": {
+              "type": "boolean"
+            },
+            "git_diff": {
+              "type": "boolean"
+            }
+          }
+        },
+        "capture_tool_io": {
+          "type": "boolean"
+        }
+      },
+      "description": "The deployed console accepts additional non-SDK fields; x-sdk-request-schema is authoritative for SDK generation."
+    },
+    "CredentialValue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "string",
+          "minLength": 1,
+          "writeOnly": true
+        }
+      }
+    },
+    "CredentialRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "host",
+        "credential"
+      ],
+      "properties": {
+        "host": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "path": {
+          "type": "string",
+          "maxLength": 2048
+        },
+        "credential": {
+          "type": "string",
+          "pattern": "^[A-Z0-9_]{1,64}$"
+        },
+        "header": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "param": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "format": {
+          "type": "string",
+          "maxLength": 4096
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "header"
+          ],
+          "not": {
+            "required": [
+              "param"
+            ]
+          }
+        },
+        {
+          "required": [
+            "param"
+          ],
+          "not": {
+            "required": [
+              "header"
+            ]
+          }
+        }
+      ]
+    },
+    "ExecRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "command"
+      ],
+      "properties": {
+        "command": {
+          "type": "string",
+          "minLength": 1
+        },
+        "args": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "cwd": {
+          "type": "string"
+        },
+        "timeout_secs": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 600
+        }
+      }
+    },
+    "ExecResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "exit_code",
+        "stdout",
+        "stderr",
+        "duration_ms",
+        "stdout_truncated",
+        "stderr_truncated"
+      ],
+      "properties": {
+        "exit_code": {
+          "type": "integer"
+        },
+        "stdout": {
+          "type": "string"
+        },
+        "stderr": {
+          "type": "string"
+        },
+        "duration_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "stdout_truncated": {
+          "type": "boolean"
+        },
+        "stderr_truncated": {
+          "type": "boolean"
+        }
+      }
+    },
+    "CheckpointRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        }
+      }
+    },
+    "OpenResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "url"
+      ],
+      "properties": {
+        "url": {
+          "type": "string",
+          "pattern": "^https://[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\\.runacode\\.cloud/__runa/auth\\?t=[^&#]+$"
+        }
+      }
+    },
+    "Record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "session_id",
+        "kind",
+        "summary",
+        "detail",
+        "created_at"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/components/schemas/Uuid"
+        },
+        "session_id": {
+          "$ref": "#/components/schemas/Uuid"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "detail": {},
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "Me": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "email",
+        "workspace"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/components/schemas/Uuid"
+        },
+        "email": {
+          "type": "string"
+        },
+        "workspace": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "assigned",
+                "usage"
+              ],
+              "properties": {
+                "assigned": {
+                  "const": true
+                },
+                "usage": {
+                  "type": "object",
+                  "required": [
+                    "est_spend_usd",
+                    "est_remaining_usd",
+                    "note"
+                  ],
+                  "properties": {
+                    "est_spend_usd": {
+                      "type": "number"
+                    },
+                    "est_remaining_usd": {
+                      "type": "number"
+                    },
+                    "note": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "assigned",
+                "waitlist_position"
+              ],
+              "properties": {
+                "assigned": {
+                  "const": false
+                },
+                "waitlist_position": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+    }
+  },
+  "x-runa-wire": {
+    "requestAccept": "application/json",
+    "requestContentTypeWithBody": "application/json; charset=utf-8",
+    "responseMediaType": "application/json",
+    "responseEncoding": "utf-8",
+    "maxResponseBytes": 8388608,
+    "followRedirects": false,
+    "sdkOperationCount": 13
+  }
+}

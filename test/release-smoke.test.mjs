@@ -1,5 +1,4 @@
 import assert from "node:assert/strict";
-import { writeFile } from "node:fs/promises";
 import { test } from "vitest";
 import { Runa } from "../dist/index.js";
 import { API_KEY, jsonResponse, meFixture, openUrl, recordFixture, sessionFixture } from "./helpers.mjs";
@@ -45,8 +44,4 @@ test("PRD-019/054 five synthetic journeys pass 30 times with cleanup", async () 
   }
   assert.deepEqual(Object.values(counts), [30, 30, 30, 30, 30]);
   assert.equal(deletions, 90);
-  await writeFile("evidence/release-smoke.json", `${JSON.stringify({
-    schema_version: 1, status: "PASS", synthetic: true,
-    journeys: counts, cleanup_deletions: deletions, public_network_dispatches: 0
-  }, null, 2)}\n`);
 });

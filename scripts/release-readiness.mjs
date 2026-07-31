@@ -96,7 +96,12 @@ const closure = await requirePass("evidence/runtime-closure.json", "runtime-clos
 if (closure !== undefined && candidate !== undefined && closure.candidate_sha256 !== candidate.sha256) {
   blockers.push({ gate: "runtime-closure", reason: "Runtime closure is not bound to the candidate." });
 }
-await requirePass("evidence/release-smoke.json", "synthetic-release-smoke");
+const smoke = await requirePass("evidence/release-smoke.json", "synthetic-release-smoke");
+if (smoke !== undefined && candidate !== undefined &&
+    (smoke.candidate_sha256 !== candidate.sha256 || smoke.clean_room_count !== 150 ||
+      smoke.runs_per_journey !== 30 || smoke.public_network_dispatches !== 0)) {
+  blockers.push({ gate: "synthetic-release-smoke", reason: "Smoke evidence is incomplete or not bound to the candidate." });
+}
 const ciManifest = await requirePass("evidence/ci-candidate-manifest.json", "ci-candidate-manifest");
 if (ciManifest !== undefined && candidate !== undefined &&
     ciManifest.candidate_sha256 !== candidate.sha256) {
@@ -107,6 +112,8 @@ if (sbom !== undefined && (sbom.bomFormat !== "CycloneDX" || sbom.specVersion !=
     sbom.metadata?.component?.hashes?.[0]?.content !== candidate?.sha256)) {
   blockers.push({ gate: "sbom", reason: "CycloneDX identity or candidate binding is invalid." });
 }
+await requirePass("evidence/sbom-validation.json", "sbom-validation");
+await requirePass("evidence/external-release-interfaces.json", "external-release-interfaces");
 const report = {
   schema_version: 2,
   decision: blockers.length === 0 ? "PASS" : "BLOCKED",

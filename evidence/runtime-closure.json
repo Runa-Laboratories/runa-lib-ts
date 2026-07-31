@@ -1,10 +1,26 @@
 {
   "schema_version": 1,
   "status": "PASS",
-  "candidate_sha256": "9652419b7fb5836a747909eeb93dc27bb85c1ff2fee64d67d4a58a83af30bdac",
+  "candidate_sha256": "2a6d215cfc6b6c60483591e0346a3cc381a523fbcfc7314b08822cb8039278c2",
   "clean_install_count": 2,
   "closure_sha256": "f42a6dd2b10f03b785533919ec20a55d1a0a334675ffc7793072b4d52aaa97ce",
   "runtime_dependencies": [],
+  "installs": [
+    {
+      "run": 1,
+      "lock_sha256": "4f24a5d65e19ed659df3a3d2d873c9da1a89137ebe6f8137965363ed5c93d67a",
+      "closure_sha256": "f42a6dd2b10f03b785533919ec20a55d1a0a334675ffc7793072b4d52aaa97ce",
+      "immutable": true,
+      "offline": true
+    },
+    {
+      "run": 2,
+      "lock_sha256": "a7165d606119dc740c7bfd4f2eb7c88aa6475cf802c505015e1c6bf5892dc27f",
+      "closure_sha256": "f42a6dd2b10f03b785533919ec20a55d1a0a334675ffc7793072b4d52aaa97ce",
+      "immutable": true,
+      "offline": true
+    }
+  ],
   "reason_ledger": [
     {
       "decision": "empty-runtime-closure",
