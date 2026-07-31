@@ -5,6 +5,7 @@ import {
   canonicalJson,
   exactSnapshotSchema,
   generateOperations,
+  validateContractProvenance,
 } from "./contract-generation.mjs";
 
 const digest = (bytes) => createHash("sha256").update(bytes).digest("hex");
@@ -28,6 +29,11 @@ assert.equal(digest(projectionBytes), provenance.projection_sha256);
 assert.equal(digest(openapiBytes), provenance.openapi_sha256);
 assert.equal(digest(Buffer.from(JSON.stringify(canonicalJson(openapi)))), declaredCanonical);
 assert.equal(provenance.canonical_contract_sha256, declaredCanonical);
+assert.equal(validateContractProvenance(provenance, {
+  canonical: declaredCanonical,
+  projection: digest(projectionBytes),
+  openapi: digest(openapiBytes),
+}), true);
 const keys = Object.keys(projection.operations).sort();
 assert.equal(keys.length, 13);
 assert.deepEqual(keys, baseline.operationKeys);
@@ -37,7 +43,4 @@ const regeneratedA = generateOperations(projection, declaredCanonical);
 const regeneratedB = generateOperations(JSON.parse(JSON.stringify(projection)), declaredCanonical);
 assert.equal(regeneratedA, regeneratedB);
 assert.equal(generated, regeneratedA);
-assert.equal(provenance.status, "BLOCKED");
-assert.equal(provenance.canonical_ref, null);
-assert.equal(provenance.approval_sha, null);
-console.log(`contract projection: PASS (${declaredCanonical}); canonical repository provenance: BLOCKED`);
+console.log(`contract projection: PASS (${declaredCanonical}); canonical repository provenance: ${provenance.status}`);

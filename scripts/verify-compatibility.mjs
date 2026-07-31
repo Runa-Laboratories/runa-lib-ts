@@ -5,26 +5,33 @@ import { mkdtemp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { build as bundle } from "esbuild";
+import { npmSpawnSync } from "./npm-process.mjs";
 
 const catalog = JSON.parse(await readFile("evidence/compatibility-catalog.json", "utf8"));
 const candidate = JSON.parse(await readFile("release-artifacts/candidate.json", "utf8"));
 const archivePath = path.resolve("release-artifacts", candidate.filename);
 const archive = await readFile(archivePath);
 assert.equal(createHash("sha256").update(archive).digest("hex"), candidate.sha256);
-const npmVersion = (process.platform === "win32"
-  ? execFileSync(process.env.ComSpec ?? "cmd.exe", ["/d", "/s", "/c", "npm --version"], { encoding: "utf8" })
-  : execFileSync("npm", ["--version"], { encoding: "utf8" })).trim();
+const npmVersionResult = npmSpawnSync(["--version"]);
+assert.equal(npmVersionResult.status, 0);
+const npmVersion = npmVersionResult.stdout.trim();
 const cell = catalog.cells.find((item) => item.node === process.versions.node &&
   item.npm === npmVersion && item.platform === process.platform && item.arch === process.arch);
 if (cell === undefined) throw new Error("Runtime is not an exact V1 matrix cell.");
 const workspace = await mkdtemp(path.join(tmpdir(), "runa-ts050-"));
 const cache = path.join(workspace, "cache");
-const runNpm = (args) => process.platform === "win32"
-  ? spawnSync(process.env.ComSpec ?? "cmd.exe", ["/d", "/s", "/c", `npm ${args.join(" ")}`], { cwd: workspace, encoding: "utf8" })
-  : spawnSync("npm", args, { cwd: workspace, encoding: "utf8" });
-let status = "PASS";
+const runNpm = (args) => npmSpawnSync(args, { cwd: workspace });
+let status = "BLOCKED";
 let failure = null;
 let metrics = null;
+let compatibilityStatus = "PASS";
+const performanceBlockers = [
+  "R-017-05/R-050-09: import p95 is not measured from 20 isolated processes",
+  "R-017-06/R-050-10: allocation maximum is not measured at the pre-transport seam across 20 isolated invocations",
+  "R-017-07/R-050-11: the controlled default-transport 10-request establishment counter is unavailable",
+  "R-017-08/R-050-12: five drained 100-cycle leak batches and post-cleanup resource counters are unavailable",
+  "R-050-15/TC-050-08: the complete hostile performance-mutation gate is unavailable",
+];
 try {
   await mkdir(cache);
   await writeFile(path.join(workspace, "package.json"), `${JSON.stringify({
@@ -116,6 +123,7 @@ try {
     input.replaceAll("\\", "/").endsWith("/dist/client.js")), false);
 } catch {
   status = "FAIL";
+  compatibilityStatus = "FAIL";
   failure = "compatibility-probe";
 } finally {
   await mkdir("evidence/compatibility-receipts", { recursive: true });
@@ -123,9 +131,12 @@ try {
     schema_version: 1, status, cell_id: cell.id, candidate_sha256: candidate.sha256,
     node: process.versions.node, npm: npmVersion, platform: process.platform,
     arch: process.arch, probes: ["isolated-offline-install", "root-esm", "declarations", "tree-shaking", "readme", "package-surface"],
+    compatibility_status: compatibilityStatus,
+    performance_status: "BLOCKED",
+    performance_blockers: performanceBlockers,
     metrics, failure
   }, null, 2)}\n`);
   await rm(workspace, { recursive: true, force: true });
 }
-if (status !== "PASS") process.exit(1);
-console.log(`compatibility: PASS (${cell.id}, ${candidate.sha256})`);
+if (status === "FAIL") process.exit(1);
+console.log(`compatibility: PASS; complete PRD-017 profile: BLOCKED (${cell.id}, ${candidate.sha256})`);

@@ -128,14 +128,24 @@ function prepare(
   });
 }
 
-async function readLimited(response: Response): Promise<Uint8Array> {
+async function readLimited(
+  response: Response,
+  signal: AbortSignal,
+): Promise<Uint8Array> {
   if (response.body === null) return new Uint8Array();
   const reader = response.body.getReader();
   const chunks: Uint8Array[] = [];
   let total = 0;
+  let rejectAbort: ((reason: DOMException) => void) | undefined;
+  const aborted = new Promise<never>((_resolve, reject) => {
+    rejectAbort = reject;
+  });
+  const onAbort = () => rejectAbort?.(cancellationFailure());
+  signal.addEventListener("abort", onAbort, { once: true });
   try {
+    if (signal.aborted) throw cancellationFailure();
     for (;;) {
-      const { done, value } = await reader.read();
+      const { done, value } = await Promise.race([reader.read(), aborted]);
       if (done) break;
       if (value !== undefined) {
         total += value.byteLength;
@@ -147,9 +157,19 @@ async function readLimited(response: Response): Promise<Uint8Array> {
       }
     }
   } catch (error) {
+    if (signal.aborted) {
+      try {
+        await reader.cancel();
+      } catch {
+        // A failed stream cancellation cannot restore a timed-out operation.
+      }
+      throw cancellationFailure();
+    }
     if (error instanceof ApiError) throw error;
     throw new ApiError(response.status, "malformed_response");
   } finally {
+    signal.removeEventListener("abort", onAbort);
+    rejectAbort = undefined;
     reader.releaseLock();
   }
   const bytes = new Uint8Array(total);
@@ -192,7 +212,7 @@ async function disposition(
   ) {
     throw new ApiError(response.status, "malformed_response");
   }
-  const bytes = await readLimited(response);
+  const bytes = await readLimited(response, signal);
   if (signal.aborted) throw cancellationFailure();
   let value: unknown;
   try {
