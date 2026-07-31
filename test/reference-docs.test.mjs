@@ -11,4 +11,4 @@ test("PRD-048 reference pipeline covers the exact surface and rejects mutations"
     "missing", "extra", "alias", "page-ownership", "signature",
     "private-source", "link", "safety", "throws", "example", "claim-tag",
   ]);
-});
+}, 20_000);

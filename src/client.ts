@@ -18,16 +18,70 @@ import type {
   SessionSnapshot,
 } from "./types.js";
 
+/**
+ * Client-owned entry point for creating, listing, and retrieving sessions.
+ * @runa-contract sessionsmanager-summary PRD-027#R-027-01
+ */
 export interface SessionsManager {
+  /**
+   * Creates one session and returns its client-owned handle.
+   * @param name Session name containing between one and eighty characters.
+   * @param options Optional agent, resource, host, and runtime-port settings.
+   * @returns A client-owned handle for the created session.
+   * @throws ApiError when the API rejects the operation or returns an invalid response.
+   * @example docs/reference/examples/workflows.ts#sessions-create
+   * @runa-contract sessionsmanager-create-description PRD-028#R-028-01
+   * @runa-contract sessionsmanager-create-param-name PRD-028#R-028-01
+   * @runa-contract sessionsmanager-create-param-options PRD-028#R-028-01
+   * @runa-contract sessionsmanager-create-returns PRD-028#R-028-01
+   * @runa-contract sessionsmanager-create-throws-api PRD-024#R-024-03
+   * @runa-contract sessionsmanager-create-example PRD-028#R-028-01
+   */
   create(
     name: string,
     options?: SessionCreateOptions,
   ): Promise<Session>;
+  /**
+   * Lists the sessions available to the caller.
+   * @returns A fresh readonly ordered collection of client-owned session handles.
+   * @throws ApiError when the API rejects the operation or returns an invalid response.
+   * @example docs/reference/examples/workflows.ts#sessions-list
+   * @runa-contract sessionsmanager-list-description PRD-029#R-029-01
+   * @runa-contract sessionsmanager-list-returns PRD-029#R-029-01
+   * @runa-contract sessionsmanager-list-throws-api PRD-024#R-024-03
+   * @runa-contract sessionsmanager-list-example PRD-029#R-029-01
+   */
   list(): Promise<readonly Session[]>;
+  /**
+   * Retrieves one session by canonical identifier.
+   * @param id Exact canonical lowercase session UUID.
+   * @returns A client-owned handle for the requested session.
+   * @throws ApiError when the API rejects the operation or returns an invalid response.
+   * @example docs/reference/examples/workflows.ts#sessions-get
+   * @runa-contract sessionsmanager-get-description PRD-030#R-030-01
+   * @runa-contract sessionsmanager-get-param-id PRD-030#R-030-01
+   * @runa-contract sessionsmanager-get-returns PRD-030#R-030-01
+   * @runa-contract sessionsmanager-get-throws-api PRD-024#R-024-03
+   * @runa-contract sessionsmanager-get-example PRD-030#R-030-01
+   */
   get(id: string): Promise<Session>;
 }
 
+/**
+ * Client-owned entry point for listing records.
+ * @runa-contract recordsmanager-summary PRD-027#R-027-01
+ */
 export interface RecordsManager {
+  /**
+   * Lists records available to the caller.
+   * @returns A fresh readonly ordered collection of records.
+   * @throws ApiError when the API rejects the operation or returns an invalid response.
+   * @example docs/reference/examples/workflows.ts#records-list
+   * @runa-contract recordsmanager-list-description PRD-037#R-037-01
+   * @runa-contract recordsmanager-list-returns PRD-037#R-037-01
+   * @runa-contract recordsmanager-list-throws-api PRD-024#R-024-03
+   * @runa-contract recordsmanager-list-example PRD-037#R-037-01
+   */
   list(): Promise<readonly Record[]>;
 }
 
@@ -208,29 +262,65 @@ class RecordsManagerImplementation implements RecordsManager {
   }
 }
 
+/**
+ * Constructible Runa client that owns managers, transport lifecycle, and cleanup.
+ * @runa-contract runa-summary PRD-023#R-023-01
+ */
 export class Runa {
   readonly #context: ClientContext;
   #sessions: SessionsManager | undefined;
   #records: RecordsManager | undefined;
 
+  /**
+   * Constructs one configured Runa client.
+   * @param config Optional client configuration resolved under the documented precedence rules.
+   * @returns A configured Runa client.
+   * @throws ConfigError when selected client configuration is invalid.
+   * @example docs/reference/examples/workflows.ts#runa-constructor
+   * @runa-contract runa-constructor-description PRD-023#R-023-01
+   * @runa-contract runa-constructor-param-config PRD-023#R-023-01
+   * @runa-contract runa-constructor-returns PRD-023#R-023-01
+   * @runa-contract runa-constructor-throws-config PRD-023#R-023-06
+   * @runa-contract runa-constructor-example PRD-023#R-023-01
+   */
   constructor(config?: RunaConfig) {
     this.#context = new ClientContext(resolveConfig(config));
   }
 
+  /** Stable sessions manager owned by this client. */
   get sessions(): SessionsManager {
     this.#sessions ??= new SessionsManagerImplementation(this.#context);
     return this.#sessions;
   }
 
+  /** Stable records manager owned by this client. */
   get records(): RecordsManager {
     this.#records ??= new RecordsManagerImplementation(this.#context);
     return this.#records;
   }
 
+  /**
+   * Reads the caller profile and workspace state.
+   * @returns The caller profile and workspace state.
+   * @throws ApiError when the API rejects the operation or returns an invalid response.
+   * @example docs/reference/examples/workflows.ts#runa-me
+   * @runa-contract runa-me-description PRD-036#R-036-01
+   * @runa-contract runa-me-returns PRD-036#R-036-01
+   * @runa-contract runa-me-throws-api PRD-024#R-024-03
+   * @runa-contract runa-me-example PRD-036#R-036-01
+   */
   async me(): Promise<Me> {
     return (await this.#context.invoke("me.get")) as Me;
   }
 
+  /**
+   * Closes this client after already admitted work completes.
+   * @returns A promise that resolves after client-owned cleanup completes.
+   * @example docs/reference/examples/workflows.ts#runa-close
+   * @runa-contract runa-close-description PRD-027#R-027-10
+   * @runa-contract runa-close-returns PRD-027#R-027-10
+   * @runa-contract runa-close-example PRD-027#R-027-10
+   */
   close(): Promise<void> {
     return this.#context.close();
   }

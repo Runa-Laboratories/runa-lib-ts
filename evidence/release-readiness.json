@@ -22,45 +22,35 @@
     {
       "id": "TS-REL-004",
       "gate": "quality",
-      "reason": "evidence/quality-gate.json does not record PASS."
-    },
-    {
-      "id": "TS-REL-005",
-      "gate": "quality",
       "reason": "Quality evidence is not bound to the candidate source commit."
     },
     {
-      "id": "TS-REL-006",
-      "gate": "documentation",
-      "reason": "evidence/docs-readiness.json does not record PASS."
-    },
-    {
-      "id": "TS-REL-007",
+      "id": "TS-REL-005",
       "gate": "compatibility-matrix",
       "reason": "Missing or invalid evidence: evidence/compatibility-matrix.json"
     },
     {
-      "id": "TS-REL-008",
+      "id": "TS-REL-006",
       "gate": "repository-controls",
       "reason": "Missing or invalid evidence: evidence/repository-controls.json"
     },
     {
-      "id": "TS-REL-009",
+      "id": "TS-REL-007",
       "gate": "cross-language",
       "reason": "Missing or invalid evidence: evidence/cross-language.json"
     },
     {
-      "id": "TS-REL-010",
+      "id": "TS-REL-008",
       "gate": "publication-readiness",
       "reason": "Missing or invalid evidence: evidence/publication-readiness.json"
     },
     {
-      "id": "TS-REL-011",
+      "id": "TS-REL-009",
       "gate": "sbom-validation",
       "reason": "No accepted release trust root is configured."
     },
     {
-      "id": "TS-REL-012",
+      "id": "TS-REL-010",
       "gate": "external-release-interfaces",
       "reason": "No accepted release trust root is configured."
     }
