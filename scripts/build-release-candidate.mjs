@@ -1,13 +1,13 @@
 import { createHash } from "node:crypto";
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
-import { execFileSync, spawnSync } from "node:child_process";
+import { execFileSync } from "node:child_process";
+import { npmSpawnSync } from "./npm-process.mjs";
 
 await rm("release-artifacts", { recursive: true, force: true });
 await mkdir("release-artifacts");
-const npmPack = process.platform === "win32"
-  ? spawnSync(process.env.ComSpec ?? "cmd.exe", ["/d", "/s", "/c",
-      "npm pack --json --ignore-scripts --pack-destination release-artifacts"], { encoding: "utf8" })
-  : spawnSync("npm", ["pack", "--json", "--ignore-scripts", "--pack-destination", "release-artifacts"], { encoding: "utf8" });
+const npmPack = npmSpawnSync([
+  "pack", "--json", "--ignore-scripts", "--pack-destination", "release-artifacts",
+]);
 if (npmPack.status !== 0) throw new Error("Candidate package creation failed.");
 const [metadata] = JSON.parse(npmPack.stdout);
 const archive = await readFile(`release-artifacts/${metadata.filename}`);

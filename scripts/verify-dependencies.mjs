@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
 import { readFile, writeFile, mkdir } from "node:fs/promises";
+import { npmSpawnSync } from "./npm-process.mjs";
 
 const pkg = JSON.parse(await readFile("package.json", "utf8"));
 const lock = JSON.parse(await readFile("package-lock.json", "utf8"));
@@ -25,9 +26,7 @@ for (const packagePath of Object.keys(lock.packages).filter((key) => key.startsW
     if (error?.code !== "ENOENT") throw error;
   }
 }
-const audit = process.platform === "win32"
-  ? spawnSync(process.env.ComSpec ?? "cmd.exe", ["/d", "/s", "/c", "npm audit --json"], { encoding: "utf8" })
-  : spawnSync("npm", ["audit", "--json"], { encoding: "utf8" });
+const audit = npmSpawnSync(["audit", "--json"]);
 if (audit.error) throw audit.error;
 const report = JSON.parse(audit.stdout || "{}");
 const vulnerabilities = report.metadata?.vulnerabilities ?? {};

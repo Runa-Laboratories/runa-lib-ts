@@ -1,9 +1,9 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { spawnSync } from "node:child_process";
 import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
+import { npmSpawnSync } from "./npm-process.mjs";
 
 const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const candidate = JSON.parse(await readFile("release-artifacts/candidate.json", "utf8"));
@@ -26,11 +26,7 @@ for (let run = 0; run < 2; run += 1) {
       private: true, type: "module",
       dependencies: { "@runa/sdk": `file:${archivePath.replaceAll("\\", "/")}` }
     })}\n`);
-    const runNpm = (arguments_) => process.platform === "win32"
-      ? spawnSync(process.env.ComSpec ?? "cmd.exe",
-          ["/d", "/s", "/c", `npm ${arguments_.join(" ")}`],
-          { cwd: workspace, encoding: "utf8" })
-      : spawnSync("npm", arguments_, { cwd: workspace, encoding: "utf8" });
+    const runNpm = (arguments_) => npmSpawnSync(arguments_, { cwd: workspace });
     const lock = runNpm(["install", "--package-lock-only", "--ignore-scripts",
       "--offline", "--cache", cache, "--no-audit", "--no-fund"]);
     if (lock.status !== 0) throw new Error("Isolated offline lock creation failed.");
