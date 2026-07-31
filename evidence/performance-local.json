@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "identity": {
+    "artifact_sha256": "2e3f8e3bbd0669cf9b731bd1b4d25d5c48390086f31f8c53316672ab39b4c6f2",
+    "catalog_sha256": "aa502e0df11c142f21e6d251abb0965f5996abcc183e0b7e82f409ad84f7537f",
+    "catalog_revision": "TS-050-EVIDENCE-V1",
+    "matrix_cell": null,
+    "environment_classification": "local-non-matrix"
+  },
+  "runtime": {
+    "node": "24.18.0",
+    "npm": "11.16.0",
+    "platform": "win32",
+    "arch": "x64"
+  },
+  "tools": {
+    "typescript": "5.8.3",
+    "types_node": "22.15.3",
+    "esbuild": "0.25.5",
+    "vitest_required": "3.2.4",
+    "vitest_security_substitution": "3.2.7"
+  },
+  "profile": {
+    "id": "P-017-TS-NPM-V1-local-non-matrix",
+    "revision": 1,
+    "baseline_reference": "bootstrap-v1",
+    "isolated_import_runs": 20,
+    "isolated_construction_runs": 20,
+    "isolated_request_invocations": 20,
+    "sequential_calls": 10,
+    "cleanup_calls": 2,
+    "leak_batches": 5,
+    "cycles_per_batch": 100
+  },
+  "metrics": {
+    "tarball_bytes": 35923,
+    "import_p95_ms": 49.185399999999994,
+    "construction_p95_ms": 1.240000000000002,
+    "request_overhead_p95_ms": 0.04659999999967113,
+    "allocation_delta_bytes_max": 190768,
+    "connection_establishments": 1,
+    "retained_memory_delta_bytes_p95": 897512,
+    "openConnections": 0,
+    "poolEntries": 0,
+    "timers": 0,
+    "callbackRegistrations": 0,
+    "lifecycleRegistrations": 0,
+    "startup_dispatches": 0,
+    "startup_connection_attempts": 0,
+    "startup_session_operations": 0,
+    "startup_hidden_transport_creations": 0
+  },
+  "forced_gc": false,
+  "ownership": {
+    "default_transport": "client",
+    "origin_isolation": "PASS",
+    "client_isolation": "PASS",
+    "injected_transport": "caller",
+    "cleanup_idempotence": "PASS"
+  },
+  "mutations": [
+    {
+      "name": "artifact",
+      "status": "REJECTED"
+    },
+    {
+      "name": "catalog",
+      "status": "REJECTED"
+    },
+    {
+      "name": "sequence",
+      "status": "REJECTED"
+    },
+    {
+      "name": "cycles",
+      "status": "REJECTED"
+    },
+    {
+      "name": "forced-gc",
+      "status": "REJECTED"
+    },
+    {
+      "name": "payload",
+      "status": "REJECTED"
+    },
+    {
+      "name": "import",
+      "status": "REJECTED"
+    },
+    {
+      "name": "construction",
+      "status": "REJECTED"
+    },
+    {
+      "name": "request",
+      "status": "REJECTED"
+    },
+    {
+      "name": "allocation",
+      "status": "REJECTED"
+    },
+    {
+      "name": "reuse",
+      "status": "REJECTED"
+    },
+    {
+      "name": "retained-memory",
+      "status": "REJECTED"
+    },
+    {
+      "name": "resource",
+      "status": "REJECTED"
+    },
+    {
+      "name": "startup-work",
+      "status": "REJECTED"
+    },
+    {
+      "name": "protected-evidence",
+      "status": "REJECTED"
+    }
+  ]
+}
