@@ -108,6 +108,11 @@ function createBody(
   }
   const source = options as SessionCreateOptions &
     globalThis.Record<string, unknown>;
+  if (Object.keys(source).some((key) =>
+    !["agent", "vcpus", "memoryMiB", "allowedHosts", "runtimePort"].includes(key)
+  )) {
+    throw new TypeError("Invalid session create options.");
+  }
   if (own(source, "agent")) {
     const allowed = new Set<SessionAgent>([
       "claude-code",

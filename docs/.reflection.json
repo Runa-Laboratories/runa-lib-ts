@@ -3199,8 +3199,17 @@
 						}
 					],
 					"type": {
-						"type": "intrinsic",
-						"name": "string"
+						"type": "union",
+						"types": [
+							{
+								"type": "intrinsic",
+								"name": "string"
+							},
+							{
+								"type": "intrinsic",
+								"name": "undefined"
+							}
+						]
 					}
 				}
 			]
@@ -3248,8 +3257,17 @@
 						}
 					],
 					"type": {
-						"type": "intrinsic",
-						"name": "string"
+						"type": "union",
+						"types": [
+							{
+								"type": "intrinsic",
+								"name": "string"
+							},
+							{
+								"type": "intrinsic",
+								"name": "undefined"
+							}
+						]
 					}
 				}
 			]
@@ -4334,8 +4352,8 @@
 						}
 					],
 					"type": {
-						"type": "intrinsic",
-						"name": "boolean"
+						"type": "literal",
+						"value": true
 					}
 				},
 				{

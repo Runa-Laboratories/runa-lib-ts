@@ -72,7 +72,7 @@ export interface EstimatedUsage {
 }
 
 export interface AssignedWorkspace {
-  readonly assigned: boolean;
+  readonly assigned: true;
   readonly usage: EstimatedUsage;
   readonly waitlistPosition?: never;
 }

@@ -48,6 +48,9 @@ function prepareExec(
     }
     const unsafe = options as ExecOptions &
       globalThis.Record<string, unknown>;
+    if (Object.keys(unsafe).some((key) => !["cwd", "timeoutSecs"].includes(key))) {
+      throw new TypeError("Invalid session exec options.");
+    }
     if (own(unsafe, "cwd") && unsafe.cwd !== undefined) {
       if (typeof unsafe.cwd !== "string") {
         throw new TypeError("Invalid session exec options.");
