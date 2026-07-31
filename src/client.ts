@@ -108,9 +108,6 @@ function createBody(
   }
   const source = options as SessionCreateOptions &
     globalThis.Record<string, unknown>;
-  if (Object.keys(source).some((key) => !["agent", "vcpus", "memoryMiB", "allowedHosts", "runtimePort"].includes(key))) {
-    throw new TypeError("Invalid session create options.");
-  }
   if (own(source, "agent")) {
     const allowed = new Set<SessionAgent>([
       "claude-code",
@@ -141,7 +138,7 @@ function createBody(
     if (!Array.isArray(source.allowedHosts) || source.allowedHosts.length > 128 || source.allowedHosts.some((host) => typeof host !== "string" || host.length === 0)) {
       throw new TypeError("Invalid session create options.");
     }
-    body.allowed_hosts = source.allowedHosts;
+    body.allowed_hosts = Object.freeze([...source.allowedHosts]);
   }
   if (own(source, "runtimePort") && source.runtimePort !== undefined) {
     if (!Number.isInteger(source.runtimePort) || source.runtimePort < 1 || source.runtimePort > 65_535) {

@@ -3199,17 +3199,8 @@
 						}
 					],
 					"type": {
-						"type": "union",
-						"types": [
-							{
-								"type": "intrinsic",
-								"name": "string"
-							},
-							{
-								"type": "intrinsic",
-								"name": "undefined"
-							}
-						]
+						"type": "intrinsic",
+						"name": "string"
 					}
 				}
 			]
@@ -3257,17 +3248,8 @@
 						}
 					],
 					"type": {
-						"type": "union",
-						"types": [
-							{
-								"type": "intrinsic",
-								"name": "string"
-							},
-							{
-								"type": "intrinsic",
-								"name": "undefined"
-							}
-						]
+						"type": "intrinsic",
+						"name": "string"
 					}
 				}
 			]

@@ -1,0 +1,26 @@
+{
+  "catalog": "TS-050-EVIDENCE-V1",
+  "revision": 1,
+  "compiler": {
+    "typescript": "5.8.3",
+    "types_node": "22.15.3",
+    "esbuild": "0.25.5"
+  },
+  "cells": [
+    {"id": "ts050-node22-linux-x64", "node": "22.17.1", "npm": "10.9.2", "platform": "linux", "arch": "x64"},
+    {"id": "ts050-node22-windows-x64", "node": "22.17.1", "npm": "10.9.2", "platform": "win32", "arch": "x64"},
+    {"id": "ts050-node22-macos-arm64", "node": "22.17.1", "npm": "10.9.2", "platform": "darwin", "arch": "arm64"},
+    {"id": "ts050-node24-linux-x64", "node": "24.4.1", "npm": "11.4.2", "platform": "linux", "arch": "x64"},
+    {"id": "ts050-node24-windows-x64", "node": "24.4.1", "npm": "11.4.2", "platform": "win32", "arch": "x64"},
+    {"id": "ts050-node24-macos-arm64", "node": "24.4.1", "npm": "11.4.2", "platform": "darwin", "arch": "arm64"}
+  ],
+  "budgets": {
+    "tarball_bytes_max": 1048576,
+    "import_p95_ms_max": 250,
+    "construction_p95_ms_max": 50,
+    "request_overhead_p95_ms_max": 10,
+    "allocation_delta_bytes_max": 524288,
+    "retained_memory_delta_bytes_max": 4194304
+  },
+  "status_note": "Vitest 3.2.7 is the security-remediated harness; V1 provenance naming 3.2.4 requires owner approval."
+}

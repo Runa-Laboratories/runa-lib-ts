@@ -2,37 +2,47 @@ import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { createHash } from "node:crypto";
 
-const prdRoot = path.resolve("../../prds/libs/typescript");
+const sources = [
+  { root: path.resolve("../../prds/libs/shared"), scope: "shared-applicable" },
+  { root: path.resolve("../../prds/libs/typescript"), scope: "typescript" }
+];
 const rows = [];
-for (const file of (await readdir(prdRoot)).filter((name) => /^PRD-\d+.*\.md$/.test(name)).sort()) {
-  const text = await readFile(path.join(prdRoot, file), "utf8");
-  const owner = file.match(/^PRD-(\d{3})/)?.[1];
-  const requirements = [...new Set(text.match(/R-\d{3}-\d{2}/g) ?? [])]
-    .filter((id) => id.slice(2, 5) === owner)
-    .sort();
-  const tests = [...new Set(text.match(/TC-\d{3}-\d{2}/g) ?? [])]
-    .filter((id) => id.slice(3, 6) === owner)
-    .sort();
-  for (const requirement of requirements) {
-    const number = requirement.slice(2, 5);
-    const owned = tests.filter((test) => test.slice(3, 6) === number);
-    rows.push({
-      requirement,
-      prd: file,
-      acceptance_tests: owned,
-      evidence_kind: "prd-acceptance-case"
-    });
+const acceptanceTestIds = new Set();
+for (const source of sources) {
+  for (const file of (await readdir(source.root)).filter((name) => /^PRD-\d+.*\.md$/.test(name)).sort()) {
+    const text = await readFile(path.join(source.root, file), "utf8");
+    const owner = file.match(/^PRD-(\d{3})/)?.[1];
+    const requirements = [...new Set(text.match(/R-\d{3}-\d{2}/g) ?? [])]
+      .filter((id) => id.slice(2, 5) === owner)
+      .sort();
+    const tests = [...new Set(text.match(/TC-\d{3}-\d{2}/g) ?? [])]
+      .filter((id) => id.slice(3, 6) === owner)
+      .sort();
+    for (const test of tests) acceptanceTestIds.add(test);
+    for (const requirement of requirements) {
+      rows.push({
+        requirement,
+        scope: source.scope,
+        prd: `prds/libs/${source.scope === "typescript" ? "typescript" : "shared"}/${file}`,
+        acceptance_test_ids: tests,
+        status: "NOT_RUN",
+        evidence_missing: "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
+      });
+    }
   }
 }
-if (rows.length === 0 || rows.some((row) => row.acceptance_tests.length === 0)) {
-  throw new Error("Requirement traceability is incomplete.");
+if (rows.length !== 984 || acceptanceTestIds.size !== 522) {
+  throw new Error(`Trace catalog mismatch: ${rows.length} requirements and ${acceptanceTestIds.size} acceptance tests.`);
 }
 await mkdir("evidence", { recursive: true });
 await writeFile("evidence/requirement-test-map.json", `${JSON.stringify({
-  schema_version: 1,
-  generated_from: "prds/libs/typescript",
+  schema_version: 2,
+  generated_from: ["prds/libs/shared", "prds/libs/typescript"],
   source_digest: createHash("sha256").update(JSON.stringify(rows)).digest("hex"),
   requirement_count: rows.length,
+  acceptance_test_count: acceptanceTestIds.size,
+  status_summary: { NOT_RUN: rows.length, PASS: 0, BLOCKED: 0 },
+  acceptance_test_ids: [...acceptanceTestIds].sort(),
   rows
 }, null, 2)}\n`);
 await writeFile("evidence/duplicate-abstraction-audit.json", `${JSON.stringify({
@@ -44,4 +54,4 @@ await writeFile("evidence/duplicate-abstraction-audit.json", `${JSON.stringify({
     { concept: "own-property checks", disposition: "intentional-local", reason: "separate input boundaries; no public abstraction" }
   ]
 }, null, 2)}\n`);
-console.log(`evidence: PASS (${rows.length} requirements)`);
+console.log(`evidence: traced ${rows.length} requirements to ${acceptanceTestIds.size} acceptance IDs; all NOT_RUN by exact TC identity`);
