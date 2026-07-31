@@ -7,7 +7,7 @@ import path from "node:path";
 import { build as bundle } from "esbuild";
 import { npmSpawnSync } from "./npm-process.mjs";
 
-const catalog = JSON.parse(await readFile("evidence/compatibility-catalog.json", "utf8"));
+const catalog = JSON.parse(await readFile("compatibility/ts-050-evidence-v1.json", "utf8"));
 const candidate = JSON.parse(await readFile("release-artifacts/candidate.json", "utf8"));
 const archivePath = path.resolve("release-artifacts", candidate.filename);
 const archive = await readFile(archivePath);
@@ -15,7 +15,7 @@ assert.equal(createHash("sha256").update(archive).digest("hex"), candidate.sha25
 const npmVersionResult = npmSpawnSync(["--version"]);
 assert.equal(npmVersionResult.status, 0);
 const npmVersion = npmVersionResult.stdout.trim();
-const cell = catalog.cells.find((item) => item.node === process.versions.node &&
+const cell = catalog.matrix.find((item) => item.node === process.versions.node &&
   item.npm === npmVersion && item.platform === process.platform && item.arch === process.arch);
 if (cell === undefined) throw new Error("Runtime is not an exact V1 matrix cell.");
 const workspace = await mkdtemp(path.join(tmpdir(), "runa-ts050-"));
@@ -25,13 +25,7 @@ let status = "BLOCKED";
 let failure = null;
 let metrics = null;
 let compatibilityStatus = "PASS";
-const performanceBlockers = [
-  "R-017-05/R-050-09: import p95 is not measured from 20 isolated processes",
-  "R-017-06/R-050-10: allocation maximum is not measured at the pre-transport seam across 20 isolated invocations",
-  "R-017-07/R-050-11: the controlled default-transport 10-request establishment counter is unavailable",
-  "R-017-08/R-050-12: five drained 100-cycle leak batches and post-cleanup resource counters are unavailable",
-  "R-050-15/TC-050-08: the complete hostile performance-mutation gate is unavailable",
-];
+let performanceStatus = "BLOCKED";
 try {
   await mkdir(cache);
   await writeFile(path.join(workspace, "package.json"), `${JSON.stringify({
@@ -100,11 +94,11 @@ try {
     request_p95_ms: request[18],
     allocation_delta_bytes: Math.max(0, process.memoryUsage().heapUsed - heapBefore)
   };
-  assert(metrics.tarball_bytes <= catalog.budgets.tarball_bytes_max);
-  assert(metrics.import_ms <= catalog.budgets.import_p95_ms_max);
-  assert(metrics.construction_p95_ms <= catalog.budgets.construction_p95_ms_max);
-  assert(metrics.request_p95_ms <= catalog.budgets.request_overhead_p95_ms_max);
-  assert(metrics.allocation_delta_bytes <= catalog.budgets.allocation_delta_bytes_max);
+  assert(metrics.tarball_bytes <= catalog.profile.metrics.payload.cap);
+  assert(metrics.import_ms <= catalog.profile.metrics.import.cap);
+  assert(metrics.construction_p95_ms <= catalog.profile.metrics.construction.cap);
+  assert(metrics.request_p95_ms <= catalog.profile.metrics.request_overhead.cap);
+  assert(metrics.allocation_delta_bytes <= catalog.profile.metrics.allocation_delta.cap);
   const readme = await readFile(path.join(workspace, "node_modules/@runa/sdk/README.md"), "utf8");
   assert.match(readme, /npm install @runa\/sdk/);
   await writeFile(path.join(workspace, "bundle-entry.mjs"),
@@ -122,6 +116,19 @@ try {
   });
   assert.equal(Object.keys(bundleResult.metafile.inputs).some((input) =>
     input.replaceAll("\\", "/").endsWith("/dist/client.js")), false);
+  const performanceRun = spawnSync(process.execPath, [
+    "scripts/verify-performance.mjs", "--artifact", archivePath,
+  ], { cwd: path.resolve("."), encoding: "utf8", timeout: 180_000 });
+  assert.equal(performanceRun.status, 0);
+  const performance = JSON.parse(
+    await readFile("evidence/performance-local.json", "utf8"),
+  );
+  assert.equal(performance.status, "PASS");
+  assert.equal(performance.identity.artifact_sha256, candidate.sha256);
+  assert.equal(performance.identity.matrix_cell, cell.id);
+  performanceStatus = "PASS";
+  metrics = performance.metrics;
+  status = "PASS";
 } catch {
   status = "FAIL";
   compatibilityStatus = "FAIL";
@@ -133,11 +140,11 @@ try {
     node: process.versions.node, npm: npmVersion, platform: process.platform,
     arch: process.arch, probes: ["isolated-offline-install", "root-esm", "declarations", "tree-shaking", "readme", "package-surface"],
     compatibility_status: compatibilityStatus,
-    performance_status: "BLOCKED",
-    performance_blockers: performanceBlockers,
+    performance_status: performanceStatus,
+    performance_receipt: "evidence/performance-local.json",
     metrics, failure
   }, null, 2)}\n`);
   await rm(workspace, { recursive: true, force: true });
 }
 if (status === "FAIL") process.exit(1);
-console.log(`compatibility: PASS; complete PRD-017 profile: BLOCKED (${cell.id}, ${candidate.sha256})`);
+console.log(`compatibility: ${status}; performance: ${performanceStatus} (${cell.id}, ${candidate.sha256})`);

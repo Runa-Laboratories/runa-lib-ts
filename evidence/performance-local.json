@@ -2,7 +2,7 @@
   "schema_version": 1,
   "status": "PASS",
   "identity": {
-    "artifact_sha256": "2e3f8e3bbd0669cf9b731bd1b4d25d5c48390086f31f8c53316672ab39b4c6f2",
+    "artifact_sha256": "a30b4e1b2e0404faa3d892bec2c8ead7e17744c712d888cf9d625fedfc93de64",
     "catalog_sha256": "aa502e0df11c142f21e6d251abb0965f5996abcc183e0b7e82f409ad84f7537f",
     "catalog_revision": "TS-050-EVIDENCE-V1",
     "matrix_cell": null,
@@ -34,13 +34,13 @@
     "cycles_per_batch": 100
   },
   "metrics": {
-    "tarball_bytes": 35923,
-    "import_p95_ms": 49.185399999999994,
-    "construction_p95_ms": 1.240000000000002,
-    "request_overhead_p95_ms": 0.04659999999967113,
-    "allocation_delta_bytes_max": 190768,
+    "tarball_bytes": 36574,
+    "import_p95_ms": 222.62660000000002,
+    "construction_p95_ms": 3.15949999999998,
+    "request_overhead_p95_ms": 0.01569999999992433,
+    "allocation_delta_bytes_max": 70072,
     "connection_establishments": 1,
-    "retained_memory_delta_bytes_p95": 897512,
+    "retained_memory_delta_bytes_p95": 2575192,
     "openConnections": 0,
     "poolEntries": 0,
     "timers": 0,
@@ -69,7 +69,19 @@
       "status": "REJECTED"
     },
     {
+      "name": "tool",
+      "status": "REJECTED"
+    },
+    {
+      "name": "profile-fact",
+      "status": "REJECTED"
+    },
+    {
       "name": "sequence",
+      "status": "REJECTED"
+    },
+    {
+      "name": "cleanup-sequence",
       "status": "REJECTED"
     },
     {
@@ -113,7 +125,27 @@
       "status": "REJECTED"
     },
     {
+      "name": "missing-metric",
+      "status": "REJECTED"
+    },
+    {
       "name": "startup-work",
+      "status": "REJECTED"
+    },
+    {
+      "name": "origin-isolation",
+      "status": "REJECTED"
+    },
+    {
+      "name": "client-isolation",
+      "status": "REJECTED"
+    },
+    {
+      "name": "injected-ownership",
+      "status": "REJECTED"
+    },
+    {
+      "name": "cleanup-idempotence",
       "status": "REJECTED"
     },
     {

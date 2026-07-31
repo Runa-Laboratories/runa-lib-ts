@@ -83,10 +83,41 @@ for (const source of sources) {
 if (rows.length !== 984 || acceptanceTestIds.size !== 522) {
   throw new Error(`Trace catalog mismatch: ${rows.length} requirements and ${acceptanceTestIds.size} acceptance tests.`);
 }
+const receipted = new Map();
+const receiptOracles = [
+  {
+    file: "evidence/docs-readiness.json",
+    tests: [
+      "TC-048-01", "TC-048-02", "TC-048-03", "TC-048-04",
+      "TC-048-05", "TC-048-06", "TC-048-07",
+    ],
+  },
+  {
+    file: "evidence/performance-local.json",
+    tests: [
+      "TC-017-02", "TC-017-03", "TC-017-04", "TC-017-05",
+      "TC-017-06", "TC-017-07", "TC-017-08",
+      "TC-050-05", "TC-050-06", "TC-050-08",
+    ],
+  },
+];
+for (const oracle of receiptOracles) {
+  let receipt;
+  try {
+    receipt = JSON.parse(await readFile(oracle.file, "utf8"));
+  } catch {
+    continue;
+  }
+  if (receipt.status !== "PASS" ||
+      !Array.isArray(receipt.acceptance_tests) ||
+      JSON.stringify([...receipt.acceptance_tests].sort()) !==
+        JSON.stringify([...oracle.tests].sort())) continue;
+  for (const testId of oracle.tests) receipted.set(testId, oracle.file);
+}
 await mkdir("evidence", { recursive: true });
 const acceptanceResults = [...acceptanceTestIds].sort().map((testId) =>
-  verified.has(testId)
-    ? { test_id: testId, status: "PASS", evidence: verified.get(testId) }
+  receipted.has(testId)
+    ? { test_id: testId, status: "PASS", evidence: receipted.get(testId) }
     : { test_id: testId, status: "NOT_RUN", reason: "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one." }
 );
 const passedCount = acceptanceResults.filter((result) => result.status === "PASS").length;

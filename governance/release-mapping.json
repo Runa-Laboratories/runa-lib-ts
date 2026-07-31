@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "policy_id": "TS-053-RELEASE-MAPPING-V1",
+  "package_name": "@runa/sdk",
+  "registry": "https://registry.npmjs.org",
+  "tag_prefix": "ts-v",
+  "channels": {
+    "stable": {"version_pattern": "^\\d+\\.\\d+\\.\\d+$", "dist_tag": "latest"},
+    "prerelease": {"version_pattern": "^\\d+\\.\\d+\\.\\d+-[0-9A-Za-z.-]+$", "dist_tag": "next"}
+  },
+  "postpublish_states": [
+    "published-unverified",
+    "registry-verified",
+    "handoff"
+  ],
+  "withdrawal_policy": {
+    "id": "TS-053-WITHDRAWAL-V1",
+    "automatic_unpublish": false,
+    "automatic_dist_tag_removal": false,
+    "allowed_plans": ["no-yank-advisory", "owner-approved-withdrawal"]
+  }
+}
