@@ -1,0 +1,14 @@
+import assert from "node:assert/strict";
+import { test } from "vitest";
+import { runReferencePipeline } from "../scripts/reference/pipeline.mjs";
+
+test("PRD-048 reference pipeline covers the exact surface and rejects mutations", async () => {
+  const result = await runReferencePipeline({ write: false });
+  assert.equal(result.model.entries.length, 26);
+  assert.equal(result.model.entries.filter((entry) => entry.kind === "runtime").length, 8);
+  assert.equal(result.model.entries.filter((entry) => entry.kind === "type").length, 18);
+  assert.deepEqual(result.mutations, [
+    "missing", "extra", "alias", "moved", "signature",
+    "private-source", "link", "safety", "throws", "example",
+  ]);
+});
