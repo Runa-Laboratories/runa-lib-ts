@@ -55,6 +55,30 @@
     {
       "name": "claim-tag",
       "status": "REJECTED"
+    },
+    {
+      "name": "reflection-tag-delete",
+      "status": "REJECTED"
+    },
+    {
+      "name": "reflection-tag-change",
+      "status": "REJECTED"
+    },
+    {
+      "name": "reflection-param",
+      "status": "REJECTED"
+    },
+    {
+      "name": "reflection-returns",
+      "status": "REJECTED"
+    },
+    {
+      "name": "reflection-throws",
+      "status": "REJECTED"
+    },
+    {
+      "name": "reflection-example",
+      "status": "REJECTED"
     }
   ],
   "acceptance_tests": [

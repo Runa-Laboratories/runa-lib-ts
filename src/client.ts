@@ -8,6 +8,10 @@ import {
   type DispatchInput,
   type DispatchResult,
 } from "./internal/transport.js";
+import {
+  takePrivateTransportFactory,
+  type ClientTransport,
+} from "./internal/performance-seam.js";
 import { Session, constructSession } from "./session.js";
 import type {
   Me,
@@ -87,7 +91,7 @@ export interface RecordsManager {
 
 class ClientContext implements ClientPort {
   readonly #config: EffectiveConfig;
-  #transport: FetchTransport | undefined;
+  #transport: ClientTransport | undefined;
   #state: "open" | "closing" | "closed" = "open";
   #active = 0;
   #closePromise: Promise<void> | undefined;
@@ -106,7 +110,13 @@ class ClientContext implements ClientPort {
     }
     this.#active += 1;
     try {
-      this.#transport ??= new FetchTransport(this.#config);
+      if (this.#transport === undefined) {
+        const privateFactory = this.#config.fetch === undefined
+          ? takePrivateTransportFactory()
+          : undefined;
+        this.#transport = privateFactory?.(this.#config) ??
+          new FetchTransport(this.#config);
+      }
       return await this.#transport.execute(operationKey, input);
     } finally {
       this.#active -= 1;

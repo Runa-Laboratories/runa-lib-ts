@@ -12,6 +12,25 @@
 			"variant": "declaration",
 			"kind": 256,
 			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "Client-owned entry point for creating, listing, and retrieving sessions."
+					}
+				],
+				"blockTags": [
+					{
+						"tag": "@runa-contract",
+						"content": [
+							{
+								"kind": "text",
+								"text": "sessionsmanager-summary PRD-027#R-027-01"
+							}
+						]
+					}
+				]
+			},
 			"children": [
 				{
 					"id": 132,
@@ -22,7 +41,7 @@
 					"sources": [
 						{
 							"fileName": "dist/client.d.ts",
-							"line": 4,
+							"line": 22,
 							"character": 4
 						}
 					],
@@ -33,10 +52,101 @@
 							"variant": "signature",
 							"kind": 4096,
 							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Creates one session and returns its client-owned handle."
+									}
+								],
+								"blockTags": [
+									{
+										"tag": "@returns",
+										"content": [
+											{
+												"kind": "text",
+												"text": "A client-owned handle for the created session."
+											}
+										]
+									},
+									{
+										"tag": "@throws",
+										"content": [
+											{
+												"kind": "text",
+												"text": "ApiError when the API rejects the operation or returns an invalid response."
+											}
+										]
+									},
+									{
+										"tag": "@example",
+										"content": [
+											{
+												"kind": "code",
+												"text": "```ts\ndocs/reference/examples/workflows.ts#sessions-create\n```"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "sessionsmanager-create-description PRD-028#R-028-01"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "sessionsmanager-create-param-name PRD-028#R-028-01"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "sessionsmanager-create-param-options PRD-028#R-028-01"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "sessionsmanager-create-returns PRD-028#R-028-01"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "sessionsmanager-create-throws-api PRD-024#R-024-03"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "sessionsmanager-create-example PRD-028#R-028-01"
+											}
+										]
+									}
+								]
+							},
 							"sources": [
 								{
 									"fileName": "dist/client.d.ts",
-									"line": 4,
+									"line": 22,
 									"character": 4
 								}
 							],
@@ -47,6 +157,14 @@
 									"variant": "param",
 									"kind": 32768,
 									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "Session name containing between one and eighty characters."
+											}
+										]
+									},
 									"type": {
 										"type": "intrinsic",
 										"name": "string"
@@ -59,6 +177,14 @@
 									"kind": 32768,
 									"flags": {
 										"isOptional": true
+									},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "Optional agent, resource, host, and runtime-port settings."
+											}
+										]
 									},
 									"type": {
 										"type": "reference",
@@ -98,7 +224,7 @@
 					"sources": [
 						{
 							"fileName": "dist/client.d.ts",
-							"line": 5,
+							"line": 33,
 							"character": 4
 						}
 					],
@@ -109,10 +235,83 @@
 							"variant": "signature",
 							"kind": 4096,
 							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Lists the sessions available to the caller."
+									}
+								],
+								"blockTags": [
+									{
+										"tag": "@returns",
+										"content": [
+											{
+												"kind": "text",
+												"text": "A fresh readonly ordered collection of client-owned session handles."
+											}
+										]
+									},
+									{
+										"tag": "@throws",
+										"content": [
+											{
+												"kind": "text",
+												"text": "ApiError when the API rejects the operation or returns an invalid response."
+											}
+										]
+									},
+									{
+										"tag": "@example",
+										"content": [
+											{
+												"kind": "code",
+												"text": "```ts\ndocs/reference/examples/workflows.ts#sessions-list\n```"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "sessionsmanager-list-description PRD-029#R-029-01"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "sessionsmanager-list-returns PRD-029#R-029-01"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "sessionsmanager-list-throws-api PRD-024#R-024-03"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "sessionsmanager-list-example PRD-029#R-029-01"
+											}
+										]
+									}
+								]
+							},
 							"sources": [
 								{
 									"fileName": "dist/client.d.ts",
-									"line": 5,
+									"line": 33,
 									"character": 4
 								}
 							],
@@ -153,7 +352,7 @@
 					"sources": [
 						{
 							"fileName": "dist/client.d.ts",
-							"line": 6,
+							"line": 46,
 							"character": 4
 						}
 					],
@@ -164,10 +363,92 @@
 							"variant": "signature",
 							"kind": 4096,
 							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Retrieves one session by canonical identifier."
+									}
+								],
+								"blockTags": [
+									{
+										"tag": "@returns",
+										"content": [
+											{
+												"kind": "text",
+												"text": "A client-owned handle for the requested session."
+											}
+										]
+									},
+									{
+										"tag": "@throws",
+										"content": [
+											{
+												"kind": "text",
+												"text": "ApiError when the API rejects the operation or returns an invalid response."
+											}
+										]
+									},
+									{
+										"tag": "@example",
+										"content": [
+											{
+												"kind": "code",
+												"text": "```ts\ndocs/reference/examples/workflows.ts#sessions-get\n```"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "sessionsmanager-get-description PRD-030#R-030-01"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "sessionsmanager-get-param-id PRD-030#R-030-01"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "sessionsmanager-get-returns PRD-030#R-030-01"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "sessionsmanager-get-throws-api PRD-024#R-024-03"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "sessionsmanager-get-example PRD-030#R-030-01"
+											}
+										]
+									}
+								]
+							},
 							"sources": [
 								{
 									"fileName": "dist/client.d.ts",
-									"line": 6,
+									"line": 46,
 									"character": 4
 								}
 							],
@@ -178,6 +459,14 @@
 									"variant": "param",
 									"kind": 32768,
 									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "Exact canonical lowercase session UUID."
+											}
+										]
+									},
 									"type": {
 										"type": "intrinsic",
 										"name": "string"
@@ -219,7 +508,7 @@
 			"sources": [
 				{
 					"fileName": "dist/client.d.ts",
-					"line": 3,
+					"line": 7,
 					"character": 17
 				}
 			]
@@ -230,6 +519,25 @@
 			"variant": "declaration",
 			"kind": 256,
 			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "Client-owned entry point for listing records."
+					}
+				],
+				"blockTags": [
+					{
+						"tag": "@runa-contract",
+						"content": [
+							{
+								"kind": "text",
+								"text": "recordsmanager-summary PRD-027#R-027-01"
+							}
+						]
+					}
+				]
+			},
 			"children": [
 				{
 					"id": 129,
@@ -240,7 +548,7 @@
 					"sources": [
 						{
 							"fileName": "dist/client.d.ts",
-							"line": 9,
+							"line": 63,
 							"character": 4
 						}
 					],
@@ -251,10 +559,83 @@
 							"variant": "signature",
 							"kind": 4096,
 							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Lists records available to the caller."
+									}
+								],
+								"blockTags": [
+									{
+										"tag": "@returns",
+										"content": [
+											{
+												"kind": "text",
+												"text": "A fresh readonly ordered collection of records."
+											}
+										]
+									},
+									{
+										"tag": "@throws",
+										"content": [
+											{
+												"kind": "text",
+												"text": "ApiError when the API rejects the operation or returns an invalid response."
+											}
+										]
+									},
+									{
+										"tag": "@example",
+										"content": [
+											{
+												"kind": "code",
+												"text": "```ts\ndocs/reference/examples/workflows.ts#records-list\n```"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "recordsmanager-list-description PRD-037#R-037-01"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "recordsmanager-list-returns PRD-037#R-037-01"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "recordsmanager-list-throws-api PRD-024#R-024-03"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "recordsmanager-list-example PRD-037#R-037-01"
+											}
+										]
+									}
+								]
+							},
 							"sources": [
 								{
 									"fileName": "dist/client.d.ts",
-									"line": 9,
+									"line": 63,
 									"character": 4
 								}
 							],
@@ -298,7 +679,7 @@
 			"sources": [
 				{
 					"fileName": "dist/client.d.ts",
-					"line": 8,
+					"line": 52,
 					"character": 17
 				}
 			]
@@ -309,6 +690,25 @@
 			"variant": "declaration",
 			"kind": 128,
 			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "Constructible Runa client that owns managers, transport lifecycle, and cleanup."
+					}
+				],
+				"blockTags": [
+					{
+						"tag": "@runa-contract",
+						"content": [
+							{
+								"kind": "text",
+								"text": "runa-summary PRD-023#R-023-01"
+							}
+						]
+					}
+				]
+			},
 			"children": [
 				{
 					"id": 2,
@@ -319,7 +719,7 @@
 					"sources": [
 						{
 							"fileName": "dist/client.d.ts",
-							"line": 13,
+							"line": 83,
 							"character": 4
 						}
 					],
@@ -330,10 +730,92 @@
 							"variant": "signature",
 							"kind": 16384,
 							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Constructs one configured Runa client."
+									}
+								],
+								"blockTags": [
+									{
+										"tag": "@returns",
+										"content": [
+											{
+												"kind": "text",
+												"text": "A configured Runa client."
+											}
+										]
+									},
+									{
+										"tag": "@throws",
+										"content": [
+											{
+												"kind": "text",
+												"text": "ConfigError when selected client configuration is invalid."
+											}
+										]
+									},
+									{
+										"tag": "@example",
+										"content": [
+											{
+												"kind": "code",
+												"text": "```ts\ndocs/reference/examples/workflows.ts#runa-constructor\n```"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "runa-constructor-description PRD-023#R-023-01"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "runa-constructor-param-config PRD-023#R-023-01"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "runa-constructor-returns PRD-023#R-023-01"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "runa-constructor-throws-config PRD-023#R-023-06"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "runa-constructor-example PRD-023#R-023-01"
+											}
+										]
+									}
+								]
+							},
 							"sources": [
 								{
 									"fileName": "dist/client.d.ts",
-									"line": 13,
+									"line": 83,
 									"character": 4
 								}
 							],
@@ -345,6 +827,14 @@
 									"kind": 32768,
 									"flags": {
 										"isOptional": true
+									},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "Optional client configuration resolved under the documented precedence rules."
+											}
+										]
 									},
 									"type": {
 										"type": "reference",
@@ -372,7 +862,7 @@
 					"sources": [
 						{
 							"fileName": "dist/client.d.ts",
-							"line": 14,
+							"line": 85,
 							"character": 8
 						}
 					],
@@ -382,10 +872,18 @@
 						"variant": "signature",
 						"kind": 524288,
 						"flags": {},
+						"comment": {
+							"summary": [
+								{
+									"kind": "text",
+									"text": "Stable sessions manager owned by this client."
+								}
+							]
+						},
 						"sources": [
 							{
 								"fileName": "dist/client.d.ts",
-								"line": 14,
+								"line": 85,
 								"character": 8
 							}
 						],
@@ -406,7 +904,7 @@
 					"sources": [
 						{
 							"fileName": "dist/client.d.ts",
-							"line": 15,
+							"line": 87,
 							"character": 8
 						}
 					],
@@ -416,10 +914,18 @@
 						"variant": "signature",
 						"kind": 524288,
 						"flags": {},
+						"comment": {
+							"summary": [
+								{
+									"kind": "text",
+									"text": "Stable records manager owned by this client."
+								}
+							]
+						},
 						"sources": [
 							{
 								"fileName": "dist/client.d.ts",
-								"line": 15,
+								"line": 87,
 								"character": 8
 							}
 						],
@@ -440,7 +946,7 @@
 					"sources": [
 						{
 							"fileName": "dist/client.d.ts",
-							"line": 16,
+							"line": 98,
 							"character": 4
 						}
 					],
@@ -451,10 +957,83 @@
 							"variant": "signature",
 							"kind": 4096,
 							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Reads the caller profile and workspace state."
+									}
+								],
+								"blockTags": [
+									{
+										"tag": "@returns",
+										"content": [
+											{
+												"kind": "text",
+												"text": "The caller profile and workspace state."
+											}
+										]
+									},
+									{
+										"tag": "@throws",
+										"content": [
+											{
+												"kind": "text",
+												"text": "ApiError when the API rejects the operation or returns an invalid response."
+											}
+										]
+									},
+									{
+										"tag": "@example",
+										"content": [
+											{
+												"kind": "code",
+												"text": "```ts\ndocs/reference/examples/workflows.ts#runa-me\n```"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "runa-me-description PRD-036#R-036-01"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "runa-me-returns PRD-036#R-036-01"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "runa-me-throws-api PRD-024#R-024-03"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "runa-me-example PRD-036#R-036-01"
+											}
+										]
+									}
+								]
+							},
 							"sources": [
 								{
 									"fileName": "dist/client.d.ts",
-									"line": 16,
+									"line": 98,
 									"character": 4
 								}
 							],
@@ -488,7 +1067,7 @@
 					"sources": [
 						{
 							"fileName": "dist/client.d.ts",
-							"line": 17,
+							"line": 107,
 							"character": 4
 						}
 					],
@@ -499,10 +1078,65 @@
 							"variant": "signature",
 							"kind": 4096,
 							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Closes this client after already admitted work completes."
+									}
+								],
+								"blockTags": [
+									{
+										"tag": "@returns",
+										"content": [
+											{
+												"kind": "text",
+												"text": "A promise that resolves after client-owned cleanup completes."
+											}
+										]
+									},
+									{
+										"tag": "@example",
+										"content": [
+											{
+												"kind": "code",
+												"text": "```ts\ndocs/reference/examples/workflows.ts#runa-close\n```"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "runa-close-description PRD-027#R-027-10"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "runa-close-returns PRD-027#R-027-10"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "runa-close-example PRD-027#R-027-10"
+											}
+										]
+									}
+								]
+							},
 							"sources": [
 								{
 									"fileName": "dist/client.d.ts",
-									"line": 17,
+									"line": 107,
 									"character": 4
 								}
 							],
@@ -551,7 +1185,7 @@
 			"sources": [
 				{
 					"fileName": "dist/client.d.ts",
-					"line": 11,
+					"line": 69,
 					"character": 21
 				}
 			]
@@ -564,6 +1198,25 @@
 			"flags": {
 				"isAbstract": true
 			},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "Base class for normalized public Runa SDK errors."
+					}
+				],
+				"blockTags": [
+					{
+						"tag": "@runa-contract",
+						"content": [
+							{
+								"kind": "text",
+								"text": "runaerror-summary PRD-024#R-024-01"
+							}
+						]
+					}
+				]
+			},
 			"children": [
 				{
 					"id": 117,
@@ -574,10 +1227,18 @@
 						"isAbstract": true,
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Stable public error class name."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/errors.d.ts",
-							"line": 2,
+							"line": 7,
 							"character": 22
 						}
 					],
@@ -613,10 +1274,18 @@
 						"isAbstract": true,
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Stable normalized public error code."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/errors.d.ts",
-							"line": 3,
+							"line": 9,
 							"character": 22
 						}
 					],
@@ -1119,7 +1788,7 @@
 			"sources": [
 				{
 					"fileName": "dist/errors.d.ts",
-					"line": 1,
+					"line": 5,
 					"character": 30
 				}
 			],
@@ -1159,6 +1828,25 @@
 			"variant": "declaration",
 			"kind": 128,
 			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "Safe public error raised when selected client configuration is invalid."
+					}
+				],
+				"blockTags": [
+					{
+						"tag": "@runa-contract",
+						"content": [
+							{
+								"kind": "text",
+								"text": "configerror-summary PRD-024#R-024-01"
+							}
+						]
+					}
+				]
+			},
 			"children": [
 				{
 					"id": 95,
@@ -1168,10 +1856,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Stable public error class name."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/errors.d.ts",
-							"line": 6,
+							"line": 17,
 							"character": 13
 						}
 					],
@@ -1194,10 +1890,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Stable normalized configuration error code."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/errors.d.ts",
-							"line": 7,
+							"line": 19,
 							"character": 13
 						}
 					],
@@ -1220,10 +1924,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Fixed safe English public error message."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/errors.d.ts",
-							"line": 8,
+							"line": 21,
 							"character": 13
 						}
 					],
@@ -1247,7 +1959,7 @@
 					"sources": [
 						{
 							"fileName": "dist/errors.d.ts",
-							"line": 9,
+							"line": 28,
 							"character": 4
 						}
 					],
@@ -1258,10 +1970,47 @@
 							"variant": "signature",
 							"kind": 16384,
 							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Constructs a safe configuration error."
+									}
+								],
+								"blockTags": [
+									{
+										"tag": "@returns",
+										"content": [
+											{
+												"kind": "text",
+												"text": "A safe configuration error instance."
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "configerror-constructor-description PRD-024#R-024-01"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "configerror-constructor-returns PRD-024#R-024-01"
+											}
+										]
+									}
+								]
+							},
 							"sources": [
 								{
 									"fileName": "dist/errors.d.ts",
-									"line": 9,
+									"line": 28,
 									"character": 4
 								}
 							],
@@ -1603,7 +2352,7 @@
 			"sources": [
 				{
 					"fileName": "dist/errors.d.ts",
-					"line": 5,
+					"line": 15,
 					"character": 21
 				}
 			],
@@ -1622,6 +2371,25 @@
 			"variant": "declaration",
 			"kind": 128,
 			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "Safe public error for an API failure or malformed successful response."
+					}
+				],
+				"blockTags": [
+					{
+						"tag": "@runa-contract",
+						"content": [
+							{
+								"kind": "text",
+								"text": "apierror-summary PRD-024#R-024-01"
+							}
+						]
+					}
+				]
+			},
 			"children": [
 				{
 					"id": 58,
@@ -1631,10 +2399,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Stable public error class name."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/errors.d.ts",
-							"line": 12,
+							"line": 36,
 							"character": 13
 						}
 					],
@@ -1657,10 +2433,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Stable normalized API or malformed-response code."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/errors.d.ts",
-							"line": 13,
+							"line": 38,
 							"character": 13
 						}
 					],
@@ -1691,10 +2475,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "HTTP status associated with the API outcome."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/errors.d.ts",
-							"line": 14,
+							"line": 40,
 							"character": 13
 						}
 					],
@@ -1711,10 +2503,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Fixed safe English public error message."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/errors.d.ts",
-							"line": 15,
+							"line": 42,
 							"character": 13
 						}
 					],
@@ -1746,7 +2546,7 @@
 					"sources": [
 						{
 							"fileName": "dist/errors.d.ts",
-							"line": 16,
+							"line": 53,
 							"character": 4
 						}
 					],
@@ -1757,10 +2557,65 @@
 							"variant": "signature",
 							"kind": 16384,
 							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Constructs a safe API error."
+									}
+								],
+								"blockTags": [
+									{
+										"tag": "@returns",
+										"content": [
+											{
+												"kind": "text",
+												"text": "A safe API error instance."
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "apierror-constructor-description PRD-024#R-024-01"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "apierror-constructor-param-status PRD-024#R-024-03"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "apierror-constructor-param-code PRD-024#R-024-03"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "apierror-constructor-returns PRD-024#R-024-01"
+											}
+										]
+									}
+								]
+							},
 							"sources": [
 								{
 									"fileName": "dist/errors.d.ts",
-									"line": 16,
+									"line": 53,
 									"character": 4
 								}
 							],
@@ -1771,6 +2626,14 @@
 									"variant": "param",
 									"kind": 32768,
 									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "HTTP status associated with the API outcome."
+											}
+										]
+									},
 									"type": {
 										"type": "intrinsic",
 										"name": "number"
@@ -1783,6 +2646,14 @@
 									"kind": 32768,
 									"flags": {
 										"isOptional": true
+									},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "Normalized API failure or malformed-response code."
+											}
+										]
 									},
 									"type": {
 										"type": "union",
@@ -2138,7 +3009,7 @@
 			"sources": [
 				{
 					"fileName": "dist/errors.d.ts",
-					"line": 11,
+					"line": 34,
 					"character": 21
 				}
 			],
@@ -2157,6 +3028,25 @@
 			"variant": "declaration",
 			"kind": 128,
 			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "Reserved non-constructible public command-error type."
+					}
+				],
+				"blockTags": [
+					{
+						"tag": "@runa-contract",
+						"content": [
+							{
+								"kind": "text",
+								"text": "commanderror-summary PRD-024#R-024-01"
+							}
+						]
+					}
+				]
+			},
 			"children": [
 				{
 					"id": 77,
@@ -2166,10 +3056,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Stable public error class name."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/errors.d.ts",
-							"line": 19,
+							"line": 61,
 							"character": 13
 						}
 					],
@@ -2192,10 +3090,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Stable normalized command error code."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/errors.d.ts",
-							"line": 20,
+							"line": 63,
 							"character": 13
 						}
 					],
@@ -2218,10 +3124,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Fixed safe English public error message."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/errors.d.ts",
-							"line": 21,
+							"line": 65,
 							"character": 13
 						}
 					],
@@ -2549,7 +3463,7 @@
 			"sources": [
 				{
 					"fileName": "dist/errors.d.ts",
-					"line": 18,
+					"line": 59,
 					"character": 21
 				}
 			],
@@ -2568,6 +3482,25 @@
 			"variant": "declaration",
 			"kind": 128,
 			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "Client-owned session handle with an immutable current snapshot and bounded operations."
+					}
+				],
+				"blockTags": [
+					{
+						"tag": "@runa-contract",
+						"content": [
+							{
+								"kind": "text",
+								"text": "session-summary PRD-031#R-031-01"
+							}
+						]
+					}
+				]
+			},
 			"children": [
 				{
 					"id": 18,
@@ -2578,7 +3511,7 @@
 					"sources": [
 						{
 							"fileName": "dist/session.d.ts",
-							"line": 6,
+							"line": 11,
 							"character": 8
 						}
 					],
@@ -2588,10 +3521,18 @@
 						"variant": "signature",
 						"kind": 524288,
 						"flags": {},
+						"comment": {
+							"summary": [
+								{
+									"kind": "text",
+									"text": "Canonical lowercase UUID of this session."
+								}
+							]
+						},
 						"sources": [
 							{
 								"fileName": "dist/session.d.ts",
-								"line": 6,
+								"line": 11,
 								"character": 8
 							}
 						],
@@ -2610,7 +3551,7 @@
 					"sources": [
 						{
 							"fileName": "dist/session.d.ts",
-							"line": 7,
+							"line": 13,
 							"character": 8
 						}
 					],
@@ -2620,10 +3561,18 @@
 						"variant": "signature",
 						"kind": 524288,
 						"flags": {},
+						"comment": {
+							"summary": [
+								{
+									"kind": "text",
+									"text": "Current immutable snapshot owned by this session handle."
+								}
+							]
+						},
 						"sources": [
 							{
 								"fileName": "dist/session.d.ts",
-								"line": 7,
+								"line": 13,
 								"character": 8
 							}
 						],
@@ -2644,7 +3593,7 @@
 					"sources": [
 						{
 							"fileName": "dist/session.d.ts",
-							"line": 8,
+							"line": 24,
 							"character": 4
 						}
 					],
@@ -2655,10 +3604,83 @@
 							"variant": "signature",
 							"kind": 4096,
 							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Refreshes this handle from the canonical session item read."
+									}
+								],
+								"blockTags": [
+									{
+										"tag": "@returns",
+										"content": [
+											{
+												"kind": "text",
+												"text": "The same session handle after an atomic successful refresh."
+											}
+										]
+									},
+									{
+										"tag": "@throws",
+										"content": [
+											{
+												"kind": "text",
+												"text": "ApiError when the API rejects the operation or returns an invalid response."
+											}
+										]
+									},
+									{
+										"tag": "@example",
+										"content": [
+											{
+												"kind": "code",
+												"text": "```ts\ndocs/reference/examples/workflows.ts#session-refresh\n```"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-refresh-description PRD-031#R-031-05"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-refresh-returns PRD-031#R-031-05"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-refresh-throws-api PRD-024#R-024-03"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-refresh-example PRD-031#R-031-05"
+											}
+										]
+									}
+								]
+							},
 							"sources": [
 								{
 									"fileName": "dist/session.d.ts",
-									"line": 8,
+									"line": 24,
 									"character": 4
 								}
 							],
@@ -2692,7 +3714,7 @@
 					"sources": [
 						{
 							"fileName": "dist/session.d.ts",
-							"line": 9,
+							"line": 35,
 							"character": 4
 						}
 					],
@@ -2703,10 +3725,83 @@
 							"variant": "signature",
 							"kind": 4096,
 							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Starts the owning session."
+									}
+								],
+								"blockTags": [
+									{
+										"tag": "@returns",
+										"content": [
+											{
+												"kind": "text",
+												"text": "The same session handle after a successful start response."
+											}
+										]
+									},
+									{
+										"tag": "@throws",
+										"content": [
+											{
+												"kind": "text",
+												"text": "ApiError when the API rejects the operation or returns an invalid response."
+											}
+										]
+									},
+									{
+										"tag": "@example",
+										"content": [
+											{
+												"kind": "code",
+												"text": "```ts\ndocs/reference/examples/workflows.ts#session-start\n```"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-start-description PRD-032#R-032-01"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-start-returns PRD-032#R-032-01"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-start-throws-api PRD-024#R-024-03"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-start-example PRD-032#R-032-01"
+											}
+										]
+									}
+								]
+							},
 							"sources": [
 								{
 									"fileName": "dist/session.d.ts",
-									"line": 9,
+									"line": 35,
 									"character": 4
 								}
 							],
@@ -2740,7 +3835,7 @@
 					"sources": [
 						{
 							"fileName": "dist/session.d.ts",
-							"line": 10,
+							"line": 46,
 							"character": 4
 						}
 					],
@@ -2751,10 +3846,83 @@
 							"variant": "signature",
 							"kind": 4096,
 							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Pauses the owning session."
+									}
+								],
+								"blockTags": [
+									{
+										"tag": "@returns",
+										"content": [
+											{
+												"kind": "text",
+												"text": "The same session handle after a successful pause response."
+											}
+										]
+									},
+									{
+										"tag": "@throws",
+										"content": [
+											{
+												"kind": "text",
+												"text": "ApiError when the API rejects the operation or returns an invalid response."
+											}
+										]
+									},
+									{
+										"tag": "@example",
+										"content": [
+											{
+												"kind": "code",
+												"text": "```ts\ndocs/reference/examples/workflows.ts#session-pause\n```"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-pause-description PRD-032#R-032-01"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-pause-returns PRD-032#R-032-01"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-pause-throws-api PRD-024#R-024-03"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-pause-example PRD-032#R-032-01"
+											}
+										]
+									}
+								]
+							},
 							"sources": [
 								{
 									"fileName": "dist/session.d.ts",
-									"line": 10,
+									"line": 46,
 									"character": 4
 								}
 							],
@@ -2788,7 +3956,7 @@
 					"sources": [
 						{
 							"fileName": "dist/session.d.ts",
-							"line": 11,
+							"line": 57,
 							"character": 4
 						}
 					],
@@ -2799,10 +3967,83 @@
 							"variant": "signature",
 							"kind": 4096,
 							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Resumes the owning session."
+									}
+								],
+								"blockTags": [
+									{
+										"tag": "@returns",
+										"content": [
+											{
+												"kind": "text",
+												"text": "The same session handle after a successful resume response."
+											}
+										]
+									},
+									{
+										"tag": "@throws",
+										"content": [
+											{
+												"kind": "text",
+												"text": "ApiError when the API rejects the operation or returns an invalid response."
+											}
+										]
+									},
+									{
+										"tag": "@example",
+										"content": [
+											{
+												"kind": "code",
+												"text": "```ts\ndocs/reference/examples/workflows.ts#session-resume\n```"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-resume-description PRD-032#R-032-01"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-resume-returns PRD-032#R-032-01"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-resume-throws-api PRD-024#R-024-03"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-resume-example PRD-032#R-032-01"
+											}
+										]
+									}
+								]
+							},
 							"sources": [
 								{
 									"fileName": "dist/session.d.ts",
-									"line": 11,
+									"line": 57,
 									"character": 4
 								}
 							],
@@ -2836,7 +4077,7 @@
 					"sources": [
 						{
 							"fileName": "dist/session.d.ts",
-							"line": 12,
+							"line": 68,
 							"character": 4
 						}
 					],
@@ -2847,10 +4088,83 @@
 							"variant": "signature",
 							"kind": 4096,
 							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Stops the owning session."
+									}
+								],
+								"blockTags": [
+									{
+										"tag": "@returns",
+										"content": [
+											{
+												"kind": "text",
+												"text": "The same session handle after a successful stop response."
+											}
+										]
+									},
+									{
+										"tag": "@throws",
+										"content": [
+											{
+												"kind": "text",
+												"text": "ApiError when the API rejects the operation or returns an invalid response."
+											}
+										]
+									},
+									{
+										"tag": "@example",
+										"content": [
+											{
+												"kind": "code",
+												"text": "```ts\ndocs/reference/examples/workflows.ts#session-stop\n```"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-stop-description PRD-032#R-032-01"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-stop-returns PRD-032#R-032-01"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-stop-throws-api PRD-024#R-024-03"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-stop-example PRD-032#R-032-01"
+											}
+										]
+									}
+								]
+							},
 							"sources": [
 								{
 									"fileName": "dist/session.d.ts",
-									"line": 12,
+									"line": 68,
 									"character": 4
 								}
 							],
@@ -2884,7 +4198,7 @@
 					"sources": [
 						{
 							"fileName": "dist/session.d.ts",
-							"line": 13,
+							"line": 79,
 							"character": 4
 						}
 					],
@@ -2895,10 +4209,83 @@
 							"variant": "signature",
 							"kind": 4096,
 							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Deletes the owning session."
+									}
+								],
+								"blockTags": [
+									{
+										"tag": "@returns",
+										"content": [
+											{
+												"kind": "text",
+												"text": "An acknowledgement whose ok member is literal true."
+											}
+										]
+									},
+									{
+										"tag": "@throws",
+										"content": [
+											{
+												"kind": "text",
+												"text": "ApiError when the API rejects the operation or returns an invalid response."
+											}
+										]
+									},
+									{
+										"tag": "@example",
+										"content": [
+											{
+												"kind": "code",
+												"text": "```ts\ndocs/reference/examples/workflows.ts#session-delete\n```"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-delete-description PRD-032#R-032-06"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-delete-returns PRD-032#R-032-06"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-delete-throws-api PRD-024#R-024-03"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-delete-example PRD-032#R-032-06"
+											}
+										]
+									}
+								]
+							},
 							"sources": [
 								{
 									"fileName": "dist/session.d.ts",
-									"line": 13,
+									"line": 79,
 									"character": 4
 								}
 							],
@@ -2932,7 +4319,7 @@
 					"sources": [
 						{
 							"fileName": "dist/session.d.ts",
-							"line": 14,
+							"line": 94,
 							"character": 4
 						}
 					],
@@ -2943,10 +4330,101 @@
 							"variant": "signature",
 							"kind": 4096,
 							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Runs one buffered command through the owning session handle."
+									}
+								],
+								"blockTags": [
+									{
+										"tag": "@returns",
+										"content": [
+											{
+												"kind": "text",
+												"text": "The complete buffered execution result."
+											}
+										]
+									},
+									{
+										"tag": "@throws",
+										"content": [
+											{
+												"kind": "text",
+												"text": "ApiError when the API rejects the operation or returns an invalid response."
+											}
+										]
+									},
+									{
+										"tag": "@example",
+										"content": [
+											{
+												"kind": "code",
+												"text": "```ts\ndocs/reference/examples/workflows.ts#session-exec\n```"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-exec-description PRD-033#R-033-01"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-exec-param-command PRD-033#R-033-01"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-exec-param-options PRD-033#R-033-04"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-exec-returns PRD-033#R-033-01"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-exec-throws-api PRD-024#R-024-03"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-exec-example PRD-033#R-033-01"
+											}
+										]
+									}
+								]
+							},
 							"sources": [
 								{
 									"fileName": "dist/session.d.ts",
-									"line": 14,
+									"line": 94,
 									"character": 4
 								}
 							],
@@ -2957,6 +4435,14 @@
 									"variant": "param",
 									"kind": 32768,
 									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "Non-empty command string or non-empty ordered string argument vector."
+											}
+										]
+									},
 									"type": {
 										"type": "union",
 										"types": [
@@ -2985,6 +4471,14 @@
 									"kind": 32768,
 									"flags": {
 										"isOptional": true
+									},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "Optional working directory and integer timeout."
+											}
+										]
 									},
 									"type": {
 										"type": "reference",
@@ -3024,7 +4518,7 @@
 					"sources": [
 						{
 							"fileName": "dist/session.d.ts",
-							"line": 15,
+							"line": 107,
 							"character": 4
 						}
 					],
@@ -3035,10 +4529,92 @@
 							"variant": "signature",
 							"kind": 4096,
 							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Creates one named checkpoint through the owning session handle."
+									}
+								],
+								"blockTags": [
+									{
+										"tag": "@returns",
+										"content": [
+											{
+												"kind": "text",
+												"text": "An acknowledgement whose ok member is literal true."
+											}
+										]
+									},
+									{
+										"tag": "@throws",
+										"content": [
+											{
+												"kind": "text",
+												"text": "ApiError when the API rejects the operation or returns an invalid response."
+											}
+										]
+									},
+									{
+										"tag": "@example",
+										"content": [
+											{
+												"kind": "code",
+												"text": "```ts\ndocs/reference/examples/workflows.ts#session-checkpoint\n```"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-checkpoint-description PRD-034#R-034-01"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-checkpoint-param-name PRD-034#R-034-01"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-checkpoint-returns PRD-034#R-034-01"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-checkpoint-throws-api PRD-024#R-024-03"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-checkpoint-example PRD-034#R-034-01"
+											}
+										]
+									}
+								]
+							},
 							"sources": [
 								{
 									"fileName": "dist/session.d.ts",
-									"line": 15,
+									"line": 107,
 									"character": 4
 								}
 							],
@@ -3049,6 +4625,14 @@
 									"variant": "param",
 									"kind": 32768,
 									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "Checkpoint name containing between one and eighty characters."
+											}
+										]
+									},
 									"type": {
 										"type": "intrinsic",
 										"name": "string"
@@ -3085,7 +4669,7 @@
 					"sources": [
 						{
 							"fileName": "dist/session.d.ts",
-							"line": 16,
+							"line": 118,
 							"character": 4
 						}
 					],
@@ -3096,10 +4680,83 @@
 							"variant": "signature",
 							"kind": 4096,
 							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Acquires and returns a validated session handoff without using it automatically."
+									}
+								],
+								"blockTags": [
+									{
+										"tag": "@returns",
+										"content": [
+											{
+												"kind": "text",
+												"text": "A validated handoff result returned without automatic use."
+											}
+										]
+									},
+									{
+										"tag": "@throws",
+										"content": [
+											{
+												"kind": "text",
+												"text": "ApiError when the API rejects the operation or returns an invalid response."
+											}
+										]
+									},
+									{
+										"tag": "@example",
+										"content": [
+											{
+												"kind": "code",
+												"text": "```ts\ndocs/reference/examples/workflows.ts#session-open\n```"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-open-description PRD-035#R-035-01"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-open-returns PRD-035#R-035-01"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-open-throws-api PRD-024#R-024-03"
+											}
+										]
+									},
+									{
+										"tag": "@runa-contract",
+										"content": [
+											{
+												"kind": "text",
+												"text": "session-open-example PRD-035#R-035-01"
+											}
+										]
+									}
+								]
+							},
 							"sources": [
 								{
 									"fileName": "dist/session.d.ts",
-									"line": 16,
+									"line": 118,
 									"character": 4
 								}
 							],
@@ -3151,7 +4808,7 @@
 			"sources": [
 				{
 					"fileName": "dist/session.d.ts",
-					"line": 3,
+					"line": 7,
 					"character": 21
 				}
 			]
@@ -3165,7 +4822,7 @@
 			"sources": [
 				{
 					"fileName": "dist/text.d.ts",
-					"line": 2,
+					"line": 11,
 					"character": 24
 				}
 			],
@@ -3176,10 +4833,65 @@
 					"variant": "signature",
 					"kind": 4096,
 					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Returns stdout only when the supplied wire value is a string."
+							}
+						],
+						"blockTags": [
+							{
+								"tag": "@returns",
+								"content": [
+									{
+										"kind": "text",
+										"text": "The stdout string when present with the correct type, otherwise undefined."
+									}
+								]
+							},
+							{
+								"tag": "@runa-contract",
+								"content": [
+									{
+										"kind": "text",
+										"text": "stdouttext-summary PRD-022#R-022-02"
+									}
+								]
+							},
+							{
+								"tag": "@runa-contract",
+								"content": [
+									{
+										"kind": "text",
+										"text": "stdouttext-stdouttext-description PRD-022#R-022-02"
+									}
+								]
+							},
+							{
+								"tag": "@runa-contract",
+								"content": [
+									{
+										"kind": "text",
+										"text": "stdouttext-stdouttext-param-result PRD-022#R-022-02"
+									}
+								]
+							},
+							{
+								"tag": "@runa-contract",
+								"content": [
+									{
+										"kind": "text",
+										"text": "stdouttext-stdouttext-returns PRD-022#R-022-02"
+									}
+								]
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/text.d.ts",
-							"line": 2,
+							"line": 11,
 							"character": 24
 						}
 					],
@@ -3190,6 +4902,14 @@
 							"variant": "param",
 							"kind": 32768,
 							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Unknown wire value to inspect without coercion."
+									}
+								]
+							},
 							"type": {
 								"type": "reference",
 								"target": 154,
@@ -3223,7 +4943,7 @@
 			"sources": [
 				{
 					"fileName": "dist/text.d.ts",
-					"line": 3,
+					"line": 21,
 					"character": 24
 				}
 			],
@@ -3234,10 +4954,65 @@
 					"variant": "signature",
 					"kind": 4096,
 					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Returns stderr only when the supplied wire value is a string."
+							}
+						],
+						"blockTags": [
+							{
+								"tag": "@returns",
+								"content": [
+									{
+										"kind": "text",
+										"text": "The stderr string when present with the correct type, otherwise undefined."
+									}
+								]
+							},
+							{
+								"tag": "@runa-contract",
+								"content": [
+									{
+										"kind": "text",
+										"text": "stderrtext-summary PRD-022#R-022-02"
+									}
+								]
+							},
+							{
+								"tag": "@runa-contract",
+								"content": [
+									{
+										"kind": "text",
+										"text": "stderrtext-stderrtext-description PRD-022#R-022-02"
+									}
+								]
+							},
+							{
+								"tag": "@runa-contract",
+								"content": [
+									{
+										"kind": "text",
+										"text": "stderrtext-stderrtext-param-result PRD-022#R-022-02"
+									}
+								]
+							},
+							{
+								"tag": "@runa-contract",
+								"content": [
+									{
+										"kind": "text",
+										"text": "stderrtext-stderrtext-returns PRD-022#R-022-02"
+									}
+								]
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/text.d.ts",
-							"line": 3,
+							"line": 21,
 							"character": 24
 						}
 					],
@@ -3248,6 +5023,14 @@
 							"variant": "param",
 							"kind": 32768,
 							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Unknown wire value to inspect without coercion."
+									}
+								]
+							},
 							"type": {
 								"type": "reference",
 								"target": 154,
@@ -3278,10 +5061,29 @@
 			"variant": "declaration",
 			"kind": 2097152,
 			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "Opaque record detail preserved without an SDK-defined shape."
+					}
+				],
+				"blockTags": [
+					{
+						"tag": "@runa-contract",
+						"content": [
+							{
+								"kind": "text",
+								"text": "opaquewirevalue-summary PRD-022#R-022-02"
+							}
+						]
+					}
+				]
+			},
 			"sources": [
 				{
 					"fileName": "dist/types.d.ts",
-					"line": 1,
+					"line": 5,
 					"character": 12
 				}
 			],
@@ -3296,10 +5098,29 @@
 			"variant": "declaration",
 			"kind": 2097152,
 			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "Documented session status returned by the API."
+					}
+				],
+				"blockTags": [
+					{
+						"tag": "@runa-contract",
+						"content": [
+							{
+								"kind": "text",
+								"text": "sessionstatus-summary PRD-022#R-022-02"
+							}
+						]
+					}
+				]
+			},
 			"sources": [
 				{
 					"fileName": "dist/types.d.ts",
-					"line": 2,
+					"line": 10,
 					"character": 12
 				}
 			],
@@ -3343,10 +5164,29 @@
 			"variant": "declaration",
 			"kind": 2097152,
 			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "Accepted agent identifier for a session."
+					}
+				],
+				"blockTags": [
+					{
+						"tag": "@runa-contract",
+						"content": [
+							{
+								"kind": "text",
+								"text": "sessionagent-summary PRD-022#R-022-02"
+							}
+						]
+					}
+				]
+			},
 			"sources": [
 				{
 					"fileName": "dist/types.d.ts",
-					"line": 3,
+					"line": 15,
 					"character": 12
 				}
 			],
@@ -3374,6 +5214,25 @@
 			"variant": "declaration",
 			"kind": 256,
 			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "Immutable public observation of a session."
+					}
+				],
+				"blockTags": [
+					{
+						"tag": "@runa-contract",
+						"content": [
+							{
+								"kind": "text",
+								"text": "sessionsnapshot-summary PRD-022#R-022-02"
+							}
+						]
+					}
+				]
+			},
 			"children": [
 				{
 					"id": 197,
@@ -3383,10 +5242,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Canonical lowercase UUID returned for this session."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 5,
+							"line": 22,
 							"character": 13
 						}
 					],
@@ -3403,10 +5270,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Canonical identifier of the user that owns the session."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 6,
+							"line": 24,
 							"character": 13
 						}
 					],
@@ -3423,10 +5298,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Validated runtime slug returned for the session."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 7,
+							"line": 26,
 							"character": 13
 						}
 					],
@@ -3443,10 +5326,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Public session name returned by the API."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 8,
+							"line": 28,
 							"character": 13
 						}
 					],
@@ -3464,10 +5355,18 @@
 						"isOptional": true,
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Selected session agent when present."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 9,
+							"line": 30,
 							"character": 13
 						}
 					],
@@ -3486,10 +5385,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Virtual CPU quantity returned by the API."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 10,
+							"line": 32,
 							"character": 13
 						}
 					],
@@ -3506,10 +5413,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Memory quantity in mebibytes."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 11,
+							"line": 34,
 							"character": 13
 						}
 					],
@@ -3526,10 +5441,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Documented session status returned by the API."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 12,
+							"line": 36,
 							"character": 13
 						}
 					],
@@ -3548,10 +5471,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Non-negative running duration returned by the API."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 13,
+							"line": 38,
 							"character": 13
 						}
 					],
@@ -3568,10 +5499,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "RFC 3339 creation timestamp returned by the API."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 14,
+							"line": 40,
 							"character": 13
 						}
 					],
@@ -3588,10 +5527,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "RFC 3339 last-update timestamp returned by the API."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 15,
+							"line": 42,
 							"character": 13
 						}
 					],
@@ -3608,10 +5555,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Validated runtime URL returned for the session."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 16,
+							"line": 44,
 							"character": 13
 						}
 					],
@@ -3643,7 +5598,7 @@
 			"sources": [
 				{
 					"fileName": "dist/types.d.ts",
-					"line": 4,
+					"line": 20,
 					"character": 17
 				}
 			]
@@ -3654,6 +5609,25 @@
 			"variant": "declaration",
 			"kind": 256,
 			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "Optional resources and network policy supplied during session creation."
+					}
+				],
+				"blockTags": [
+					{
+						"tag": "@runa-contract",
+						"content": [
+							{
+								"kind": "text",
+								"text": "sessioncreateoptions-summary PRD-028#R-028-01"
+							}
+						]
+					}
+				]
+			},
 			"children": [
 				{
 					"id": 191,
@@ -3664,10 +5638,18 @@
 						"isOptional": true,
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Optional selected session agent."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 19,
+							"line": 52,
 							"character": 13
 						}
 					],
@@ -3687,10 +5669,18 @@
 						"isOptional": true,
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Optional virtual CPU quantity."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 20,
+							"line": 54,
 							"character": 13
 						}
 					],
@@ -3708,10 +5698,18 @@
 						"isOptional": true,
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Optional memory quantity in mebibytes."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 21,
+							"line": 56,
 							"character": 13
 						}
 					],
@@ -3729,10 +5727,18 @@
 						"isOptional": true,
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Optional ordered host allowlist copied into the create request."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 22,
+							"line": 58,
 							"character": 13
 						}
 					],
@@ -3757,10 +5763,18 @@
 						"isOptional": true,
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Optional runtime port included in session creation."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 23,
+							"line": 60,
 							"character": 13
 						}
 					],
@@ -3785,7 +5799,7 @@
 			"sources": [
 				{
 					"fileName": "dist/types.d.ts",
-					"line": 18,
+					"line": 50,
 					"character": 17
 				}
 			]
@@ -3796,6 +5810,25 @@
 			"variant": "declaration",
 			"kind": 256,
 			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "Optional working directory and timeout for buffered execution."
+					}
+				],
+				"blockTags": [
+					{
+						"tag": "@runa-contract",
+						"content": [
+							{
+								"kind": "text",
+								"text": "execoptions-summary PRD-033#R-033-04"
+							}
+						]
+					}
+				]
+			},
 			"children": [
 				{
 					"id": 152,
@@ -3806,10 +5839,18 @@
 						"isOptional": true,
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Optional working directory passed to buffered execution."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 26,
+							"line": 68,
 							"character": 13
 						}
 					],
@@ -3827,10 +5868,18 @@
 						"isOptional": true,
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Optional integer execution timeout in seconds."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 27,
+							"line": 70,
 							"character": 13
 						}
 					],
@@ -3852,7 +5901,7 @@
 			"sources": [
 				{
 					"fileName": "dist/types.d.ts",
-					"line": 25,
+					"line": 66,
 					"character": 17
 				}
 			]
@@ -3863,6 +5912,25 @@
 			"variant": "declaration",
 			"kind": 256,
 			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "Complete buffered command result returned after execution."
+					}
+				],
+				"blockTags": [
+					{
+						"tag": "@runa-contract",
+						"content": [
+							{
+								"kind": "text",
+								"text": "execresult-summary PRD-033#R-033-09"
+							}
+						]
+					}
+				]
+			},
 			"children": [
 				{
 					"id": 155,
@@ -3872,10 +5940,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Integer process exit code returned after execution."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 30,
+							"line": 78,
 							"character": 13
 						}
 					],
@@ -3892,10 +5968,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Complete buffered standard-output text."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 31,
+							"line": 80,
 							"character": 13
 						}
 					],
@@ -3912,10 +5996,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Complete buffered standard-error text."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 32,
+							"line": 82,
 							"character": 13
 						}
 					],
@@ -3932,10 +6024,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Non-negative command duration in milliseconds."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 33,
+							"line": 84,
 							"character": 13
 						}
 					],
@@ -3952,10 +6052,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Whether the returned standard-output text was truncated."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 34,
+							"line": 86,
 							"character": 13
 						}
 					],
@@ -3972,10 +6080,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Whether the returned standard-error text was truncated."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 35,
+							"line": 88,
 							"character": 13
 						}
 					],
@@ -4001,7 +6117,7 @@
 			"sources": [
 				{
 					"fileName": "dist/types.d.ts",
-					"line": 29,
+					"line": 76,
 					"character": 17
 				}
 			]
@@ -4012,6 +6128,25 @@
 			"variant": "declaration",
 			"kind": 256,
 			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "Successful acknowledgement with literal true status."
+					}
+				],
+				"blockTags": [
+					{
+						"tag": "@runa-contract",
+						"content": [
+							{
+								"kind": "text",
+								"text": "acknowledgement-summary PRD-034#R-034-03"
+							}
+						]
+					}
+				]
+			},
 			"children": [
 				{
 					"id": 142,
@@ -4021,10 +6156,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Literal true acknowledgement of successful completion."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 38,
+							"line": 96,
 							"character": 13
 						}
 					],
@@ -4045,7 +6188,7 @@
 			"sources": [
 				{
 					"fileName": "dist/types.d.ts",
-					"line": 37,
+					"line": 94,
 					"character": 17
 				}
 			]
@@ -4056,6 +6199,25 @@
 			"variant": "declaration",
 			"kind": 256,
 			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "Single-use session handoff result returned without automatic use."
+					}
+				],
+				"blockTags": [
+					{
+						"tag": "@runa-contract",
+						"content": [
+							{
+								"kind": "text",
+								"text": "opensessionresult-summary PRD-035#R-035-02"
+							}
+						]
+					}
+				]
+			},
 			"children": [
 				{
 					"id": 167,
@@ -4065,10 +6227,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Validated handoff URL returned only to the caller."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 41,
+							"line": 104,
 							"character": 13
 						}
 					],
@@ -4089,7 +6259,7 @@
 			"sources": [
 				{
 					"fileName": "dist/types.d.ts",
-					"line": 40,
+					"line": 102,
 					"character": 17
 				}
 			]
@@ -4100,6 +6270,25 @@
 			"variant": "declaration",
 			"kind": 256,
 			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "Immutable record associated with a session."
+					}
+				],
+				"blockTags": [
+					{
+						"tag": "@runa-contract",
+						"content": [
+							{
+								"kind": "text",
+								"text": "record-summary PRD-037#R-037-01"
+							}
+						]
+					}
+				]
+			},
 			"children": [
 				{
 					"id": 169,
@@ -4109,10 +6298,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Canonical lowercase UUID returned for this record."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 44,
+							"line": 112,
 							"character": 13
 						}
 					],
@@ -4129,10 +6326,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Canonical identifier of the associated session."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 45,
+							"line": 114,
 							"character": 13
 						}
 					],
@@ -4149,10 +6354,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Record kind returned by the API."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 46,
+							"line": 116,
 							"character": 13
 						}
 					],
@@ -4169,10 +6382,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Safe record summary returned by the API."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 47,
+							"line": 118,
 							"character": 13
 						}
 					],
@@ -4189,10 +6410,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Opaque record detail preserved without an SDK-defined shape."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 48,
+							"line": 120,
 							"character": 13
 						}
 					],
@@ -4209,10 +6438,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "RFC 3339 creation timestamp returned by the API."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 49,
+							"line": 122,
 							"character": 13
 						}
 					],
@@ -4238,7 +6475,7 @@
 			"sources": [
 				{
 					"fileName": "dist/types.d.ts",
-					"line": 43,
+					"line": 110,
 					"character": 17
 				}
 			]
@@ -4249,6 +6486,25 @@
 			"variant": "declaration",
 			"kind": 256,
 			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "Estimated spend, remaining amount, and explanatory note."
+					}
+				],
+				"blockTags": [
+					{
+						"tag": "@runa-contract",
+						"content": [
+							{
+								"kind": "text",
+								"text": "estimatedusage-summary PRD-036#R-036-01"
+							}
+						]
+					}
+				]
+			},
 			"children": [
 				{
 					"id": 148,
@@ -4258,10 +6514,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Estimated spend amount in US dollars."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 52,
+							"line": 130,
 							"character": 13
 						}
 					],
@@ -4278,10 +6542,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Estimated remaining amount in US dollars."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 53,
+							"line": 132,
 							"character": 13
 						}
 					],
@@ -4298,10 +6570,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Explanatory estimated-usage note returned by the API."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 54,
+							"line": 134,
 							"character": 13
 						}
 					],
@@ -4324,7 +6604,7 @@
 			"sources": [
 				{
 					"fileName": "dist/types.d.ts",
-					"line": 51,
+					"line": 128,
 					"character": 17
 				}
 			]
@@ -4335,6 +6615,25 @@
 			"variant": "declaration",
 			"kind": 256,
 			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "Assigned workspace state with estimated usage."
+					}
+				],
+				"blockTags": [
+					{
+						"tag": "@runa-contract",
+						"content": [
+							{
+								"kind": "text",
+								"text": "assignedworkspace-summary PRD-036#R-036-01"
+							}
+						]
+					}
+				]
+			},
 			"children": [
 				{
 					"id": 144,
@@ -4344,10 +6643,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Literal discriminator for the assigned workspace variant."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 57,
+							"line": 142,
 							"character": 13
 						}
 					],
@@ -4364,10 +6671,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Estimated usage for this assigned workspace."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 58,
+							"line": 144,
 							"character": 13
 						}
 					],
@@ -4387,10 +6702,18 @@
 						"isOptional": true,
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Absent waitlist position in the assigned variant."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 59,
+							"line": 146,
 							"character": 13
 						}
 					],
@@ -4413,7 +6736,7 @@
 			"sources": [
 				{
 					"fileName": "dist/types.d.ts",
-					"line": 56,
+					"line": 140,
 					"character": 17
 				}
 			]
@@ -4424,6 +6747,25 @@
 			"variant": "declaration",
 			"kind": 256,
 			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "Unassigned workspace state with a waitlist position."
+					}
+				],
+				"blockTags": [
+					{
+						"tag": "@runa-contract",
+						"content": [
+							{
+								"kind": "text",
+								"text": "unassignedworkspace-summary PRD-036#R-036-01"
+							}
+						]
+					}
+				]
+			},
 			"children": [
 				{
 					"id": 211,
@@ -4433,10 +6775,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Literal discriminator for the unassigned workspace variant."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 62,
+							"line": 154,
 							"character": 13
 						}
 					],
@@ -4453,10 +6803,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Non-negative waitlist position for this workspace."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 63,
+							"line": 156,
 							"character": 13
 						}
 					],
@@ -4474,10 +6832,18 @@
 						"isOptional": true,
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Absent estimated usage in the unassigned variant."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 64,
+							"line": 158,
 							"character": 13
 						}
 					],
@@ -4500,7 +6866,7 @@
 			"sources": [
 				{
 					"fileName": "dist/types.d.ts",
-					"line": 61,
+					"line": 152,
 					"character": 17
 				}
 			]
@@ -4511,10 +6877,29 @@
 			"variant": "declaration",
 			"kind": 2097152,
 			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "Assigned or unassigned workspace state."
+					}
+				],
+				"blockTags": [
+					{
+						"tag": "@runa-contract",
+						"content": [
+							{
+								"kind": "text",
+								"text": "workspace-summary PRD-036#R-036-01"
+							}
+						]
+					}
+				]
+			},
 			"sources": [
 				{
 					"fileName": "dist/types.d.ts",
-					"line": 66,
+					"line": 164,
 					"character": 12
 				}
 			],
@@ -4542,6 +6927,25 @@
 			"variant": "declaration",
 			"kind": 256,
 			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "Caller profile and workspace assignment."
+					}
+				],
+				"blockTags": [
+					{
+						"tag": "@runa-contract",
+						"content": [
+							{
+								"kind": "text",
+								"text": "me-summary PRD-036#R-036-01"
+							}
+						]
+					}
+				]
+			},
 			"children": [
 				{
 					"id": 162,
@@ -4551,10 +6955,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Canonical identifier returned for the caller."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 68,
+							"line": 171,
 							"character": 13
 						}
 					],
@@ -4571,10 +6983,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Email address returned for the caller profile."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 69,
+							"line": 173,
 							"character": 13
 						}
 					],
@@ -4591,10 +7011,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Assigned or unassigned workspace state for the caller."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 70,
+							"line": 175,
 							"character": 13
 						}
 					],
@@ -4619,7 +7047,7 @@
 			"sources": [
 				{
 					"fileName": "dist/types.d.ts",
-					"line": 67,
+					"line": 169,
 					"character": 17
 				}
 			]
@@ -4630,6 +7058,25 @@
 			"variant": "declaration",
 			"kind": 256,
 			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "Configuration accepted while constructing a Runa client."
+					}
+				],
+				"blockTags": [
+					{
+						"tag": "@runa-contract",
+						"content": [
+							{
+								"kind": "text",
+								"text": "runaconfig-summary PRD-023#R-023-01"
+							}
+						]
+					}
+				]
+			},
 			"children": [
 				{
 					"id": 176,
@@ -4640,10 +7087,18 @@
 						"isOptional": true,
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Optional constructor API key selected before environment or explicit-file sources."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 131,
+							"line": 241,
 							"character": 13
 						}
 					],
@@ -4661,10 +7116,18 @@
 						"isOptional": true,
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Optional normalized HTTPS API origin override."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 132,
+							"line": 243,
 							"character": 13
 						}
 					],
@@ -4682,10 +7145,18 @@
 						"isOptional": true,
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Optional explicit JSON configuration file, or null to disable file loading."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 133,
+							"line": 245,
 							"character": 13
 						}
 					],
@@ -4712,10 +7183,18 @@
 						"isOptional": true,
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Optional caller-owned fetch-compatible transport function."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 134,
+							"line": 247,
 							"character": 13
 						}
 					],
@@ -4925,10 +7404,18 @@
 						"isOptional": true,
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Optional caller-owned diagnostic sink."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 135,
+							"line": 249,
 							"character": 13
 						}
 					],
@@ -4952,10 +7439,18 @@
 						"isOptional": true,
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Optional caller-owned tracing sink."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 136,
+							"line": 251,
 							"character": 13
 						}
 					],
@@ -4987,7 +7482,7 @@
 			"sources": [
 				{
 					"fileName": "dist/types.d.ts",
-					"line": 130,
+					"line": 239,
 					"character": 17
 				}
 			]
