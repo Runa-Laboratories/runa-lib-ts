@@ -31,6 +31,7 @@
     "docs:verify": "node scripts/verify-docs.mjs",
     "security:verify": "node scripts/verify-security.mjs",
     "dependencies:verify": "node scripts/verify-dependencies.mjs",
+    "duplicates:verify": "node scripts/verify-duplicate-abstractions.mjs",
     "pack:verify": "npm run build && node scripts/verify-pack.mjs",
     "compatibility:verify": "node scripts/verify-compatibility.mjs",
     "compatibility:aggregate": "node scripts/aggregate-compatibility.mjs",
@@ -39,7 +40,7 @@
     "release:local-gates": "node scripts/verify-local-release-gates.mjs",
     "release:smoke": "node scripts/verify-release-smoke.mjs",
     "evidence": "node scripts/build-evidence.mjs",
-    "quality": "npm run lint && npm run typecheck && npm run contract:verify && npm test && npm run docs:api && npm run surface:verify && npm run docs:verify && npm run security:verify && npm run dependencies:verify && npm run pack:verify && npm run evidence",
+    "quality": "npm run lint && npm run typecheck && npm run contract:verify && npm test && npm run docs:api && npm run surface:verify && npm run docs:verify && npm run security:verify && npm run dependencies:verify && npm run duplicates:verify && npm run pack:verify && npm run evidence",
     "prepack": "npm run build"
   },
   "devDependencies": {

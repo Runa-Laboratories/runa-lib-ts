@@ -21,10 +21,20 @@ test("release trust accepts valid evidence and rejects tamper, stale, and wrong 
   const policy = {
     schema_version: 1,
     maximum_validity_ms: 3_600_000,
-    keys: [{ key_id: "synthetic", role: "compatibility", public_key_pem: publicKey.export({ type: "spki", format: "pem" }) }],
+    keys: [{ key_id: "synthetic", role: "compatibility", algorithm: "Ed25519", public_key_pem: publicKey.export({ type: "spki", format: "pem" }) }],
   };
   assert.equal(verifyTrustedEnvelope(envelope, policy, "compatibility", now), payload);
   assert.equal(verifyTrustedEnvelope({ ...envelope, payload: { ...payload, status: "FAIL" } }, policy, "compatibility", now), undefined);
   assert.equal(verifyTrustedEnvelope(envelope, policy, "publication", now), undefined);
   assert.equal(verifyTrustedEnvelope(envelope, policy, "compatibility", Date.parse("2026-07-30T12:06:00Z")), undefined);
+  assert.equal(verifyTrustedEnvelope(envelope, {
+    ...policy,
+    keys: [...policy.keys, policy.keys[0]],
+  }, "compatibility", now), undefined);
+  assert.equal(verifyTrustedEnvelope(envelope, {
+    ...policy,
+    keys: [{ ...policy.keys[0], algorithm: "RSA" }],
+  }, "compatibility", now), undefined);
+  assert.equal(verifyTrustedEnvelope({ ...envelope, signature: "not-base64!" },
+    policy, "compatibility", now), undefined);
 });

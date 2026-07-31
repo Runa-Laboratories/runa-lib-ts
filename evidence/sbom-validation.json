@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "status": "BLOCKED",
+  "candidate_sha256": "2a6d215cfc6b6c60483591e0346a3cc381a523fbcfc7314b08822cb8039278c2",
+  "local_structural_checks": "PASS",
+  "required_validator": "cyclonedx-cli validate --input-format json",
+  "reason": "The accepted CycloneDX 1.6 schema and validator receipt are not configured locally."
+}

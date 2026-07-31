@@ -1,21 +1,98 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "status": "PASS",
+  "method": "scripts/verify-duplicate-abstractions.mjs",
+  "audited_source_sha256": "76da4742fe85249be6047231ee8cc5c7bdc58d3271a111a349d7c7975da1643f",
+  "audited_files": [
+    "src/domain.ts",
+    "src/client.ts",
+    "src/session.ts",
+    "src/internal/transport.ts",
+    "src/internal/sanitize.ts",
+    "src/internal/boundary-policy.ts",
+    "scripts/build-evidence.mjs",
+    "scripts/build-release-candidate.mjs",
+    "scripts/release-readiness.mjs",
+    "scripts/verify-local-release-gates.mjs",
+    "scripts/verify-security.mjs"
+  ],
   "decisions": [
     {
       "concept": "wire-decoding",
       "disposition": "centralized",
-      "owner": "src/domain.ts"
+      "owner": "src/domain.ts",
+      "observed": {
+        "decoder_exports": [
+          "decodeAcknowledgement",
+          "decodeExec",
+          "decodeMe",
+          "decodeOpen",
+          "decodeRecords",
+          "decodeSession",
+          "decodeSessions"
+        ],
+        "out_of_owner_definitions": 0
+      },
+      "rationale": "All response-shape decoders and primitive wire validators share one fail-closed module."
     },
     {
-      "concept": "request-policy",
-      "disposition": "centralized",
-      "owner": "src/internal/transport.ts"
+      "concept": "request-validation-and-policy",
+      "disposition": "layered-distinct",
+      "owners": [
+        "src/client.ts",
+        "src/session.ts",
+        "src/internal/transport.ts"
+      ],
+      "observed": {
+        "create_body_validator": 1,
+        "exec_body_validator": 1,
+        "transport_request_preparer": 1
+      },
+      "rationale": "Public option validation, session command validation, and transport framing enforce different contracts and are intentionally not one permissive validator."
     },
     {
-      "concept": "own-property checks",
+      "concept": "own-property-checks",
       "disposition": "intentional-local",
-      "reason": "separate input boundaries; no public abstraction"
+      "owners": [
+        "src/domain.ts",
+        "src/client.ts",
+        "src/session.ts"
+      ],
+      "observed": {
+        "object_has_own_calls": 6,
+        "local_own_helpers": 2
+      },
+      "rationale": "Tiny private predicates stay at separate decode and caller-input trust boundaries; no public or cross-layer abstraction is created."
+    },
+    {
+      "concept": "hash-and-evidence-utilities",
+      "disposition": "accepted-job-local",
+      "owners": [
+        "scripts/build-evidence.mjs",
+        "scripts/build-release-candidate.mjs",
+        "scripts/release-readiness.mjs",
+        "scripts/verify-local-release-gates.mjs"
+      ],
+      "observed": {
+        "sha256_call_sites": 5
+      },
+      "rationale": "Release tools are independently executable trust-boundary gates; their one-line SHA-256 calculations remain local and compare the same candidate rather than sharing mutable evidence state."
+    },
+    {
+      "concept": "secret-redaction-and-boundary-policy",
+      "disposition": "centralized-runtime-plus-control-plane",
+      "owners": [
+        "src/internal/boundary-policy.ts",
+        "src/internal/sanitize.ts",
+        "scripts/verify-security.mjs"
+      ],
+      "observed": {
+        "prohibited_marker_definitions": 1,
+        "runtime_policy_consumers": 1,
+        "exact_byte_scanner_consumers": 1,
+        "scanner_credential_pattern_families": 3
+      },
+      "rationale": "Runtime redaction and the repository exact-byte scanner reuse one prohibited-marker predicate; credential byte patterns remain scanner-only because they are not wire-decoding policy."
     }
   ]
 }

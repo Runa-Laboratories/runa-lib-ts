@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "status": "PASS",
-  "source_commit": "fc7213f6ca99b37e3f6790b520267bbf826a86e9",
-  "candidate_sha256": "9652419b7fb5836a747909eeb93dc27bb85c1ff2fee64d67d4a58a83af30bdac",
+  "source_commit": "3849fdc5ceac39d952d9c35b0bb2178f3acb6f3c",
+  "candidate_sha256": "2a6d215cfc6b6c60483591e0346a3cc381a523fbcfc7314b08822cb8039278c2",
   "expected_cells": 6,
   "aggregate_rule": "same candidate digest and six exact PASS receipts"
 }
