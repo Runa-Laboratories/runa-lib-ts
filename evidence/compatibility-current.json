@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "catalog": "TS-050-EVIDENCE-V1",
+  "revision": 1,
+  "status": "BLOCKED",
+  "cell_id": null,
+  "runtime": {
+    "node": "24.18.0",
+    "npm": "11.16.0",
+    "platform": "win32",
+    "arch": "x64"
+  }
+}

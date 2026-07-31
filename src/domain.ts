@@ -140,7 +140,7 @@ export function decodeMe(value: unknown): Me {
   if (workspace.assigned === true) {
     exact(workspace, ["assigned", "usage"]);
     const usage = object(workspace.usage);
-    exact(usage, ["est_spend_usd", "est_remaining_usd", "note"]);
+    if (["est_spend_usd", "est_remaining_usd", "note"].some((key) => !Object.hasOwn(usage, key))) malformed();
     return Object.freeze({
       id, email, workspace: Object.freeze({
         assigned: true as const,

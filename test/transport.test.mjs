@@ -217,6 +217,51 @@ test("PRD-030/033 reject local invalid values before I/O", async () => {
   await assert.rejects(session.exec("ok", { timeoutSecs: 0 }), TypeError);
   await assert.rejects(session.exec("ok", { timeoutSecs: 601 }), TypeError);
   await assert.rejects(session.exec("ok", { timeoutSecs: 1.5 }), TypeError);
+  await assert.rejects(session.exec(""), TypeError);
+  await assert.rejects(session.checkpoint(""), TypeError);
+  await assert.rejects(session.checkpoint("x".repeat(81)), TypeError);
+  for (const [name, options] of [
+    ["", undefined],
+    ["x".repeat(81), undefined],
+    ["ok", { vcpus: 0 }],
+    ["ok", { memoryMiB: 511 }],
+    ["ok", { allowedHosts: [""] }],
+    ["ok", { allowedHosts: Array(129).fill("example.invalid") }],
+    ["ok", { runtimePort: 65_536 }],
+  ]) {
+    await assert.rejects(runa.sessions.create(name, options), TypeError);
+  }
   assert.equal(dispatches, 1);
+  await runa.close();
+});
+
+test("PRD-028 snapshots caller-owned create arrays before dispatch", async () => {
+  let capturedBody;
+  let release;
+  const fetch = async (_url, init) => {
+    capturedBody = init.body;
+    await new Promise((resolve) => {
+      release = resolve;
+    });
+    return jsonResponse(sessionFixture(), 201);
+  };
+  const runa = new Runa({
+    apiKey: API_KEY,
+    baseUrl: "https://sdk.example.invalid",
+    fetch,
+  });
+  const allowedHosts = ["first.example.invalid"];
+  const pending = runa.sessions.create("snapshot", {
+    allowedHosts,
+    unknown: "must-not-cross-the-boundary",
+  });
+  allowedHosts[0] = "changed.example.invalid";
+  allowedHosts.push("second.example.invalid");
+  release();
+  await pending;
+  assert.deepEqual(JSON.parse(capturedBody), {
+    name: "snapshot",
+    allowed_hosts: ["first.example.invalid"],
+  });
   await runa.close();
 });

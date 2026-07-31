@@ -27,6 +27,7 @@ import {
   API_KEY,
   SESSION_ID,
   USER_ID,
+  meFixture,
   recordFixture,
   sessionFixture,
   upstreamName,
@@ -179,5 +180,14 @@ test("PRD-022 enforces the canonical schema and preserves only detail identity",
   assert.throws(() => decodeMe({
     ...meFixture(),
     unknown: true,
+  }));
+  const extendedUsage = meFixture();
+  extendedUsage.workspace.usage.safe_extension = { accepted: true };
+  const decodedMe = decodeMe(extendedUsage);
+  assert.equal(decodedMe.workspace.assigned, true);
+  assert.equal("safe_extension" in decodedMe.workspace.usage, false);
+  assert.throws(() => decodeMe({
+    ...meFixture(),
+    workspace: { ...meFixture().workspace, safe_extension: true },
   }));
 });

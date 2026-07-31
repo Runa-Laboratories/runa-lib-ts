@@ -32,6 +32,7 @@
     "security:verify": "node scripts/verify-security.mjs",
     "dependencies:verify": "node scripts/verify-dependencies.mjs",
     "pack:verify": "npm run build && node scripts/verify-pack.mjs",
+    "compatibility:verify": "node scripts/verify-compatibility.mjs",
     "release:readiness": "node scripts/release-readiness.mjs",
     "evidence": "node scripts/build-evidence.mjs",
     "quality": "npm run lint && npm run typecheck && npm run contract:verify && npm test && npm run docs:api && npm run surface:verify && npm run docs:verify && npm run security:verify && npm run dependencies:verify && npm run pack:verify && npm run evidence",

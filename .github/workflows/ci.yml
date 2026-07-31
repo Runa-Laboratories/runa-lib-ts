@@ -44,6 +44,7 @@ jobs:
       - run: npm --version
       - run: npm ci
       - run: npm run quality
+      - run: npm run compatibility:verify
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:

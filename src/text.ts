@@ -1,9 +1,9 @@
 import type { ExecResult } from "./types.js";
 
-export function stdoutText(result: ExecResult): string | undefined {
-  return typeof result.stdout === "string" ? result.stdout : undefined;
+export function stdoutText(result: ExecResult): string {
+  return result.stdout;
 }
 
-export function stderrText(result: ExecResult): string | undefined {
-  return typeof result.stderr === "string" ? result.stderr : undefined;
+export function stderrText(result: ExecResult): string {
+  return result.stderr;
 }
