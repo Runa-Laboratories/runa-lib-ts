@@ -162,6 +162,105 @@ const parseSourceTags = (text) => {
   return lines;
 };
 
+const commentText = (comment) => (comment?.summary ?? [])
+  .map((item) => item.text ?? "")
+  .join("")
+  .trim();
+
+const blockTags = (comment, tag) => (comment?.blockTags ?? [])
+  .filter((item) => item.tag === tag);
+
+const blockText = (tag) => (tag.content ?? [])
+  .map((item) => item.text ?? "")
+  .join("")
+  .replace(/^```ts\s*|\s*```$/g, "")
+  .trim();
+
+const reflectedOperations = (roots) => roots.flatMap((entry) => {
+  if (entry.kind === 64) {
+    return (entry.signatures ?? []).map((signature) => ({
+      operationKey: `${entry.name}#${entry.name}`,
+      entry,
+      signature,
+    }));
+  }
+  return publicChildren(entry).flatMap((child) =>
+    (child.signatures ?? []).map((signature) => ({
+      operationKey: `${entry.name}#${child.name}`,
+      entry,
+      child,
+      signature,
+    })));
+});
+
+const validateReflectionDocumentation = (roots) => {
+  const observedContractTags = [];
+  for (const entry of roots) {
+    const entryComment = entry.comment ?? entry.signatures?.[0]?.comment;
+    assert(commentText(entryComment).length > 0, `R-048-04: missing summary:${entry.name}`);
+    if (entry.kind !== 64) {
+      for (const tag of blockTags(entryComment, "@runa-contract")) {
+        observedContractTags.push(`@runa-contract ${blockText(tag)}`);
+      }
+    }
+    for (const child of publicChildren(entry)) {
+      if (Array.isArray(child.signatures)) {
+        for (const signature of child.signatures) {
+          assert(commentText(signature.comment).length > 0,
+            `R-048-04: missing operation summary:${entry.name}#${child.name}`);
+        }
+      } else {
+        const comment = child.getSignature?.comment ?? child.comment;
+        assert(commentText(comment).length > 0,
+          `R-048-04: missing member summary:${entry.name}.${child.name}`);
+      }
+    }
+  }
+
+  const reflected = reflectedOperations(roots);
+  const expectedOperationKeys = errorMatrix.map((row) => row.operationKey).sort();
+  assert.deepEqual(reflected
+    .filter((item) => expectedOperationKeys.includes(item.operationKey))
+    .map((item) => item.operationKey).sort(), expectedOperationKeys);
+  for (const operation of reflected.filter((item) =>
+    expectedOperationKeys.includes(item.operationKey))) {
+    const { signature, operationKey } = operation;
+    const matrix = errorMatrix.find((row) => row.operationKey === operationKey);
+    const expectedParameters = (signature.parameters ?? []).map((item) => item.name).sort();
+    const documentedParameters = (signature.parameters ?? [])
+      .filter((item) => commentText(item.comment).length > 0)
+      .map((item) => item.name).sort();
+    assert.deepEqual(documentedParameters, expectedParameters,
+      `R-048-05: parameter documentation mismatch:${operationKey}`);
+    assert.equal(blockTags(signature.comment, "@returns").length, 1,
+      `R-048-06: returns documentation mismatch:${operationKey}`);
+    const throwsTags = blockTags(signature.comment, "@throws");
+    assert.equal(throwsTags.length, matrix.disposition === "accepted" ? matrix.cases.length : 0,
+      `R-048-06: throws documentation mismatch:${operationKey}`);
+    for (const item of matrix.cases) {
+      assert(throwsTags.some((tag) => blockText(tag).startsWith(`${item.errorType} `)),
+        `R-048-06: wrong public error:${operationKey}`);
+    }
+    const expectedExample = examples[operationKey];
+    const exampleTags = blockTags(signature.comment, "@example");
+    assert.equal(exampleTags.length, expectedExample === undefined ? 0 : 1,
+      `R-048-08: example documentation mismatch:${operationKey}`);
+    if (expectedExample !== undefined) {
+      assert.equal(blockText(exampleTags[0]),
+        `${expectedExample.sourcePath}#${expectedExample.marker}`,
+        `R-048-09: example source mismatch:${operationKey}`);
+    }
+    for (const tag of blockTags(signature.comment, "@runa-contract")) {
+      observedContractTags.push(`@runa-contract ${blockText(tag)}`);
+    }
+  }
+  const expectedTags = claimRegistry.flatMap((row) => row.contractRefs.map((contractRef) =>
+    `@runa-contract ${row.claimId} ${contractRef}`)).sort();
+  assert.deepEqual(observedContractTags.sort(), expectedTags,
+    "R-048-07: reflection contract tags do not match the claim registry");
+  return true;
+};
+
 const validateRegistries = async (operations, sourceTags) => {
   const claimIds = new Set();
   for (const row of claimRegistry) {
@@ -512,6 +611,47 @@ const mutationGate = (model, expectedNames, files, sourceTags) => {
   return passed;
 };
 
+const reflectionMutationGate = (roots) => {
+  const clone = () => JSON.parse(JSON.stringify(roots));
+  const operation = (candidate, key) => reflectedOperations(candidate)
+    .find((item) => item.operationKey === key);
+  const mutations = [
+    ["reflection-tag-delete", (candidate) => {
+      const target = operation(candidate, "Runa#constructor").signature.comment.blockTags;
+      target.splice(target.findIndex((tag) => tag.tag === "@runa-contract"), 1);
+    }],
+    ["reflection-tag-change", (candidate) => {
+      const target = operation(candidate, "Runa#constructor").signature.comment.blockTags
+        .find((tag) => tag.tag === "@runa-contract");
+      target.content[0].text = target.content[0].text.replace("runa-constructor", "changed");
+    }],
+    ["reflection-param", (candidate) => {
+      operation(candidate, "Runa#constructor").signature.parameters[0].comment = undefined;
+    }],
+    ["reflection-returns", (candidate) => {
+      const tags = operation(candidate, "Runa#constructor").signature.comment.blockTags;
+      tags.splice(tags.findIndex((tag) => tag.tag === "@returns"), 1);
+    }],
+    ["reflection-throws", (candidate) => {
+      const tags = operation(candidate, "Runa#constructor").signature.comment.blockTags;
+      tags.splice(tags.findIndex((tag) => tag.tag === "@throws"), 1);
+    }],
+    ["reflection-example", (candidate) => {
+      const tag = operation(candidate, "Runa#constructor").signature.comment.blockTags
+        .find((item) => item.tag === "@example");
+      tag.content[0].text = "docs/reference/examples/workflows.ts#changed";
+    }],
+  ];
+  const passed = [];
+  for (const [name, mutate] of mutations) {
+    const candidate = clone();
+    mutate(candidate);
+    assert.throws(() => validateReflectionDocumentation(candidate));
+    passed.push(name);
+  }
+  return passed;
+};
+
 export async function runReferencePipeline({ write = true } = {}) {
   const reflection = JSON.parse(await readFile("docs/.reflection.json", "utf8"));
   const surface = JSON.parse(await readFile("evidence/export-snapshot.json", "utf8"));
@@ -521,6 +661,7 @@ export async function runReferencePipeline({ write = true } = {}) {
   const reflectedRoots = (reflection.children ?? []).filter((entry) =>
     expectedNames.includes(entry.name));
   assert.deepEqual(reflectedRoots.map((entry) => entry.name).sort(), expectedNames);
+  validateReflectionDocumentation(reflectedRoots);
   const entries = reflectedRoots.map((entry) => ({
     name: entry.name,
     kind: surface.runtime_exports.includes(entry.name) ? "runtime" : "type",
@@ -556,7 +697,10 @@ export async function runReferencePipeline({ write = true } = {}) {
     ...first,
     ...Object.fromEntries(Object.entries(exampleSources)),
   });
-  const mutations = mutationGate(model, expectedNames, first, sourceClaimTags);
+  const mutations = [
+    ...mutationGate(model, expectedNames, first, sourceClaimTags),
+    ...reflectionMutationGate(reflectedRoots),
+  ];
   const outputDigest = createHash("sha256")
     .update(Object.entries(first).sort().map(([file, content]) => `${file}\0${content}\0`).join(""))
     .digest("hex");

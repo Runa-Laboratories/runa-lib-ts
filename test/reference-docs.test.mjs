@@ -10,5 +10,7 @@ test("PRD-048 reference pipeline covers the exact surface and rejects mutations"
   assert.deepEqual(result.mutations, [
     "missing", "extra", "alias", "page-ownership", "signature",
     "private-source", "link", "safety", "throws", "example", "claim-tag",
+    "reflection-tag-delete", "reflection-tag-change", "reflection-param",
+    "reflection-returns", "reflection-throws", "reflection-example",
   ]);
 }, 20_000);

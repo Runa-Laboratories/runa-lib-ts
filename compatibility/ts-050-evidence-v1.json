@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "catalog_revision": "TS-050-EVIDENCE-V1",
+  "profile_revision": 1,
+  "baseline_reference": "bootstrap-v1",
+  "artifact_form": "compressed-npm-tarball",
+  "matrix": [
+    {"id":"ts050-node22-linux-x64","node":"22.17.1","npm":"10.9.2","os":"Ubuntu 22.04","platform":"linux","arch":"x64"},
+    {"id":"ts050-node22-windows-x64","node":"22.17.1","npm":"10.9.2","os":"Windows Server 2022","platform":"win32","arch":"x64"},
+    {"id":"ts050-node22-macos-arm64","node":"22.17.1","npm":"10.9.2","os":"macOS 14","platform":"darwin","arch":"arm64"},
+    {"id":"ts050-node24-linux-x64","node":"24.4.1","npm":"11.4.2","os":"Ubuntu 22.04","platform":"linux","arch":"x64"},
+    {"id":"ts050-node24-windows-x64","node":"24.4.1","npm":"11.4.2","os":"Windows Server 2022","platform":"win32","arch":"x64"},
+    {"id":"ts050-node24-macos-arm64","node":"24.4.1","npm":"11.4.2","os":"macOS 14","platform":"darwin","arch":"arm64"}
+  ],
+  "tools": {
+    "typescript": "5.8.3",
+    "types_node": "22.15.3",
+    "esbuild": "0.25.5",
+    "vitest_required": "3.2.4",
+    "vitest_security_substitution": "3.2.7"
+  },
+  "compiler_profile": {
+    "id": "TS-050-TSC-V1",
+    "options": {
+      "target": "ES2022",
+      "module": "NodeNext",
+      "moduleResolution": "NodeNext",
+      "strict": true,
+      "verbatimModuleSyntax": true,
+      "isolatedModules": true,
+      "exactOptionalPropertyTypes": true,
+      "noUncheckedIndexedAccess": true,
+      "skipLibCheck": false,
+      "noEmit": true
+    }
+  },
+  "bundle_profile": {
+    "id": "TS-050-BUNDLE-V1",
+    "format": "esm",
+    "platform": "node",
+    "target": "es2022",
+    "tree_shaking": true
+  },
+  "install_profile": {
+    "id": "TS-050-INSTALL-V1",
+    "offline": true,
+    "ignore_scripts": true,
+    "isolated_cache": true,
+    "file_artifact_only": true
+  },
+  "reuse_fixture": {
+    "id": "TS-050-REUSE-V1",
+    "operation": "SessionsManager#list",
+    "sequential_calls": 10,
+    "cleanup_calls": 2
+  },
+  "profile": {
+    "id_prefix": "P-017-TS-NPM-V1-",
+    "commands": {
+      "payload": "node tools/ts050/measure-payload.mjs --artifact <tarball>",
+      "startup": "node tools/ts050/measure-startup.mjs --artifact <tarball> --runs 20",
+      "request_reuse_cleanup": "npm run performance:verify"
+    },
+    "metrics": {
+      "payload": {"statistic":"single","unit":"bytes","cap":1048576},
+      "import": {"statistic":"p95","samples":20,"unit":"milliseconds","cap":250},
+      "construction": {"statistic":"p95","samples":20,"unit":"milliseconds","cap":50},
+      "request_overhead": {"statistic":"p95","samples":20,"unit":"milliseconds","cap":10},
+      "allocation_delta": {"statistic":"maximum","samples":20,"unit":"bytes","cap":524288},
+      "connection_establishments": {"statistic":"count","requests":10,"unit":"connections","cap":1},
+      "retained_memory_delta": {"statistic":"p95","batches":5,"cycles_per_batch":100,"unit":"bytes","cap":4194304},
+      "open_connections": {"statistic":"post_cleanup_count","unit":"connections","cap":0},
+      "pool_entries": {"statistic":"post_cleanup_count","unit":"entries","cap":0},
+      "timers": {"statistic":"post_cleanup_count","unit":"timers","cap":0},
+      "callback_registrations": {"statistic":"post_cleanup_count","unit":"registrations","cap":0},
+      "lifecycle_registrations": {"statistic":"post_cleanup_count","unit":"registrations","cap":0}
+    }
+  }
+}

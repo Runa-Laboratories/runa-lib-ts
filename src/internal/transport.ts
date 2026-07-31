@@ -1,4 +1,6 @@
 import { randomBytes } from "node:crypto";
+import { Agent as HttpsAgent, request as httpsRequest } from "node:https";
+import { Readable } from "node:stream";
 import { TextDecoder } from "node:util";
 
 import type { EffectiveConfig } from "../config.js";
@@ -70,6 +72,55 @@ interface PreparedRequest {
   readonly method: "GET" | "POST" | "DELETE";
   readonly headers: Readonly<globalThis.Record<string, string>>;
   readonly body?: string;
+}
+
+class ClientOwnedFetch {
+  readonly #agent = new HttpsAgent({ keepAlive: true });
+  #closed = false;
+
+  fetch(
+    input: string,
+    init: RequestInit,
+  ): Promise<Response> {
+    if (this.#closed) return Promise.reject(safeTransportFailure());
+    return new Promise((resolve, reject) => {
+      const request = httpsRequest(input, {
+        method: init.method,
+        headers: init.headers as globalThis.Record<string, string>,
+        agent: this.#agent,
+        signal: init.signal ?? undefined,
+      }, (response) => {
+        const headers = new Headers();
+        for (const [name, value] of Object.entries(response.headers)) {
+          if (value === undefined) continue;
+          if (Array.isArray(value)) {
+            for (const item of value) headers.append(name, item);
+          } else {
+            headers.set(name, value);
+          }
+        }
+        resolve(new Response(
+          Readable.toWeb(response) as ReadableStream<Uint8Array>,
+          {
+            status: response.statusCode ?? 0,
+            ...(response.statusMessage === undefined
+              ? {}
+              : { statusText: response.statusMessage }),
+            headers,
+          },
+        ));
+      });
+      request.once("error", reject);
+      if (typeof init.body === "string") request.end(init.body);
+      else request.end();
+    });
+  }
+
+  close(): void {
+    if (this.#closed) return;
+    this.#closed = true;
+    this.#agent.destroy();
+  }
 }
 
 function safeTransportFailure(): TypeError {
@@ -302,6 +353,7 @@ const PRODUCTION_RUNTIME: TransportRuntime = Object.freeze({
 export class FetchTransport {
   readonly #config: EffectiveConfig;
   readonly #runtime: TransportRuntime;
+  readonly #ownedFetch: ClientOwnedFetch | undefined;
 
   constructor(
     config: EffectiveConfig,
@@ -309,6 +361,7 @@ export class FetchTransport {
   ) {
     this.#config = config;
     this.#runtime = runtime;
+    this.#ownedFetch = config.fetch === undefined ? new ClientOwnedFetch() : undefined;
   }
 
   async execute(
@@ -317,7 +370,12 @@ export class FetchTransport {
   ): Promise<DispatchResult> {
     const descriptor = operationDescriptor(operationKey);
     const prepared = prepare(this.#config, operationKey, input);
-    const fetchImplementation = this.#config.fetch ?? globalThis.fetch;
+    const ownedFetch = this.#ownedFetch;
+    const fetchImplementation = this.#config.fetch ??
+      ((url: string, init: RequestInit) => {
+        if (ownedFetch === undefined) throw new ConfigError();
+        return ownedFetch.fetch(url, init);
+      });
     if (typeof fetchImplementation !== "function") throw new ConfigError();
     const observer = new OperationObserver(
       descriptor,
@@ -414,6 +472,6 @@ export class FetchTransport {
   }
 
   close(): void {
-    // Fetch and injected fetch resources are not owned by this SDK.
+    this.#ownedFetch?.close();
   }
 }
