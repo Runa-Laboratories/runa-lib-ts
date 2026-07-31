@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 
 const module = await import("../dist/index.js");
 assert.deepEqual(Object.keys(module).sort(), [
@@ -15,4 +15,14 @@ const pkg = JSON.parse(await readFile("package.json", "utf8"));
 assert.deepEqual(Object.keys(pkg.exports), ["."]);
 assert.equal("default" in pkg.exports["."], false);
 assert.equal("require" in pkg.exports["."], false);
+await writeFile("evidence/export-snapshot.json", `${JSON.stringify({
+  schema_version: 1,
+  status: "PASS",
+  runtime_exports: Object.keys(module).sort(),
+  type_exports: [...manifest.types].sort(),
+  package_exports: pkg.exports,
+  default_export: false,
+  commonjs_entry: false,
+  subpath_exports: false
+}, null, 2)}\n`);
 console.log("surface: PASS");

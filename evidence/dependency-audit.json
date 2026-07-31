@@ -3,6 +3,20 @@
   "status": "PASS",
   "runtime_dependency_count": 0,
   "exact_dev_pins": true,
+  "vitest_security_floor": "3.2.7",
+  "vitest_lock_exact": true,
+  "licenses": {
+    "status": "PASS",
+    "counts": {
+      "MIT": 67,
+      "Python-2.0": 1,
+      "BSD-2-Clause": 1,
+      "Apache-2.0": 3,
+      "BlueOak-1.0.0": 1,
+      "ISC": 3,
+      "BSD-3-Clause": 1
+    }
+  },
   "vulnerabilities": {
     "info": 0,
     "low": 0,

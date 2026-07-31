@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "runtime_exports": [
+    "ApiError",
+    "CommandError",
+    "ConfigError",
+    "Runa",
+    "RunaError",
+    "Session",
+    "stderrText",
+    "stdoutText"
+  ],
+  "type_exports": [
+    "Acknowledgement",
+    "AssignedWorkspace",
+    "EstimatedUsage",
+    "ExecOptions",
+    "ExecResult",
+    "Me",
+    "OpaqueWireValue",
+    "OpenSessionResult",
+    "Record",
+    "RecordsManager",
+    "RunaConfig",
+    "SessionAgent",
+    "SessionCreateOptions",
+    "SessionSnapshot",
+    "SessionStatus",
+    "SessionsManager",
+    "UnassignedWorkspace",
+    "Workspace"
+  ],
+  "package_exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "default_export": false,
+  "commonjs_entry": false,
+  "subpath_exports": false
+}
