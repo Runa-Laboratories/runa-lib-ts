@@ -1,5 +1,6 @@
-import { createHash, verify } from "node:crypto";
+import { createHash } from "node:crypto";
 import { readFile, writeFile } from "node:fs/promises";
+import { verifyTrustedEnvelope } from "./trusted-evidence.mjs";
 
 const blockers = [];
 const readJson = async (file, gate) => {
@@ -30,25 +31,12 @@ const requireTrusted = async (file, gate, role) => {
     blockers.push({ gate, reason: "No accepted release trust root is configured." });
     return undefined;
   }
-  const key = trustPolicy.keys?.find((item) => item.key_id === envelope.key_id && item.role === role);
-  const exactEnvelope = ["key_id", "payload", "schema_version", "signature"].sort();
-  if (envelope.schema_version !== 1 || Object.keys(envelope).sort().join() !== exactEnvelope.join() ||
-      key === undefined || typeof envelope.signature !== "string" ||
-      !verify(null, Buffer.from(JSON.stringify(envelope.payload)), key.public_key_pem,
-        Buffer.from(envelope.signature, "base64"))) {
-    blockers.push({ gate, reason: "Evidence signature or role authorization is invalid." });
+  const payload = verifyTrustedEnvelope(envelope, trustPolicy, role);
+  if (payload === undefined) {
+    blockers.push({ gate, reason: "Evidence signature, role, status, or freshness is invalid." });
     return undefined;
   }
-  const issued = Date.parse(envelope.payload.issued_at);
-  const expires = Date.parse(envelope.payload.expires_at);
-  const now = Date.now();
-  if (envelope.payload.status !== "PASS" || !Number.isFinite(issued) ||
-      !Number.isFinite(expires) || issued > now || expires <= now ||
-      expires - issued > trustPolicy.maximum_validity_ms) {
-    blockers.push({ gate, reason: "Evidence is failed, stale, future-dated, or exceeds freshness policy." });
-    return undefined;
-  }
-  return envelope.payload;
+  return payload;
 };
 const projection = await readFile("contracts/runa-sdk.projection.json");
 const projectionSha = createHash("sha256").update(projection).digest("hex");
@@ -103,6 +91,21 @@ const dependency = await requirePass("evidence/dependency-audit.json", "dependen
 if (dependency !== undefined && ((dependency.vulnerabilities?.critical ?? 0) > 0 ||
     (dependency.vulnerabilities?.high ?? 0) > 0)) {
   blockers.push({ gate: "dependencies", reason: "High or critical dependency vulnerabilities remain." });
+}
+const closure = await requirePass("evidence/runtime-closure.json", "runtime-closure");
+if (closure !== undefined && candidate !== undefined && closure.candidate_sha256 !== candidate.sha256) {
+  blockers.push({ gate: "runtime-closure", reason: "Runtime closure is not bound to the candidate." });
+}
+await requirePass("evidence/release-smoke.json", "synthetic-release-smoke");
+const ciManifest = await requirePass("evidence/ci-candidate-manifest.json", "ci-candidate-manifest");
+if (ciManifest !== undefined && candidate !== undefined &&
+    ciManifest.candidate_sha256 !== candidate.sha256) {
+  blockers.push({ gate: "ci-candidate-manifest", reason: "CI manifest is not bound to the candidate." });
+}
+const sbom = await readJson("evidence/sbom.cdx.json", "sbom");
+if (sbom !== undefined && (sbom.bomFormat !== "CycloneDX" || sbom.specVersion !== "1.6" ||
+    sbom.metadata?.component?.hashes?.[0]?.content !== candidate?.sha256)) {
+  blockers.push({ gate: "sbom", reason: "CycloneDX identity or candidate binding is invalid." });
 }
 const report = {
   schema_version: 2,

@@ -1,0 +1,6 @@
+{
+  "schema_version": 1,
+  "runtime_dependencies": [],
+  "allowed_licenses": ["Apache-2.0", "BSD-2-Clause", "BSD-3-Clause", "BlueOak-1.0.0", "ISC", "MIT", "Python-2.0"],
+  "advisory_exceptions": []
+}

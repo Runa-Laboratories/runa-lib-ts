@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "source": "npm-audit",
+  "status": "PASS",
+  "high": 0,
+  "critical": 0,
+  "exceptions": []
+}

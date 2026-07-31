@@ -1,0 +1,19 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "version": 1,
+  "metadata": {
+    "component": {
+      "type": "library",
+      "name": "@runa/sdk",
+      "version": "0.1.0",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "9652419b7fb5836a747909eeb93dc27bb85c1ff2fee64d67d4a58a83af30bdac"
+        }
+      ]
+    }
+  },
+  "components": []
+}

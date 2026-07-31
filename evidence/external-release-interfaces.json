@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "status": "BLOCKED",
+  "required_interfaces": [
+    "OIDC trusted publisher",
+    "GitHub attestation verification",
+    "npm registry retrieval",
+    "dist-tag verification"
+  ],
+  "candidate_sha256": "9652419b7fb5836a747909eeb93dc27bb85c1ff2fee64d67d4a58a83af30bdac"
+}

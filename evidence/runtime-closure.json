@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "candidate_sha256": "9652419b7fb5836a747909eeb93dc27bb85c1ff2fee64d67d4a58a83af30bdac",
+  "clean_install_count": 2,
+  "closure_sha256": "f42a6dd2b10f03b785533919ec20a55d1a0a334675ffc7793072b4d52aaa97ce",
+  "runtime_dependencies": [],
+  "reason_ledger": [
+    {
+      "decision": "empty-runtime-closure",
+      "reason": "The package manifest and both installed artifacts declare no runtime dependencies."
+    }
+  ]
+}
