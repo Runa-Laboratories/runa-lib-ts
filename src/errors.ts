@@ -18,6 +18,7 @@ export class ConfigError extends RunaError {
   constructor() {
     super("Runa SDK configuration is invalid.");
     Object.setPrototypeOf(this, new.target.prototype);
+    this.stack = `${this.name}: ${this.message}`;
   }
 }
 
@@ -42,6 +43,7 @@ export class ApiError extends RunaError {
     this.status = Number.isInteger(status) ? status : 0;
     this.code = code;
     this.message = message;
+    this.stack = `${this.name}: ${this.message}`;
   }
 }
 

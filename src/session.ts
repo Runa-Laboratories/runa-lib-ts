@@ -37,7 +37,7 @@ function prepareExec(
       throw new TypeError("Invalid session command.");
     }
     body.command = command[0];
-    if (command.length > 1) body.args = command.slice(1);
+    body.args = command.slice(1);
   } else {
     throw new TypeError("Invalid session command.");
   }
@@ -85,13 +85,6 @@ export class Session {
     }
     this.#owner = owner;
     this.#snapshot = initialSnapshot;
-  }
-
-  private static construct(
-    owner: ClientPort,
-    initialSnapshot: SessionSnapshot,
-  ): Session {
-    return new Session(owner, initialSnapshot, SESSION_CAPABILITY);
   }
 
   get id(): SessionSnapshot["id"] {
@@ -195,8 +188,9 @@ export const constructSession: (
   owner: ClientPort,
   initialSnapshot: SessionSnapshot,
 ): Session => {
-  const factory = Session as unknown as {
-    construct(owner: ClientPort, snapshot: SessionSnapshot): Session;
-  };
-  return factory.construct(owner, initialSnapshot);
+  return Reflect.construct(Session, [
+    owner,
+    initialSnapshot,
+    SESSION_CAPABILITY,
+  ]) as Session;
 };
