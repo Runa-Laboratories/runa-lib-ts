@@ -1,6 +1,3 @@
-import { randomBytes } from "node:crypto";
-import { performance } from "node:perf_hooks";
-
 import { ApiError, RunaError } from "../errors.js";
 import type {
   DiagnosticEvent,
@@ -40,18 +37,24 @@ export class OperationObserver {
   readonly #tracing: TraceSink | undefined;
   readonly #requestId: string;
   readonly #startedAt: number;
+  readonly #now: () => number;
   #span: TraceSpan | undefined;
 
   constructor(
     descriptor: OperationDescriptor,
-    diagnostics?: DiagnosticSink,
-    tracing?: TraceSink,
+    diagnostics: DiagnosticSink | undefined,
+    tracing: TraceSink | undefined,
+    runtime: {
+      readonly now: () => number;
+      readonly requestId: () => string;
+    },
   ) {
     this.#descriptor = descriptor;
     this.#diagnostics = diagnostics;
     this.#tracing = tracing;
-    this.#requestId = `runa_req_${randomBytes(16).toString("hex")}`;
-    this.#startedAt = performance.now();
+    this.#requestId = runtime.requestId();
+    this.#now = runtime.now;
+    this.#startedAt = this.#now();
   }
 
   get requestId(): string {
@@ -134,7 +137,7 @@ export class OperationObserver {
   }
 
   end(attempt: number, error?: unknown): void {
-    const elapsed_ms = Math.max(0, Math.floor(performance.now() - this.#startedAt));
+    const elapsed_ms = Math.max(0, Math.floor(this.#now() - this.#startedAt));
     let outcome: "success" | "error" | "cancelled" = "success";
     let severity: "INFO" | "WARN" | "ERROR" = "INFO";
     let error_code: NormalizedErrorCode | undefined;

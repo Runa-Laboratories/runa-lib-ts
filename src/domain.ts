@@ -193,10 +193,10 @@ export function decodeMe(value: unknown): Me {
   }
   if (assigned !== false) malformed();
   return Object.freeze({
-    id,
-    email,
-    workspace: Object.freeze({
-      assigned: false,
+      id,
+      email,
+      workspace: Object.freeze({
+      assigned: false as const,
       waitlistPosition: required(workspaceSource, "waitlist_position"),
     }),
   });
