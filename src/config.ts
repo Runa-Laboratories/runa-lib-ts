@@ -7,6 +7,7 @@ import type {
   RunaConfig,
   TraceSink,
 } from "./types.js";
+import { containsProhibitedMarker } from "./internal/boundary-policy.js";
 
 export const DEFAULT_BASE_URL = "https://api.runacode.io";
 
@@ -83,13 +84,8 @@ function validApiKey(value: unknown): value is string {
 }
 
 function isProhibitedHost(hostname: string): boolean {
-  const host = hostname.toLowerCase();
-  return (
-    host === "runta.com" ||
-    host.endsWith(".runta.com") ||
-    host === "runta.dev" ||
-    host.endsWith(".runta.dev")
-  );
+  const host = hostname.toLowerCase().replace(/\.$/, "");
+  return containsProhibitedMarker(host);
 }
 
 function normalizeBaseUrl(value: unknown): string {
