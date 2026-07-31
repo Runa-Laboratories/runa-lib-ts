@@ -7,7 +7,10 @@ assert.equal(Object.keys(pkg.dependencies ?? {}).length, 0);
 for (const [name, version] of Object.entries(pkg.devDependencies ?? {})) {
   assert.match(version, /^\d+\.\d+\.\d+$/, `${name} must use an exact pin`);
 }
-const audit = spawnSync("npm.cmd", ["audit", "--json"], { encoding: "utf8" });
+const audit = process.platform === "win32"
+  ? spawnSync(process.env.ComSpec ?? "cmd.exe", ["/d", "/s", "/c", "npm audit --json"], { encoding: "utf8" })
+  : spawnSync("npm", ["audit", "--json"], { encoding: "utf8" });
+if (audit.error) throw audit.error;
 const report = JSON.parse(audit.stdout || "{}");
 const vulnerabilities = report.metadata?.vulnerabilities ?? {};
 assert.equal(vulnerabilities.critical ?? 0, 0);

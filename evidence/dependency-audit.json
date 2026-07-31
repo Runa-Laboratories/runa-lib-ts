@@ -1,7 +1,14 @@
 {
   "schema_version": 1,
-  "status": "BLOCKED",
+  "status": "PASS",
   "runtime_dependency_count": 0,
   "exact_dev_pins": true,
-  "vulnerabilities": {}
+  "vulnerabilities": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  }
 }

@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "decision": "BLOCKED",
+  "projection_sha256": "02a554b22592f0267475b847a2bb1c7df64e2b688cdb69b0a4a8b392695e1c55",
+  "local_gates": "run npm run quality for current evidence",
+  "blockers": [
+    {
+      "id": "TS-REL-001",
+      "gate": "canonical-contract-provenance",
+      "reason": "Canonical repository and approval evidence are unavailable."
+    },
+    {
+      "id": "TS-REL-002",
+      "gate": "license-approval",
+      "reason": "LICENSE is an explicit non-GA placeholder."
+    },
+    {
+      "id": "TS-REL-003",
+      "gate": "compatibility-matrix",
+      "reason": "All six exact Node/npm/OS cells have not run."
+    },
+    {
+      "id": "TS-REL-004",
+      "gate": "tool-catalog",
+      "reason": "Security remediation requires Vitest 3.2.7 while the V1 profile still names 3.2.4."
+    },
+    {
+      "id": "TS-REL-005",
+      "gate": "repository-controls",
+      "reason": "Required branch protection, rulesets, and vulnerability controls are not externally evidenced."
+    },
+    {
+      "id": "TS-REL-006",
+      "gate": "publication",
+      "reason": "Trusted publishing, registry identity, attestation, and release smoke evidence are unavailable."
+    },
+    {
+      "id": "TS-REL-007",
+      "gate": "cross-language",
+      "reason": "Cross-language conformance evidence is not finalized."
+    }
+  ]
+}

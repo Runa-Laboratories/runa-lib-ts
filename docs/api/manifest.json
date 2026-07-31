@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "source": "dist/index.d.ts",
+  "runtime": [
+    "Runa",
+    "Session",
+    "ConfigError",
+    "ApiError",
+    "CommandError",
+    "RunaError",
+    "stdoutText",
+    "stderrText"
+  ],
+  "types": [
+    "RecordsManager",
+    "SessionsManager",
+    "Acknowledgement",
+    "AssignedWorkspace",
+    "EstimatedUsage",
+    "ExecOptions",
+    "ExecResult",
+    "Me",
+    "OpaqueWireValue",
+    "OpenSessionResult",
+    "Record",
+    "RunaConfig",
+    "SessionAgent",
+    "SessionCreateOptions",
+    "SessionSnapshot",
+    "SessionStatus",
+    "UnassignedWorkspace",
+    "Workspace"
+  ],
+  "pages": {
+    "Core.md": [
+      "Runa",
+      "RunaConfig",
+      "ConfigError",
+      "ApiError",
+      "CommandError",
+      "RunaError"
+    ],
+    "Sessions.md": [
+      "Session",
+      "SessionsManager",
+      "SessionAgent",
+      "SessionCreateOptions",
+      "SessionSnapshot",
+      "SessionStatus",
+      "ExecOptions",
+      "ExecResult",
+      "Acknowledgement",
+      "OpenSessionResult"
+    ],
+    "Account-and-records.md": [
+      "Me",
+      "Workspace",
+      "AssignedWorkspace",
+      "UnassignedWorkspace",
+      "EstimatedUsage",
+      "RecordsManager",
+      "Record"
+    ],
+    "Shared.md": [
+      "OpaqueWireValue",
+      "stdoutText",
+      "stderrText"
+    ]
+  }
+}

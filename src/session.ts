@@ -165,7 +165,7 @@ export class Session {
   }
 
   async checkpoint(name: string): Promise<Acknowledgement> {
-    if (typeof name !== "string" || name.length < 1 || name.length > 80) {
+    if (typeof name !== "string" || [...name].length < 1 || [...name].length > 80) {
       throw new TypeError("Invalid checkpoint name.");
     }
     const id = this.#snapshot.id;

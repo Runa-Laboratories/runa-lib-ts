@@ -1,0 +1,6100 @@
+{
+	"schemaVersion": "2.0",
+	"id": 0,
+	"name": "@runa/sdk",
+	"variant": "project",
+	"kind": 1,
+	"flags": {},
+	"children": [
+		{
+			"id": 131,
+			"name": "SessionsManager",
+			"variant": "declaration",
+			"kind": 256,
+			"flags": {},
+			"children": [
+				{
+					"id": 132,
+					"name": "create",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "dist/client.d.ts",
+							"line": 4,
+							"character": 4
+						}
+					],
+					"signatures": [
+						{
+							"id": 133,
+							"name": "create",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "dist/client.d.ts",
+									"line": 4,
+									"character": 4
+								}
+							],
+							"parameters": [
+								{
+									"id": 134,
+									"name": "name",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								},
+								{
+									"id": 135,
+									"name": "options",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "reference",
+										"target": 190,
+										"name": "SessionCreateOptions",
+										"package": "@runa/sdk"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"packageName": "typescript",
+									"packagePath": "lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": 14,
+										"name": "Session",
+										"package": "@runa/sdk"
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							}
+						}
+					]
+				},
+				{
+					"id": 136,
+					"name": "list",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "dist/client.d.ts",
+							"line": 5,
+							"character": 4
+						}
+					],
+					"signatures": [
+						{
+							"id": 137,
+							"name": "list",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "dist/client.d.ts",
+									"line": 5,
+									"character": 4
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"packageName": "typescript",
+									"packagePath": "lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "typeOperator",
+										"operator": "readonly",
+										"target": {
+											"type": "array",
+											"elementType": {
+												"type": "reference",
+												"target": 14,
+												"name": "Session",
+												"package": "@runa/sdk"
+											}
+										}
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							}
+						}
+					]
+				},
+				{
+					"id": 138,
+					"name": "get",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "dist/client.d.ts",
+							"line": 6,
+							"character": 4
+						}
+					],
+					"signatures": [
+						{
+							"id": 139,
+							"name": "get",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "dist/client.d.ts",
+									"line": 6,
+									"character": 4
+								}
+							],
+							"parameters": [
+								{
+									"id": 140,
+									"name": "id",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"packageName": "typescript",
+									"packagePath": "lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": 14,
+										"name": "Session",
+										"package": "@runa/sdk"
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							}
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Methods",
+					"children": [
+						132,
+						136,
+						138
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "dist/client.d.ts",
+					"line": 3,
+					"character": 17
+				}
+			]
+		},
+		{
+			"id": 128,
+			"name": "RecordsManager",
+			"variant": "declaration",
+			"kind": 256,
+			"flags": {},
+			"children": [
+				{
+					"id": 129,
+					"name": "list",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "dist/client.d.ts",
+							"line": 9,
+							"character": 4
+						}
+					],
+					"signatures": [
+						{
+							"id": 130,
+							"name": "list",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "dist/client.d.ts",
+									"line": 9,
+									"character": 4
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"packageName": "typescript",
+									"packagePath": "lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "typeOperator",
+										"operator": "readonly",
+										"target": {
+											"type": "array",
+											"elementType": {
+												"type": "reference",
+												"target": 168,
+												"name": "Record",
+												"package": "@runa/sdk"
+											}
+										}
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							}
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Methods",
+					"children": [
+						129
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "dist/client.d.ts",
+					"line": 8,
+					"character": 17
+				}
+			]
+		},
+		{
+			"id": 1,
+			"name": "Runa",
+			"variant": "declaration",
+			"kind": 128,
+			"flags": {},
+			"children": [
+				{
+					"id": 2,
+					"name": "constructor",
+					"variant": "declaration",
+					"kind": 512,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "dist/client.d.ts",
+							"line": 13,
+							"character": 4
+						}
+					],
+					"signatures": [
+						{
+							"id": 3,
+							"name": "Runa",
+							"variant": "signature",
+							"kind": 16384,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "dist/client.d.ts",
+									"line": 13,
+									"character": 4
+								}
+							],
+							"parameters": [
+								{
+									"id": 4,
+									"name": "config",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "reference",
+										"target": 175,
+										"name": "RunaConfig",
+										"package": "@runa/sdk"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": 1,
+								"name": "Runa",
+								"package": "@runa/sdk"
+							}
+						}
+					]
+				},
+				{
+					"id": 6,
+					"name": "sessions",
+					"variant": "declaration",
+					"kind": 262144,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "dist/client.d.ts",
+							"line": 14,
+							"character": 8
+						}
+					],
+					"getSignature": {
+						"id": 7,
+						"name": "sessions",
+						"variant": "signature",
+						"kind": 524288,
+						"flags": {},
+						"sources": [
+							{
+								"fileName": "dist/client.d.ts",
+								"line": 14,
+								"character": 8
+							}
+						],
+						"type": {
+							"type": "reference",
+							"target": 131,
+							"name": "SessionsManager",
+							"package": "@runa/sdk"
+						}
+					}
+				},
+				{
+					"id": 8,
+					"name": "records",
+					"variant": "declaration",
+					"kind": 262144,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "dist/client.d.ts",
+							"line": 15,
+							"character": 8
+						}
+					],
+					"getSignature": {
+						"id": 9,
+						"name": "records",
+						"variant": "signature",
+						"kind": 524288,
+						"flags": {},
+						"sources": [
+							{
+								"fileName": "dist/client.d.ts",
+								"line": 15,
+								"character": 8
+							}
+						],
+						"type": {
+							"type": "reference",
+							"target": 128,
+							"name": "RecordsManager",
+							"package": "@runa/sdk"
+						}
+					}
+				},
+				{
+					"id": 10,
+					"name": "me",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "dist/client.d.ts",
+							"line": 16,
+							"character": 4
+						}
+					],
+					"signatures": [
+						{
+							"id": 11,
+							"name": "me",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "dist/client.d.ts",
+									"line": 16,
+									"character": 4
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"packageName": "typescript",
+									"packagePath": "lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": 161,
+										"name": "Me",
+										"package": "@runa/sdk"
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							}
+						}
+					]
+				},
+				{
+					"id": 12,
+					"name": "close",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "dist/client.d.ts",
+							"line": 17,
+							"character": 4
+						}
+					],
+					"signatures": [
+						{
+							"id": 13,
+							"name": "close",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "dist/client.d.ts",
+									"line": 17,
+									"character": 4
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"packageName": "typescript",
+									"packagePath": "lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "intrinsic",
+										"name": "void"
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							}
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Constructors",
+					"children": [
+						2
+					]
+				},
+				{
+					"title": "Accessors",
+					"children": [
+						6,
+						8
+					]
+				},
+				{
+					"title": "Methods",
+					"children": [
+						10,
+						12
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "dist/client.d.ts",
+					"line": 11,
+					"character": 21
+				}
+			]
+		},
+		{
+			"id": 100,
+			"name": "RunaError",
+			"variant": "declaration",
+			"kind": 128,
+			"flags": {
+				"isAbstract": true
+			},
+			"children": [
+				{
+					"id": 117,
+					"name": "name",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isAbstract": true,
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/errors.d.ts",
+							"line": 2,
+							"character": 22
+						}
+					],
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "literal",
+								"value": "ConfigError"
+							},
+							{
+								"type": "literal",
+								"value": "ApiError"
+							},
+							{
+								"type": "literal",
+								"value": "CommandError"
+							}
+						]
+					},
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "Error.name"
+					}
+				},
+				{
+					"id": 118,
+					"name": "code",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isAbstract": true,
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/errors.d.ts",
+							"line": 3,
+							"character": 22
+						}
+					],
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "literal",
+								"value": "config_error"
+							},
+							{
+								"type": "literal",
+								"value": "api_error"
+							},
+							{
+								"type": "literal",
+								"value": "malformed_response"
+							},
+							{
+								"type": "literal",
+								"value": "command_error"
+							}
+						]
+					}
+				},
+				{
+					"id": 101,
+					"name": "captureStackTrace",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {
+						"isStatic": true,
+						"isExternal": true,
+						"isInherited": true
+					},
+					"sources": [
+						{
+							"fileName": "node_modules/@types/node/globals.d.ts",
+							"line": 136,
+							"character": 8
+						}
+					],
+					"signatures": [
+						{
+							"id": 102,
+							"name": "captureStackTrace",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {
+								"isExternal": true,
+								"isInherited": true
+							},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Create .stack property on a target object"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "node_modules/@types/node/globals.d.ts",
+									"line": 136,
+									"character": 8
+								}
+							],
+							"parameters": [
+								{
+									"id": 103,
+									"name": "targetObject",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {
+										"isExternal": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "object"
+									}
+								},
+								{
+									"id": 104,
+									"name": "constructorOpt",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {
+										"isExternal": true,
+										"isOptional": true
+									},
+									"type": {
+										"type": "reference",
+										"target": {
+											"packageName": "typescript",
+											"packagePath": "lib/lib.es5.d.ts",
+											"qualifiedName": "Function"
+										},
+										"name": "Function",
+										"package": "typescript"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "void"
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"target": -1,
+								"name": "Error.captureStackTrace"
+							}
+						}
+					],
+					"inheritedFrom": {
+						"type": "reference",
+						"target": -1,
+						"name": "Error.captureStackTrace"
+					}
+				},
+				{
+					"id": 105,
+					"name": "prepareStackTrace",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isStatic": true,
+						"isExternal": true,
+						"isOptional": true,
+						"isInherited": true
+					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Optional override for formatting stack traces"
+							}
+						],
+						"blockTags": [
+							{
+								"tag": "@see",
+								"content": [
+									{
+										"kind": "text",
+										"text": "https://v8.dev/docs/stack-trace-api#customizing-stack-traces"
+									}
+								]
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "node_modules/@types/node/globals.d.ts",
+							"line": 143,
+							"character": 8
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 106,
+							"name": "__type",
+							"variant": "declaration",
+							"kind": 65536,
+							"flags": {
+								"isExternal": true
+							},
+							"signatures": [
+								{
+									"id": 107,
+									"name": "__type",
+									"variant": "signature",
+									"kind": 4096,
+									"flags": {
+										"isExternal": true
+									},
+									"parameters": [
+										{
+											"id": 108,
+											"name": "err",
+											"variant": "param",
+											"kind": 32768,
+											"flags": {
+												"isExternal": true
+											},
+											"type": {
+												"type": "reference",
+												"target": {
+													"packageName": "typescript",
+													"packagePath": "lib/lib.es5.d.ts",
+													"qualifiedName": "Error"
+												},
+												"name": "Error",
+												"package": "typescript"
+											}
+										},
+										{
+											"id": 109,
+											"name": "stackTraces",
+											"variant": "param",
+											"kind": 32768,
+											"flags": {
+												"isExternal": true
+											},
+											"type": {
+												"type": "array",
+												"elementType": {
+													"type": "reference",
+													"target": {
+														"packageName": "@types/node",
+														"packagePath": "globals.d.ts",
+														"qualifiedName": "__global.NodeJS.CallSite"
+													},
+													"name": "CallSite",
+													"package": "@types/node",
+													"qualifiedName": "__global.NodeJS.CallSite"
+												}
+											}
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "any"
+									}
+								}
+							]
+						}
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"target": -1,
+						"name": "Error.prepareStackTrace"
+					}
+				},
+				{
+					"id": 110,
+					"name": "stackTraceLimit",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isStatic": true,
+						"isExternal": true,
+						"isInherited": true
+					},
+					"sources": [
+						{
+							"fileName": "node_modules/@types/node/globals.d.ts",
+							"line": 145,
+							"character": 8
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "number"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"target": -1,
+						"name": "Error.stackTraceLimit"
+					}
+				},
+				{
+					"id": 121,
+					"name": "cause",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isExternal": true,
+						"isOptional": true,
+						"isInherited": true
+					},
+					"sources": [
+						{
+							"fileName": "node_modules/typescript/lib/lib.es2022.error.d.ts",
+							"line": 26,
+							"character": 4
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "unknown"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"target": -1,
+						"name": "Error.cause"
+					}
+				},
+				{
+					"id": 119,
+					"name": "message",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isExternal": true,
+						"isInherited": true
+					},
+					"sources": [
+						{
+							"fileName": "node_modules/typescript/lib/lib.es5.d.ts",
+							"line": 1077,
+							"character": 4
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"target": -1,
+						"name": "Error.message"
+					}
+				},
+				{
+					"id": 120,
+					"name": "stack",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isExternal": true,
+						"isOptional": true,
+						"isInherited": true
+					},
+					"sources": [
+						{
+							"fileName": "node_modules/typescript/lib/lib.es5.d.ts",
+							"line": 1078,
+							"character": 4
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"target": -1,
+						"name": "Error.stack"
+					}
+				},
+				{
+					"id": 111,
+					"name": "constructor",
+					"variant": "declaration",
+					"kind": 512,
+					"flags": {
+						"isExternal": true
+					},
+					"sources": [
+						{
+							"fileName": "node_modules/typescript/lib/lib.es5.d.ts",
+							"line": 1082,
+							"character": 4
+						}
+					],
+					"signatures": [
+						{
+							"id": 112,
+							"name": "RunaError",
+							"variant": "signature",
+							"kind": 16384,
+							"flags": {
+								"isExternal": true
+							},
+							"sources": [
+								{
+									"fileName": "node_modules/typescript/lib/lib.es5.d.ts",
+									"line": 1082,
+									"character": 4
+								}
+							],
+							"parameters": [
+								{
+									"id": 113,
+									"name": "message",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {
+										"isExternal": true,
+										"isOptional": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": 100,
+								"name": "RunaError",
+								"package": "@runa/sdk"
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"target": -1,
+								"name": "Error.constructor",
+								"package": "typescript"
+							}
+						},
+						{
+							"id": 114,
+							"name": "RunaError",
+							"variant": "signature",
+							"kind": 16384,
+							"flags": {
+								"isExternal": true
+							},
+							"sources": [
+								{
+									"fileName": "node_modules/typescript/lib/lib.es5.d.ts",
+									"line": 1082,
+									"character": 4
+								}
+							],
+							"parameters": [
+								{
+									"id": 115,
+									"name": "message",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {
+										"isExternal": true,
+										"isOptional": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								},
+								{
+									"id": 116,
+									"name": "options",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {
+										"isExternal": true,
+										"isOptional": true
+									},
+									"type": {
+										"type": "reference",
+										"target": {
+											"packageName": "typescript",
+											"packagePath": "lib/lib.es2022.error.d.ts",
+											"qualifiedName": "ErrorOptions"
+										},
+										"name": "ErrorOptions",
+										"package": "typescript"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": 100,
+								"name": "RunaError",
+								"package": "@runa/sdk"
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"target": -1,
+								"name": "Error.constructor",
+								"package": "typescript"
+							}
+						}
+					],
+					"inheritedFrom": {
+						"type": "reference",
+						"target": -1,
+						"name": "Error.constructor",
+						"package": "typescript"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Constructors",
+					"children": [
+						111
+					]
+				},
+				{
+					"title": "Properties",
+					"children": [
+						117,
+						118,
+						105,
+						110,
+						121,
+						119,
+						120
+					]
+				},
+				{
+					"title": "Methods",
+					"children": [
+						101
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "dist/errors.d.ts",
+					"line": 1,
+					"character": 30
+				}
+			],
+			"extendedTypes": [
+				{
+					"type": "reference",
+					"target": {
+						"packageName": "typescript",
+						"packagePath": "lib/lib.es5.d.ts",
+						"qualifiedName": "Error"
+					},
+					"name": "Error",
+					"package": "typescript"
+				}
+			],
+			"extendedBy": [
+				{
+					"type": "reference",
+					"target": 43,
+					"name": "ApiError"
+				},
+				{
+					"type": "reference",
+					"target": 64,
+					"name": "CommandError"
+				},
+				{
+					"type": "reference",
+					"target": 82,
+					"name": "ConfigError"
+				}
+			]
+		},
+		{
+			"id": 82,
+			"name": "ConfigError",
+			"variant": "declaration",
+			"kind": 128,
+			"flags": {},
+			"children": [
+				{
+					"id": 95,
+					"name": "name",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/errors.d.ts",
+							"line": 6,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "literal",
+						"value": "ConfigError"
+					},
+					"defaultValue": "\"ConfigError\"",
+					"overwrites": {
+						"type": "reference",
+						"target": 117,
+						"name": "RunaError.name"
+					}
+				},
+				{
+					"id": 96,
+					"name": "code",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/errors.d.ts",
+							"line": 7,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "literal",
+						"value": "config_error"
+					},
+					"defaultValue": "\"config_error\"",
+					"overwrites": {
+						"type": "reference",
+						"target": 118,
+						"name": "RunaError.code"
+					}
+				},
+				{
+					"id": 97,
+					"name": "message",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/errors.d.ts",
+							"line": 8,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "literal",
+						"value": "Runa SDK configuration is invalid."
+					},
+					"defaultValue": "\"Runa SDK configuration is invalid.\"",
+					"overwrites": {
+						"type": "reference",
+						"target": 119,
+						"name": "RunaError.message"
+					}
+				},
+				{
+					"id": 93,
+					"name": "constructor",
+					"variant": "declaration",
+					"kind": 512,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "dist/errors.d.ts",
+							"line": 9,
+							"character": 4
+						}
+					],
+					"signatures": [
+						{
+							"id": 94,
+							"name": "ConfigError",
+							"variant": "signature",
+							"kind": 16384,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "dist/errors.d.ts",
+									"line": 9,
+									"character": 4
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": 82,
+								"name": "ConfigError",
+								"package": "@runa/sdk"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": 112,
+								"name": "RunaError.constructor"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": 111,
+						"name": "RunaError.constructor"
+					}
+				},
+				{
+					"id": 83,
+					"name": "captureStackTrace",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {
+						"isStatic": true,
+						"isExternal": true,
+						"isInherited": true
+					},
+					"sources": [
+						{
+							"fileName": "node_modules/@types/node/globals.d.ts",
+							"line": 136,
+							"character": 8
+						}
+					],
+					"signatures": [
+						{
+							"id": 84,
+							"name": "captureStackTrace",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {
+								"isExternal": true,
+								"isInherited": true
+							},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Create .stack property on a target object"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "node_modules/@types/node/globals.d.ts",
+									"line": 136,
+									"character": 8
+								}
+							],
+							"parameters": [
+								{
+									"id": 85,
+									"name": "targetObject",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {
+										"isExternal": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "object"
+									}
+								},
+								{
+									"id": 86,
+									"name": "constructorOpt",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {
+										"isExternal": true,
+										"isOptional": true
+									},
+									"type": {
+										"type": "reference",
+										"target": {
+											"packageName": "typescript",
+											"packagePath": "lib/lib.es5.d.ts",
+											"qualifiedName": "Function"
+										},
+										"name": "Function",
+										"package": "typescript"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "void"
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"target": 102,
+								"name": "RunaError.captureStackTrace"
+							}
+						}
+					],
+					"inheritedFrom": {
+						"type": "reference",
+						"target": 101,
+						"name": "RunaError.captureStackTrace"
+					}
+				},
+				{
+					"id": 87,
+					"name": "prepareStackTrace",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isStatic": true,
+						"isExternal": true,
+						"isOptional": true,
+						"isInherited": true
+					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Optional override for formatting stack traces"
+							}
+						],
+						"blockTags": [
+							{
+								"tag": "@see",
+								"content": [
+									{
+										"kind": "text",
+										"text": "https://v8.dev/docs/stack-trace-api#customizing-stack-traces"
+									}
+								]
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "node_modules/@types/node/globals.d.ts",
+							"line": 143,
+							"character": 8
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 88,
+							"name": "__type",
+							"variant": "declaration",
+							"kind": 65536,
+							"flags": {
+								"isExternal": true
+							},
+							"signatures": [
+								{
+									"id": 89,
+									"name": "__type",
+									"variant": "signature",
+									"kind": 4096,
+									"flags": {
+										"isExternal": true
+									},
+									"parameters": [
+										{
+											"id": 90,
+											"name": "err",
+											"variant": "param",
+											"kind": 32768,
+											"flags": {
+												"isExternal": true
+											},
+											"type": {
+												"type": "reference",
+												"target": {
+													"packageName": "typescript",
+													"packagePath": "lib/lib.es5.d.ts",
+													"qualifiedName": "Error"
+												},
+												"name": "Error",
+												"package": "typescript"
+											}
+										},
+										{
+											"id": 91,
+											"name": "stackTraces",
+											"variant": "param",
+											"kind": 32768,
+											"flags": {
+												"isExternal": true
+											},
+											"type": {
+												"type": "array",
+												"elementType": {
+													"type": "reference",
+													"target": {
+														"packageName": "@types/node",
+														"packagePath": "globals.d.ts",
+														"qualifiedName": "__global.NodeJS.CallSite"
+													},
+													"name": "CallSite",
+													"package": "@types/node",
+													"qualifiedName": "__global.NodeJS.CallSite"
+												}
+											}
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "any"
+									}
+								}
+							]
+						}
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"target": 105,
+						"name": "RunaError.prepareStackTrace"
+					}
+				},
+				{
+					"id": 92,
+					"name": "stackTraceLimit",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isStatic": true,
+						"isExternal": true,
+						"isInherited": true
+					},
+					"sources": [
+						{
+							"fileName": "node_modules/@types/node/globals.d.ts",
+							"line": 145,
+							"character": 8
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "number"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"target": 110,
+						"name": "RunaError.stackTraceLimit"
+					}
+				},
+				{
+					"id": 99,
+					"name": "cause",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isExternal": true,
+						"isOptional": true,
+						"isInherited": true
+					},
+					"sources": [
+						{
+							"fileName": "node_modules/typescript/lib/lib.es2022.error.d.ts",
+							"line": 26,
+							"character": 4
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "unknown"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"target": 121,
+						"name": "RunaError.cause"
+					}
+				},
+				{
+					"id": 98,
+					"name": "stack",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isExternal": true,
+						"isOptional": true,
+						"isInherited": true
+					},
+					"sources": [
+						{
+							"fileName": "node_modules/typescript/lib/lib.es5.d.ts",
+							"line": 1078,
+							"character": 4
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"target": 120,
+						"name": "RunaError.stack"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Constructors",
+					"children": [
+						93
+					]
+				},
+				{
+					"title": "Properties",
+					"children": [
+						95,
+						96,
+						97,
+						87,
+						92,
+						99,
+						98
+					]
+				},
+				{
+					"title": "Methods",
+					"children": [
+						83
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "dist/errors.d.ts",
+					"line": 5,
+					"character": 21
+				}
+			],
+			"extendedTypes": [
+				{
+					"type": "reference",
+					"target": 100,
+					"name": "RunaError",
+					"package": "@runa/sdk"
+				}
+			]
+		},
+		{
+			"id": 43,
+			"name": "ApiError",
+			"variant": "declaration",
+			"kind": 128,
+			"flags": {},
+			"children": [
+				{
+					"id": 58,
+					"name": "name",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/errors.d.ts",
+							"line": 12,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "literal",
+						"value": "ApiError"
+					},
+					"defaultValue": "\"ApiError\"",
+					"overwrites": {
+						"type": "reference",
+						"target": 117,
+						"name": "RunaError.name"
+					}
+				},
+				{
+					"id": 59,
+					"name": "code",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/errors.d.ts",
+							"line": 13,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "literal",
+								"value": "api_error"
+							},
+							{
+								"type": "literal",
+								"value": "malformed_response"
+							}
+						]
+					},
+					"overwrites": {
+						"type": "reference",
+						"target": 118,
+						"name": "RunaError.code"
+					}
+				},
+				{
+					"id": 60,
+					"name": "status",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/errors.d.ts",
+							"line": 14,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "number"
+					}
+				},
+				{
+					"id": 61,
+					"name": "message",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/errors.d.ts",
+							"line": 15,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "literal",
+								"value": "The Runa API request failed."
+							},
+							{
+								"type": "literal",
+								"value": "The Runa API returned an invalid response."
+							}
+						]
+					},
+					"overwrites": {
+						"type": "reference",
+						"target": 119,
+						"name": "RunaError.message"
+					}
+				},
+				{
+					"id": 54,
+					"name": "constructor",
+					"variant": "declaration",
+					"kind": 512,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "dist/errors.d.ts",
+							"line": 16,
+							"character": 4
+						}
+					],
+					"signatures": [
+						{
+							"id": 55,
+							"name": "ApiError",
+							"variant": "signature",
+							"kind": 16384,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "dist/errors.d.ts",
+									"line": 16,
+									"character": 4
+								}
+							],
+							"parameters": [
+								{
+									"id": 56,
+									"name": "status",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								},
+								{
+									"id": 57,
+									"name": "code",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "union",
+										"types": [
+											{
+												"type": "literal",
+												"value": "api_error"
+											},
+											{
+												"type": "literal",
+												"value": "malformed_response"
+											}
+										]
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": 43,
+								"name": "ApiError",
+								"package": "@runa/sdk"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": 112,
+								"name": "RunaError.constructor"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": 111,
+						"name": "RunaError.constructor"
+					}
+				},
+				{
+					"id": 44,
+					"name": "captureStackTrace",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {
+						"isStatic": true,
+						"isExternal": true,
+						"isInherited": true
+					},
+					"sources": [
+						{
+							"fileName": "node_modules/@types/node/globals.d.ts",
+							"line": 136,
+							"character": 8
+						}
+					],
+					"signatures": [
+						{
+							"id": 45,
+							"name": "captureStackTrace",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {
+								"isExternal": true,
+								"isInherited": true
+							},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Create .stack property on a target object"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "node_modules/@types/node/globals.d.ts",
+									"line": 136,
+									"character": 8
+								}
+							],
+							"parameters": [
+								{
+									"id": 46,
+									"name": "targetObject",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {
+										"isExternal": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "object"
+									}
+								},
+								{
+									"id": 47,
+									"name": "constructorOpt",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {
+										"isExternal": true,
+										"isOptional": true
+									},
+									"type": {
+										"type": "reference",
+										"target": {
+											"packageName": "typescript",
+											"packagePath": "lib/lib.es5.d.ts",
+											"qualifiedName": "Function"
+										},
+										"name": "Function",
+										"package": "typescript"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "void"
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"target": 102,
+								"name": "RunaError.captureStackTrace"
+							}
+						}
+					],
+					"inheritedFrom": {
+						"type": "reference",
+						"target": 101,
+						"name": "RunaError.captureStackTrace"
+					}
+				},
+				{
+					"id": 48,
+					"name": "prepareStackTrace",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isStatic": true,
+						"isExternal": true,
+						"isOptional": true,
+						"isInherited": true
+					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Optional override for formatting stack traces"
+							}
+						],
+						"blockTags": [
+							{
+								"tag": "@see",
+								"content": [
+									{
+										"kind": "text",
+										"text": "https://v8.dev/docs/stack-trace-api#customizing-stack-traces"
+									}
+								]
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "node_modules/@types/node/globals.d.ts",
+							"line": 143,
+							"character": 8
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 49,
+							"name": "__type",
+							"variant": "declaration",
+							"kind": 65536,
+							"flags": {
+								"isExternal": true
+							},
+							"signatures": [
+								{
+									"id": 50,
+									"name": "__type",
+									"variant": "signature",
+									"kind": 4096,
+									"flags": {
+										"isExternal": true
+									},
+									"parameters": [
+										{
+											"id": 51,
+											"name": "err",
+											"variant": "param",
+											"kind": 32768,
+											"flags": {
+												"isExternal": true
+											},
+											"type": {
+												"type": "reference",
+												"target": {
+													"packageName": "typescript",
+													"packagePath": "lib/lib.es5.d.ts",
+													"qualifiedName": "Error"
+												},
+												"name": "Error",
+												"package": "typescript"
+											}
+										},
+										{
+											"id": 52,
+											"name": "stackTraces",
+											"variant": "param",
+											"kind": 32768,
+											"flags": {
+												"isExternal": true
+											},
+											"type": {
+												"type": "array",
+												"elementType": {
+													"type": "reference",
+													"target": {
+														"packageName": "@types/node",
+														"packagePath": "globals.d.ts",
+														"qualifiedName": "__global.NodeJS.CallSite"
+													},
+													"name": "CallSite",
+													"package": "@types/node",
+													"qualifiedName": "__global.NodeJS.CallSite"
+												}
+											}
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "any"
+									}
+								}
+							]
+						}
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"target": 105,
+						"name": "RunaError.prepareStackTrace"
+					}
+				},
+				{
+					"id": 53,
+					"name": "stackTraceLimit",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isStatic": true,
+						"isExternal": true,
+						"isInherited": true
+					},
+					"sources": [
+						{
+							"fileName": "node_modules/@types/node/globals.d.ts",
+							"line": 145,
+							"character": 8
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "number"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"target": 110,
+						"name": "RunaError.stackTraceLimit"
+					}
+				},
+				{
+					"id": 63,
+					"name": "cause",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isExternal": true,
+						"isOptional": true,
+						"isInherited": true
+					},
+					"sources": [
+						{
+							"fileName": "node_modules/typescript/lib/lib.es2022.error.d.ts",
+							"line": 26,
+							"character": 4
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "unknown"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"target": 121,
+						"name": "RunaError.cause"
+					}
+				},
+				{
+					"id": 62,
+					"name": "stack",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isExternal": true,
+						"isOptional": true,
+						"isInherited": true
+					},
+					"sources": [
+						{
+							"fileName": "node_modules/typescript/lib/lib.es5.d.ts",
+							"line": 1078,
+							"character": 4
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"target": 120,
+						"name": "RunaError.stack"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Constructors",
+					"children": [
+						54
+					]
+				},
+				{
+					"title": "Properties",
+					"children": [
+						58,
+						59,
+						60,
+						61,
+						48,
+						53,
+						63,
+						62
+					]
+				},
+				{
+					"title": "Methods",
+					"children": [
+						44
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "dist/errors.d.ts",
+					"line": 11,
+					"character": 21
+				}
+			],
+			"extendedTypes": [
+				{
+					"type": "reference",
+					"target": 100,
+					"name": "RunaError",
+					"package": "@runa/sdk"
+				}
+			]
+		},
+		{
+			"id": 64,
+			"name": "CommandError",
+			"variant": "declaration",
+			"kind": 128,
+			"flags": {},
+			"children": [
+				{
+					"id": 77,
+					"name": "name",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/errors.d.ts",
+							"line": 19,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "literal",
+						"value": "CommandError"
+					},
+					"defaultValue": "\"CommandError\"",
+					"overwrites": {
+						"type": "reference",
+						"target": 117,
+						"name": "RunaError.name"
+					}
+				},
+				{
+					"id": 78,
+					"name": "code",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/errors.d.ts",
+							"line": 20,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "literal",
+						"value": "command_error"
+					},
+					"defaultValue": "\"command_error\"",
+					"overwrites": {
+						"type": "reference",
+						"target": 118,
+						"name": "RunaError.code"
+					}
+				},
+				{
+					"id": 79,
+					"name": "message",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/errors.d.ts",
+							"line": 21,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "literal",
+						"value": "The session command failed."
+					},
+					"defaultValue": "\"The session command failed.\"",
+					"overwrites": {
+						"type": "reference",
+						"target": 119,
+						"name": "RunaError.message"
+					}
+				},
+				{
+					"id": 65,
+					"name": "captureStackTrace",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {
+						"isStatic": true,
+						"isExternal": true,
+						"isInherited": true
+					},
+					"sources": [
+						{
+							"fileName": "node_modules/@types/node/globals.d.ts",
+							"line": 136,
+							"character": 8
+						}
+					],
+					"signatures": [
+						{
+							"id": 66,
+							"name": "captureStackTrace",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {
+								"isExternal": true,
+								"isInherited": true
+							},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Create .stack property on a target object"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "node_modules/@types/node/globals.d.ts",
+									"line": 136,
+									"character": 8
+								}
+							],
+							"parameters": [
+								{
+									"id": 67,
+									"name": "targetObject",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {
+										"isExternal": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "object"
+									}
+								},
+								{
+									"id": 68,
+									"name": "constructorOpt",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {
+										"isExternal": true,
+										"isOptional": true
+									},
+									"type": {
+										"type": "reference",
+										"target": {
+											"packageName": "typescript",
+											"packagePath": "lib/lib.es5.d.ts",
+											"qualifiedName": "Function"
+										},
+										"name": "Function",
+										"package": "typescript"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "void"
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"target": 102,
+								"name": "RunaError.captureStackTrace"
+							}
+						}
+					],
+					"inheritedFrom": {
+						"type": "reference",
+						"target": 101,
+						"name": "RunaError.captureStackTrace"
+					}
+				},
+				{
+					"id": 69,
+					"name": "prepareStackTrace",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isStatic": true,
+						"isExternal": true,
+						"isOptional": true,
+						"isInherited": true
+					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Optional override for formatting stack traces"
+							}
+						],
+						"blockTags": [
+							{
+								"tag": "@see",
+								"content": [
+									{
+										"kind": "text",
+										"text": "https://v8.dev/docs/stack-trace-api#customizing-stack-traces"
+									}
+								]
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "node_modules/@types/node/globals.d.ts",
+							"line": 143,
+							"character": 8
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 70,
+							"name": "__type",
+							"variant": "declaration",
+							"kind": 65536,
+							"flags": {
+								"isExternal": true
+							},
+							"signatures": [
+								{
+									"id": 71,
+									"name": "__type",
+									"variant": "signature",
+									"kind": 4096,
+									"flags": {
+										"isExternal": true
+									},
+									"parameters": [
+										{
+											"id": 72,
+											"name": "err",
+											"variant": "param",
+											"kind": 32768,
+											"flags": {
+												"isExternal": true
+											},
+											"type": {
+												"type": "reference",
+												"target": {
+													"packageName": "typescript",
+													"packagePath": "lib/lib.es5.d.ts",
+													"qualifiedName": "Error"
+												},
+												"name": "Error",
+												"package": "typescript"
+											}
+										},
+										{
+											"id": 73,
+											"name": "stackTraces",
+											"variant": "param",
+											"kind": 32768,
+											"flags": {
+												"isExternal": true
+											},
+											"type": {
+												"type": "array",
+												"elementType": {
+													"type": "reference",
+													"target": {
+														"packageName": "@types/node",
+														"packagePath": "globals.d.ts",
+														"qualifiedName": "__global.NodeJS.CallSite"
+													},
+													"name": "CallSite",
+													"package": "@types/node",
+													"qualifiedName": "__global.NodeJS.CallSite"
+												}
+											}
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "any"
+									}
+								}
+							]
+						}
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"target": 105,
+						"name": "RunaError.prepareStackTrace"
+					}
+				},
+				{
+					"id": 74,
+					"name": "stackTraceLimit",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isStatic": true,
+						"isExternal": true,
+						"isInherited": true
+					},
+					"sources": [
+						{
+							"fileName": "node_modules/@types/node/globals.d.ts",
+							"line": 145,
+							"character": 8
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "number"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"target": 110,
+						"name": "RunaError.stackTraceLimit"
+					}
+				},
+				{
+					"id": 81,
+					"name": "cause",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isExternal": true,
+						"isOptional": true,
+						"isInherited": true
+					},
+					"sources": [
+						{
+							"fileName": "node_modules/typescript/lib/lib.es2022.error.d.ts",
+							"line": 26,
+							"character": 4
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "unknown"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"target": 121,
+						"name": "RunaError.cause"
+					}
+				},
+				{
+					"id": 80,
+					"name": "stack",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isExternal": true,
+						"isOptional": true,
+						"isInherited": true
+					},
+					"sources": [
+						{
+							"fileName": "node_modules/typescript/lib/lib.es5.d.ts",
+							"line": 1078,
+							"character": 4
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"target": 120,
+						"name": "RunaError.stack"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Properties",
+					"children": [
+						77,
+						78,
+						79,
+						69,
+						74,
+						81,
+						80
+					]
+				},
+				{
+					"title": "Methods",
+					"children": [
+						65
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "dist/errors.d.ts",
+					"line": 18,
+					"character": 21
+				}
+			],
+			"extendedTypes": [
+				{
+					"type": "reference",
+					"target": 100,
+					"name": "RunaError",
+					"package": "@runa/sdk"
+				}
+			]
+		},
+		{
+			"id": 14,
+			"name": "Session",
+			"variant": "declaration",
+			"kind": 128,
+			"flags": {},
+			"children": [
+				{
+					"id": 18,
+					"name": "id",
+					"variant": "declaration",
+					"kind": 262144,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "dist/session.d.ts",
+							"line": 6,
+							"character": 8
+						}
+					],
+					"getSignature": {
+						"id": 19,
+						"name": "id",
+						"variant": "signature",
+						"kind": 524288,
+						"flags": {},
+						"sources": [
+							{
+								"fileName": "dist/session.d.ts",
+								"line": 6,
+								"character": 8
+							}
+						],
+						"type": {
+							"type": "intrinsic",
+							"name": "string"
+						}
+					}
+				},
+				{
+					"id": 20,
+					"name": "snapshot",
+					"variant": "declaration",
+					"kind": 262144,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "dist/session.d.ts",
+							"line": 7,
+							"character": 8
+						}
+					],
+					"getSignature": {
+						"id": 21,
+						"name": "snapshot",
+						"variant": "signature",
+						"kind": 524288,
+						"flags": {},
+						"sources": [
+							{
+								"fileName": "dist/session.d.ts",
+								"line": 7,
+								"character": 8
+							}
+						],
+						"type": {
+							"type": "reference",
+							"target": 196,
+							"name": "SessionSnapshot",
+							"package": "@runa/sdk"
+						}
+					}
+				},
+				{
+					"id": 22,
+					"name": "refresh",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "dist/session.d.ts",
+							"line": 8,
+							"character": 4
+						}
+					],
+					"signatures": [
+						{
+							"id": 23,
+							"name": "refresh",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "dist/session.d.ts",
+									"line": 8,
+									"character": 4
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"packageName": "typescript",
+									"packagePath": "lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": 14,
+										"name": "Session",
+										"package": "@runa/sdk"
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							}
+						}
+					]
+				},
+				{
+					"id": 24,
+					"name": "start",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "dist/session.d.ts",
+							"line": 9,
+							"character": 4
+						}
+					],
+					"signatures": [
+						{
+							"id": 25,
+							"name": "start",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "dist/session.d.ts",
+									"line": 9,
+									"character": 4
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"packageName": "typescript",
+									"packagePath": "lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": 14,
+										"name": "Session",
+										"package": "@runa/sdk"
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							}
+						}
+					]
+				},
+				{
+					"id": 26,
+					"name": "pause",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "dist/session.d.ts",
+							"line": 10,
+							"character": 4
+						}
+					],
+					"signatures": [
+						{
+							"id": 27,
+							"name": "pause",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "dist/session.d.ts",
+									"line": 10,
+									"character": 4
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"packageName": "typescript",
+									"packagePath": "lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": 14,
+										"name": "Session",
+										"package": "@runa/sdk"
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							}
+						}
+					]
+				},
+				{
+					"id": 28,
+					"name": "resume",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "dist/session.d.ts",
+							"line": 11,
+							"character": 4
+						}
+					],
+					"signatures": [
+						{
+							"id": 29,
+							"name": "resume",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "dist/session.d.ts",
+									"line": 11,
+									"character": 4
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"packageName": "typescript",
+									"packagePath": "lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": 14,
+										"name": "Session",
+										"package": "@runa/sdk"
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							}
+						}
+					]
+				},
+				{
+					"id": 30,
+					"name": "stop",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "dist/session.d.ts",
+							"line": 12,
+							"character": 4
+						}
+					],
+					"signatures": [
+						{
+							"id": 31,
+							"name": "stop",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "dist/session.d.ts",
+									"line": 12,
+									"character": 4
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"packageName": "typescript",
+									"packagePath": "lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": 14,
+										"name": "Session",
+										"package": "@runa/sdk"
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							}
+						}
+					]
+				},
+				{
+					"id": 32,
+					"name": "delete",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "dist/session.d.ts",
+							"line": 13,
+							"character": 4
+						}
+					],
+					"signatures": [
+						{
+							"id": 33,
+							"name": "delete",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "dist/session.d.ts",
+									"line": 13,
+									"character": 4
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"packageName": "typescript",
+									"packagePath": "lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": 141,
+										"name": "Acknowledgement",
+										"package": "@runa/sdk"
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							}
+						}
+					]
+				},
+				{
+					"id": 34,
+					"name": "exec",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "dist/session.d.ts",
+							"line": 14,
+							"character": 4
+						}
+					],
+					"signatures": [
+						{
+							"id": 35,
+							"name": "exec",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "dist/session.d.ts",
+									"line": 14,
+									"character": 4
+								}
+							],
+							"parameters": [
+								{
+									"id": 36,
+									"name": "command",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "union",
+										"types": [
+											{
+												"type": "intrinsic",
+												"name": "string"
+											},
+											{
+												"type": "typeOperator",
+												"operator": "readonly",
+												"target": {
+													"type": "array",
+													"elementType": {
+														"type": "intrinsic",
+														"name": "string"
+													}
+												}
+											}
+										]
+									}
+								},
+								{
+									"id": 37,
+									"name": "options",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "reference",
+										"target": 151,
+										"name": "ExecOptions",
+										"package": "@runa/sdk"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"packageName": "typescript",
+									"packagePath": "lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": 154,
+										"name": "ExecResult",
+										"package": "@runa/sdk"
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							}
+						}
+					]
+				},
+				{
+					"id": 38,
+					"name": "checkpoint",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "dist/session.d.ts",
+							"line": 15,
+							"character": 4
+						}
+					],
+					"signatures": [
+						{
+							"id": 39,
+							"name": "checkpoint",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "dist/session.d.ts",
+									"line": 15,
+									"character": 4
+								}
+							],
+							"parameters": [
+								{
+									"id": 40,
+									"name": "name",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"packageName": "typescript",
+									"packagePath": "lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": 141,
+										"name": "Acknowledgement",
+										"package": "@runa/sdk"
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							}
+						}
+					]
+				},
+				{
+					"id": 41,
+					"name": "open",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "dist/session.d.ts",
+							"line": 16,
+							"character": 4
+						}
+					],
+					"signatures": [
+						{
+							"id": 42,
+							"name": "open",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "dist/session.d.ts",
+									"line": 16,
+									"character": 4
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"packageName": "typescript",
+									"packagePath": "lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": 166,
+										"name": "OpenSessionResult",
+										"package": "@runa/sdk"
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							}
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Accessors",
+					"children": [
+						18,
+						20
+					]
+				},
+				{
+					"title": "Methods",
+					"children": [
+						22,
+						24,
+						26,
+						28,
+						30,
+						32,
+						34,
+						38,
+						41
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "dist/session.d.ts",
+					"line": 3,
+					"character": 21
+				}
+			]
+		},
+		{
+			"id": 125,
+			"name": "stdoutText",
+			"variant": "declaration",
+			"kind": 64,
+			"flags": {},
+			"sources": [
+				{
+					"fileName": "dist/text.d.ts",
+					"line": 2,
+					"character": 24
+				}
+			],
+			"signatures": [
+				{
+					"id": 126,
+					"name": "stdoutText",
+					"variant": "signature",
+					"kind": 4096,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "dist/text.d.ts",
+							"line": 2,
+							"character": 24
+						}
+					],
+					"parameters": [
+						{
+							"id": 127,
+							"name": "result",
+							"variant": "param",
+							"kind": 32768,
+							"flags": {},
+							"type": {
+								"type": "reference",
+								"target": 154,
+								"name": "ExecResult",
+								"package": "@runa/sdk"
+							}
+						}
+					],
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "intrinsic",
+								"name": "string"
+							},
+							{
+								"type": "intrinsic",
+								"name": "undefined"
+							}
+						]
+					}
+				}
+			]
+		},
+		{
+			"id": 122,
+			"name": "stderrText",
+			"variant": "declaration",
+			"kind": 64,
+			"flags": {},
+			"sources": [
+				{
+					"fileName": "dist/text.d.ts",
+					"line": 3,
+					"character": 24
+				}
+			],
+			"signatures": [
+				{
+					"id": 123,
+					"name": "stderrText",
+					"variant": "signature",
+					"kind": 4096,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "dist/text.d.ts",
+							"line": 3,
+							"character": 24
+						}
+					],
+					"parameters": [
+						{
+							"id": 124,
+							"name": "result",
+							"variant": "param",
+							"kind": 32768,
+							"flags": {},
+							"type": {
+								"type": "reference",
+								"target": 154,
+								"name": "ExecResult",
+								"package": "@runa/sdk"
+							}
+						}
+					],
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "intrinsic",
+								"name": "string"
+							},
+							{
+								"type": "intrinsic",
+								"name": "undefined"
+							}
+						]
+					}
+				}
+			]
+		},
+		{
+			"id": 165,
+			"name": "OpaqueWireValue",
+			"variant": "declaration",
+			"kind": 2097152,
+			"flags": {},
+			"sources": [
+				{
+					"fileName": "dist/types.d.ts",
+					"line": 1,
+					"character": 12
+				}
+			],
+			"type": {
+				"type": "intrinsic",
+				"name": "unknown"
+			}
+		},
+		{
+			"id": 209,
+			"name": "SessionStatus",
+			"variant": "declaration",
+			"kind": 2097152,
+			"flags": {},
+			"sources": [
+				{
+					"fileName": "dist/types.d.ts",
+					"line": 2,
+					"character": 12
+				}
+			],
+			"type": {
+				"type": "union",
+				"types": [
+					{
+						"type": "literal",
+						"value": "creating"
+					},
+					{
+						"type": "literal",
+						"value": "running"
+					},
+					{
+						"type": "literal",
+						"value": "paused"
+					},
+					{
+						"type": "literal",
+						"value": "suspended"
+					},
+					{
+						"type": "literal",
+						"value": "stopped"
+					},
+					{
+						"type": "literal",
+						"value": "deleted"
+					},
+					{
+						"type": "literal",
+						"value": "error"
+					}
+				]
+			}
+		},
+		{
+			"id": 189,
+			"name": "SessionAgent",
+			"variant": "declaration",
+			"kind": 2097152,
+			"flags": {},
+			"sources": [
+				{
+					"fileName": "dist/types.d.ts",
+					"line": 3,
+					"character": 12
+				}
+			],
+			"type": {
+				"type": "union",
+				"types": [
+					{
+						"type": "literal",
+						"value": "claude-code"
+					},
+					{
+						"type": "literal",
+						"value": "codex"
+					},
+					{
+						"type": "literal",
+						"value": "openclaw"
+					}
+				]
+			}
+		},
+		{
+			"id": 196,
+			"name": "SessionSnapshot",
+			"variant": "declaration",
+			"kind": 256,
+			"flags": {},
+			"children": [
+				{
+					"id": 197,
+					"name": "id",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 5,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				},
+				{
+					"id": 198,
+					"name": "userId",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 6,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				},
+				{
+					"id": 199,
+					"name": "slug",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 7,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				},
+				{
+					"id": 200,
+					"name": "name",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 8,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				},
+				{
+					"id": 201,
+					"name": "agent",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isOptional": true,
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 9,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": 189,
+						"name": "SessionAgent",
+						"package": "@runa/sdk"
+					}
+				},
+				{
+					"id": 202,
+					"name": "vcpus",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 10,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "number"
+					}
+				},
+				{
+					"id": 203,
+					"name": "memoryMiB",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 11,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "number"
+					}
+				},
+				{
+					"id": 204,
+					"name": "status",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 12,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": 209,
+						"name": "SessionStatus",
+						"package": "@runa/sdk"
+					}
+				},
+				{
+					"id": 205,
+					"name": "runningSeconds",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 13,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "number"
+					}
+				},
+				{
+					"id": 206,
+					"name": "createdAt",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 14,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				},
+				{
+					"id": 207,
+					"name": "updatedAt",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 15,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				},
+				{
+					"id": 208,
+					"name": "url",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 16,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Properties",
+					"children": [
+						197,
+						198,
+						199,
+						200,
+						201,
+						202,
+						203,
+						204,
+						205,
+						206,
+						207,
+						208
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "dist/types.d.ts",
+					"line": 4,
+					"character": 17
+				}
+			]
+		},
+		{
+			"id": 190,
+			"name": "SessionCreateOptions",
+			"variant": "declaration",
+			"kind": 256,
+			"flags": {},
+			"children": [
+				{
+					"id": 191,
+					"name": "agent",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isOptional": true,
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 19,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": 189,
+						"name": "SessionAgent",
+						"package": "@runa/sdk"
+					}
+				},
+				{
+					"id": 192,
+					"name": "vcpus",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isOptional": true,
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 20,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "number"
+					}
+				},
+				{
+					"id": 193,
+					"name": "memoryMiB",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isOptional": true,
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 21,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "number"
+					}
+				},
+				{
+					"id": 194,
+					"name": "allowedHosts",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isOptional": true,
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 22,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "typeOperator",
+						"operator": "readonly",
+						"target": {
+							"type": "array",
+							"elementType": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						}
+					}
+				},
+				{
+					"id": 195,
+					"name": "runtimePort",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isOptional": true,
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 23,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "number"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Properties",
+					"children": [
+						191,
+						192,
+						193,
+						194,
+						195
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "dist/types.d.ts",
+					"line": 18,
+					"character": 17
+				}
+			]
+		},
+		{
+			"id": 151,
+			"name": "ExecOptions",
+			"variant": "declaration",
+			"kind": 256,
+			"flags": {},
+			"children": [
+				{
+					"id": 152,
+					"name": "cwd",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isOptional": true,
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 26,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				},
+				{
+					"id": 153,
+					"name": "timeoutSecs",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isOptional": true,
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 27,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "number"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Properties",
+					"children": [
+						152,
+						153
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "dist/types.d.ts",
+					"line": 25,
+					"character": 17
+				}
+			]
+		},
+		{
+			"id": 154,
+			"name": "ExecResult",
+			"variant": "declaration",
+			"kind": 256,
+			"flags": {},
+			"children": [
+				{
+					"id": 155,
+					"name": "exitCode",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 30,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "number"
+					}
+				},
+				{
+					"id": 156,
+					"name": "stdout",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 31,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				},
+				{
+					"id": 157,
+					"name": "stderr",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 32,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				},
+				{
+					"id": 158,
+					"name": "durationMs",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 33,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "number"
+					}
+				},
+				{
+					"id": 159,
+					"name": "stdoutTruncated",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 34,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "boolean"
+					}
+				},
+				{
+					"id": 160,
+					"name": "stderrTruncated",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 35,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "boolean"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Properties",
+					"children": [
+						155,
+						156,
+						157,
+						158,
+						159,
+						160
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "dist/types.d.ts",
+					"line": 29,
+					"character": 17
+				}
+			]
+		},
+		{
+			"id": 141,
+			"name": "Acknowledgement",
+			"variant": "declaration",
+			"kind": 256,
+			"flags": {},
+			"children": [
+				{
+					"id": 142,
+					"name": "ok",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 38,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "literal",
+						"value": true
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Properties",
+					"children": [
+						142
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "dist/types.d.ts",
+					"line": 37,
+					"character": 17
+				}
+			]
+		},
+		{
+			"id": 166,
+			"name": "OpenSessionResult",
+			"variant": "declaration",
+			"kind": 256,
+			"flags": {},
+			"children": [
+				{
+					"id": 167,
+					"name": "url",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 41,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Properties",
+					"children": [
+						167
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "dist/types.d.ts",
+					"line": 40,
+					"character": 17
+				}
+			]
+		},
+		{
+			"id": 168,
+			"name": "Record",
+			"variant": "declaration",
+			"kind": 256,
+			"flags": {},
+			"children": [
+				{
+					"id": 169,
+					"name": "id",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 44,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				},
+				{
+					"id": 170,
+					"name": "sessionId",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 45,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				},
+				{
+					"id": 171,
+					"name": "kind",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 46,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				},
+				{
+					"id": 172,
+					"name": "summary",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 47,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				},
+				{
+					"id": 173,
+					"name": "detail",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 48,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "unknown"
+					}
+				},
+				{
+					"id": 174,
+					"name": "createdAt",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 49,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Properties",
+					"children": [
+						169,
+						170,
+						171,
+						172,
+						173,
+						174
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "dist/types.d.ts",
+					"line": 43,
+					"character": 17
+				}
+			]
+		},
+		{
+			"id": 147,
+			"name": "EstimatedUsage",
+			"variant": "declaration",
+			"kind": 256,
+			"flags": {},
+			"children": [
+				{
+					"id": 148,
+					"name": "estimatedSpendUsd",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 52,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "number"
+					}
+				},
+				{
+					"id": 149,
+					"name": "estimatedRemainingUsd",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 53,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "number"
+					}
+				},
+				{
+					"id": 150,
+					"name": "note",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 54,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Properties",
+					"children": [
+						148,
+						149,
+						150
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "dist/types.d.ts",
+					"line": 51,
+					"character": 17
+				}
+			]
+		},
+		{
+			"id": 143,
+			"name": "AssignedWorkspace",
+			"variant": "declaration",
+			"kind": 256,
+			"flags": {},
+			"children": [
+				{
+					"id": 144,
+					"name": "assigned",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 57,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "boolean"
+					}
+				},
+				{
+					"id": 145,
+					"name": "usage",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 58,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": 147,
+						"name": "EstimatedUsage",
+						"package": "@runa/sdk"
+					}
+				},
+				{
+					"id": 146,
+					"name": "waitlistPosition",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isOptional": true,
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 59,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "undefined"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Properties",
+					"children": [
+						144,
+						145,
+						146
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "dist/types.d.ts",
+					"line": 56,
+					"character": 17
+				}
+			]
+		},
+		{
+			"id": 210,
+			"name": "UnassignedWorkspace",
+			"variant": "declaration",
+			"kind": 256,
+			"flags": {},
+			"children": [
+				{
+					"id": 211,
+					"name": "assigned",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 62,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "literal",
+						"value": false
+					}
+				},
+				{
+					"id": 212,
+					"name": "waitlistPosition",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 63,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "number"
+					}
+				},
+				{
+					"id": 213,
+					"name": "usage",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isOptional": true,
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 64,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "undefined"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Properties",
+					"children": [
+						211,
+						212,
+						213
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "dist/types.d.ts",
+					"line": 61,
+					"character": 17
+				}
+			]
+		},
+		{
+			"id": 214,
+			"name": "Workspace",
+			"variant": "declaration",
+			"kind": 2097152,
+			"flags": {},
+			"sources": [
+				{
+					"fileName": "dist/types.d.ts",
+					"line": 66,
+					"character": 12
+				}
+			],
+			"type": {
+				"type": "union",
+				"types": [
+					{
+						"type": "reference",
+						"target": 143,
+						"name": "AssignedWorkspace",
+						"package": "@runa/sdk"
+					},
+					{
+						"type": "reference",
+						"target": 210,
+						"name": "UnassignedWorkspace",
+						"package": "@runa/sdk"
+					}
+				]
+			}
+		},
+		{
+			"id": 161,
+			"name": "Me",
+			"variant": "declaration",
+			"kind": 256,
+			"flags": {},
+			"children": [
+				{
+					"id": 162,
+					"name": "id",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 68,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				},
+				{
+					"id": 163,
+					"name": "email",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 69,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				},
+				{
+					"id": 164,
+					"name": "workspace",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 70,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": 214,
+						"name": "Workspace",
+						"package": "@runa/sdk"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Properties",
+					"children": [
+						162,
+						163,
+						164
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "dist/types.d.ts",
+					"line": 67,
+					"character": 17
+				}
+			]
+		},
+		{
+			"id": 175,
+			"name": "RunaConfig",
+			"variant": "declaration",
+			"kind": 256,
+			"flags": {},
+			"children": [
+				{
+					"id": 176,
+					"name": "apiKey",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isOptional": true,
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 131,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				},
+				{
+					"id": 177,
+					"name": "baseUrl",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isOptional": true,
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 132,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				},
+				{
+					"id": 178,
+					"name": "configFile",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isOptional": true,
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 133,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "intrinsic",
+								"name": "string"
+							},
+							{
+								"type": "literal",
+								"value": null
+							}
+						]
+					}
+				},
+				{
+					"id": 179,
+					"name": "fetch",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isOptional": true,
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 134,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 180,
+							"name": "__type",
+							"variant": "declaration",
+							"kind": 65536,
+							"flags": {},
+							"signatures": [
+								{
+									"id": 181,
+									"name": "__type",
+									"variant": "signature",
+									"kind": 4096,
+									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "[MDN Reference](https://developer.mozilla.org/docs/Web/API/Window/fetch)"
+											}
+										]
+									},
+									"parameters": [
+										{
+											"id": 182,
+											"name": "input",
+											"variant": "param",
+											"kind": 32768,
+											"flags": {},
+											"type": {
+												"type": "union",
+												"types": [
+													{
+														"type": "reference",
+														"target": {
+															"packageName": "typescript",
+															"packagePath": "lib/lib.dom.d.ts",
+															"qualifiedName": "RequestInfo"
+														},
+														"name": "RequestInfo",
+														"package": "typescript"
+													},
+													{
+														"type": "reference",
+														"target": {
+															"packageName": "typescript",
+															"packagePath": "lib/lib.dom.d.ts",
+															"qualifiedName": "URL"
+														},
+														"name": "URL",
+														"package": "typescript"
+													}
+												]
+											}
+										},
+										{
+											"id": 183,
+											"name": "init",
+											"variant": "param",
+											"kind": 32768,
+											"flags": {
+												"isOptional": true
+											},
+											"type": {
+												"type": "reference",
+												"target": {
+													"packageName": "typescript",
+													"packagePath": "lib/lib.dom.d.ts",
+													"qualifiedName": "RequestInit"
+												},
+												"name": "RequestInit",
+												"package": "typescript"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"target": {
+											"packageName": "typescript",
+											"packagePath": "lib/lib.es5.d.ts",
+											"qualifiedName": "Promise"
+										},
+										"typeArguments": [
+											{
+												"type": "reference",
+												"target": {
+													"packageName": "typescript",
+													"packagePath": "lib/lib.dom.d.ts",
+													"qualifiedName": "Response"
+												},
+												"name": "Response",
+												"package": "typescript"
+											}
+										],
+										"name": "Promise",
+										"package": "typescript"
+									}
+								},
+								{
+									"id": 184,
+									"name": "__type",
+									"variant": "signature",
+									"kind": 4096,
+									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "[MDN Reference](https://developer.mozilla.org/docs/Web/API/Window/fetch)"
+											}
+										]
+									},
+									"parameters": [
+										{
+											"id": 185,
+											"name": "input",
+											"variant": "param",
+											"kind": 32768,
+											"flags": {},
+											"type": {
+												"type": "union",
+												"types": [
+													{
+														"type": "intrinsic",
+														"name": "string"
+													},
+													{
+														"type": "reference",
+														"target": {
+															"packageName": "typescript",
+															"packagePath": "lib/lib.dom.d.ts",
+															"qualifiedName": "Request"
+														},
+														"name": "Request",
+														"package": "typescript"
+													},
+													{
+														"type": "reference",
+														"target": {
+															"packageName": "typescript",
+															"packagePath": "lib/lib.dom.d.ts",
+															"qualifiedName": "URL"
+														},
+														"name": "URL",
+														"package": "typescript"
+													}
+												]
+											}
+										},
+										{
+											"id": 186,
+											"name": "init",
+											"variant": "param",
+											"kind": 32768,
+											"flags": {
+												"isOptional": true
+											},
+											"type": {
+												"type": "reference",
+												"target": {
+													"packageName": "typescript",
+													"packagePath": "lib/lib.dom.d.ts",
+													"qualifiedName": "RequestInit"
+												},
+												"name": "RequestInit",
+												"package": "typescript"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"target": {
+											"packageName": "typescript",
+											"packagePath": "lib/lib.es5.d.ts",
+											"qualifiedName": "Promise"
+										},
+										"typeArguments": [
+											{
+												"type": "reference",
+												"target": {
+													"packageName": "typescript",
+													"packagePath": "lib/lib.dom.d.ts",
+													"qualifiedName": "Response"
+												},
+												"name": "Response",
+												"package": "typescript"
+											}
+										],
+										"name": "Promise",
+										"package": "typescript"
+									}
+								}
+							]
+						}
+					}
+				},
+				{
+					"id": 187,
+					"name": "diagnostics",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isOptional": true,
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 135,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"packageName": "@runa/sdk",
+							"packagePath": "src/types.ts",
+							"qualifiedName": "DiagnosticSink"
+						},
+						"name": "DiagnosticSink",
+						"package": "@runa/sdk"
+					}
+				},
+				{
+					"id": 188,
+					"name": "tracing",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isOptional": true,
+						"isReadonly": true
+					},
+					"sources": [
+						{
+							"fileName": "dist/types.d.ts",
+							"line": 136,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"packageName": "@runa/sdk",
+							"packagePath": "src/types.ts",
+							"qualifiedName": "TraceSink"
+						},
+						"name": "TraceSink",
+						"package": "@runa/sdk"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Properties",
+					"children": [
+						176,
+						177,
+						178,
+						179,
+						187,
+						188
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "dist/types.d.ts",
+					"line": 130,
+					"character": 17
+				}
+			]
+		}
+	],
+	"groups": [
+		{
+			"title": "Classes",
+			"children": [
+				1,
+				100,
+				82,
+				43,
+				64,
+				14
+			]
+		},
+		{
+			"title": "Interfaces",
+			"children": [
+				131,
+				128,
+				196,
+				190,
+				151,
+				154,
+				141,
+				166,
+				168,
+				147,
+				143,
+				210,
+				161,
+				175
+			]
+		},
+		{
+			"title": "Type Aliases",
+			"children": [
+				165,
+				209,
+				189,
+				214
+			]
+		},
+		{
+			"title": "Functions",
+			"children": [
+				125,
+				122
+			]
+		}
+	],
+	"packageName": "@runa/sdk",
+	"symbolIdMap": {
+		"0": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/index.ts",
+			"qualifiedName": ""
+		},
+		"1": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/client.ts",
+			"qualifiedName": "Runa"
+		},
+		"2": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/client.ts",
+			"qualifiedName": "Runa.__constructor"
+		},
+		"3": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/client.ts",
+			"qualifiedName": "Runa"
+		},
+		"4": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/client.ts",
+			"qualifiedName": "config"
+		},
+		"6": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/client.ts",
+			"qualifiedName": "Runa.sessions"
+		},
+		"7": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/client.ts",
+			"qualifiedName": "Runa.sessions"
+		},
+		"8": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/client.ts",
+			"qualifiedName": "Runa.records"
+		},
+		"9": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/client.ts",
+			"qualifiedName": "Runa.records"
+		},
+		"10": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/client.ts",
+			"qualifiedName": "Runa.me"
+		},
+		"11": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/client.ts",
+			"qualifiedName": "Runa.me"
+		},
+		"12": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/client.ts",
+			"qualifiedName": "Runa.close"
+		},
+		"13": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/client.ts",
+			"qualifiedName": "Runa.close"
+		},
+		"14": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/session.ts",
+			"qualifiedName": "Session"
+		},
+		"18": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/session.ts",
+			"qualifiedName": "Session.id"
+		},
+		"19": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/session.ts",
+			"qualifiedName": "Session.id"
+		},
+		"20": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/session.ts",
+			"qualifiedName": "Session.snapshot"
+		},
+		"21": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/session.ts",
+			"qualifiedName": "Session.snapshot"
+		},
+		"22": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/session.ts",
+			"qualifiedName": "Session.refresh"
+		},
+		"23": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/session.ts",
+			"qualifiedName": "Session.refresh"
+		},
+		"24": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/session.ts",
+			"qualifiedName": "Session.start"
+		},
+		"25": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/session.ts",
+			"qualifiedName": "Session.start"
+		},
+		"26": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/session.ts",
+			"qualifiedName": "Session.pause"
+		},
+		"27": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/session.ts",
+			"qualifiedName": "Session.pause"
+		},
+		"28": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/session.ts",
+			"qualifiedName": "Session.resume"
+		},
+		"29": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/session.ts",
+			"qualifiedName": "Session.resume"
+		},
+		"30": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/session.ts",
+			"qualifiedName": "Session.stop"
+		},
+		"31": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/session.ts",
+			"qualifiedName": "Session.stop"
+		},
+		"32": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/session.ts",
+			"qualifiedName": "Session.delete"
+		},
+		"33": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/session.ts",
+			"qualifiedName": "Session.delete"
+		},
+		"34": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/session.ts",
+			"qualifiedName": "Session.exec"
+		},
+		"35": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/session.ts",
+			"qualifiedName": "Session.exec"
+		},
+		"36": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/session.ts",
+			"qualifiedName": "command"
+		},
+		"37": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/session.ts",
+			"qualifiedName": "options"
+		},
+		"38": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/session.ts",
+			"qualifiedName": "Session.checkpoint"
+		},
+		"39": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/session.ts",
+			"qualifiedName": "Session.checkpoint"
+		},
+		"40": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/session.ts",
+			"qualifiedName": "name"
+		},
+		"41": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/session.ts",
+			"qualifiedName": "Session.open"
+		},
+		"42": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/session.ts",
+			"qualifiedName": "Session.open"
+		},
+		"43": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/errors.ts",
+			"qualifiedName": "ApiError"
+		},
+		"44": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "__global.ErrorConstructor.captureStackTrace"
+		},
+		"45": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "__global.ErrorConstructor.captureStackTrace"
+		},
+		"46": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "targetObject"
+		},
+		"47": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "constructorOpt"
+		},
+		"48": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "__global.ErrorConstructor.prepareStackTrace"
+		},
+		"49": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "__type"
+		},
+		"50": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "__type"
+		},
+		"51": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "err"
+		},
+		"52": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "stackTraces"
+		},
+		"53": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "__global.ErrorConstructor.stackTraceLimit"
+		},
+		"54": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/errors.ts",
+			"qualifiedName": "ApiError.__constructor"
+		},
+		"55": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/errors.ts",
+			"qualifiedName": "ApiError"
+		},
+		"56": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/errors.ts",
+			"qualifiedName": "status"
+		},
+		"57": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/errors.ts",
+			"qualifiedName": "code"
+		},
+		"58": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/errors.ts",
+			"qualifiedName": "ApiError.name"
+		},
+		"59": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/errors.ts",
+			"qualifiedName": "ApiError.code"
+		},
+		"60": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/errors.ts",
+			"qualifiedName": "ApiError.status"
+		},
+		"61": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/errors.ts",
+			"qualifiedName": "ApiError.message"
+		},
+		"62": {
+			"packageName": "typescript",
+			"packagePath": "lib/lib.es5.d.ts",
+			"qualifiedName": "Error.stack"
+		},
+		"63": {
+			"packageName": "typescript",
+			"packagePath": "lib/lib.es2022.error.d.ts",
+			"qualifiedName": "Error.cause"
+		},
+		"64": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/errors.ts",
+			"qualifiedName": "CommandError"
+		},
+		"65": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "__global.ErrorConstructor.captureStackTrace"
+		},
+		"66": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "__global.ErrorConstructor.captureStackTrace"
+		},
+		"67": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "targetObject"
+		},
+		"68": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "constructorOpt"
+		},
+		"69": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "__global.ErrorConstructor.prepareStackTrace"
+		},
+		"70": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "__type"
+		},
+		"71": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "__type"
+		},
+		"72": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "err"
+		},
+		"73": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "stackTraces"
+		},
+		"74": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "__global.ErrorConstructor.stackTraceLimit"
+		},
+		"77": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/errors.ts",
+			"qualifiedName": "CommandError.name"
+		},
+		"78": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/errors.ts",
+			"qualifiedName": "CommandError.code"
+		},
+		"79": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/errors.ts",
+			"qualifiedName": "CommandError.message"
+		},
+		"80": {
+			"packageName": "typescript",
+			"packagePath": "lib/lib.es5.d.ts",
+			"qualifiedName": "Error.stack"
+		},
+		"81": {
+			"packageName": "typescript",
+			"packagePath": "lib/lib.es2022.error.d.ts",
+			"qualifiedName": "Error.cause"
+		},
+		"82": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/errors.ts",
+			"qualifiedName": "ConfigError"
+		},
+		"83": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "__global.ErrorConstructor.captureStackTrace"
+		},
+		"84": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "__global.ErrorConstructor.captureStackTrace"
+		},
+		"85": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "targetObject"
+		},
+		"86": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "constructorOpt"
+		},
+		"87": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "__global.ErrorConstructor.prepareStackTrace"
+		},
+		"88": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "__type"
+		},
+		"89": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "__type"
+		},
+		"90": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "err"
+		},
+		"91": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "stackTraces"
+		},
+		"92": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "__global.ErrorConstructor.stackTraceLimit"
+		},
+		"93": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/errors.ts",
+			"qualifiedName": "ConfigError.__constructor"
+		},
+		"94": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/errors.ts",
+			"qualifiedName": "ConfigError"
+		},
+		"95": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/errors.ts",
+			"qualifiedName": "ConfigError.name"
+		},
+		"96": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/errors.ts",
+			"qualifiedName": "ConfigError.code"
+		},
+		"97": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/errors.ts",
+			"qualifiedName": "ConfigError.message"
+		},
+		"98": {
+			"packageName": "typescript",
+			"packagePath": "lib/lib.es5.d.ts",
+			"qualifiedName": "Error.stack"
+		},
+		"99": {
+			"packageName": "typescript",
+			"packagePath": "lib/lib.es2022.error.d.ts",
+			"qualifiedName": "Error.cause"
+		},
+		"100": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/errors.ts",
+			"qualifiedName": "RunaError"
+		},
+		"101": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "__global.ErrorConstructor.captureStackTrace"
+		},
+		"102": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "__global.ErrorConstructor.captureStackTrace"
+		},
+		"103": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "targetObject"
+		},
+		"104": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "constructorOpt"
+		},
+		"105": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "__global.ErrorConstructor.prepareStackTrace"
+		},
+		"106": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "__type"
+		},
+		"107": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "__type"
+		},
+		"108": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "err"
+		},
+		"109": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "stackTraces"
+		},
+		"110": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "__global.ErrorConstructor.stackTraceLimit"
+		},
+		"111": {
+			"packageName": "typescript",
+			"packagePath": "lib/lib.es5.d.ts",
+			"qualifiedName": "ErrorConstructor.__new"
+		},
+		"112": {
+			"packageName": "typescript",
+			"packagePath": "lib/lib.es5.d.ts",
+			"qualifiedName": "RunaError"
+		},
+		"113": {
+			"packageName": "typescript",
+			"packagePath": "lib/lib.es5.d.ts",
+			"qualifiedName": "message"
+		},
+		"114": {
+			"packageName": "typescript",
+			"packagePath": "lib/lib.es2022.error.d.ts",
+			"qualifiedName": "RunaError"
+		},
+		"115": {
+			"packageName": "typescript",
+			"packagePath": "lib/lib.es2022.error.d.ts",
+			"qualifiedName": "message"
+		},
+		"116": {
+			"packageName": "typescript",
+			"packagePath": "lib/lib.es2022.error.d.ts",
+			"qualifiedName": "options"
+		},
+		"117": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/errors.ts",
+			"qualifiedName": "RunaError.name"
+		},
+		"118": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/errors.ts",
+			"qualifiedName": "RunaError.code"
+		},
+		"119": {
+			"packageName": "typescript",
+			"packagePath": "lib/lib.es5.d.ts",
+			"qualifiedName": "Error.message"
+		},
+		"120": {
+			"packageName": "typescript",
+			"packagePath": "lib/lib.es5.d.ts",
+			"qualifiedName": "Error.stack"
+		},
+		"121": {
+			"packageName": "typescript",
+			"packagePath": "lib/lib.es2022.error.d.ts",
+			"qualifiedName": "Error.cause"
+		},
+		"122": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/text.ts",
+			"qualifiedName": "stderrText"
+		},
+		"123": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/text.ts",
+			"qualifiedName": "stderrText"
+		},
+		"124": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/text.ts",
+			"qualifiedName": "result"
+		},
+		"125": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/text.ts",
+			"qualifiedName": "stdoutText"
+		},
+		"126": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/text.ts",
+			"qualifiedName": "stdoutText"
+		},
+		"127": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/text.ts",
+			"qualifiedName": "result"
+		},
+		"128": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/client.ts",
+			"qualifiedName": "RecordsManager"
+		},
+		"129": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/client.ts",
+			"qualifiedName": "RecordsManager.list"
+		},
+		"130": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/client.ts",
+			"qualifiedName": "RecordsManager.list"
+		},
+		"131": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/client.ts",
+			"qualifiedName": "SessionsManager"
+		},
+		"132": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/client.ts",
+			"qualifiedName": "SessionsManager.create"
+		},
+		"133": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/client.ts",
+			"qualifiedName": "SessionsManager.create"
+		},
+		"134": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/client.ts",
+			"qualifiedName": "name"
+		},
+		"135": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/client.ts",
+			"qualifiedName": "options"
+		},
+		"136": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/client.ts",
+			"qualifiedName": "SessionsManager.list"
+		},
+		"137": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/client.ts",
+			"qualifiedName": "SessionsManager.list"
+		},
+		"138": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/client.ts",
+			"qualifiedName": "SessionsManager.get"
+		},
+		"139": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/client.ts",
+			"qualifiedName": "SessionsManager.get"
+		},
+		"140": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/client.ts",
+			"qualifiedName": "id"
+		},
+		"141": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "Acknowledgement"
+		},
+		"142": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "Acknowledgement.ok"
+		},
+		"143": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "AssignedWorkspace"
+		},
+		"144": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "AssignedWorkspace.assigned"
+		},
+		"145": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "AssignedWorkspace.usage"
+		},
+		"146": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "AssignedWorkspace.waitlistPosition"
+		},
+		"147": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "EstimatedUsage"
+		},
+		"148": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "EstimatedUsage.estimatedSpendUsd"
+		},
+		"149": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "EstimatedUsage.estimatedRemainingUsd"
+		},
+		"150": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "EstimatedUsage.note"
+		},
+		"151": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "ExecOptions"
+		},
+		"152": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "ExecOptions.cwd"
+		},
+		"153": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "ExecOptions.timeoutSecs"
+		},
+		"154": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "ExecResult"
+		},
+		"155": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "ExecResult.exitCode"
+		},
+		"156": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "ExecResult.stdout"
+		},
+		"157": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "ExecResult.stderr"
+		},
+		"158": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "ExecResult.durationMs"
+		},
+		"159": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "ExecResult.stdoutTruncated"
+		},
+		"160": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "ExecResult.stderrTruncated"
+		},
+		"161": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "Me"
+		},
+		"162": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "Me.id"
+		},
+		"163": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "Me.email"
+		},
+		"164": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "Me.workspace"
+		},
+		"165": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "OpaqueWireValue"
+		},
+		"166": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "OpenSessionResult"
+		},
+		"167": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "OpenSessionResult.url"
+		},
+		"168": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "Record"
+		},
+		"169": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "Record.id"
+		},
+		"170": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "Record.sessionId"
+		},
+		"171": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "Record.kind"
+		},
+		"172": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "Record.summary"
+		},
+		"173": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "Record.detail"
+		},
+		"174": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "Record.createdAt"
+		},
+		"175": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "RunaConfig"
+		},
+		"176": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "RunaConfig.apiKey"
+		},
+		"177": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "RunaConfig.baseUrl"
+		},
+		"178": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "RunaConfig.configFile"
+		},
+		"179": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "RunaConfig.fetch"
+		},
+		"180": {
+			"packageName": "typescript",
+			"packagePath": "lib/lib.dom.d.ts",
+			"qualifiedName": "fetch"
+		},
+		"181": {
+			"packageName": "typescript",
+			"packagePath": "lib/lib.dom.d.ts",
+			"qualifiedName": "fetch"
+		},
+		"182": {
+			"packageName": "typescript",
+			"packagePath": "lib/lib.dom.d.ts",
+			"qualifiedName": "input"
+		},
+		"183": {
+			"packageName": "typescript",
+			"packagePath": "lib/lib.dom.d.ts",
+			"qualifiedName": "init"
+		},
+		"184": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "fetch"
+		},
+		"185": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "input"
+		},
+		"186": {
+			"packageName": "@types/node",
+			"packagePath": "globals.d.ts",
+			"qualifiedName": "init"
+		},
+		"187": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "RunaConfig.diagnostics"
+		},
+		"188": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "RunaConfig.tracing"
+		},
+		"189": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "SessionAgent"
+		},
+		"190": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "SessionCreateOptions"
+		},
+		"191": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "SessionCreateOptions.agent"
+		},
+		"192": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "SessionCreateOptions.vcpus"
+		},
+		"193": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "SessionCreateOptions.memoryMiB"
+		},
+		"194": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "SessionCreateOptions.allowedHosts"
+		},
+		"195": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "SessionCreateOptions.runtimePort"
+		},
+		"196": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "SessionSnapshot"
+		},
+		"197": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "SessionSnapshot.id"
+		},
+		"198": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "SessionSnapshot.userId"
+		},
+		"199": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "SessionSnapshot.slug"
+		},
+		"200": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "SessionSnapshot.name"
+		},
+		"201": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "SessionSnapshot.agent"
+		},
+		"202": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "SessionSnapshot.vcpus"
+		},
+		"203": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "SessionSnapshot.memoryMiB"
+		},
+		"204": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "SessionSnapshot.status"
+		},
+		"205": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "SessionSnapshot.runningSeconds"
+		},
+		"206": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "SessionSnapshot.createdAt"
+		},
+		"207": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "SessionSnapshot.updatedAt"
+		},
+		"208": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "SessionSnapshot.url"
+		},
+		"209": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "SessionStatus"
+		},
+		"210": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "UnassignedWorkspace"
+		},
+		"211": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "UnassignedWorkspace.assigned"
+		},
+		"212": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "UnassignedWorkspace.waitlistPosition"
+		},
+		"213": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "UnassignedWorkspace.usage"
+		},
+		"214": {
+			"packageName": "@runa/sdk",
+			"packagePath": "src/types.ts",
+			"qualifiedName": "Workspace"
+		}
+	},
+	"files": {
+		"entries": {
+			"1": "dist/index.d.ts"
+		},
+		"reflections": {
+			"1": 0
+		}
+	}
+}
