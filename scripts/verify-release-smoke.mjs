@@ -1,9 +1,10 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { spawnSync } from "node:child_process";
+import { spawn } from "node:child_process";
 import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
+import { npmSpawn } from "./npm-process.mjs";
 
 const candidate = JSON.parse(await readFile("release-artifacts/candidate.json", "utf8"));
 const archivePath = path.resolve("release-artifacts", candidate.filename);
@@ -11,12 +12,25 @@ const archive = await readFile(archivePath);
 assert.equal(createHash("sha256").update(archive).digest("hex"), candidate.sha256);
 assert.equal(candidate.package, "@runa/sdk");
 
-const npm = (arguments_, cwd) => process.platform === "win32"
-  ? spawnSync(process.env.ComSpec ?? "cmd.exe",
-      ["/d", "/s", "/c", `npm ${arguments_.join(" ")}`],
-      { cwd, encoding: "utf8", env: { ...process.env, npm_config_update_notifier: "false" } })
-  : spawnSync("npm", arguments_,
-      { cwd, encoding: "utf8", env: { ...process.env, npm_config_update_notifier: "false" } });
+const collect = (child) => new Promise((resolve, reject) => {
+  let stdout = "";
+  let stderr = "";
+  child.stdout.setEncoding("utf8");
+  child.stderr.setEncoding("utf8");
+  child.stdout.on("data", (chunk) => { stdout += chunk; });
+  child.stderr.on("data", (chunk) => { stderr += chunk; });
+  child.on("error", reject);
+  child.on("close", (status) => resolve({ status, stdout, stderr }));
+});
+const npm = (arguments_, cwd) => collect(npmSpawn(arguments_, {
+  cwd,
+  env: { ...process.env, npm_config_update_notifier: "false" },
+}));
+const runNode = (arguments_, cwd, env) => collect(spawn(process.execPath, arguments_, {
+  cwd,
+  env,
+  stdio: ["ignore", "pipe", "pipe"],
+}));
 
 const runnerSource = String.raw`
 import assert from "node:assert/strict";
@@ -141,57 +155,80 @@ const journeys = [
 ];
 const results = Object.fromEntries(journeys.map((journey) => [journey, []]));
 let cleanRooms = 0;
-
-for (let run = 0; run < 30; run += 1) {
-  for (const journey of journeys) {
-    const workspace = await mkdtemp(path.join(tmpdir(), `runa-ts054-${run}-`));
-    try {
-      const cache = path.join(workspace, "cache");
-      await mkdir(cache);
-      await writeFile(path.join(workspace, "package.json"), `${JSON.stringify({
-        private: true,
-        type: "module",
-        dependencies: { "@runa/sdk": `file:${archivePath.replaceAll("\\", "/")}` },
-      })}\n`);
-      const lock = npm([
-        "install", "--package-lock-only", "--ignore-scripts", "--offline",
-        "--cache", cache, "--no-audit", "--no-fund", "--package-lock=true",
-      ], workspace);
-      assert.equal(lock.status, 0, "R-054-03: exact offline lock creation failed.");
-      const lockBefore = await readFile(path.join(workspace, "package-lock.json"));
-      const lockJson = JSON.parse(lockBefore);
-      assert.equal(lockJson.packages["node_modules/@runa/sdk"].version, candidate.version);
-      assert.match(lockJson.packages["node_modules/@runa/sdk"].resolved,
-        new RegExp(`${candidate.filename.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}$`));
-      const install = npm([
-        "ci", "--ignore-scripts", "--offline", "--cache", cache,
-        "--no-audit", "--no-fund",
-      ], workspace);
-      assert.equal(install.status, 0, "R-054-03: exact offline install failed.");
-      assert.deepEqual(await readFile(path.join(workspace, "package-lock.json")), lockBefore);
-      const installed = JSON.parse(await readFile(
-        path.join(workspace, "node_modules/@runa/sdk/package.json"), "utf8"));
-      assert.equal(installed.name, candidate.package);
-      assert.equal(installed.version, candidate.version);
-      assert.equal(Object.keys(installed.dependencies ?? {}).length, 0);
-      await writeFile(path.join(workspace, "runner.mjs"), runnerSource);
-      const probe = spawnSync(process.execPath, ["runner.mjs", journey], {
-        cwd: workspace,
-        encoding: "utf8",
-        env: { ...process.env, RUNA_API_KEY: "", RUNA_BASE_URL: "" },
-      });
-      assert.equal(probe.status, 0, `R-054-05: ${journey} failed.`);
-      const result = JSON.parse(probe.stdout);
-      assert.equal(result.journey, journey);
-      assert.equal(result.outcome, "structural-pass");
-      if (journey !== "ttfc") assert.equal(result.cleanup, "pass");
-      results[journey].push(result);
-      cleanRooms += 1;
-    } finally {
-      await rm(workspace, { recursive: true, force: true });
-    }
-  }
+const installManifest = `${JSON.stringify({
+  private: true,
+  type: "module",
+  dependencies: { "@runa/sdk": `file:${archivePath.replaceAll("\\", "/")}` },
+})}\n`;
+const lockRoom = await mkdtemp(path.join(tmpdir(), "runa-ts054-lock-"));
+let lockBefore;
+try {
+  const cache = path.join(lockRoom, "cache");
+  await mkdir(cache);
+  await writeFile(path.join(lockRoom, "package.json"), installManifest);
+  const lock = await npm([
+    "install", "--package-lock-only", "--ignore-scripts", "--offline",
+    "--cache", cache, "--no-audit", "--no-fund", "--package-lock=true",
+  ], lockRoom);
+  assert.equal(lock.status, 0, "R-054-03: exact offline lock creation failed.");
+  lockBefore = await readFile(path.join(lockRoom, "package-lock.json"));
+  const lockJson = JSON.parse(lockBefore);
+  assert.equal(lockJson.packages["node_modules/@runa/sdk"].version, candidate.version);
+  assert.match(lockJson.packages["node_modules/@runa/sdk"].resolved,
+    new RegExp(`${candidate.filename.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}$`));
+} finally {
+  await rm(lockRoom, { recursive: true, force: true });
 }
+
+const tasks = [];
+for (let run = 0; run < 30; run += 1) {
+  for (const journey of journeys) tasks.push({ run, journey });
+}
+const execute = async ({ run, journey }) => {
+  const workspace = await mkdtemp(path.join(tmpdir(), `runa-ts054-${run}-`));
+  try {
+    const cache = path.join(workspace, "cache");
+    await mkdir(cache);
+    await writeFile(path.join(workspace, "package.json"), installManifest);
+    await writeFile(path.join(workspace, "package-lock.json"), lockBefore);
+    const install = await npm([
+      "ci", "--ignore-scripts", "--offline", "--cache", cache,
+      "--no-audit", "--no-fund",
+    ], workspace);
+    assert.equal(install.status, 0, "R-054-03: exact offline install failed.");
+    assert.deepEqual(await readFile(path.join(workspace, "package-lock.json")), lockBefore);
+    const installed = JSON.parse(await readFile(
+      path.join(workspace, "node_modules/@runa/sdk/package.json"), "utf8"));
+    assert.equal(installed.name, candidate.package);
+    assert.equal(installed.version, candidate.version);
+    assert.equal(Object.keys(installed.dependencies ?? {}).length, 0);
+    await writeFile(path.join(workspace, "runner.mjs"), runnerSource);
+    const probe = await runNode(["runner.mjs", journey], workspace, {
+      ...process.env,
+      RUNA_API_KEY: "",
+      RUNA_BASE_URL: "",
+    });
+    assert.equal(probe.status, 0, `R-054-05: ${journey} failed.`);
+    const result = JSON.parse(probe.stdout);
+    assert.equal(result.journey, journey);
+    assert.equal(result.outcome, "structural-pass");
+    if (journey !== "ttfc") assert.equal(result.cleanup, "pass");
+    results[journey].push(result);
+    cleanRooms += 1;
+  } finally {
+    await rm(workspace, { recursive: true, force: true });
+  }
+};
+let nextTask = 0;
+const worker = async () => {
+  for (;;) {
+    const index = nextTask;
+    nextTask += 1;
+    if (index >= tasks.length) return;
+    await execute(tasks[index]);
+  }
+};
+await Promise.all(Array.from({ length: 12 }, worker));
 
 for (const journey of journeys) assert.equal(results[journey].length, 30);
 await mkdir("evidence", { recursive: true });

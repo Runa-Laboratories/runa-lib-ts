@@ -4,11 +4,11 @@ import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { npmSpawnSync } from "./npm-process.mjs";
 
 const commandOptions = { encoding: "utf8" };
-const npmRun = (arguments_, options = {}) => process.platform === "win32"
-  ? spawnSync(process.env.ComSpec ?? "cmd.exe", ["/d", "/s", "/c", `npm ${arguments_.join(" ")}`], { ...commandOptions, ...options })
-  : spawnSync("npm", arguments_, { ...commandOptions, ...options });
+const npmRun = (arguments_, options = {}) =>
+  npmSpawnSync(arguments_, { ...commandOptions, ...options });
 const packed = npmRun(["pack", "--json", "--ignore-scripts"]);
 if (packed.status !== 0) throw new Error("Package creation failed.");
 const [metadata] = JSON.parse(packed.stdout);
