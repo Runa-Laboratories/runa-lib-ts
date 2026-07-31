@@ -1,11 +1,11 @@
 import { readdir, readFile, writeFile } from "node:fs/promises";
 import { createPrivateKey, sign } from "node:crypto";
 
-const catalog = JSON.parse(await readFile("evidence/compatibility-catalog.json", "utf8"));
+const catalog = JSON.parse(await readFile("compatibility/ts-050-evidence-v1.json", "utf8"));
 const candidate = JSON.parse(await readFile("release-artifacts/candidate.json", "utf8"));
 const files = await readdir("evidence/compatibility-receipts");
 const cells = [];
-for (const expected of catalog.cells) {
+for (const expected of catalog.matrix) {
   if (!files.includes(`${expected.id}.json`)) throw new Error(`Missing receipt: ${expected.id}`);
   const receipt = JSON.parse(await readFile(`evidence/compatibility-receipts/${expected.id}.json`, "utf8"));
   if (!["PASS", "BLOCKED"].includes(receipt.status) ||
@@ -21,7 +21,7 @@ const issuedAt = new Date();
 const status = cells.every((cell) => cell.status === "PASS" &&
   cell.performance_status === "PASS") ? "PASS" : "BLOCKED";
 const payload = {
-  schema_version: 1, status, catalog: catalog.catalog,
+  schema_version: 1, status, catalog: catalog.catalog_revision,
   candidate_sha256: candidate.sha256, cells,
   issued_at: issuedAt.toISOString(),
   expires_at: new Date(issuedAt.getTime() + 60 * 60 * 1_000).toISOString()

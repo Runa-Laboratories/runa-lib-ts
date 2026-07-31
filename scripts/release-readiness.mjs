@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import { readFile, writeFile } from "node:fs/promises";
 import { verifyTrustedEnvelope } from "./trusted-evidence.mjs";
+import { validateTrustedRolePayload } from "./release-authority-schema.mjs";
 
 const blockers = [];
 const readJson = async (file, gate) => {
@@ -36,6 +37,17 @@ const requireTrusted = async (file, gate, role) => {
     blockers.push({ gate, reason: "Evidence signature, role, status, or freshness is invalid." });
     return undefined;
   }
+  if (["publication", "sbom-validation", "external-interfaces"].includes(role)) {
+    try {
+      validateTrustedRolePayload(role, payload);
+    } catch {
+      blockers.push({
+        gate,
+        reason: "Trusted evidence payload does not satisfy its closed role schema.",
+      });
+      return undefined;
+    }
+  }
   return payload;
 };
 const projection = await readFile("contracts/runa-sdk.projection.json");
@@ -70,6 +82,17 @@ if (quality !== undefined && candidate !== undefined &&
   blockers.push({ gate: "quality", reason: "Quality evidence is not bound to the candidate source commit." });
 }
 await requirePass("evidence/docs-readiness.json", "documentation");
+const performance = await requirePass(
+  "evidence/performance-local.json",
+  "local-performance",
+);
+if (performance !== undefined && candidate !== undefined &&
+    performance.identity?.artifact_sha256 !== candidate.sha256) {
+  blockers.push({
+    gate: "local-performance",
+    reason: "Local performance evidence is not bound to the candidate archive.",
+  });
+}
 const matrix = await requireTrusted("evidence/compatibility-matrix.json", "compatibility-matrix", "compatibility");
 if (matrix !== undefined && (!Array.isArray(matrix.cells) || matrix.cells.length !== 6 ||
     matrix.cells.some((cell) => cell.status !== "PASS"))) {

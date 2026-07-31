@@ -3,6 +3,7 @@ import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { validateContractProvenance } from "./contract-generation.mjs";
 import { verifyTrustedEnvelope } from "./trusted-evidence.mjs";
+import { validateTrustedRolePayload } from "./release-authority-schema.mjs";
 
 const encoded = process.env.RUNA_RELEASE_AUTHORITY_BUNDLE_BASE64;
 if (encoded === undefined || encoded === "") {
@@ -58,6 +59,9 @@ for (const [field, role, filename, binding] of entries) {
   const envelope = bundle[field];
   const payload = verifyTrustedEnvelope(envelope, bundle.trust_policy, role);
   assert.notEqual(payload, undefined, `Invalid trusted ${field} evidence.`);
+  if (["publication", "sbom-validation", "external-interfaces"].includes(role)) {
+    assert.equal(validateTrustedRolePayload(role, payload), true);
+  }
   assert.equal(binding(payload), true, `Mismatched ${field} candidate binding.`);
   retained.push([`evidence/${filename}.json`, envelope]);
 }
