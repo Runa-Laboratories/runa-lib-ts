@@ -136,6 +136,13 @@ function validateTracing(value: unknown): TraceSink | undefined {
 }
 
 export function resolveConfig(config: RunaConfig = {}): EffectiveConfig {
+  if (
+    config === null ||
+    typeof config !== "object" ||
+    Array.isArray(config)
+  ) {
+    fail();
+  }
   const unsafe = config as RunaConfig &
     globalThis.Record<string, unknown>;
   let file: ConfigFileShape = Object.freeze({});

@@ -11,7 +11,6 @@ import {
 import { Session, constructSession } from "./session.js";
 import type {
   Me,
-  OpaqueWireValue,
   Record,
   RunaConfig,
   SessionAgent,
@@ -21,7 +20,7 @@ import type {
 
 export interface SessionsManager {
   create(
-    name: OpaqueWireValue,
+    name: string,
     options?: SessionCreateOptions,
   ): Promise<Session>;
   list(): Promise<readonly Session[]>;
@@ -96,10 +95,10 @@ function own(
 }
 
 function createBody(
-  name: OpaqueWireValue,
+  name: string,
   options?: SessionCreateOptions,
 ): Readonly<globalThis.Record<string, unknown>> {
-  if (name === undefined) {
+  if (typeof name !== "string" || name.length < 1 || name.length > 80) {
     throw new TypeError("Invalid session create options.");
   }
   const body: globalThis.Record<string, unknown> = { name };
@@ -109,6 +108,9 @@ function createBody(
   }
   const source = options as SessionCreateOptions &
     globalThis.Record<string, unknown>;
+  if (Object.keys(source).some((key) => !["agent", "vcpus", "memoryMiB", "allowedHosts", "runtimePort"].includes(key))) {
+    throw new TypeError("Invalid session create options.");
+  }
   if (own(source, "agent")) {
     const allowed = new Set<SessionAgent>([
       "claude-code",
@@ -124,15 +126,27 @@ function createBody(
     body.agent = source.agent;
   }
   if (own(source, "vcpus") && source.vcpus !== undefined) {
+    if (!Number.isInteger(source.vcpus) || source.vcpus < 1 || source.vcpus > 8) {
+      throw new TypeError("Invalid session create options.");
+    }
     body.vcpus = source.vcpus;
   }
   if (own(source, "memoryMiB") && source.memoryMiB !== undefined) {
+    if (!Number.isInteger(source.memoryMiB) || source.memoryMiB < 512 || source.memoryMiB > 16_384) {
+      throw new TypeError("Invalid session create options.");
+    }
     body.memory_mib = source.memoryMiB;
   }
   if (own(source, "allowedHosts") && source.allowedHosts !== undefined) {
+    if (!Array.isArray(source.allowedHosts) || source.allowedHosts.length > 128 || source.allowedHosts.some((host) => typeof host !== "string" || host.length === 0)) {
+      throw new TypeError("Invalid session create options.");
+    }
     body.allowed_hosts = source.allowedHosts;
   }
   if (own(source, "runtimePort") && source.runtimePort !== undefined) {
+    if (!Number.isInteger(source.runtimePort) || source.runtimePort < 1 || source.runtimePort > 65_535) {
+      throw new TypeError("Invalid session create options.");
+    }
     body.runtime_port = source.runtimePort;
   }
   return Object.freeze(body);
@@ -146,7 +160,7 @@ class SessionsManagerImplementation implements SessionsManager {
   }
 
   async create(
-    name: OpaqueWireValue,
+    name: string,
     options?: SessionCreateOptions,
   ): Promise<Session> {
     const body = createBody(name, options);

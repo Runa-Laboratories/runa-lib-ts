@@ -57,8 +57,8 @@ test("PRD-021/025/028-037 dispatch exactly 13 canonical operations", async () =>
   await runa.sessions.get(SESSION_ID);
   const session = await runa.sessions.create("worker", {
     agent: "codex",
-    vcpus: null,
-    memoryMiB: "opaque",
+    vcpus: 2,
+    memoryMiB: 4096,
     allowedHosts: ["example.invalid"],
     runtimePort: 4444,
   });
@@ -110,8 +110,8 @@ test("PRD-021/025/028-037 dispatch exactly 13 canonical operations", async () =>
   assert.deepEqual(createBody, {
     name: "worker",
     agent: "codex",
-    vcpus: null,
-    memory_mib: "opaque",
+    vcpus: 2,
+    memory_mib: 4096,
     allowed_hosts: ["example.invalid"],
     runtime_port: 4444,
   });

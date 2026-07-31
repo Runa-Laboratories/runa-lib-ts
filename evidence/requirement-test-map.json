@@ -1,0 +1,8060 @@
+{
+  "schema_version": 1,
+  "generated_from": "prds/libs/typescript",
+  "source_digest": "d77f1088a36530dfe032c450985272dc33fb927a590dee5cc8e6fe206cb2ccb4",
+  "requirement_count": 527,
+  "rows": [
+    {
+      "requirement": "R-020-01",
+      "prd": "PRD-020-ts-package-and-build-foundation.md",
+      "acceptance_tests": [
+        "TC-020-01",
+        "TC-020-02",
+        "TC-020-03",
+        "TC-020-04",
+        "TC-020-05",
+        "TC-020-06",
+        "TC-020-07",
+        "TC-020-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-020-02",
+      "prd": "PRD-020-ts-package-and-build-foundation.md",
+      "acceptance_tests": [
+        "TC-020-01",
+        "TC-020-02",
+        "TC-020-03",
+        "TC-020-04",
+        "TC-020-05",
+        "TC-020-06",
+        "TC-020-07",
+        "TC-020-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-020-03",
+      "prd": "PRD-020-ts-package-and-build-foundation.md",
+      "acceptance_tests": [
+        "TC-020-01",
+        "TC-020-02",
+        "TC-020-03",
+        "TC-020-04",
+        "TC-020-05",
+        "TC-020-06",
+        "TC-020-07",
+        "TC-020-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-020-04",
+      "prd": "PRD-020-ts-package-and-build-foundation.md",
+      "acceptance_tests": [
+        "TC-020-01",
+        "TC-020-02",
+        "TC-020-03",
+        "TC-020-04",
+        "TC-020-05",
+        "TC-020-06",
+        "TC-020-07",
+        "TC-020-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-020-05",
+      "prd": "PRD-020-ts-package-and-build-foundation.md",
+      "acceptance_tests": [
+        "TC-020-01",
+        "TC-020-02",
+        "TC-020-03",
+        "TC-020-04",
+        "TC-020-05",
+        "TC-020-06",
+        "TC-020-07",
+        "TC-020-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-020-06",
+      "prd": "PRD-020-ts-package-and-build-foundation.md",
+      "acceptance_tests": [
+        "TC-020-01",
+        "TC-020-02",
+        "TC-020-03",
+        "TC-020-04",
+        "TC-020-05",
+        "TC-020-06",
+        "TC-020-07",
+        "TC-020-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-020-07",
+      "prd": "PRD-020-ts-package-and-build-foundation.md",
+      "acceptance_tests": [
+        "TC-020-01",
+        "TC-020-02",
+        "TC-020-03",
+        "TC-020-04",
+        "TC-020-05",
+        "TC-020-06",
+        "TC-020-07",
+        "TC-020-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-020-08",
+      "prd": "PRD-020-ts-package-and-build-foundation.md",
+      "acceptance_tests": [
+        "TC-020-01",
+        "TC-020-02",
+        "TC-020-03",
+        "TC-020-04",
+        "TC-020-05",
+        "TC-020-06",
+        "TC-020-07",
+        "TC-020-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-020-09",
+      "prd": "PRD-020-ts-package-and-build-foundation.md",
+      "acceptance_tests": [
+        "TC-020-01",
+        "TC-020-02",
+        "TC-020-03",
+        "TC-020-04",
+        "TC-020-05",
+        "TC-020-06",
+        "TC-020-07",
+        "TC-020-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-020-10",
+      "prd": "PRD-020-ts-package-and-build-foundation.md",
+      "acceptance_tests": [
+        "TC-020-01",
+        "TC-020-02",
+        "TC-020-03",
+        "TC-020-04",
+        "TC-020-05",
+        "TC-020-06",
+        "TC-020-07",
+        "TC-020-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-020-11",
+      "prd": "PRD-020-ts-package-and-build-foundation.md",
+      "acceptance_tests": [
+        "TC-020-01",
+        "TC-020-02",
+        "TC-020-03",
+        "TC-020-04",
+        "TC-020-05",
+        "TC-020-06",
+        "TC-020-07",
+        "TC-020-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-020-12",
+      "prd": "PRD-020-ts-package-and-build-foundation.md",
+      "acceptance_tests": [
+        "TC-020-01",
+        "TC-020-02",
+        "TC-020-03",
+        "TC-020-04",
+        "TC-020-05",
+        "TC-020-06",
+        "TC-020-07",
+        "TC-020-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-020-13",
+      "prd": "PRD-020-ts-package-and-build-foundation.md",
+      "acceptance_tests": [
+        "TC-020-01",
+        "TC-020-02",
+        "TC-020-03",
+        "TC-020-04",
+        "TC-020-05",
+        "TC-020-06",
+        "TC-020-07",
+        "TC-020-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-020-14",
+      "prd": "PRD-020-ts-package-and-build-foundation.md",
+      "acceptance_tests": [
+        "TC-020-01",
+        "TC-020-02",
+        "TC-020-03",
+        "TC-020-04",
+        "TC-020-05",
+        "TC-020-06",
+        "TC-020-07",
+        "TC-020-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-020-15",
+      "prd": "PRD-020-ts-package-and-build-foundation.md",
+      "acceptance_tests": [
+        "TC-020-01",
+        "TC-020-02",
+        "TC-020-03",
+        "TC-020-04",
+        "TC-020-05",
+        "TC-020-06",
+        "TC-020-07",
+        "TC-020-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-020-16",
+      "prd": "PRD-020-ts-package-and-build-foundation.md",
+      "acceptance_tests": [
+        "TC-020-01",
+        "TC-020-02",
+        "TC-020-03",
+        "TC-020-04",
+        "TC-020-05",
+        "TC-020-06",
+        "TC-020-07",
+        "TC-020-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-020-17",
+      "prd": "PRD-020-ts-package-and-build-foundation.md",
+      "acceptance_tests": [
+        "TC-020-01",
+        "TC-020-02",
+        "TC-020-03",
+        "TC-020-04",
+        "TC-020-05",
+        "TC-020-06",
+        "TC-020-07",
+        "TC-020-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-020-18",
+      "prd": "PRD-020-ts-package-and-build-foundation.md",
+      "acceptance_tests": [
+        "TC-020-01",
+        "TC-020-02",
+        "TC-020-03",
+        "TC-020-04",
+        "TC-020-05",
+        "TC-020-06",
+        "TC-020-07",
+        "TC-020-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-020-19",
+      "prd": "PRD-020-ts-package-and-build-foundation.md",
+      "acceptance_tests": [
+        "TC-020-01",
+        "TC-020-02",
+        "TC-020-03",
+        "TC-020-04",
+        "TC-020-05",
+        "TC-020-06",
+        "TC-020-07",
+        "TC-020-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-021-01",
+      "prd": "PRD-021-ts-contract-bindings.md",
+      "acceptance_tests": [
+        "TC-021-01",
+        "TC-021-02",
+        "TC-021-03",
+        "TC-021-04",
+        "TC-021-05",
+        "TC-021-06",
+        "TC-021-07",
+        "TC-021-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-021-02",
+      "prd": "PRD-021-ts-contract-bindings.md",
+      "acceptance_tests": [
+        "TC-021-01",
+        "TC-021-02",
+        "TC-021-03",
+        "TC-021-04",
+        "TC-021-05",
+        "TC-021-06",
+        "TC-021-07",
+        "TC-021-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-021-03",
+      "prd": "PRD-021-ts-contract-bindings.md",
+      "acceptance_tests": [
+        "TC-021-01",
+        "TC-021-02",
+        "TC-021-03",
+        "TC-021-04",
+        "TC-021-05",
+        "TC-021-06",
+        "TC-021-07",
+        "TC-021-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-021-04",
+      "prd": "PRD-021-ts-contract-bindings.md",
+      "acceptance_tests": [
+        "TC-021-01",
+        "TC-021-02",
+        "TC-021-03",
+        "TC-021-04",
+        "TC-021-05",
+        "TC-021-06",
+        "TC-021-07",
+        "TC-021-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-021-05",
+      "prd": "PRD-021-ts-contract-bindings.md",
+      "acceptance_tests": [
+        "TC-021-01",
+        "TC-021-02",
+        "TC-021-03",
+        "TC-021-04",
+        "TC-021-05",
+        "TC-021-06",
+        "TC-021-07",
+        "TC-021-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-021-06",
+      "prd": "PRD-021-ts-contract-bindings.md",
+      "acceptance_tests": [
+        "TC-021-01",
+        "TC-021-02",
+        "TC-021-03",
+        "TC-021-04",
+        "TC-021-05",
+        "TC-021-06",
+        "TC-021-07",
+        "TC-021-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-021-07",
+      "prd": "PRD-021-ts-contract-bindings.md",
+      "acceptance_tests": [
+        "TC-021-01",
+        "TC-021-02",
+        "TC-021-03",
+        "TC-021-04",
+        "TC-021-05",
+        "TC-021-06",
+        "TC-021-07",
+        "TC-021-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-021-08",
+      "prd": "PRD-021-ts-contract-bindings.md",
+      "acceptance_tests": [
+        "TC-021-01",
+        "TC-021-02",
+        "TC-021-03",
+        "TC-021-04",
+        "TC-021-05",
+        "TC-021-06",
+        "TC-021-07",
+        "TC-021-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-021-09",
+      "prd": "PRD-021-ts-contract-bindings.md",
+      "acceptance_tests": [
+        "TC-021-01",
+        "TC-021-02",
+        "TC-021-03",
+        "TC-021-04",
+        "TC-021-05",
+        "TC-021-06",
+        "TC-021-07",
+        "TC-021-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-021-10",
+      "prd": "PRD-021-ts-contract-bindings.md",
+      "acceptance_tests": [
+        "TC-021-01",
+        "TC-021-02",
+        "TC-021-03",
+        "TC-021-04",
+        "TC-021-05",
+        "TC-021-06",
+        "TC-021-07",
+        "TC-021-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-021-11",
+      "prd": "PRD-021-ts-contract-bindings.md",
+      "acceptance_tests": [
+        "TC-021-01",
+        "TC-021-02",
+        "TC-021-03",
+        "TC-021-04",
+        "TC-021-05",
+        "TC-021-06",
+        "TC-021-07",
+        "TC-021-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-021-12",
+      "prd": "PRD-021-ts-contract-bindings.md",
+      "acceptance_tests": [
+        "TC-021-01",
+        "TC-021-02",
+        "TC-021-03",
+        "TC-021-04",
+        "TC-021-05",
+        "TC-021-06",
+        "TC-021-07",
+        "TC-021-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-021-13",
+      "prd": "PRD-021-ts-contract-bindings.md",
+      "acceptance_tests": [
+        "TC-021-01",
+        "TC-021-02",
+        "TC-021-03",
+        "TC-021-04",
+        "TC-021-05",
+        "TC-021-06",
+        "TC-021-07",
+        "TC-021-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-021-14",
+      "prd": "PRD-021-ts-contract-bindings.md",
+      "acceptance_tests": [
+        "TC-021-01",
+        "TC-021-02",
+        "TC-021-03",
+        "TC-021-04",
+        "TC-021-05",
+        "TC-021-06",
+        "TC-021-07",
+        "TC-021-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-021-15",
+      "prd": "PRD-021-ts-contract-bindings.md",
+      "acceptance_tests": [
+        "TC-021-01",
+        "TC-021-02",
+        "TC-021-03",
+        "TC-021-04",
+        "TC-021-05",
+        "TC-021-06",
+        "TC-021-07",
+        "TC-021-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-021-16",
+      "prd": "PRD-021-ts-contract-bindings.md",
+      "acceptance_tests": [
+        "TC-021-01",
+        "TC-021-02",
+        "TC-021-03",
+        "TC-021-04",
+        "TC-021-05",
+        "TC-021-06",
+        "TC-021-07",
+        "TC-021-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-021-17",
+      "prd": "PRD-021-ts-contract-bindings.md",
+      "acceptance_tests": [
+        "TC-021-01",
+        "TC-021-02",
+        "TC-021-03",
+        "TC-021-04",
+        "TC-021-05",
+        "TC-021-06",
+        "TC-021-07",
+        "TC-021-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-021-18",
+      "prd": "PRD-021-ts-contract-bindings.md",
+      "acceptance_tests": [
+        "TC-021-01",
+        "TC-021-02",
+        "TC-021-03",
+        "TC-021-04",
+        "TC-021-05",
+        "TC-021-06",
+        "TC-021-07",
+        "TC-021-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-021-19",
+      "prd": "PRD-021-ts-contract-bindings.md",
+      "acceptance_tests": [
+        "TC-021-01",
+        "TC-021-02",
+        "TC-021-03",
+        "TC-021-04",
+        "TC-021-05",
+        "TC-021-06",
+        "TC-021-07",
+        "TC-021-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-021-20",
+      "prd": "PRD-021-ts-contract-bindings.md",
+      "acceptance_tests": [
+        "TC-021-01",
+        "TC-021-02",
+        "TC-021-03",
+        "TC-021-04",
+        "TC-021-05",
+        "TC-021-06",
+        "TC-021-07",
+        "TC-021-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-021-21",
+      "prd": "PRD-021-ts-contract-bindings.md",
+      "acceptance_tests": [
+        "TC-021-01",
+        "TC-021-02",
+        "TC-021-03",
+        "TC-021-04",
+        "TC-021-05",
+        "TC-021-06",
+        "TC-021-07",
+        "TC-021-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-021-22",
+      "prd": "PRD-021-ts-contract-bindings.md",
+      "acceptance_tests": [
+        "TC-021-01",
+        "TC-021-02",
+        "TC-021-03",
+        "TC-021-04",
+        "TC-021-05",
+        "TC-021-06",
+        "TC-021-07",
+        "TC-021-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-022-01",
+      "prd": "PRD-022-ts-domain-types-and-serialization.md",
+      "acceptance_tests": [
+        "TC-022-01",
+        "TC-022-02",
+        "TC-022-03",
+        "TC-022-04",
+        "TC-022-05",
+        "TC-022-06",
+        "TC-022-07",
+        "TC-022-08",
+        "TC-022-09",
+        "TC-022-10"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-022-02",
+      "prd": "PRD-022-ts-domain-types-and-serialization.md",
+      "acceptance_tests": [
+        "TC-022-01",
+        "TC-022-02",
+        "TC-022-03",
+        "TC-022-04",
+        "TC-022-05",
+        "TC-022-06",
+        "TC-022-07",
+        "TC-022-08",
+        "TC-022-09",
+        "TC-022-10"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-022-03",
+      "prd": "PRD-022-ts-domain-types-and-serialization.md",
+      "acceptance_tests": [
+        "TC-022-01",
+        "TC-022-02",
+        "TC-022-03",
+        "TC-022-04",
+        "TC-022-05",
+        "TC-022-06",
+        "TC-022-07",
+        "TC-022-08",
+        "TC-022-09",
+        "TC-022-10"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-022-04",
+      "prd": "PRD-022-ts-domain-types-and-serialization.md",
+      "acceptance_tests": [
+        "TC-022-01",
+        "TC-022-02",
+        "TC-022-03",
+        "TC-022-04",
+        "TC-022-05",
+        "TC-022-06",
+        "TC-022-07",
+        "TC-022-08",
+        "TC-022-09",
+        "TC-022-10"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-022-05",
+      "prd": "PRD-022-ts-domain-types-and-serialization.md",
+      "acceptance_tests": [
+        "TC-022-01",
+        "TC-022-02",
+        "TC-022-03",
+        "TC-022-04",
+        "TC-022-05",
+        "TC-022-06",
+        "TC-022-07",
+        "TC-022-08",
+        "TC-022-09",
+        "TC-022-10"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-022-06",
+      "prd": "PRD-022-ts-domain-types-and-serialization.md",
+      "acceptance_tests": [
+        "TC-022-01",
+        "TC-022-02",
+        "TC-022-03",
+        "TC-022-04",
+        "TC-022-05",
+        "TC-022-06",
+        "TC-022-07",
+        "TC-022-08",
+        "TC-022-09",
+        "TC-022-10"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-022-07",
+      "prd": "PRD-022-ts-domain-types-and-serialization.md",
+      "acceptance_tests": [
+        "TC-022-01",
+        "TC-022-02",
+        "TC-022-03",
+        "TC-022-04",
+        "TC-022-05",
+        "TC-022-06",
+        "TC-022-07",
+        "TC-022-08",
+        "TC-022-09",
+        "TC-022-10"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-022-08",
+      "prd": "PRD-022-ts-domain-types-and-serialization.md",
+      "acceptance_tests": [
+        "TC-022-01",
+        "TC-022-02",
+        "TC-022-03",
+        "TC-022-04",
+        "TC-022-05",
+        "TC-022-06",
+        "TC-022-07",
+        "TC-022-08",
+        "TC-022-09",
+        "TC-022-10"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-022-09",
+      "prd": "PRD-022-ts-domain-types-and-serialization.md",
+      "acceptance_tests": [
+        "TC-022-01",
+        "TC-022-02",
+        "TC-022-03",
+        "TC-022-04",
+        "TC-022-05",
+        "TC-022-06",
+        "TC-022-07",
+        "TC-022-08",
+        "TC-022-09",
+        "TC-022-10"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-022-10",
+      "prd": "PRD-022-ts-domain-types-and-serialization.md",
+      "acceptance_tests": [
+        "TC-022-01",
+        "TC-022-02",
+        "TC-022-03",
+        "TC-022-04",
+        "TC-022-05",
+        "TC-022-06",
+        "TC-022-07",
+        "TC-022-08",
+        "TC-022-09",
+        "TC-022-10"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-022-11",
+      "prd": "PRD-022-ts-domain-types-and-serialization.md",
+      "acceptance_tests": [
+        "TC-022-01",
+        "TC-022-02",
+        "TC-022-03",
+        "TC-022-04",
+        "TC-022-05",
+        "TC-022-06",
+        "TC-022-07",
+        "TC-022-08",
+        "TC-022-09",
+        "TC-022-10"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-022-12",
+      "prd": "PRD-022-ts-domain-types-and-serialization.md",
+      "acceptance_tests": [
+        "TC-022-01",
+        "TC-022-02",
+        "TC-022-03",
+        "TC-022-04",
+        "TC-022-05",
+        "TC-022-06",
+        "TC-022-07",
+        "TC-022-08",
+        "TC-022-09",
+        "TC-022-10"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-022-13",
+      "prd": "PRD-022-ts-domain-types-and-serialization.md",
+      "acceptance_tests": [
+        "TC-022-01",
+        "TC-022-02",
+        "TC-022-03",
+        "TC-022-04",
+        "TC-022-05",
+        "TC-022-06",
+        "TC-022-07",
+        "TC-022-08",
+        "TC-022-09",
+        "TC-022-10"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-022-14",
+      "prd": "PRD-022-ts-domain-types-and-serialization.md",
+      "acceptance_tests": [
+        "TC-022-01",
+        "TC-022-02",
+        "TC-022-03",
+        "TC-022-04",
+        "TC-022-05",
+        "TC-022-06",
+        "TC-022-07",
+        "TC-022-08",
+        "TC-022-09",
+        "TC-022-10"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-022-15",
+      "prd": "PRD-022-ts-domain-types-and-serialization.md",
+      "acceptance_tests": [
+        "TC-022-01",
+        "TC-022-02",
+        "TC-022-03",
+        "TC-022-04",
+        "TC-022-05",
+        "TC-022-06",
+        "TC-022-07",
+        "TC-022-08",
+        "TC-022-09",
+        "TC-022-10"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-022-16",
+      "prd": "PRD-022-ts-domain-types-and-serialization.md",
+      "acceptance_tests": [
+        "TC-022-01",
+        "TC-022-02",
+        "TC-022-03",
+        "TC-022-04",
+        "TC-022-05",
+        "TC-022-06",
+        "TC-022-07",
+        "TC-022-08",
+        "TC-022-09",
+        "TC-022-10"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-022-17",
+      "prd": "PRD-022-ts-domain-types-and-serialization.md",
+      "acceptance_tests": [
+        "TC-022-01",
+        "TC-022-02",
+        "TC-022-03",
+        "TC-022-04",
+        "TC-022-05",
+        "TC-022-06",
+        "TC-022-07",
+        "TC-022-08",
+        "TC-022-09",
+        "TC-022-10"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-022-18",
+      "prd": "PRD-022-ts-domain-types-and-serialization.md",
+      "acceptance_tests": [
+        "TC-022-01",
+        "TC-022-02",
+        "TC-022-03",
+        "TC-022-04",
+        "TC-022-05",
+        "TC-022-06",
+        "TC-022-07",
+        "TC-022-08",
+        "TC-022-09",
+        "TC-022-10"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-022-19",
+      "prd": "PRD-022-ts-domain-types-and-serialization.md",
+      "acceptance_tests": [
+        "TC-022-01",
+        "TC-022-02",
+        "TC-022-03",
+        "TC-022-04",
+        "TC-022-05",
+        "TC-022-06",
+        "TC-022-07",
+        "TC-022-08",
+        "TC-022-09",
+        "TC-022-10"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-022-20",
+      "prd": "PRD-022-ts-domain-types-and-serialization.md",
+      "acceptance_tests": [
+        "TC-022-01",
+        "TC-022-02",
+        "TC-022-03",
+        "TC-022-04",
+        "TC-022-05",
+        "TC-022-06",
+        "TC-022-07",
+        "TC-022-08",
+        "TC-022-09",
+        "TC-022-10"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-023-01",
+      "prd": "PRD-023-ts-config-and-api-key-resolution.md",
+      "acceptance_tests": [
+        "TC-023-01",
+        "TC-023-02",
+        "TC-023-03",
+        "TC-023-04",
+        "TC-023-05",
+        "TC-023-06",
+        "TC-023-07",
+        "TC-023-08",
+        "TC-023-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-023-02",
+      "prd": "PRD-023-ts-config-and-api-key-resolution.md",
+      "acceptance_tests": [
+        "TC-023-01",
+        "TC-023-02",
+        "TC-023-03",
+        "TC-023-04",
+        "TC-023-05",
+        "TC-023-06",
+        "TC-023-07",
+        "TC-023-08",
+        "TC-023-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-023-03",
+      "prd": "PRD-023-ts-config-and-api-key-resolution.md",
+      "acceptance_tests": [
+        "TC-023-01",
+        "TC-023-02",
+        "TC-023-03",
+        "TC-023-04",
+        "TC-023-05",
+        "TC-023-06",
+        "TC-023-07",
+        "TC-023-08",
+        "TC-023-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-023-04",
+      "prd": "PRD-023-ts-config-and-api-key-resolution.md",
+      "acceptance_tests": [
+        "TC-023-01",
+        "TC-023-02",
+        "TC-023-03",
+        "TC-023-04",
+        "TC-023-05",
+        "TC-023-06",
+        "TC-023-07",
+        "TC-023-08",
+        "TC-023-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-023-05",
+      "prd": "PRD-023-ts-config-and-api-key-resolution.md",
+      "acceptance_tests": [
+        "TC-023-01",
+        "TC-023-02",
+        "TC-023-03",
+        "TC-023-04",
+        "TC-023-05",
+        "TC-023-06",
+        "TC-023-07",
+        "TC-023-08",
+        "TC-023-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-023-06",
+      "prd": "PRD-023-ts-config-and-api-key-resolution.md",
+      "acceptance_tests": [
+        "TC-023-01",
+        "TC-023-02",
+        "TC-023-03",
+        "TC-023-04",
+        "TC-023-05",
+        "TC-023-06",
+        "TC-023-07",
+        "TC-023-08",
+        "TC-023-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-023-07",
+      "prd": "PRD-023-ts-config-and-api-key-resolution.md",
+      "acceptance_tests": [
+        "TC-023-01",
+        "TC-023-02",
+        "TC-023-03",
+        "TC-023-04",
+        "TC-023-05",
+        "TC-023-06",
+        "TC-023-07",
+        "TC-023-08",
+        "TC-023-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-023-08",
+      "prd": "PRD-023-ts-config-and-api-key-resolution.md",
+      "acceptance_tests": [
+        "TC-023-01",
+        "TC-023-02",
+        "TC-023-03",
+        "TC-023-04",
+        "TC-023-05",
+        "TC-023-06",
+        "TC-023-07",
+        "TC-023-08",
+        "TC-023-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-023-09",
+      "prd": "PRD-023-ts-config-and-api-key-resolution.md",
+      "acceptance_tests": [
+        "TC-023-01",
+        "TC-023-02",
+        "TC-023-03",
+        "TC-023-04",
+        "TC-023-05",
+        "TC-023-06",
+        "TC-023-07",
+        "TC-023-08",
+        "TC-023-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-023-10",
+      "prd": "PRD-023-ts-config-and-api-key-resolution.md",
+      "acceptance_tests": [
+        "TC-023-01",
+        "TC-023-02",
+        "TC-023-03",
+        "TC-023-04",
+        "TC-023-05",
+        "TC-023-06",
+        "TC-023-07",
+        "TC-023-08",
+        "TC-023-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-023-11",
+      "prd": "PRD-023-ts-config-and-api-key-resolution.md",
+      "acceptance_tests": [
+        "TC-023-01",
+        "TC-023-02",
+        "TC-023-03",
+        "TC-023-04",
+        "TC-023-05",
+        "TC-023-06",
+        "TC-023-07",
+        "TC-023-08",
+        "TC-023-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-023-12",
+      "prd": "PRD-023-ts-config-and-api-key-resolution.md",
+      "acceptance_tests": [
+        "TC-023-01",
+        "TC-023-02",
+        "TC-023-03",
+        "TC-023-04",
+        "TC-023-05",
+        "TC-023-06",
+        "TC-023-07",
+        "TC-023-08",
+        "TC-023-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-023-13",
+      "prd": "PRD-023-ts-config-and-api-key-resolution.md",
+      "acceptance_tests": [
+        "TC-023-01",
+        "TC-023-02",
+        "TC-023-03",
+        "TC-023-04",
+        "TC-023-05",
+        "TC-023-06",
+        "TC-023-07",
+        "TC-023-08",
+        "TC-023-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-023-14",
+      "prd": "PRD-023-ts-config-and-api-key-resolution.md",
+      "acceptance_tests": [
+        "TC-023-01",
+        "TC-023-02",
+        "TC-023-03",
+        "TC-023-04",
+        "TC-023-05",
+        "TC-023-06",
+        "TC-023-07",
+        "TC-023-08",
+        "TC-023-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-023-15",
+      "prd": "PRD-023-ts-config-and-api-key-resolution.md",
+      "acceptance_tests": [
+        "TC-023-01",
+        "TC-023-02",
+        "TC-023-03",
+        "TC-023-04",
+        "TC-023-05",
+        "TC-023-06",
+        "TC-023-07",
+        "TC-023-08",
+        "TC-023-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-023-16",
+      "prd": "PRD-023-ts-config-and-api-key-resolution.md",
+      "acceptance_tests": [
+        "TC-023-01",
+        "TC-023-02",
+        "TC-023-03",
+        "TC-023-04",
+        "TC-023-05",
+        "TC-023-06",
+        "TC-023-07",
+        "TC-023-08",
+        "TC-023-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-023-17",
+      "prd": "PRD-023-ts-config-and-api-key-resolution.md",
+      "acceptance_tests": [
+        "TC-023-01",
+        "TC-023-02",
+        "TC-023-03",
+        "TC-023-04",
+        "TC-023-05",
+        "TC-023-06",
+        "TC-023-07",
+        "TC-023-08",
+        "TC-023-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-023-18",
+      "prd": "PRD-023-ts-config-and-api-key-resolution.md",
+      "acceptance_tests": [
+        "TC-023-01",
+        "TC-023-02",
+        "TC-023-03",
+        "TC-023-04",
+        "TC-023-05",
+        "TC-023-06",
+        "TC-023-07",
+        "TC-023-08",
+        "TC-023-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-023-19",
+      "prd": "PRD-023-ts-config-and-api-key-resolution.md",
+      "acceptance_tests": [
+        "TC-023-01",
+        "TC-023-02",
+        "TC-023-03",
+        "TC-023-04",
+        "TC-023-05",
+        "TC-023-06",
+        "TC-023-07",
+        "TC-023-08",
+        "TC-023-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-023-20",
+      "prd": "PRD-023-ts-config-and-api-key-resolution.md",
+      "acceptance_tests": [
+        "TC-023-01",
+        "TC-023-02",
+        "TC-023-03",
+        "TC-023-04",
+        "TC-023-05",
+        "TC-023-06",
+        "TC-023-07",
+        "TC-023-08",
+        "TC-023-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-024-01",
+      "prd": "PRD-024-ts-error-classes.md",
+      "acceptance_tests": [
+        "TC-024-01",
+        "TC-024-02",
+        "TC-024-03",
+        "TC-024-04",
+        "TC-024-05",
+        "TC-024-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-024-02",
+      "prd": "PRD-024-ts-error-classes.md",
+      "acceptance_tests": [
+        "TC-024-01",
+        "TC-024-02",
+        "TC-024-03",
+        "TC-024-04",
+        "TC-024-05",
+        "TC-024-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-024-03",
+      "prd": "PRD-024-ts-error-classes.md",
+      "acceptance_tests": [
+        "TC-024-01",
+        "TC-024-02",
+        "TC-024-03",
+        "TC-024-04",
+        "TC-024-05",
+        "TC-024-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-024-04",
+      "prd": "PRD-024-ts-error-classes.md",
+      "acceptance_tests": [
+        "TC-024-01",
+        "TC-024-02",
+        "TC-024-03",
+        "TC-024-04",
+        "TC-024-05",
+        "TC-024-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-024-05",
+      "prd": "PRD-024-ts-error-classes.md",
+      "acceptance_tests": [
+        "TC-024-01",
+        "TC-024-02",
+        "TC-024-03",
+        "TC-024-04",
+        "TC-024-05",
+        "TC-024-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-024-06",
+      "prd": "PRD-024-ts-error-classes.md",
+      "acceptance_tests": [
+        "TC-024-01",
+        "TC-024-02",
+        "TC-024-03",
+        "TC-024-04",
+        "TC-024-05",
+        "TC-024-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-024-07",
+      "prd": "PRD-024-ts-error-classes.md",
+      "acceptance_tests": [
+        "TC-024-01",
+        "TC-024-02",
+        "TC-024-03",
+        "TC-024-04",
+        "TC-024-05",
+        "TC-024-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-025-01",
+      "prd": "PRD-025-ts-fetch-transport.md",
+      "acceptance_tests": [
+        "TC-025-01",
+        "TC-025-02",
+        "TC-025-03",
+        "TC-025-04",
+        "TC-025-05",
+        "TC-025-06",
+        "TC-025-07",
+        "TC-025-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-025-02",
+      "prd": "PRD-025-ts-fetch-transport.md",
+      "acceptance_tests": [
+        "TC-025-01",
+        "TC-025-02",
+        "TC-025-03",
+        "TC-025-04",
+        "TC-025-05",
+        "TC-025-06",
+        "TC-025-07",
+        "TC-025-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-025-03",
+      "prd": "PRD-025-ts-fetch-transport.md",
+      "acceptance_tests": [
+        "TC-025-01",
+        "TC-025-02",
+        "TC-025-03",
+        "TC-025-04",
+        "TC-025-05",
+        "TC-025-06",
+        "TC-025-07",
+        "TC-025-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-025-04",
+      "prd": "PRD-025-ts-fetch-transport.md",
+      "acceptance_tests": [
+        "TC-025-01",
+        "TC-025-02",
+        "TC-025-03",
+        "TC-025-04",
+        "TC-025-05",
+        "TC-025-06",
+        "TC-025-07",
+        "TC-025-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-025-05",
+      "prd": "PRD-025-ts-fetch-transport.md",
+      "acceptance_tests": [
+        "TC-025-01",
+        "TC-025-02",
+        "TC-025-03",
+        "TC-025-04",
+        "TC-025-05",
+        "TC-025-06",
+        "TC-025-07",
+        "TC-025-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-025-06",
+      "prd": "PRD-025-ts-fetch-transport.md",
+      "acceptance_tests": [
+        "TC-025-01",
+        "TC-025-02",
+        "TC-025-03",
+        "TC-025-04",
+        "TC-025-05",
+        "TC-025-06",
+        "TC-025-07",
+        "TC-025-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-025-07",
+      "prd": "PRD-025-ts-fetch-transport.md",
+      "acceptance_tests": [
+        "TC-025-01",
+        "TC-025-02",
+        "TC-025-03",
+        "TC-025-04",
+        "TC-025-05",
+        "TC-025-06",
+        "TC-025-07",
+        "TC-025-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-025-08",
+      "prd": "PRD-025-ts-fetch-transport.md",
+      "acceptance_tests": [
+        "TC-025-01",
+        "TC-025-02",
+        "TC-025-03",
+        "TC-025-04",
+        "TC-025-05",
+        "TC-025-06",
+        "TC-025-07",
+        "TC-025-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-025-09",
+      "prd": "PRD-025-ts-fetch-transport.md",
+      "acceptance_tests": [
+        "TC-025-01",
+        "TC-025-02",
+        "TC-025-03",
+        "TC-025-04",
+        "TC-025-05",
+        "TC-025-06",
+        "TC-025-07",
+        "TC-025-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-025-10",
+      "prd": "PRD-025-ts-fetch-transport.md",
+      "acceptance_tests": [
+        "TC-025-01",
+        "TC-025-02",
+        "TC-025-03",
+        "TC-025-04",
+        "TC-025-05",
+        "TC-025-06",
+        "TC-025-07",
+        "TC-025-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-025-11",
+      "prd": "PRD-025-ts-fetch-transport.md",
+      "acceptance_tests": [
+        "TC-025-01",
+        "TC-025-02",
+        "TC-025-03",
+        "TC-025-04",
+        "TC-025-05",
+        "TC-025-06",
+        "TC-025-07",
+        "TC-025-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-026-01",
+      "prd": "PRD-026-ts-resilience-policy.md",
+      "acceptance_tests": [
+        "TC-026-01",
+        "TC-026-02",
+        "TC-026-03",
+        "TC-026-04",
+        "TC-026-05",
+        "TC-026-06",
+        "TC-026-07",
+        "TC-026-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-026-02",
+      "prd": "PRD-026-ts-resilience-policy.md",
+      "acceptance_tests": [
+        "TC-026-01",
+        "TC-026-02",
+        "TC-026-03",
+        "TC-026-04",
+        "TC-026-05",
+        "TC-026-06",
+        "TC-026-07",
+        "TC-026-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-026-03",
+      "prd": "PRD-026-ts-resilience-policy.md",
+      "acceptance_tests": [
+        "TC-026-01",
+        "TC-026-02",
+        "TC-026-03",
+        "TC-026-04",
+        "TC-026-05",
+        "TC-026-06",
+        "TC-026-07",
+        "TC-026-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-026-04",
+      "prd": "PRD-026-ts-resilience-policy.md",
+      "acceptance_tests": [
+        "TC-026-01",
+        "TC-026-02",
+        "TC-026-03",
+        "TC-026-04",
+        "TC-026-05",
+        "TC-026-06",
+        "TC-026-07",
+        "TC-026-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-026-05",
+      "prd": "PRD-026-ts-resilience-policy.md",
+      "acceptance_tests": [
+        "TC-026-01",
+        "TC-026-02",
+        "TC-026-03",
+        "TC-026-04",
+        "TC-026-05",
+        "TC-026-06",
+        "TC-026-07",
+        "TC-026-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-026-06",
+      "prd": "PRD-026-ts-resilience-policy.md",
+      "acceptance_tests": [
+        "TC-026-01",
+        "TC-026-02",
+        "TC-026-03",
+        "TC-026-04",
+        "TC-026-05",
+        "TC-026-06",
+        "TC-026-07",
+        "TC-026-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-026-07",
+      "prd": "PRD-026-ts-resilience-policy.md",
+      "acceptance_tests": [
+        "TC-026-01",
+        "TC-026-02",
+        "TC-026-03",
+        "TC-026-04",
+        "TC-026-05",
+        "TC-026-06",
+        "TC-026-07",
+        "TC-026-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-026-08",
+      "prd": "PRD-026-ts-resilience-policy.md",
+      "acceptance_tests": [
+        "TC-026-01",
+        "TC-026-02",
+        "TC-026-03",
+        "TC-026-04",
+        "TC-026-05",
+        "TC-026-06",
+        "TC-026-07",
+        "TC-026-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-026-09",
+      "prd": "PRD-026-ts-resilience-policy.md",
+      "acceptance_tests": [
+        "TC-026-01",
+        "TC-026-02",
+        "TC-026-03",
+        "TC-026-04",
+        "TC-026-05",
+        "TC-026-06",
+        "TC-026-07",
+        "TC-026-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-027-01",
+      "prd": "PRD-027-ts-runa-client-lifecycle.md",
+      "acceptance_tests": [
+        "TC-027-01",
+        "TC-027-02",
+        "TC-027-03",
+        "TC-027-04",
+        "TC-027-05",
+        "TC-027-06",
+        "TC-027-07",
+        "TC-027-08",
+        "TC-027-09",
+        "TC-027-10",
+        "TC-027-11"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-027-02",
+      "prd": "PRD-027-ts-runa-client-lifecycle.md",
+      "acceptance_tests": [
+        "TC-027-01",
+        "TC-027-02",
+        "TC-027-03",
+        "TC-027-04",
+        "TC-027-05",
+        "TC-027-06",
+        "TC-027-07",
+        "TC-027-08",
+        "TC-027-09",
+        "TC-027-10",
+        "TC-027-11"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-027-03",
+      "prd": "PRD-027-ts-runa-client-lifecycle.md",
+      "acceptance_tests": [
+        "TC-027-01",
+        "TC-027-02",
+        "TC-027-03",
+        "TC-027-04",
+        "TC-027-05",
+        "TC-027-06",
+        "TC-027-07",
+        "TC-027-08",
+        "TC-027-09",
+        "TC-027-10",
+        "TC-027-11"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-027-04",
+      "prd": "PRD-027-ts-runa-client-lifecycle.md",
+      "acceptance_tests": [
+        "TC-027-01",
+        "TC-027-02",
+        "TC-027-03",
+        "TC-027-04",
+        "TC-027-05",
+        "TC-027-06",
+        "TC-027-07",
+        "TC-027-08",
+        "TC-027-09",
+        "TC-027-10",
+        "TC-027-11"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-027-05",
+      "prd": "PRD-027-ts-runa-client-lifecycle.md",
+      "acceptance_tests": [
+        "TC-027-01",
+        "TC-027-02",
+        "TC-027-03",
+        "TC-027-04",
+        "TC-027-05",
+        "TC-027-06",
+        "TC-027-07",
+        "TC-027-08",
+        "TC-027-09",
+        "TC-027-10",
+        "TC-027-11"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-027-06",
+      "prd": "PRD-027-ts-runa-client-lifecycle.md",
+      "acceptance_tests": [
+        "TC-027-01",
+        "TC-027-02",
+        "TC-027-03",
+        "TC-027-04",
+        "TC-027-05",
+        "TC-027-06",
+        "TC-027-07",
+        "TC-027-08",
+        "TC-027-09",
+        "TC-027-10",
+        "TC-027-11"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-027-07",
+      "prd": "PRD-027-ts-runa-client-lifecycle.md",
+      "acceptance_tests": [
+        "TC-027-01",
+        "TC-027-02",
+        "TC-027-03",
+        "TC-027-04",
+        "TC-027-05",
+        "TC-027-06",
+        "TC-027-07",
+        "TC-027-08",
+        "TC-027-09",
+        "TC-027-10",
+        "TC-027-11"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-027-08",
+      "prd": "PRD-027-ts-runa-client-lifecycle.md",
+      "acceptance_tests": [
+        "TC-027-01",
+        "TC-027-02",
+        "TC-027-03",
+        "TC-027-04",
+        "TC-027-05",
+        "TC-027-06",
+        "TC-027-07",
+        "TC-027-08",
+        "TC-027-09",
+        "TC-027-10",
+        "TC-027-11"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-027-09",
+      "prd": "PRD-027-ts-runa-client-lifecycle.md",
+      "acceptance_tests": [
+        "TC-027-01",
+        "TC-027-02",
+        "TC-027-03",
+        "TC-027-04",
+        "TC-027-05",
+        "TC-027-06",
+        "TC-027-07",
+        "TC-027-08",
+        "TC-027-09",
+        "TC-027-10",
+        "TC-027-11"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-027-10",
+      "prd": "PRD-027-ts-runa-client-lifecycle.md",
+      "acceptance_tests": [
+        "TC-027-01",
+        "TC-027-02",
+        "TC-027-03",
+        "TC-027-04",
+        "TC-027-05",
+        "TC-027-06",
+        "TC-027-07",
+        "TC-027-08",
+        "TC-027-09",
+        "TC-027-10",
+        "TC-027-11"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-027-11",
+      "prd": "PRD-027-ts-runa-client-lifecycle.md",
+      "acceptance_tests": [
+        "TC-027-01",
+        "TC-027-02",
+        "TC-027-03",
+        "TC-027-04",
+        "TC-027-05",
+        "TC-027-06",
+        "TC-027-07",
+        "TC-027-08",
+        "TC-027-09",
+        "TC-027-10",
+        "TC-027-11"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-027-12",
+      "prd": "PRD-027-ts-runa-client-lifecycle.md",
+      "acceptance_tests": [
+        "TC-027-01",
+        "TC-027-02",
+        "TC-027-03",
+        "TC-027-04",
+        "TC-027-05",
+        "TC-027-06",
+        "TC-027-07",
+        "TC-027-08",
+        "TC-027-09",
+        "TC-027-10",
+        "TC-027-11"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-027-13",
+      "prd": "PRD-027-ts-runa-client-lifecycle.md",
+      "acceptance_tests": [
+        "TC-027-01",
+        "TC-027-02",
+        "TC-027-03",
+        "TC-027-04",
+        "TC-027-05",
+        "TC-027-06",
+        "TC-027-07",
+        "TC-027-08",
+        "TC-027-09",
+        "TC-027-10",
+        "TC-027-11"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-027-14",
+      "prd": "PRD-027-ts-runa-client-lifecycle.md",
+      "acceptance_tests": [
+        "TC-027-01",
+        "TC-027-02",
+        "TC-027-03",
+        "TC-027-04",
+        "TC-027-05",
+        "TC-027-06",
+        "TC-027-07",
+        "TC-027-08",
+        "TC-027-09",
+        "TC-027-10",
+        "TC-027-11"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-027-15",
+      "prd": "PRD-027-ts-runa-client-lifecycle.md",
+      "acceptance_tests": [
+        "TC-027-01",
+        "TC-027-02",
+        "TC-027-03",
+        "TC-027-04",
+        "TC-027-05",
+        "TC-027-06",
+        "TC-027-07",
+        "TC-027-08",
+        "TC-027-09",
+        "TC-027-10",
+        "TC-027-11"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-027-16",
+      "prd": "PRD-027-ts-runa-client-lifecycle.md",
+      "acceptance_tests": [
+        "TC-027-01",
+        "TC-027-02",
+        "TC-027-03",
+        "TC-027-04",
+        "TC-027-05",
+        "TC-027-06",
+        "TC-027-07",
+        "TC-027-08",
+        "TC-027-09",
+        "TC-027-10",
+        "TC-027-11"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-027-17",
+      "prd": "PRD-027-ts-runa-client-lifecycle.md",
+      "acceptance_tests": [
+        "TC-027-01",
+        "TC-027-02",
+        "TC-027-03",
+        "TC-027-04",
+        "TC-027-05",
+        "TC-027-06",
+        "TC-027-07",
+        "TC-027-08",
+        "TC-027-09",
+        "TC-027-10",
+        "TC-027-11"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-027-18",
+      "prd": "PRD-027-ts-runa-client-lifecycle.md",
+      "acceptance_tests": [
+        "TC-027-01",
+        "TC-027-02",
+        "TC-027-03",
+        "TC-027-04",
+        "TC-027-05",
+        "TC-027-06",
+        "TC-027-07",
+        "TC-027-08",
+        "TC-027-09",
+        "TC-027-10",
+        "TC-027-11"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-027-19",
+      "prd": "PRD-027-ts-runa-client-lifecycle.md",
+      "acceptance_tests": [
+        "TC-027-01",
+        "TC-027-02",
+        "TC-027-03",
+        "TC-027-04",
+        "TC-027-05",
+        "TC-027-06",
+        "TC-027-07",
+        "TC-027-08",
+        "TC-027-09",
+        "TC-027-10",
+        "TC-027-11"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-027-20",
+      "prd": "PRD-027-ts-runa-client-lifecycle.md",
+      "acceptance_tests": [
+        "TC-027-01",
+        "TC-027-02",
+        "TC-027-03",
+        "TC-027-04",
+        "TC-027-05",
+        "TC-027-06",
+        "TC-027-07",
+        "TC-027-08",
+        "TC-027-09",
+        "TC-027-10",
+        "TC-027-11"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-027-21",
+      "prd": "PRD-027-ts-runa-client-lifecycle.md",
+      "acceptance_tests": [
+        "TC-027-01",
+        "TC-027-02",
+        "TC-027-03",
+        "TC-027-04",
+        "TC-027-05",
+        "TC-027-06",
+        "TC-027-07",
+        "TC-027-08",
+        "TC-027-09",
+        "TC-027-10",
+        "TC-027-11"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-027-22",
+      "prd": "PRD-027-ts-runa-client-lifecycle.md",
+      "acceptance_tests": [
+        "TC-027-01",
+        "TC-027-02",
+        "TC-027-03",
+        "TC-027-04",
+        "TC-027-05",
+        "TC-027-06",
+        "TC-027-07",
+        "TC-027-08",
+        "TC-027-09",
+        "TC-027-10",
+        "TC-027-11"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-028-01",
+      "prd": "PRD-028-ts-session-creation.md",
+      "acceptance_tests": [
+        "TC-028-01",
+        "TC-028-02",
+        "TC-028-03",
+        "TC-028-04",
+        "TC-028-05",
+        "TC-028-06",
+        "TC-028-07",
+        "TC-028-08",
+        "TC-028-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-028-02",
+      "prd": "PRD-028-ts-session-creation.md",
+      "acceptance_tests": [
+        "TC-028-01",
+        "TC-028-02",
+        "TC-028-03",
+        "TC-028-04",
+        "TC-028-05",
+        "TC-028-06",
+        "TC-028-07",
+        "TC-028-08",
+        "TC-028-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-028-03",
+      "prd": "PRD-028-ts-session-creation.md",
+      "acceptance_tests": [
+        "TC-028-01",
+        "TC-028-02",
+        "TC-028-03",
+        "TC-028-04",
+        "TC-028-05",
+        "TC-028-06",
+        "TC-028-07",
+        "TC-028-08",
+        "TC-028-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-028-04",
+      "prd": "PRD-028-ts-session-creation.md",
+      "acceptance_tests": [
+        "TC-028-01",
+        "TC-028-02",
+        "TC-028-03",
+        "TC-028-04",
+        "TC-028-05",
+        "TC-028-06",
+        "TC-028-07",
+        "TC-028-08",
+        "TC-028-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-028-05",
+      "prd": "PRD-028-ts-session-creation.md",
+      "acceptance_tests": [
+        "TC-028-01",
+        "TC-028-02",
+        "TC-028-03",
+        "TC-028-04",
+        "TC-028-05",
+        "TC-028-06",
+        "TC-028-07",
+        "TC-028-08",
+        "TC-028-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-028-06",
+      "prd": "PRD-028-ts-session-creation.md",
+      "acceptance_tests": [
+        "TC-028-01",
+        "TC-028-02",
+        "TC-028-03",
+        "TC-028-04",
+        "TC-028-05",
+        "TC-028-06",
+        "TC-028-07",
+        "TC-028-08",
+        "TC-028-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-028-07",
+      "prd": "PRD-028-ts-session-creation.md",
+      "acceptance_tests": [
+        "TC-028-01",
+        "TC-028-02",
+        "TC-028-03",
+        "TC-028-04",
+        "TC-028-05",
+        "TC-028-06",
+        "TC-028-07",
+        "TC-028-08",
+        "TC-028-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-028-08",
+      "prd": "PRD-028-ts-session-creation.md",
+      "acceptance_tests": [
+        "TC-028-01",
+        "TC-028-02",
+        "TC-028-03",
+        "TC-028-04",
+        "TC-028-05",
+        "TC-028-06",
+        "TC-028-07",
+        "TC-028-08",
+        "TC-028-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-028-09",
+      "prd": "PRD-028-ts-session-creation.md",
+      "acceptance_tests": [
+        "TC-028-01",
+        "TC-028-02",
+        "TC-028-03",
+        "TC-028-04",
+        "TC-028-05",
+        "TC-028-06",
+        "TC-028-07",
+        "TC-028-08",
+        "TC-028-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-028-10",
+      "prd": "PRD-028-ts-session-creation.md",
+      "acceptance_tests": [
+        "TC-028-01",
+        "TC-028-02",
+        "TC-028-03",
+        "TC-028-04",
+        "TC-028-05",
+        "TC-028-06",
+        "TC-028-07",
+        "TC-028-08",
+        "TC-028-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-028-11",
+      "prd": "PRD-028-ts-session-creation.md",
+      "acceptance_tests": [
+        "TC-028-01",
+        "TC-028-02",
+        "TC-028-03",
+        "TC-028-04",
+        "TC-028-05",
+        "TC-028-06",
+        "TC-028-07",
+        "TC-028-08",
+        "TC-028-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-028-12",
+      "prd": "PRD-028-ts-session-creation.md",
+      "acceptance_tests": [
+        "TC-028-01",
+        "TC-028-02",
+        "TC-028-03",
+        "TC-028-04",
+        "TC-028-05",
+        "TC-028-06",
+        "TC-028-07",
+        "TC-028-08",
+        "TC-028-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-028-13",
+      "prd": "PRD-028-ts-session-creation.md",
+      "acceptance_tests": [
+        "TC-028-01",
+        "TC-028-02",
+        "TC-028-03",
+        "TC-028-04",
+        "TC-028-05",
+        "TC-028-06",
+        "TC-028-07",
+        "TC-028-08",
+        "TC-028-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-028-14",
+      "prd": "PRD-028-ts-session-creation.md",
+      "acceptance_tests": [
+        "TC-028-01",
+        "TC-028-02",
+        "TC-028-03",
+        "TC-028-04",
+        "TC-028-05",
+        "TC-028-06",
+        "TC-028-07",
+        "TC-028-08",
+        "TC-028-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-028-15",
+      "prd": "PRD-028-ts-session-creation.md",
+      "acceptance_tests": [
+        "TC-028-01",
+        "TC-028-02",
+        "TC-028-03",
+        "TC-028-04",
+        "TC-028-05",
+        "TC-028-06",
+        "TC-028-07",
+        "TC-028-08",
+        "TC-028-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-029-01",
+      "prd": "PRD-029-ts-session-listing.md",
+      "acceptance_tests": [
+        "TC-029-01",
+        "TC-029-02",
+        "TC-029-03",
+        "TC-029-04",
+        "TC-029-05",
+        "TC-029-06",
+        "TC-029-07",
+        "TC-029-08",
+        "TC-029-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-029-02",
+      "prd": "PRD-029-ts-session-listing.md",
+      "acceptance_tests": [
+        "TC-029-01",
+        "TC-029-02",
+        "TC-029-03",
+        "TC-029-04",
+        "TC-029-05",
+        "TC-029-06",
+        "TC-029-07",
+        "TC-029-08",
+        "TC-029-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-029-03",
+      "prd": "PRD-029-ts-session-listing.md",
+      "acceptance_tests": [
+        "TC-029-01",
+        "TC-029-02",
+        "TC-029-03",
+        "TC-029-04",
+        "TC-029-05",
+        "TC-029-06",
+        "TC-029-07",
+        "TC-029-08",
+        "TC-029-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-029-04",
+      "prd": "PRD-029-ts-session-listing.md",
+      "acceptance_tests": [
+        "TC-029-01",
+        "TC-029-02",
+        "TC-029-03",
+        "TC-029-04",
+        "TC-029-05",
+        "TC-029-06",
+        "TC-029-07",
+        "TC-029-08",
+        "TC-029-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-029-05",
+      "prd": "PRD-029-ts-session-listing.md",
+      "acceptance_tests": [
+        "TC-029-01",
+        "TC-029-02",
+        "TC-029-03",
+        "TC-029-04",
+        "TC-029-05",
+        "TC-029-06",
+        "TC-029-07",
+        "TC-029-08",
+        "TC-029-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-029-06",
+      "prd": "PRD-029-ts-session-listing.md",
+      "acceptance_tests": [
+        "TC-029-01",
+        "TC-029-02",
+        "TC-029-03",
+        "TC-029-04",
+        "TC-029-05",
+        "TC-029-06",
+        "TC-029-07",
+        "TC-029-08",
+        "TC-029-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-029-07",
+      "prd": "PRD-029-ts-session-listing.md",
+      "acceptance_tests": [
+        "TC-029-01",
+        "TC-029-02",
+        "TC-029-03",
+        "TC-029-04",
+        "TC-029-05",
+        "TC-029-06",
+        "TC-029-07",
+        "TC-029-08",
+        "TC-029-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-029-08",
+      "prd": "PRD-029-ts-session-listing.md",
+      "acceptance_tests": [
+        "TC-029-01",
+        "TC-029-02",
+        "TC-029-03",
+        "TC-029-04",
+        "TC-029-05",
+        "TC-029-06",
+        "TC-029-07",
+        "TC-029-08",
+        "TC-029-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-029-09",
+      "prd": "PRD-029-ts-session-listing.md",
+      "acceptance_tests": [
+        "TC-029-01",
+        "TC-029-02",
+        "TC-029-03",
+        "TC-029-04",
+        "TC-029-05",
+        "TC-029-06",
+        "TC-029-07",
+        "TC-029-08",
+        "TC-029-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-029-10",
+      "prd": "PRD-029-ts-session-listing.md",
+      "acceptance_tests": [
+        "TC-029-01",
+        "TC-029-02",
+        "TC-029-03",
+        "TC-029-04",
+        "TC-029-05",
+        "TC-029-06",
+        "TC-029-07",
+        "TC-029-08",
+        "TC-029-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-029-11",
+      "prd": "PRD-029-ts-session-listing.md",
+      "acceptance_tests": [
+        "TC-029-01",
+        "TC-029-02",
+        "TC-029-03",
+        "TC-029-04",
+        "TC-029-05",
+        "TC-029-06",
+        "TC-029-07",
+        "TC-029-08",
+        "TC-029-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-029-12",
+      "prd": "PRD-029-ts-session-listing.md",
+      "acceptance_tests": [
+        "TC-029-01",
+        "TC-029-02",
+        "TC-029-03",
+        "TC-029-04",
+        "TC-029-05",
+        "TC-029-06",
+        "TC-029-07",
+        "TC-029-08",
+        "TC-029-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-029-13",
+      "prd": "PRD-029-ts-session-listing.md",
+      "acceptance_tests": [
+        "TC-029-01",
+        "TC-029-02",
+        "TC-029-03",
+        "TC-029-04",
+        "TC-029-05",
+        "TC-029-06",
+        "TC-029-07",
+        "TC-029-08",
+        "TC-029-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-029-14",
+      "prd": "PRD-029-ts-session-listing.md",
+      "acceptance_tests": [
+        "TC-029-01",
+        "TC-029-02",
+        "TC-029-03",
+        "TC-029-04",
+        "TC-029-05",
+        "TC-029-06",
+        "TC-029-07",
+        "TC-029-08",
+        "TC-029-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-029-15",
+      "prd": "PRD-029-ts-session-listing.md",
+      "acceptance_tests": [
+        "TC-029-01",
+        "TC-029-02",
+        "TC-029-03",
+        "TC-029-04",
+        "TC-029-05",
+        "TC-029-06",
+        "TC-029-07",
+        "TC-029-08",
+        "TC-029-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-029-16",
+      "prd": "PRD-029-ts-session-listing.md",
+      "acceptance_tests": [
+        "TC-029-01",
+        "TC-029-02",
+        "TC-029-03",
+        "TC-029-04",
+        "TC-029-05",
+        "TC-029-06",
+        "TC-029-07",
+        "TC-029-08",
+        "TC-029-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-029-17",
+      "prd": "PRD-029-ts-session-listing.md",
+      "acceptance_tests": [
+        "TC-029-01",
+        "TC-029-02",
+        "TC-029-03",
+        "TC-029-04",
+        "TC-029-05",
+        "TC-029-06",
+        "TC-029-07",
+        "TC-029-08",
+        "TC-029-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-030-01",
+      "prd": "PRD-030-ts-session-lookup.md",
+      "acceptance_tests": [
+        "TC-030-01",
+        "TC-030-02",
+        "TC-030-03",
+        "TC-030-04",
+        "TC-030-05",
+        "TC-030-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-030-02",
+      "prd": "PRD-030-ts-session-lookup.md",
+      "acceptance_tests": [
+        "TC-030-01",
+        "TC-030-02",
+        "TC-030-03",
+        "TC-030-04",
+        "TC-030-05",
+        "TC-030-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-030-03",
+      "prd": "PRD-030-ts-session-lookup.md",
+      "acceptance_tests": [
+        "TC-030-01",
+        "TC-030-02",
+        "TC-030-03",
+        "TC-030-04",
+        "TC-030-05",
+        "TC-030-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-030-04",
+      "prd": "PRD-030-ts-session-lookup.md",
+      "acceptance_tests": [
+        "TC-030-01",
+        "TC-030-02",
+        "TC-030-03",
+        "TC-030-04",
+        "TC-030-05",
+        "TC-030-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-030-05",
+      "prd": "PRD-030-ts-session-lookup.md",
+      "acceptance_tests": [
+        "TC-030-01",
+        "TC-030-02",
+        "TC-030-03",
+        "TC-030-04",
+        "TC-030-05",
+        "TC-030-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-030-06",
+      "prd": "PRD-030-ts-session-lookup.md",
+      "acceptance_tests": [
+        "TC-030-01",
+        "TC-030-02",
+        "TC-030-03",
+        "TC-030-04",
+        "TC-030-05",
+        "TC-030-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-030-07",
+      "prd": "PRD-030-ts-session-lookup.md",
+      "acceptance_tests": [
+        "TC-030-01",
+        "TC-030-02",
+        "TC-030-03",
+        "TC-030-04",
+        "TC-030-05",
+        "TC-030-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-030-08",
+      "prd": "PRD-030-ts-session-lookup.md",
+      "acceptance_tests": [
+        "TC-030-01",
+        "TC-030-02",
+        "TC-030-03",
+        "TC-030-04",
+        "TC-030-05",
+        "TC-030-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-031-01",
+      "prd": "PRD-031-ts-session-rich-handle.md",
+      "acceptance_tests": [
+        "TC-031-01",
+        "TC-031-02",
+        "TC-031-03",
+        "TC-031-04",
+        "TC-031-05",
+        "TC-031-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-031-02",
+      "prd": "PRD-031-ts-session-rich-handle.md",
+      "acceptance_tests": [
+        "TC-031-01",
+        "TC-031-02",
+        "TC-031-03",
+        "TC-031-04",
+        "TC-031-05",
+        "TC-031-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-031-03",
+      "prd": "PRD-031-ts-session-rich-handle.md",
+      "acceptance_tests": [
+        "TC-031-01",
+        "TC-031-02",
+        "TC-031-03",
+        "TC-031-04",
+        "TC-031-05",
+        "TC-031-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-031-04",
+      "prd": "PRD-031-ts-session-rich-handle.md",
+      "acceptance_tests": [
+        "TC-031-01",
+        "TC-031-02",
+        "TC-031-03",
+        "TC-031-04",
+        "TC-031-05",
+        "TC-031-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-031-05",
+      "prd": "PRD-031-ts-session-rich-handle.md",
+      "acceptance_tests": [
+        "TC-031-01",
+        "TC-031-02",
+        "TC-031-03",
+        "TC-031-04",
+        "TC-031-05",
+        "TC-031-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-031-06",
+      "prd": "PRD-031-ts-session-rich-handle.md",
+      "acceptance_tests": [
+        "TC-031-01",
+        "TC-031-02",
+        "TC-031-03",
+        "TC-031-04",
+        "TC-031-05",
+        "TC-031-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-031-07",
+      "prd": "PRD-031-ts-session-rich-handle.md",
+      "acceptance_tests": [
+        "TC-031-01",
+        "TC-031-02",
+        "TC-031-03",
+        "TC-031-04",
+        "TC-031-05",
+        "TC-031-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-031-08",
+      "prd": "PRD-031-ts-session-rich-handle.md",
+      "acceptance_tests": [
+        "TC-031-01",
+        "TC-031-02",
+        "TC-031-03",
+        "TC-031-04",
+        "TC-031-05",
+        "TC-031-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-031-09",
+      "prd": "PRD-031-ts-session-rich-handle.md",
+      "acceptance_tests": [
+        "TC-031-01",
+        "TC-031-02",
+        "TC-031-03",
+        "TC-031-04",
+        "TC-031-05",
+        "TC-031-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-031-10",
+      "prd": "PRD-031-ts-session-rich-handle.md",
+      "acceptance_tests": [
+        "TC-031-01",
+        "TC-031-02",
+        "TC-031-03",
+        "TC-031-04",
+        "TC-031-05",
+        "TC-031-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-032-01",
+      "prd": "PRD-032-ts-session-lifecycle-actions.md",
+      "acceptance_tests": [
+        "TC-032-01",
+        "TC-032-02",
+        "TC-032-03",
+        "TC-032-04",
+        "TC-032-05",
+        "TC-032-06",
+        "TC-032-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-032-02",
+      "prd": "PRD-032-ts-session-lifecycle-actions.md",
+      "acceptance_tests": [
+        "TC-032-01",
+        "TC-032-02",
+        "TC-032-03",
+        "TC-032-04",
+        "TC-032-05",
+        "TC-032-06",
+        "TC-032-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-032-03",
+      "prd": "PRD-032-ts-session-lifecycle-actions.md",
+      "acceptance_tests": [
+        "TC-032-01",
+        "TC-032-02",
+        "TC-032-03",
+        "TC-032-04",
+        "TC-032-05",
+        "TC-032-06",
+        "TC-032-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-032-04",
+      "prd": "PRD-032-ts-session-lifecycle-actions.md",
+      "acceptance_tests": [
+        "TC-032-01",
+        "TC-032-02",
+        "TC-032-03",
+        "TC-032-04",
+        "TC-032-05",
+        "TC-032-06",
+        "TC-032-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-032-05",
+      "prd": "PRD-032-ts-session-lifecycle-actions.md",
+      "acceptance_tests": [
+        "TC-032-01",
+        "TC-032-02",
+        "TC-032-03",
+        "TC-032-04",
+        "TC-032-05",
+        "TC-032-06",
+        "TC-032-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-032-06",
+      "prd": "PRD-032-ts-session-lifecycle-actions.md",
+      "acceptance_tests": [
+        "TC-032-01",
+        "TC-032-02",
+        "TC-032-03",
+        "TC-032-04",
+        "TC-032-05",
+        "TC-032-06",
+        "TC-032-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-032-07",
+      "prd": "PRD-032-ts-session-lifecycle-actions.md",
+      "acceptance_tests": [
+        "TC-032-01",
+        "TC-032-02",
+        "TC-032-03",
+        "TC-032-04",
+        "TC-032-05",
+        "TC-032-06",
+        "TC-032-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-032-08",
+      "prd": "PRD-032-ts-session-lifecycle-actions.md",
+      "acceptance_tests": [
+        "TC-032-01",
+        "TC-032-02",
+        "TC-032-03",
+        "TC-032-04",
+        "TC-032-05",
+        "TC-032-06",
+        "TC-032-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-032-09",
+      "prd": "PRD-032-ts-session-lifecycle-actions.md",
+      "acceptance_tests": [
+        "TC-032-01",
+        "TC-032-02",
+        "TC-032-03",
+        "TC-032-04",
+        "TC-032-05",
+        "TC-032-06",
+        "TC-032-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-033-01",
+      "prd": "PRD-033-ts-session-exec.md",
+      "acceptance_tests": [
+        "TC-033-01",
+        "TC-033-02",
+        "TC-033-03",
+        "TC-033-04",
+        "TC-033-05",
+        "TC-033-06",
+        "TC-033-07",
+        "TC-033-08",
+        "TC-033-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-033-02",
+      "prd": "PRD-033-ts-session-exec.md",
+      "acceptance_tests": [
+        "TC-033-01",
+        "TC-033-02",
+        "TC-033-03",
+        "TC-033-04",
+        "TC-033-05",
+        "TC-033-06",
+        "TC-033-07",
+        "TC-033-08",
+        "TC-033-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-033-03",
+      "prd": "PRD-033-ts-session-exec.md",
+      "acceptance_tests": [
+        "TC-033-01",
+        "TC-033-02",
+        "TC-033-03",
+        "TC-033-04",
+        "TC-033-05",
+        "TC-033-06",
+        "TC-033-07",
+        "TC-033-08",
+        "TC-033-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-033-04",
+      "prd": "PRD-033-ts-session-exec.md",
+      "acceptance_tests": [
+        "TC-033-01",
+        "TC-033-02",
+        "TC-033-03",
+        "TC-033-04",
+        "TC-033-05",
+        "TC-033-06",
+        "TC-033-07",
+        "TC-033-08",
+        "TC-033-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-033-05",
+      "prd": "PRD-033-ts-session-exec.md",
+      "acceptance_tests": [
+        "TC-033-01",
+        "TC-033-02",
+        "TC-033-03",
+        "TC-033-04",
+        "TC-033-05",
+        "TC-033-06",
+        "TC-033-07",
+        "TC-033-08",
+        "TC-033-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-033-06",
+      "prd": "PRD-033-ts-session-exec.md",
+      "acceptance_tests": [
+        "TC-033-01",
+        "TC-033-02",
+        "TC-033-03",
+        "TC-033-04",
+        "TC-033-05",
+        "TC-033-06",
+        "TC-033-07",
+        "TC-033-08",
+        "TC-033-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-033-07",
+      "prd": "PRD-033-ts-session-exec.md",
+      "acceptance_tests": [
+        "TC-033-01",
+        "TC-033-02",
+        "TC-033-03",
+        "TC-033-04",
+        "TC-033-05",
+        "TC-033-06",
+        "TC-033-07",
+        "TC-033-08",
+        "TC-033-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-033-08",
+      "prd": "PRD-033-ts-session-exec.md",
+      "acceptance_tests": [
+        "TC-033-01",
+        "TC-033-02",
+        "TC-033-03",
+        "TC-033-04",
+        "TC-033-05",
+        "TC-033-06",
+        "TC-033-07",
+        "TC-033-08",
+        "TC-033-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-033-09",
+      "prd": "PRD-033-ts-session-exec.md",
+      "acceptance_tests": [
+        "TC-033-01",
+        "TC-033-02",
+        "TC-033-03",
+        "TC-033-04",
+        "TC-033-05",
+        "TC-033-06",
+        "TC-033-07",
+        "TC-033-08",
+        "TC-033-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-033-10",
+      "prd": "PRD-033-ts-session-exec.md",
+      "acceptance_tests": [
+        "TC-033-01",
+        "TC-033-02",
+        "TC-033-03",
+        "TC-033-04",
+        "TC-033-05",
+        "TC-033-06",
+        "TC-033-07",
+        "TC-033-08",
+        "TC-033-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-033-11",
+      "prd": "PRD-033-ts-session-exec.md",
+      "acceptance_tests": [
+        "TC-033-01",
+        "TC-033-02",
+        "TC-033-03",
+        "TC-033-04",
+        "TC-033-05",
+        "TC-033-06",
+        "TC-033-07",
+        "TC-033-08",
+        "TC-033-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-033-12",
+      "prd": "PRD-033-ts-session-exec.md",
+      "acceptance_tests": [
+        "TC-033-01",
+        "TC-033-02",
+        "TC-033-03",
+        "TC-033-04",
+        "TC-033-05",
+        "TC-033-06",
+        "TC-033-07",
+        "TC-033-08",
+        "TC-033-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-034-01",
+      "prd": "PRD-034-ts-session-checkpoint.md",
+      "acceptance_tests": [
+        "TC-034-01",
+        "TC-034-02",
+        "TC-034-03",
+        "TC-034-04",
+        "TC-034-05"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-034-02",
+      "prd": "PRD-034-ts-session-checkpoint.md",
+      "acceptance_tests": [
+        "TC-034-01",
+        "TC-034-02",
+        "TC-034-03",
+        "TC-034-04",
+        "TC-034-05"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-034-03",
+      "prd": "PRD-034-ts-session-checkpoint.md",
+      "acceptance_tests": [
+        "TC-034-01",
+        "TC-034-02",
+        "TC-034-03",
+        "TC-034-04",
+        "TC-034-05"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-034-04",
+      "prd": "PRD-034-ts-session-checkpoint.md",
+      "acceptance_tests": [
+        "TC-034-01",
+        "TC-034-02",
+        "TC-034-03",
+        "TC-034-04",
+        "TC-034-05"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-034-05",
+      "prd": "PRD-034-ts-session-checkpoint.md",
+      "acceptance_tests": [
+        "TC-034-01",
+        "TC-034-02",
+        "TC-034-03",
+        "TC-034-04",
+        "TC-034-05"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-034-06",
+      "prd": "PRD-034-ts-session-checkpoint.md",
+      "acceptance_tests": [
+        "TC-034-01",
+        "TC-034-02",
+        "TC-034-03",
+        "TC-034-04",
+        "TC-034-05"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-034-07",
+      "prd": "PRD-034-ts-session-checkpoint.md",
+      "acceptance_tests": [
+        "TC-034-01",
+        "TC-034-02",
+        "TC-034-03",
+        "TC-034-04",
+        "TC-034-05"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-034-08",
+      "prd": "PRD-034-ts-session-checkpoint.md",
+      "acceptance_tests": [
+        "TC-034-01",
+        "TC-034-02",
+        "TC-034-03",
+        "TC-034-04",
+        "TC-034-05"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-034-09",
+      "prd": "PRD-034-ts-session-checkpoint.md",
+      "acceptance_tests": [
+        "TC-034-01",
+        "TC-034-02",
+        "TC-034-03",
+        "TC-034-04",
+        "TC-034-05"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-034-10",
+      "prd": "PRD-034-ts-session-checkpoint.md",
+      "acceptance_tests": [
+        "TC-034-01",
+        "TC-034-02",
+        "TC-034-03",
+        "TC-034-04",
+        "TC-034-05"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-034-11",
+      "prd": "PRD-034-ts-session-checkpoint.md",
+      "acceptance_tests": [
+        "TC-034-01",
+        "TC-034-02",
+        "TC-034-03",
+        "TC-034-04",
+        "TC-034-05"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-034-12",
+      "prd": "PRD-034-ts-session-checkpoint.md",
+      "acceptance_tests": [
+        "TC-034-01",
+        "TC-034-02",
+        "TC-034-03",
+        "TC-034-04",
+        "TC-034-05"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-034-13",
+      "prd": "PRD-034-ts-session-checkpoint.md",
+      "acceptance_tests": [
+        "TC-034-01",
+        "TC-034-02",
+        "TC-034-03",
+        "TC-034-04",
+        "TC-034-05"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-034-14",
+      "prd": "PRD-034-ts-session-checkpoint.md",
+      "acceptance_tests": [
+        "TC-034-01",
+        "TC-034-02",
+        "TC-034-03",
+        "TC-034-04",
+        "TC-034-05"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-035-01",
+      "prd": "PRD-035-ts-session-open-handshake.md",
+      "acceptance_tests": [
+        "TC-035-01",
+        "TC-035-02",
+        "TC-035-03",
+        "TC-035-04",
+        "TC-035-05",
+        "TC-035-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-035-02",
+      "prd": "PRD-035-ts-session-open-handshake.md",
+      "acceptance_tests": [
+        "TC-035-01",
+        "TC-035-02",
+        "TC-035-03",
+        "TC-035-04",
+        "TC-035-05",
+        "TC-035-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-035-03",
+      "prd": "PRD-035-ts-session-open-handshake.md",
+      "acceptance_tests": [
+        "TC-035-01",
+        "TC-035-02",
+        "TC-035-03",
+        "TC-035-04",
+        "TC-035-05",
+        "TC-035-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-035-04",
+      "prd": "PRD-035-ts-session-open-handshake.md",
+      "acceptance_tests": [
+        "TC-035-01",
+        "TC-035-02",
+        "TC-035-03",
+        "TC-035-04",
+        "TC-035-05",
+        "TC-035-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-035-05",
+      "prd": "PRD-035-ts-session-open-handshake.md",
+      "acceptance_tests": [
+        "TC-035-01",
+        "TC-035-02",
+        "TC-035-03",
+        "TC-035-04",
+        "TC-035-05",
+        "TC-035-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-035-06",
+      "prd": "PRD-035-ts-session-open-handshake.md",
+      "acceptance_tests": [
+        "TC-035-01",
+        "TC-035-02",
+        "TC-035-03",
+        "TC-035-04",
+        "TC-035-05",
+        "TC-035-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-035-07",
+      "prd": "PRD-035-ts-session-open-handshake.md",
+      "acceptance_tests": [
+        "TC-035-01",
+        "TC-035-02",
+        "TC-035-03",
+        "TC-035-04",
+        "TC-035-05",
+        "TC-035-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-035-08",
+      "prd": "PRD-035-ts-session-open-handshake.md",
+      "acceptance_tests": [
+        "TC-035-01",
+        "TC-035-02",
+        "TC-035-03",
+        "TC-035-04",
+        "TC-035-05",
+        "TC-035-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-035-09",
+      "prd": "PRD-035-ts-session-open-handshake.md",
+      "acceptance_tests": [
+        "TC-035-01",
+        "TC-035-02",
+        "TC-035-03",
+        "TC-035-04",
+        "TC-035-05",
+        "TC-035-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-035-10",
+      "prd": "PRD-035-ts-session-open-handshake.md",
+      "acceptance_tests": [
+        "TC-035-01",
+        "TC-035-02",
+        "TC-035-03",
+        "TC-035-04",
+        "TC-035-05",
+        "TC-035-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-035-11",
+      "prd": "PRD-035-ts-session-open-handshake.md",
+      "acceptance_tests": [
+        "TC-035-01",
+        "TC-035-02",
+        "TC-035-03",
+        "TC-035-04",
+        "TC-035-05",
+        "TC-035-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-035-12",
+      "prd": "PRD-035-ts-session-open-handshake.md",
+      "acceptance_tests": [
+        "TC-035-01",
+        "TC-035-02",
+        "TC-035-03",
+        "TC-035-04",
+        "TC-035-05",
+        "TC-035-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-035-13",
+      "prd": "PRD-035-ts-session-open-handshake.md",
+      "acceptance_tests": [
+        "TC-035-01",
+        "TC-035-02",
+        "TC-035-03",
+        "TC-035-04",
+        "TC-035-05",
+        "TC-035-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-035-14",
+      "prd": "PRD-035-ts-session-open-handshake.md",
+      "acceptance_tests": [
+        "TC-035-01",
+        "TC-035-02",
+        "TC-035-03",
+        "TC-035-04",
+        "TC-035-05",
+        "TC-035-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-035-15",
+      "prd": "PRD-035-ts-session-open-handshake.md",
+      "acceptance_tests": [
+        "TC-035-01",
+        "TC-035-02",
+        "TC-035-03",
+        "TC-035-04",
+        "TC-035-05",
+        "TC-035-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-035-16",
+      "prd": "PRD-035-ts-session-open-handshake.md",
+      "acceptance_tests": [
+        "TC-035-01",
+        "TC-035-02",
+        "TC-035-03",
+        "TC-035-04",
+        "TC-035-05",
+        "TC-035-06"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-036-01",
+      "prd": "PRD-036-ts-records-resource.md",
+      "acceptance_tests": [
+        "TC-036-01",
+        "TC-036-02",
+        "TC-036-03",
+        "TC-036-04",
+        "TC-036-05",
+        "TC-036-06",
+        "TC-036-07",
+        "TC-036-08",
+        "TC-036-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-036-02",
+      "prd": "PRD-036-ts-records-resource.md",
+      "acceptance_tests": [
+        "TC-036-01",
+        "TC-036-02",
+        "TC-036-03",
+        "TC-036-04",
+        "TC-036-05",
+        "TC-036-06",
+        "TC-036-07",
+        "TC-036-08",
+        "TC-036-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-036-03",
+      "prd": "PRD-036-ts-records-resource.md",
+      "acceptance_tests": [
+        "TC-036-01",
+        "TC-036-02",
+        "TC-036-03",
+        "TC-036-04",
+        "TC-036-05",
+        "TC-036-06",
+        "TC-036-07",
+        "TC-036-08",
+        "TC-036-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-036-04",
+      "prd": "PRD-036-ts-records-resource.md",
+      "acceptance_tests": [
+        "TC-036-01",
+        "TC-036-02",
+        "TC-036-03",
+        "TC-036-04",
+        "TC-036-05",
+        "TC-036-06",
+        "TC-036-07",
+        "TC-036-08",
+        "TC-036-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-036-05",
+      "prd": "PRD-036-ts-records-resource.md",
+      "acceptance_tests": [
+        "TC-036-01",
+        "TC-036-02",
+        "TC-036-03",
+        "TC-036-04",
+        "TC-036-05",
+        "TC-036-06",
+        "TC-036-07",
+        "TC-036-08",
+        "TC-036-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-036-06",
+      "prd": "PRD-036-ts-records-resource.md",
+      "acceptance_tests": [
+        "TC-036-01",
+        "TC-036-02",
+        "TC-036-03",
+        "TC-036-04",
+        "TC-036-05",
+        "TC-036-06",
+        "TC-036-07",
+        "TC-036-08",
+        "TC-036-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-036-07",
+      "prd": "PRD-036-ts-records-resource.md",
+      "acceptance_tests": [
+        "TC-036-01",
+        "TC-036-02",
+        "TC-036-03",
+        "TC-036-04",
+        "TC-036-05",
+        "TC-036-06",
+        "TC-036-07",
+        "TC-036-08",
+        "TC-036-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-036-08",
+      "prd": "PRD-036-ts-records-resource.md",
+      "acceptance_tests": [
+        "TC-036-01",
+        "TC-036-02",
+        "TC-036-03",
+        "TC-036-04",
+        "TC-036-05",
+        "TC-036-06",
+        "TC-036-07",
+        "TC-036-08",
+        "TC-036-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-036-09",
+      "prd": "PRD-036-ts-records-resource.md",
+      "acceptance_tests": [
+        "TC-036-01",
+        "TC-036-02",
+        "TC-036-03",
+        "TC-036-04",
+        "TC-036-05",
+        "TC-036-06",
+        "TC-036-07",
+        "TC-036-08",
+        "TC-036-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-036-10",
+      "prd": "PRD-036-ts-records-resource.md",
+      "acceptance_tests": [
+        "TC-036-01",
+        "TC-036-02",
+        "TC-036-03",
+        "TC-036-04",
+        "TC-036-05",
+        "TC-036-06",
+        "TC-036-07",
+        "TC-036-08",
+        "TC-036-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-036-11",
+      "prd": "PRD-036-ts-records-resource.md",
+      "acceptance_tests": [
+        "TC-036-01",
+        "TC-036-02",
+        "TC-036-03",
+        "TC-036-04",
+        "TC-036-05",
+        "TC-036-06",
+        "TC-036-07",
+        "TC-036-08",
+        "TC-036-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-036-12",
+      "prd": "PRD-036-ts-records-resource.md",
+      "acceptance_tests": [
+        "TC-036-01",
+        "TC-036-02",
+        "TC-036-03",
+        "TC-036-04",
+        "TC-036-05",
+        "TC-036-06",
+        "TC-036-07",
+        "TC-036-08",
+        "TC-036-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-036-13",
+      "prd": "PRD-036-ts-records-resource.md",
+      "acceptance_tests": [
+        "TC-036-01",
+        "TC-036-02",
+        "TC-036-03",
+        "TC-036-04",
+        "TC-036-05",
+        "TC-036-06",
+        "TC-036-07",
+        "TC-036-08",
+        "TC-036-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-036-14",
+      "prd": "PRD-036-ts-records-resource.md",
+      "acceptance_tests": [
+        "TC-036-01",
+        "TC-036-02",
+        "TC-036-03",
+        "TC-036-04",
+        "TC-036-05",
+        "TC-036-06",
+        "TC-036-07",
+        "TC-036-08",
+        "TC-036-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-036-15",
+      "prd": "PRD-036-ts-records-resource.md",
+      "acceptance_tests": [
+        "TC-036-01",
+        "TC-036-02",
+        "TC-036-03",
+        "TC-036-04",
+        "TC-036-05",
+        "TC-036-06",
+        "TC-036-07",
+        "TC-036-08",
+        "TC-036-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-036-16",
+      "prd": "PRD-036-ts-records-resource.md",
+      "acceptance_tests": [
+        "TC-036-01",
+        "TC-036-02",
+        "TC-036-03",
+        "TC-036-04",
+        "TC-036-05",
+        "TC-036-06",
+        "TC-036-07",
+        "TC-036-08",
+        "TC-036-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-036-17",
+      "prd": "PRD-036-ts-records-resource.md",
+      "acceptance_tests": [
+        "TC-036-01",
+        "TC-036-02",
+        "TC-036-03",
+        "TC-036-04",
+        "TC-036-05",
+        "TC-036-06",
+        "TC-036-07",
+        "TC-036-08",
+        "TC-036-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-036-18",
+      "prd": "PRD-036-ts-records-resource.md",
+      "acceptance_tests": [
+        "TC-036-01",
+        "TC-036-02",
+        "TC-036-03",
+        "TC-036-04",
+        "TC-036-05",
+        "TC-036-06",
+        "TC-036-07",
+        "TC-036-08",
+        "TC-036-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-036-19",
+      "prd": "PRD-036-ts-records-resource.md",
+      "acceptance_tests": [
+        "TC-036-01",
+        "TC-036-02",
+        "TC-036-03",
+        "TC-036-04",
+        "TC-036-05",
+        "TC-036-06",
+        "TC-036-07",
+        "TC-036-08",
+        "TC-036-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-037-01",
+      "prd": "PRD-037-ts-me-resource.md",
+      "acceptance_tests": [
+        "TC-037-01",
+        "TC-037-02",
+        "TC-037-03",
+        "TC-037-04",
+        "TC-037-05",
+        "TC-037-06",
+        "TC-037-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-037-02",
+      "prd": "PRD-037-ts-me-resource.md",
+      "acceptance_tests": [
+        "TC-037-01",
+        "TC-037-02",
+        "TC-037-03",
+        "TC-037-04",
+        "TC-037-05",
+        "TC-037-06",
+        "TC-037-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-037-03",
+      "prd": "PRD-037-ts-me-resource.md",
+      "acceptance_tests": [
+        "TC-037-01",
+        "TC-037-02",
+        "TC-037-03",
+        "TC-037-04",
+        "TC-037-05",
+        "TC-037-06",
+        "TC-037-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-037-04",
+      "prd": "PRD-037-ts-me-resource.md",
+      "acceptance_tests": [
+        "TC-037-01",
+        "TC-037-02",
+        "TC-037-03",
+        "TC-037-04",
+        "TC-037-05",
+        "TC-037-06",
+        "TC-037-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-037-05",
+      "prd": "PRD-037-ts-me-resource.md",
+      "acceptance_tests": [
+        "TC-037-01",
+        "TC-037-02",
+        "TC-037-03",
+        "TC-037-04",
+        "TC-037-05",
+        "TC-037-06",
+        "TC-037-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-037-06",
+      "prd": "PRD-037-ts-me-resource.md",
+      "acceptance_tests": [
+        "TC-037-01",
+        "TC-037-02",
+        "TC-037-03",
+        "TC-037-04",
+        "TC-037-05",
+        "TC-037-06",
+        "TC-037-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-037-07",
+      "prd": "PRD-037-ts-me-resource.md",
+      "acceptance_tests": [
+        "TC-037-01",
+        "TC-037-02",
+        "TC-037-03",
+        "TC-037-04",
+        "TC-037-05",
+        "TC-037-06",
+        "TC-037-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-037-08",
+      "prd": "PRD-037-ts-me-resource.md",
+      "acceptance_tests": [
+        "TC-037-01",
+        "TC-037-02",
+        "TC-037-03",
+        "TC-037-04",
+        "TC-037-05",
+        "TC-037-06",
+        "TC-037-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-037-09",
+      "prd": "PRD-037-ts-me-resource.md",
+      "acceptance_tests": [
+        "TC-037-01",
+        "TC-037-02",
+        "TC-037-03",
+        "TC-037-04",
+        "TC-037-05",
+        "TC-037-06",
+        "TC-037-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-037-10",
+      "prd": "PRD-037-ts-me-resource.md",
+      "acceptance_tests": [
+        "TC-037-01",
+        "TC-037-02",
+        "TC-037-03",
+        "TC-037-04",
+        "TC-037-05",
+        "TC-037-06",
+        "TC-037-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-037-11",
+      "prd": "PRD-037-ts-me-resource.md",
+      "acceptance_tests": [
+        "TC-037-01",
+        "TC-037-02",
+        "TC-037-03",
+        "TC-037-04",
+        "TC-037-05",
+        "TC-037-06",
+        "TC-037-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-037-12",
+      "prd": "PRD-037-ts-me-resource.md",
+      "acceptance_tests": [
+        "TC-037-01",
+        "TC-037-02",
+        "TC-037-03",
+        "TC-037-04",
+        "TC-037-05",
+        "TC-037-06",
+        "TC-037-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-037-13",
+      "prd": "PRD-037-ts-me-resource.md",
+      "acceptance_tests": [
+        "TC-037-01",
+        "TC-037-02",
+        "TC-037-03",
+        "TC-037-04",
+        "TC-037-05",
+        "TC-037-06",
+        "TC-037-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-037-14",
+      "prd": "PRD-037-ts-me-resource.md",
+      "acceptance_tests": [
+        "TC-037-01",
+        "TC-037-02",
+        "TC-037-03",
+        "TC-037-04",
+        "TC-037-05",
+        "TC-037-06",
+        "TC-037-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-038-01",
+      "prd": "PRD-038-ts-public-exports.md",
+      "acceptance_tests": [
+        "TC-038-01",
+        "TC-038-02",
+        "TC-038-03",
+        "TC-038-04",
+        "TC-038-05",
+        "TC-038-06",
+        "TC-038-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-038-02",
+      "prd": "PRD-038-ts-public-exports.md",
+      "acceptance_tests": [
+        "TC-038-01",
+        "TC-038-02",
+        "TC-038-03",
+        "TC-038-04",
+        "TC-038-05",
+        "TC-038-06",
+        "TC-038-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-038-03",
+      "prd": "PRD-038-ts-public-exports.md",
+      "acceptance_tests": [
+        "TC-038-01",
+        "TC-038-02",
+        "TC-038-03",
+        "TC-038-04",
+        "TC-038-05",
+        "TC-038-06",
+        "TC-038-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-038-04",
+      "prd": "PRD-038-ts-public-exports.md",
+      "acceptance_tests": [
+        "TC-038-01",
+        "TC-038-02",
+        "TC-038-03",
+        "TC-038-04",
+        "TC-038-05",
+        "TC-038-06",
+        "TC-038-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-038-05",
+      "prd": "PRD-038-ts-public-exports.md",
+      "acceptance_tests": [
+        "TC-038-01",
+        "TC-038-02",
+        "TC-038-03",
+        "TC-038-04",
+        "TC-038-05",
+        "TC-038-06",
+        "TC-038-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-038-06",
+      "prd": "PRD-038-ts-public-exports.md",
+      "acceptance_tests": [
+        "TC-038-01",
+        "TC-038-02",
+        "TC-038-03",
+        "TC-038-04",
+        "TC-038-05",
+        "TC-038-06",
+        "TC-038-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-038-07",
+      "prd": "PRD-038-ts-public-exports.md",
+      "acceptance_tests": [
+        "TC-038-01",
+        "TC-038-02",
+        "TC-038-03",
+        "TC-038-04",
+        "TC-038-05",
+        "TC-038-06",
+        "TC-038-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-038-08",
+      "prd": "PRD-038-ts-public-exports.md",
+      "acceptance_tests": [
+        "TC-038-01",
+        "TC-038-02",
+        "TC-038-03",
+        "TC-038-04",
+        "TC-038-05",
+        "TC-038-06",
+        "TC-038-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-038-09",
+      "prd": "PRD-038-ts-public-exports.md",
+      "acceptance_tests": [
+        "TC-038-01",
+        "TC-038-02",
+        "TC-038-03",
+        "TC-038-04",
+        "TC-038-05",
+        "TC-038-06",
+        "TC-038-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-038-10",
+      "prd": "PRD-038-ts-public-exports.md",
+      "acceptance_tests": [
+        "TC-038-01",
+        "TC-038-02",
+        "TC-038-03",
+        "TC-038-04",
+        "TC-038-05",
+        "TC-038-06",
+        "TC-038-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-038-11",
+      "prd": "PRD-038-ts-public-exports.md",
+      "acceptance_tests": [
+        "TC-038-01",
+        "TC-038-02",
+        "TC-038-03",
+        "TC-038-04",
+        "TC-038-05",
+        "TC-038-06",
+        "TC-038-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-038-12",
+      "prd": "PRD-038-ts-public-exports.md",
+      "acceptance_tests": [
+        "TC-038-01",
+        "TC-038-02",
+        "TC-038-03",
+        "TC-038-04",
+        "TC-038-05",
+        "TC-038-06",
+        "TC-038-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-038-13",
+      "prd": "PRD-038-ts-public-exports.md",
+      "acceptance_tests": [
+        "TC-038-01",
+        "TC-038-02",
+        "TC-038-03",
+        "TC-038-04",
+        "TC-038-05",
+        "TC-038-06",
+        "TC-038-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-038-14",
+      "prd": "PRD-038-ts-public-exports.md",
+      "acceptance_tests": [
+        "TC-038-01",
+        "TC-038-02",
+        "TC-038-03",
+        "TC-038-04",
+        "TC-038-05",
+        "TC-038-06",
+        "TC-038-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-039-01",
+      "prd": "PRD-039-ts-observability-hooks.md",
+      "acceptance_tests": [
+        "TC-039-01",
+        "TC-039-02",
+        "TC-039-03",
+        "TC-039-04",
+        "TC-039-05",
+        "TC-039-06",
+        "TC-039-07",
+        "TC-039-08",
+        "TC-039-09",
+        "TC-039-10"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-039-02",
+      "prd": "PRD-039-ts-observability-hooks.md",
+      "acceptance_tests": [
+        "TC-039-01",
+        "TC-039-02",
+        "TC-039-03",
+        "TC-039-04",
+        "TC-039-05",
+        "TC-039-06",
+        "TC-039-07",
+        "TC-039-08",
+        "TC-039-09",
+        "TC-039-10"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-039-03",
+      "prd": "PRD-039-ts-observability-hooks.md",
+      "acceptance_tests": [
+        "TC-039-01",
+        "TC-039-02",
+        "TC-039-03",
+        "TC-039-04",
+        "TC-039-05",
+        "TC-039-06",
+        "TC-039-07",
+        "TC-039-08",
+        "TC-039-09",
+        "TC-039-10"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-039-04",
+      "prd": "PRD-039-ts-observability-hooks.md",
+      "acceptance_tests": [
+        "TC-039-01",
+        "TC-039-02",
+        "TC-039-03",
+        "TC-039-04",
+        "TC-039-05",
+        "TC-039-06",
+        "TC-039-07",
+        "TC-039-08",
+        "TC-039-09",
+        "TC-039-10"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-039-05",
+      "prd": "PRD-039-ts-observability-hooks.md",
+      "acceptance_tests": [
+        "TC-039-01",
+        "TC-039-02",
+        "TC-039-03",
+        "TC-039-04",
+        "TC-039-05",
+        "TC-039-06",
+        "TC-039-07",
+        "TC-039-08",
+        "TC-039-09",
+        "TC-039-10"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-039-06",
+      "prd": "PRD-039-ts-observability-hooks.md",
+      "acceptance_tests": [
+        "TC-039-01",
+        "TC-039-02",
+        "TC-039-03",
+        "TC-039-04",
+        "TC-039-05",
+        "TC-039-06",
+        "TC-039-07",
+        "TC-039-08",
+        "TC-039-09",
+        "TC-039-10"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-039-07",
+      "prd": "PRD-039-ts-observability-hooks.md",
+      "acceptance_tests": [
+        "TC-039-01",
+        "TC-039-02",
+        "TC-039-03",
+        "TC-039-04",
+        "TC-039-05",
+        "TC-039-06",
+        "TC-039-07",
+        "TC-039-08",
+        "TC-039-09",
+        "TC-039-10"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-039-08",
+      "prd": "PRD-039-ts-observability-hooks.md",
+      "acceptance_tests": [
+        "TC-039-01",
+        "TC-039-02",
+        "TC-039-03",
+        "TC-039-04",
+        "TC-039-05",
+        "TC-039-06",
+        "TC-039-07",
+        "TC-039-08",
+        "TC-039-09",
+        "TC-039-10"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-039-09",
+      "prd": "PRD-039-ts-observability-hooks.md",
+      "acceptance_tests": [
+        "TC-039-01",
+        "TC-039-02",
+        "TC-039-03",
+        "TC-039-04",
+        "TC-039-05",
+        "TC-039-06",
+        "TC-039-07",
+        "TC-039-08",
+        "TC-039-09",
+        "TC-039-10"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-039-10",
+      "prd": "PRD-039-ts-observability-hooks.md",
+      "acceptance_tests": [
+        "TC-039-01",
+        "TC-039-02",
+        "TC-039-03",
+        "TC-039-04",
+        "TC-039-05",
+        "TC-039-06",
+        "TC-039-07",
+        "TC-039-08",
+        "TC-039-09",
+        "TC-039-10"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-039-11",
+      "prd": "PRD-039-ts-observability-hooks.md",
+      "acceptance_tests": [
+        "TC-039-01",
+        "TC-039-02",
+        "TC-039-03",
+        "TC-039-04",
+        "TC-039-05",
+        "TC-039-06",
+        "TC-039-07",
+        "TC-039-08",
+        "TC-039-09",
+        "TC-039-10"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-039-12",
+      "prd": "PRD-039-ts-observability-hooks.md",
+      "acceptance_tests": [
+        "TC-039-01",
+        "TC-039-02",
+        "TC-039-03",
+        "TC-039-04",
+        "TC-039-05",
+        "TC-039-06",
+        "TC-039-07",
+        "TC-039-08",
+        "TC-039-09",
+        "TC-039-10"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-039-13",
+      "prd": "PRD-039-ts-observability-hooks.md",
+      "acceptance_tests": [
+        "TC-039-01",
+        "TC-039-02",
+        "TC-039-03",
+        "TC-039-04",
+        "TC-039-05",
+        "TC-039-06",
+        "TC-039-07",
+        "TC-039-08",
+        "TC-039-09",
+        "TC-039-10"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-039-14",
+      "prd": "PRD-039-ts-observability-hooks.md",
+      "acceptance_tests": [
+        "TC-039-01",
+        "TC-039-02",
+        "TC-039-03",
+        "TC-039-04",
+        "TC-039-05",
+        "TC-039-06",
+        "TC-039-07",
+        "TC-039-08",
+        "TC-039-09",
+        "TC-039-10"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-039-15",
+      "prd": "PRD-039-ts-observability-hooks.md",
+      "acceptance_tests": [
+        "TC-039-01",
+        "TC-039-02",
+        "TC-039-03",
+        "TC-039-04",
+        "TC-039-05",
+        "TC-039-06",
+        "TC-039-07",
+        "TC-039-08",
+        "TC-039-09",
+        "TC-039-10"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-039-16",
+      "prd": "PRD-039-ts-observability-hooks.md",
+      "acceptance_tests": [
+        "TC-039-01",
+        "TC-039-02",
+        "TC-039-03",
+        "TC-039-04",
+        "TC-039-05",
+        "TC-039-06",
+        "TC-039-07",
+        "TC-039-08",
+        "TC-039-09",
+        "TC-039-10"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-039-17",
+      "prd": "PRD-039-ts-observability-hooks.md",
+      "acceptance_tests": [
+        "TC-039-01",
+        "TC-039-02",
+        "TC-039-03",
+        "TC-039-04",
+        "TC-039-05",
+        "TC-039-06",
+        "TC-039-07",
+        "TC-039-08",
+        "TC-039-09",
+        "TC-039-10"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-039-18",
+      "prd": "PRD-039-ts-observability-hooks.md",
+      "acceptance_tests": [
+        "TC-039-01",
+        "TC-039-02",
+        "TC-039-03",
+        "TC-039-04",
+        "TC-039-05",
+        "TC-039-06",
+        "TC-039-07",
+        "TC-039-08",
+        "TC-039-09",
+        "TC-039-10"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-040-01",
+      "prd": "PRD-040-ts-security-hardening.md",
+      "acceptance_tests": [
+        "TC-040-01",
+        "TC-040-02",
+        "TC-040-03",
+        "TC-040-04",
+        "TC-040-05",
+        "TC-040-06",
+        "TC-040-07",
+        "TC-040-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-040-02",
+      "prd": "PRD-040-ts-security-hardening.md",
+      "acceptance_tests": [
+        "TC-040-01",
+        "TC-040-02",
+        "TC-040-03",
+        "TC-040-04",
+        "TC-040-05",
+        "TC-040-06",
+        "TC-040-07",
+        "TC-040-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-040-03",
+      "prd": "PRD-040-ts-security-hardening.md",
+      "acceptance_tests": [
+        "TC-040-01",
+        "TC-040-02",
+        "TC-040-03",
+        "TC-040-04",
+        "TC-040-05",
+        "TC-040-06",
+        "TC-040-07",
+        "TC-040-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-040-04",
+      "prd": "PRD-040-ts-security-hardening.md",
+      "acceptance_tests": [
+        "TC-040-01",
+        "TC-040-02",
+        "TC-040-03",
+        "TC-040-04",
+        "TC-040-05",
+        "TC-040-06",
+        "TC-040-07",
+        "TC-040-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-040-05",
+      "prd": "PRD-040-ts-security-hardening.md",
+      "acceptance_tests": [
+        "TC-040-01",
+        "TC-040-02",
+        "TC-040-03",
+        "TC-040-04",
+        "TC-040-05",
+        "TC-040-06",
+        "TC-040-07",
+        "TC-040-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-040-06",
+      "prd": "PRD-040-ts-security-hardening.md",
+      "acceptance_tests": [
+        "TC-040-01",
+        "TC-040-02",
+        "TC-040-03",
+        "TC-040-04",
+        "TC-040-05",
+        "TC-040-06",
+        "TC-040-07",
+        "TC-040-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-040-07",
+      "prd": "PRD-040-ts-security-hardening.md",
+      "acceptance_tests": [
+        "TC-040-01",
+        "TC-040-02",
+        "TC-040-03",
+        "TC-040-04",
+        "TC-040-05",
+        "TC-040-06",
+        "TC-040-07",
+        "TC-040-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-040-08",
+      "prd": "PRD-040-ts-security-hardening.md",
+      "acceptance_tests": [
+        "TC-040-01",
+        "TC-040-02",
+        "TC-040-03",
+        "TC-040-04",
+        "TC-040-05",
+        "TC-040-06",
+        "TC-040-07",
+        "TC-040-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-040-09",
+      "prd": "PRD-040-ts-security-hardening.md",
+      "acceptance_tests": [
+        "TC-040-01",
+        "TC-040-02",
+        "TC-040-03",
+        "TC-040-04",
+        "TC-040-05",
+        "TC-040-06",
+        "TC-040-07",
+        "TC-040-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-040-10",
+      "prd": "PRD-040-ts-security-hardening.md",
+      "acceptance_tests": [
+        "TC-040-01",
+        "TC-040-02",
+        "TC-040-03",
+        "TC-040-04",
+        "TC-040-05",
+        "TC-040-06",
+        "TC-040-07",
+        "TC-040-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-040-11",
+      "prd": "PRD-040-ts-security-hardening.md",
+      "acceptance_tests": [
+        "TC-040-01",
+        "TC-040-02",
+        "TC-040-03",
+        "TC-040-04",
+        "TC-040-05",
+        "TC-040-06",
+        "TC-040-07",
+        "TC-040-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-040-12",
+      "prd": "PRD-040-ts-security-hardening.md",
+      "acceptance_tests": [
+        "TC-040-01",
+        "TC-040-02",
+        "TC-040-03",
+        "TC-040-04",
+        "TC-040-05",
+        "TC-040-06",
+        "TC-040-07",
+        "TC-040-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-041-01",
+      "prd": "PRD-041-ts-test-harness.md",
+      "acceptance_tests": [
+        "TC-041-01",
+        "TC-041-02",
+        "TC-041-03",
+        "TC-041-04",
+        "TC-041-05",
+        "TC-041-06",
+        "TC-041-07",
+        "TC-041-08",
+        "TC-041-09",
+        "TC-041-10",
+        "TC-041-11",
+        "TC-041-12"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-041-02",
+      "prd": "PRD-041-ts-test-harness.md",
+      "acceptance_tests": [
+        "TC-041-01",
+        "TC-041-02",
+        "TC-041-03",
+        "TC-041-04",
+        "TC-041-05",
+        "TC-041-06",
+        "TC-041-07",
+        "TC-041-08",
+        "TC-041-09",
+        "TC-041-10",
+        "TC-041-11",
+        "TC-041-12"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-041-03",
+      "prd": "PRD-041-ts-test-harness.md",
+      "acceptance_tests": [
+        "TC-041-01",
+        "TC-041-02",
+        "TC-041-03",
+        "TC-041-04",
+        "TC-041-05",
+        "TC-041-06",
+        "TC-041-07",
+        "TC-041-08",
+        "TC-041-09",
+        "TC-041-10",
+        "TC-041-11",
+        "TC-041-12"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-041-04",
+      "prd": "PRD-041-ts-test-harness.md",
+      "acceptance_tests": [
+        "TC-041-01",
+        "TC-041-02",
+        "TC-041-03",
+        "TC-041-04",
+        "TC-041-05",
+        "TC-041-06",
+        "TC-041-07",
+        "TC-041-08",
+        "TC-041-09",
+        "TC-041-10",
+        "TC-041-11",
+        "TC-041-12"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-041-05",
+      "prd": "PRD-041-ts-test-harness.md",
+      "acceptance_tests": [
+        "TC-041-01",
+        "TC-041-02",
+        "TC-041-03",
+        "TC-041-04",
+        "TC-041-05",
+        "TC-041-06",
+        "TC-041-07",
+        "TC-041-08",
+        "TC-041-09",
+        "TC-041-10",
+        "TC-041-11",
+        "TC-041-12"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-041-06",
+      "prd": "PRD-041-ts-test-harness.md",
+      "acceptance_tests": [
+        "TC-041-01",
+        "TC-041-02",
+        "TC-041-03",
+        "TC-041-04",
+        "TC-041-05",
+        "TC-041-06",
+        "TC-041-07",
+        "TC-041-08",
+        "TC-041-09",
+        "TC-041-10",
+        "TC-041-11",
+        "TC-041-12"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-041-07",
+      "prd": "PRD-041-ts-test-harness.md",
+      "acceptance_tests": [
+        "TC-041-01",
+        "TC-041-02",
+        "TC-041-03",
+        "TC-041-04",
+        "TC-041-05",
+        "TC-041-06",
+        "TC-041-07",
+        "TC-041-08",
+        "TC-041-09",
+        "TC-041-10",
+        "TC-041-11",
+        "TC-041-12"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-041-08",
+      "prd": "PRD-041-ts-test-harness.md",
+      "acceptance_tests": [
+        "TC-041-01",
+        "TC-041-02",
+        "TC-041-03",
+        "TC-041-04",
+        "TC-041-05",
+        "TC-041-06",
+        "TC-041-07",
+        "TC-041-08",
+        "TC-041-09",
+        "TC-041-10",
+        "TC-041-11",
+        "TC-041-12"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-041-09",
+      "prd": "PRD-041-ts-test-harness.md",
+      "acceptance_tests": [
+        "TC-041-01",
+        "TC-041-02",
+        "TC-041-03",
+        "TC-041-04",
+        "TC-041-05",
+        "TC-041-06",
+        "TC-041-07",
+        "TC-041-08",
+        "TC-041-09",
+        "TC-041-10",
+        "TC-041-11",
+        "TC-041-12"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-041-10",
+      "prd": "PRD-041-ts-test-harness.md",
+      "acceptance_tests": [
+        "TC-041-01",
+        "TC-041-02",
+        "TC-041-03",
+        "TC-041-04",
+        "TC-041-05",
+        "TC-041-06",
+        "TC-041-07",
+        "TC-041-08",
+        "TC-041-09",
+        "TC-041-10",
+        "TC-041-11",
+        "TC-041-12"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-041-11",
+      "prd": "PRD-041-ts-test-harness.md",
+      "acceptance_tests": [
+        "TC-041-01",
+        "TC-041-02",
+        "TC-041-03",
+        "TC-041-04",
+        "TC-041-05",
+        "TC-041-06",
+        "TC-041-07",
+        "TC-041-08",
+        "TC-041-09",
+        "TC-041-10",
+        "TC-041-11",
+        "TC-041-12"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-041-12",
+      "prd": "PRD-041-ts-test-harness.md",
+      "acceptance_tests": [
+        "TC-041-01",
+        "TC-041-02",
+        "TC-041-03",
+        "TC-041-04",
+        "TC-041-05",
+        "TC-041-06",
+        "TC-041-07",
+        "TC-041-08",
+        "TC-041-09",
+        "TC-041-10",
+        "TC-041-11",
+        "TC-041-12"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-041-13",
+      "prd": "PRD-041-ts-test-harness.md",
+      "acceptance_tests": [
+        "TC-041-01",
+        "TC-041-02",
+        "TC-041-03",
+        "TC-041-04",
+        "TC-041-05",
+        "TC-041-06",
+        "TC-041-07",
+        "TC-041-08",
+        "TC-041-09",
+        "TC-041-10",
+        "TC-041-11",
+        "TC-041-12"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-041-14",
+      "prd": "PRD-041-ts-test-harness.md",
+      "acceptance_tests": [
+        "TC-041-01",
+        "TC-041-02",
+        "TC-041-03",
+        "TC-041-04",
+        "TC-041-05",
+        "TC-041-06",
+        "TC-041-07",
+        "TC-041-08",
+        "TC-041-09",
+        "TC-041-10",
+        "TC-041-11",
+        "TC-041-12"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-041-15",
+      "prd": "PRD-041-ts-test-harness.md",
+      "acceptance_tests": [
+        "TC-041-01",
+        "TC-041-02",
+        "TC-041-03",
+        "TC-041-04",
+        "TC-041-05",
+        "TC-041-06",
+        "TC-041-07",
+        "TC-041-08",
+        "TC-041-09",
+        "TC-041-10",
+        "TC-041-11",
+        "TC-041-12"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-041-16",
+      "prd": "PRD-041-ts-test-harness.md",
+      "acceptance_tests": [
+        "TC-041-01",
+        "TC-041-02",
+        "TC-041-03",
+        "TC-041-04",
+        "TC-041-05",
+        "TC-041-06",
+        "TC-041-07",
+        "TC-041-08",
+        "TC-041-09",
+        "TC-041-10",
+        "TC-041-11",
+        "TC-041-12"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-041-17",
+      "prd": "PRD-041-ts-test-harness.md",
+      "acceptance_tests": [
+        "TC-041-01",
+        "TC-041-02",
+        "TC-041-03",
+        "TC-041-04",
+        "TC-041-05",
+        "TC-041-06",
+        "TC-041-07",
+        "TC-041-08",
+        "TC-041-09",
+        "TC-041-10",
+        "TC-041-11",
+        "TC-041-12"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-041-18",
+      "prd": "PRD-041-ts-test-harness.md",
+      "acceptance_tests": [
+        "TC-041-01",
+        "TC-041-02",
+        "TC-041-03",
+        "TC-041-04",
+        "TC-041-05",
+        "TC-041-06",
+        "TC-041-07",
+        "TC-041-08",
+        "TC-041-09",
+        "TC-041-10",
+        "TC-041-11",
+        "TC-041-12"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-041-19",
+      "prd": "PRD-041-ts-test-harness.md",
+      "acceptance_tests": [
+        "TC-041-01",
+        "TC-041-02",
+        "TC-041-03",
+        "TC-041-04",
+        "TC-041-05",
+        "TC-041-06",
+        "TC-041-07",
+        "TC-041-08",
+        "TC-041-09",
+        "TC-041-10",
+        "TC-041-11",
+        "TC-041-12"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-041-20",
+      "prd": "PRD-041-ts-test-harness.md",
+      "acceptance_tests": [
+        "TC-041-01",
+        "TC-041-02",
+        "TC-041-03",
+        "TC-041-04",
+        "TC-041-05",
+        "TC-041-06",
+        "TC-041-07",
+        "TC-041-08",
+        "TC-041-09",
+        "TC-041-10",
+        "TC-041-11",
+        "TC-041-12"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-042-01",
+      "prd": "PRD-042-ts-config-error-transport-tests.md",
+      "acceptance_tests": [
+        "TC-042-01",
+        "TC-042-02",
+        "TC-042-03",
+        "TC-042-04",
+        "TC-042-05",
+        "TC-042-06",
+        "TC-042-07",
+        "TC-042-08",
+        "TC-042-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-042-02",
+      "prd": "PRD-042-ts-config-error-transport-tests.md",
+      "acceptance_tests": [
+        "TC-042-01",
+        "TC-042-02",
+        "TC-042-03",
+        "TC-042-04",
+        "TC-042-05",
+        "TC-042-06",
+        "TC-042-07",
+        "TC-042-08",
+        "TC-042-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-042-03",
+      "prd": "PRD-042-ts-config-error-transport-tests.md",
+      "acceptance_tests": [
+        "TC-042-01",
+        "TC-042-02",
+        "TC-042-03",
+        "TC-042-04",
+        "TC-042-05",
+        "TC-042-06",
+        "TC-042-07",
+        "TC-042-08",
+        "TC-042-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-042-04",
+      "prd": "PRD-042-ts-config-error-transport-tests.md",
+      "acceptance_tests": [
+        "TC-042-01",
+        "TC-042-02",
+        "TC-042-03",
+        "TC-042-04",
+        "TC-042-05",
+        "TC-042-06",
+        "TC-042-07",
+        "TC-042-08",
+        "TC-042-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-042-05",
+      "prd": "PRD-042-ts-config-error-transport-tests.md",
+      "acceptance_tests": [
+        "TC-042-01",
+        "TC-042-02",
+        "TC-042-03",
+        "TC-042-04",
+        "TC-042-05",
+        "TC-042-06",
+        "TC-042-07",
+        "TC-042-08",
+        "TC-042-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-042-06",
+      "prd": "PRD-042-ts-config-error-transport-tests.md",
+      "acceptance_tests": [
+        "TC-042-01",
+        "TC-042-02",
+        "TC-042-03",
+        "TC-042-04",
+        "TC-042-05",
+        "TC-042-06",
+        "TC-042-07",
+        "TC-042-08",
+        "TC-042-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-042-07",
+      "prd": "PRD-042-ts-config-error-transport-tests.md",
+      "acceptance_tests": [
+        "TC-042-01",
+        "TC-042-02",
+        "TC-042-03",
+        "TC-042-04",
+        "TC-042-05",
+        "TC-042-06",
+        "TC-042-07",
+        "TC-042-08",
+        "TC-042-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-042-08",
+      "prd": "PRD-042-ts-config-error-transport-tests.md",
+      "acceptance_tests": [
+        "TC-042-01",
+        "TC-042-02",
+        "TC-042-03",
+        "TC-042-04",
+        "TC-042-05",
+        "TC-042-06",
+        "TC-042-07",
+        "TC-042-08",
+        "TC-042-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-042-09",
+      "prd": "PRD-042-ts-config-error-transport-tests.md",
+      "acceptance_tests": [
+        "TC-042-01",
+        "TC-042-02",
+        "TC-042-03",
+        "TC-042-04",
+        "TC-042-05",
+        "TC-042-06",
+        "TC-042-07",
+        "TC-042-08",
+        "TC-042-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-042-10",
+      "prd": "PRD-042-ts-config-error-transport-tests.md",
+      "acceptance_tests": [
+        "TC-042-01",
+        "TC-042-02",
+        "TC-042-03",
+        "TC-042-04",
+        "TC-042-05",
+        "TC-042-06",
+        "TC-042-07",
+        "TC-042-08",
+        "TC-042-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-042-11",
+      "prd": "PRD-042-ts-config-error-transport-tests.md",
+      "acceptance_tests": [
+        "TC-042-01",
+        "TC-042-02",
+        "TC-042-03",
+        "TC-042-04",
+        "TC-042-05",
+        "TC-042-06",
+        "TC-042-07",
+        "TC-042-08",
+        "TC-042-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-043-01",
+      "prd": "PRD-043-ts-contract-and-model-tests.md",
+      "acceptance_tests": [
+        "TC-043-01",
+        "TC-043-02",
+        "TC-043-03",
+        "TC-043-04",
+        "TC-043-05",
+        "TC-043-06",
+        "TC-043-07",
+        "TC-043-08",
+        "TC-043-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-043-02",
+      "prd": "PRD-043-ts-contract-and-model-tests.md",
+      "acceptance_tests": [
+        "TC-043-01",
+        "TC-043-02",
+        "TC-043-03",
+        "TC-043-04",
+        "TC-043-05",
+        "TC-043-06",
+        "TC-043-07",
+        "TC-043-08",
+        "TC-043-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-043-03",
+      "prd": "PRD-043-ts-contract-and-model-tests.md",
+      "acceptance_tests": [
+        "TC-043-01",
+        "TC-043-02",
+        "TC-043-03",
+        "TC-043-04",
+        "TC-043-05",
+        "TC-043-06",
+        "TC-043-07",
+        "TC-043-08",
+        "TC-043-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-043-04",
+      "prd": "PRD-043-ts-contract-and-model-tests.md",
+      "acceptance_tests": [
+        "TC-043-01",
+        "TC-043-02",
+        "TC-043-03",
+        "TC-043-04",
+        "TC-043-05",
+        "TC-043-06",
+        "TC-043-07",
+        "TC-043-08",
+        "TC-043-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-043-05",
+      "prd": "PRD-043-ts-contract-and-model-tests.md",
+      "acceptance_tests": [
+        "TC-043-01",
+        "TC-043-02",
+        "TC-043-03",
+        "TC-043-04",
+        "TC-043-05",
+        "TC-043-06",
+        "TC-043-07",
+        "TC-043-08",
+        "TC-043-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-043-06",
+      "prd": "PRD-043-ts-contract-and-model-tests.md",
+      "acceptance_tests": [
+        "TC-043-01",
+        "TC-043-02",
+        "TC-043-03",
+        "TC-043-04",
+        "TC-043-05",
+        "TC-043-06",
+        "TC-043-07",
+        "TC-043-08",
+        "TC-043-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-043-07",
+      "prd": "PRD-043-ts-contract-and-model-tests.md",
+      "acceptance_tests": [
+        "TC-043-01",
+        "TC-043-02",
+        "TC-043-03",
+        "TC-043-04",
+        "TC-043-05",
+        "TC-043-06",
+        "TC-043-07",
+        "TC-043-08",
+        "TC-043-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-043-08",
+      "prd": "PRD-043-ts-contract-and-model-tests.md",
+      "acceptance_tests": [
+        "TC-043-01",
+        "TC-043-02",
+        "TC-043-03",
+        "TC-043-04",
+        "TC-043-05",
+        "TC-043-06",
+        "TC-043-07",
+        "TC-043-08",
+        "TC-043-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-043-09",
+      "prd": "PRD-043-ts-contract-and-model-tests.md",
+      "acceptance_tests": [
+        "TC-043-01",
+        "TC-043-02",
+        "TC-043-03",
+        "TC-043-04",
+        "TC-043-05",
+        "TC-043-06",
+        "TC-043-07",
+        "TC-043-08",
+        "TC-043-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-043-10",
+      "prd": "PRD-043-ts-contract-and-model-tests.md",
+      "acceptance_tests": [
+        "TC-043-01",
+        "TC-043-02",
+        "TC-043-03",
+        "TC-043-04",
+        "TC-043-05",
+        "TC-043-06",
+        "TC-043-07",
+        "TC-043-08",
+        "TC-043-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-043-11",
+      "prd": "PRD-043-ts-contract-and-model-tests.md",
+      "acceptance_tests": [
+        "TC-043-01",
+        "TC-043-02",
+        "TC-043-03",
+        "TC-043-04",
+        "TC-043-05",
+        "TC-043-06",
+        "TC-043-07",
+        "TC-043-08",
+        "TC-043-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-043-12",
+      "prd": "PRD-043-ts-contract-and-model-tests.md",
+      "acceptance_tests": [
+        "TC-043-01",
+        "TC-043-02",
+        "TC-043-03",
+        "TC-043-04",
+        "TC-043-05",
+        "TC-043-06",
+        "TC-043-07",
+        "TC-043-08",
+        "TC-043-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-043-13",
+      "prd": "PRD-043-ts-contract-and-model-tests.md",
+      "acceptance_tests": [
+        "TC-043-01",
+        "TC-043-02",
+        "TC-043-03",
+        "TC-043-04",
+        "TC-043-05",
+        "TC-043-06",
+        "TC-043-07",
+        "TC-043-08",
+        "TC-043-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-043-14",
+      "prd": "PRD-043-ts-contract-and-model-tests.md",
+      "acceptance_tests": [
+        "TC-043-01",
+        "TC-043-02",
+        "TC-043-03",
+        "TC-043-04",
+        "TC-043-05",
+        "TC-043-06",
+        "TC-043-07",
+        "TC-043-08",
+        "TC-043-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-043-15",
+      "prd": "PRD-043-ts-contract-and-model-tests.md",
+      "acceptance_tests": [
+        "TC-043-01",
+        "TC-043-02",
+        "TC-043-03",
+        "TC-043-04",
+        "TC-043-05",
+        "TC-043-06",
+        "TC-043-07",
+        "TC-043-08",
+        "TC-043-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-043-16",
+      "prd": "PRD-043-ts-contract-and-model-tests.md",
+      "acceptance_tests": [
+        "TC-043-01",
+        "TC-043-02",
+        "TC-043-03",
+        "TC-043-04",
+        "TC-043-05",
+        "TC-043-06",
+        "TC-043-07",
+        "TC-043-08",
+        "TC-043-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-043-17",
+      "prd": "PRD-043-ts-contract-and-model-tests.md",
+      "acceptance_tests": [
+        "TC-043-01",
+        "TC-043-02",
+        "TC-043-03",
+        "TC-043-04",
+        "TC-043-05",
+        "TC-043-06",
+        "TC-043-07",
+        "TC-043-08",
+        "TC-043-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-044-01",
+      "prd": "PRD-044-ts-session-lifecycle-tests.md",
+      "acceptance_tests": [
+        "TC-044-01",
+        "TC-044-02",
+        "TC-044-03",
+        "TC-044-04",
+        "TC-044-05",
+        "TC-044-06",
+        "TC-044-07",
+        "TC-044-08",
+        "TC-044-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-044-02",
+      "prd": "PRD-044-ts-session-lifecycle-tests.md",
+      "acceptance_tests": [
+        "TC-044-01",
+        "TC-044-02",
+        "TC-044-03",
+        "TC-044-04",
+        "TC-044-05",
+        "TC-044-06",
+        "TC-044-07",
+        "TC-044-08",
+        "TC-044-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-044-03",
+      "prd": "PRD-044-ts-session-lifecycle-tests.md",
+      "acceptance_tests": [
+        "TC-044-01",
+        "TC-044-02",
+        "TC-044-03",
+        "TC-044-04",
+        "TC-044-05",
+        "TC-044-06",
+        "TC-044-07",
+        "TC-044-08",
+        "TC-044-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-044-04",
+      "prd": "PRD-044-ts-session-lifecycle-tests.md",
+      "acceptance_tests": [
+        "TC-044-01",
+        "TC-044-02",
+        "TC-044-03",
+        "TC-044-04",
+        "TC-044-05",
+        "TC-044-06",
+        "TC-044-07",
+        "TC-044-08",
+        "TC-044-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-044-05",
+      "prd": "PRD-044-ts-session-lifecycle-tests.md",
+      "acceptance_tests": [
+        "TC-044-01",
+        "TC-044-02",
+        "TC-044-03",
+        "TC-044-04",
+        "TC-044-05",
+        "TC-044-06",
+        "TC-044-07",
+        "TC-044-08",
+        "TC-044-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-044-06",
+      "prd": "PRD-044-ts-session-lifecycle-tests.md",
+      "acceptance_tests": [
+        "TC-044-01",
+        "TC-044-02",
+        "TC-044-03",
+        "TC-044-04",
+        "TC-044-05",
+        "TC-044-06",
+        "TC-044-07",
+        "TC-044-08",
+        "TC-044-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-044-07",
+      "prd": "PRD-044-ts-session-lifecycle-tests.md",
+      "acceptance_tests": [
+        "TC-044-01",
+        "TC-044-02",
+        "TC-044-03",
+        "TC-044-04",
+        "TC-044-05",
+        "TC-044-06",
+        "TC-044-07",
+        "TC-044-08",
+        "TC-044-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-044-08",
+      "prd": "PRD-044-ts-session-lifecycle-tests.md",
+      "acceptance_tests": [
+        "TC-044-01",
+        "TC-044-02",
+        "TC-044-03",
+        "TC-044-04",
+        "TC-044-05",
+        "TC-044-06",
+        "TC-044-07",
+        "TC-044-08",
+        "TC-044-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-045-01",
+      "prd": "PRD-045-ts-exec-and-checkpoint-tests.md",
+      "acceptance_tests": [
+        "TC-045-01",
+        "TC-045-02",
+        "TC-045-03",
+        "TC-045-04",
+        "TC-045-05",
+        "TC-045-06",
+        "TC-045-07",
+        "TC-045-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-045-02",
+      "prd": "PRD-045-ts-exec-and-checkpoint-tests.md",
+      "acceptance_tests": [
+        "TC-045-01",
+        "TC-045-02",
+        "TC-045-03",
+        "TC-045-04",
+        "TC-045-05",
+        "TC-045-06",
+        "TC-045-07",
+        "TC-045-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-045-03",
+      "prd": "PRD-045-ts-exec-and-checkpoint-tests.md",
+      "acceptance_tests": [
+        "TC-045-01",
+        "TC-045-02",
+        "TC-045-03",
+        "TC-045-04",
+        "TC-045-05",
+        "TC-045-06",
+        "TC-045-07",
+        "TC-045-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-045-04",
+      "prd": "PRD-045-ts-exec-and-checkpoint-tests.md",
+      "acceptance_tests": [
+        "TC-045-01",
+        "TC-045-02",
+        "TC-045-03",
+        "TC-045-04",
+        "TC-045-05",
+        "TC-045-06",
+        "TC-045-07",
+        "TC-045-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-045-05",
+      "prd": "PRD-045-ts-exec-and-checkpoint-tests.md",
+      "acceptance_tests": [
+        "TC-045-01",
+        "TC-045-02",
+        "TC-045-03",
+        "TC-045-04",
+        "TC-045-05",
+        "TC-045-06",
+        "TC-045-07",
+        "TC-045-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-045-06",
+      "prd": "PRD-045-ts-exec-and-checkpoint-tests.md",
+      "acceptance_tests": [
+        "TC-045-01",
+        "TC-045-02",
+        "TC-045-03",
+        "TC-045-04",
+        "TC-045-05",
+        "TC-045-06",
+        "TC-045-07",
+        "TC-045-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-045-07",
+      "prd": "PRD-045-ts-exec-and-checkpoint-tests.md",
+      "acceptance_tests": [
+        "TC-045-01",
+        "TC-045-02",
+        "TC-045-03",
+        "TC-045-04",
+        "TC-045-05",
+        "TC-045-06",
+        "TC-045-07",
+        "TC-045-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-045-08",
+      "prd": "PRD-045-ts-exec-and-checkpoint-tests.md",
+      "acceptance_tests": [
+        "TC-045-01",
+        "TC-045-02",
+        "TC-045-03",
+        "TC-045-04",
+        "TC-045-05",
+        "TC-045-06",
+        "TC-045-07",
+        "TC-045-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-045-09",
+      "prd": "PRD-045-ts-exec-and-checkpoint-tests.md",
+      "acceptance_tests": [
+        "TC-045-01",
+        "TC-045-02",
+        "TC-045-03",
+        "TC-045-04",
+        "TC-045-05",
+        "TC-045-06",
+        "TC-045-07",
+        "TC-045-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-046-01",
+      "prd": "PRD-046-ts-open-handshake-security-tests.md",
+      "acceptance_tests": [
+        "TC-046-01",
+        "TC-046-02",
+        "TC-046-03",
+        "TC-046-04",
+        "TC-046-05",
+        "TC-046-06",
+        "TC-046-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-046-02",
+      "prd": "PRD-046-ts-open-handshake-security-tests.md",
+      "acceptance_tests": [
+        "TC-046-01",
+        "TC-046-02",
+        "TC-046-03",
+        "TC-046-04",
+        "TC-046-05",
+        "TC-046-06",
+        "TC-046-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-046-03",
+      "prd": "PRD-046-ts-open-handshake-security-tests.md",
+      "acceptance_tests": [
+        "TC-046-01",
+        "TC-046-02",
+        "TC-046-03",
+        "TC-046-04",
+        "TC-046-05",
+        "TC-046-06",
+        "TC-046-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-046-04",
+      "prd": "PRD-046-ts-open-handshake-security-tests.md",
+      "acceptance_tests": [
+        "TC-046-01",
+        "TC-046-02",
+        "TC-046-03",
+        "TC-046-04",
+        "TC-046-05",
+        "TC-046-06",
+        "TC-046-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-046-05",
+      "prd": "PRD-046-ts-open-handshake-security-tests.md",
+      "acceptance_tests": [
+        "TC-046-01",
+        "TC-046-02",
+        "TC-046-03",
+        "TC-046-04",
+        "TC-046-05",
+        "TC-046-06",
+        "TC-046-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-046-06",
+      "prd": "PRD-046-ts-open-handshake-security-tests.md",
+      "acceptance_tests": [
+        "TC-046-01",
+        "TC-046-02",
+        "TC-046-03",
+        "TC-046-04",
+        "TC-046-05",
+        "TC-046-06",
+        "TC-046-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-046-07",
+      "prd": "PRD-046-ts-open-handshake-security-tests.md",
+      "acceptance_tests": [
+        "TC-046-01",
+        "TC-046-02",
+        "TC-046-03",
+        "TC-046-04",
+        "TC-046-05",
+        "TC-046-06",
+        "TC-046-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-046-08",
+      "prd": "PRD-046-ts-open-handshake-security-tests.md",
+      "acceptance_tests": [
+        "TC-046-01",
+        "TC-046-02",
+        "TC-046-03",
+        "TC-046-04",
+        "TC-046-05",
+        "TC-046-06",
+        "TC-046-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-046-09",
+      "prd": "PRD-046-ts-open-handshake-security-tests.md",
+      "acceptance_tests": [
+        "TC-046-01",
+        "TC-046-02",
+        "TC-046-03",
+        "TC-046-04",
+        "TC-046-05",
+        "TC-046-06",
+        "TC-046-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-046-10",
+      "prd": "PRD-046-ts-open-handshake-security-tests.md",
+      "acceptance_tests": [
+        "TC-046-01",
+        "TC-046-02",
+        "TC-046-03",
+        "TC-046-04",
+        "TC-046-05",
+        "TC-046-06",
+        "TC-046-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-046-11",
+      "prd": "PRD-046-ts-open-handshake-security-tests.md",
+      "acceptance_tests": [
+        "TC-046-01",
+        "TC-046-02",
+        "TC-046-03",
+        "TC-046-04",
+        "TC-046-05",
+        "TC-046-06",
+        "TC-046-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-046-12",
+      "prd": "PRD-046-ts-open-handshake-security-tests.md",
+      "acceptance_tests": [
+        "TC-046-01",
+        "TC-046-02",
+        "TC-046-03",
+        "TC-046-04",
+        "TC-046-05",
+        "TC-046-06",
+        "TC-046-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-046-13",
+      "prd": "PRD-046-ts-open-handshake-security-tests.md",
+      "acceptance_tests": [
+        "TC-046-01",
+        "TC-046-02",
+        "TC-046-03",
+        "TC-046-04",
+        "TC-046-05",
+        "TC-046-06",
+        "TC-046-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-047-01",
+      "prd": "PRD-047-ts-me-and-records-tests.md",
+      "acceptance_tests": [
+        "TC-047-01",
+        "TC-047-02",
+        "TC-047-03",
+        "TC-047-04",
+        "TC-047-05",
+        "TC-047-06",
+        "TC-047-07",
+        "TC-047-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-047-02",
+      "prd": "PRD-047-ts-me-and-records-tests.md",
+      "acceptance_tests": [
+        "TC-047-01",
+        "TC-047-02",
+        "TC-047-03",
+        "TC-047-04",
+        "TC-047-05",
+        "TC-047-06",
+        "TC-047-07",
+        "TC-047-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-047-03",
+      "prd": "PRD-047-ts-me-and-records-tests.md",
+      "acceptance_tests": [
+        "TC-047-01",
+        "TC-047-02",
+        "TC-047-03",
+        "TC-047-04",
+        "TC-047-05",
+        "TC-047-06",
+        "TC-047-07",
+        "TC-047-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-047-04",
+      "prd": "PRD-047-ts-me-and-records-tests.md",
+      "acceptance_tests": [
+        "TC-047-01",
+        "TC-047-02",
+        "TC-047-03",
+        "TC-047-04",
+        "TC-047-05",
+        "TC-047-06",
+        "TC-047-07",
+        "TC-047-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-047-05",
+      "prd": "PRD-047-ts-me-and-records-tests.md",
+      "acceptance_tests": [
+        "TC-047-01",
+        "TC-047-02",
+        "TC-047-03",
+        "TC-047-04",
+        "TC-047-05",
+        "TC-047-06",
+        "TC-047-07",
+        "TC-047-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-047-06",
+      "prd": "PRD-047-ts-me-and-records-tests.md",
+      "acceptance_tests": [
+        "TC-047-01",
+        "TC-047-02",
+        "TC-047-03",
+        "TC-047-04",
+        "TC-047-05",
+        "TC-047-06",
+        "TC-047-07",
+        "TC-047-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-047-07",
+      "prd": "PRD-047-ts-me-and-records-tests.md",
+      "acceptance_tests": [
+        "TC-047-01",
+        "TC-047-02",
+        "TC-047-03",
+        "TC-047-04",
+        "TC-047-05",
+        "TC-047-06",
+        "TC-047-07",
+        "TC-047-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-047-08",
+      "prd": "PRD-047-ts-me-and-records-tests.md",
+      "acceptance_tests": [
+        "TC-047-01",
+        "TC-047-02",
+        "TC-047-03",
+        "TC-047-04",
+        "TC-047-05",
+        "TC-047-06",
+        "TC-047-07",
+        "TC-047-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-047-09",
+      "prd": "PRD-047-ts-me-and-records-tests.md",
+      "acceptance_tests": [
+        "TC-047-01",
+        "TC-047-02",
+        "TC-047-03",
+        "TC-047-04",
+        "TC-047-05",
+        "TC-047-06",
+        "TC-047-07",
+        "TC-047-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-047-10",
+      "prd": "PRD-047-ts-me-and-records-tests.md",
+      "acceptance_tests": [
+        "TC-047-01",
+        "TC-047-02",
+        "TC-047-03",
+        "TC-047-04",
+        "TC-047-05",
+        "TC-047-06",
+        "TC-047-07",
+        "TC-047-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-047-11",
+      "prd": "PRD-047-ts-me-and-records-tests.md",
+      "acceptance_tests": [
+        "TC-047-01",
+        "TC-047-02",
+        "TC-047-03",
+        "TC-047-04",
+        "TC-047-05",
+        "TC-047-06",
+        "TC-047-07",
+        "TC-047-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-047-12",
+      "prd": "PRD-047-ts-me-and-records-tests.md",
+      "acceptance_tests": [
+        "TC-047-01",
+        "TC-047-02",
+        "TC-047-03",
+        "TC-047-04",
+        "TC-047-05",
+        "TC-047-06",
+        "TC-047-07",
+        "TC-047-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-047-13",
+      "prd": "PRD-047-ts-me-and-records-tests.md",
+      "acceptance_tests": [
+        "TC-047-01",
+        "TC-047-02",
+        "TC-047-03",
+        "TC-047-04",
+        "TC-047-05",
+        "TC-047-06",
+        "TC-047-07",
+        "TC-047-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-047-14",
+      "prd": "PRD-047-ts-me-and-records-tests.md",
+      "acceptance_tests": [
+        "TC-047-01",
+        "TC-047-02",
+        "TC-047-03",
+        "TC-047-04",
+        "TC-047-05",
+        "TC-047-06",
+        "TC-047-07",
+        "TC-047-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-048-01",
+      "prd": "PRD-048-ts-api-reference-generation.md",
+      "acceptance_tests": [
+        "TC-048-01",
+        "TC-048-02",
+        "TC-048-03",
+        "TC-048-04",
+        "TC-048-05",
+        "TC-048-06",
+        "TC-048-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-048-02",
+      "prd": "PRD-048-ts-api-reference-generation.md",
+      "acceptance_tests": [
+        "TC-048-01",
+        "TC-048-02",
+        "TC-048-03",
+        "TC-048-04",
+        "TC-048-05",
+        "TC-048-06",
+        "TC-048-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-048-03",
+      "prd": "PRD-048-ts-api-reference-generation.md",
+      "acceptance_tests": [
+        "TC-048-01",
+        "TC-048-02",
+        "TC-048-03",
+        "TC-048-04",
+        "TC-048-05",
+        "TC-048-06",
+        "TC-048-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-048-04",
+      "prd": "PRD-048-ts-api-reference-generation.md",
+      "acceptance_tests": [
+        "TC-048-01",
+        "TC-048-02",
+        "TC-048-03",
+        "TC-048-04",
+        "TC-048-05",
+        "TC-048-06",
+        "TC-048-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-048-05",
+      "prd": "PRD-048-ts-api-reference-generation.md",
+      "acceptance_tests": [
+        "TC-048-01",
+        "TC-048-02",
+        "TC-048-03",
+        "TC-048-04",
+        "TC-048-05",
+        "TC-048-06",
+        "TC-048-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-048-06",
+      "prd": "PRD-048-ts-api-reference-generation.md",
+      "acceptance_tests": [
+        "TC-048-01",
+        "TC-048-02",
+        "TC-048-03",
+        "TC-048-04",
+        "TC-048-05",
+        "TC-048-06",
+        "TC-048-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-048-07",
+      "prd": "PRD-048-ts-api-reference-generation.md",
+      "acceptance_tests": [
+        "TC-048-01",
+        "TC-048-02",
+        "TC-048-03",
+        "TC-048-04",
+        "TC-048-05",
+        "TC-048-06",
+        "TC-048-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-048-08",
+      "prd": "PRD-048-ts-api-reference-generation.md",
+      "acceptance_tests": [
+        "TC-048-01",
+        "TC-048-02",
+        "TC-048-03",
+        "TC-048-04",
+        "TC-048-05",
+        "TC-048-06",
+        "TC-048-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-048-09",
+      "prd": "PRD-048-ts-api-reference-generation.md",
+      "acceptance_tests": [
+        "TC-048-01",
+        "TC-048-02",
+        "TC-048-03",
+        "TC-048-04",
+        "TC-048-05",
+        "TC-048-06",
+        "TC-048-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-048-10",
+      "prd": "PRD-048-ts-api-reference-generation.md",
+      "acceptance_tests": [
+        "TC-048-01",
+        "TC-048-02",
+        "TC-048-03",
+        "TC-048-04",
+        "TC-048-05",
+        "TC-048-06",
+        "TC-048-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-048-11",
+      "prd": "PRD-048-ts-api-reference-generation.md",
+      "acceptance_tests": [
+        "TC-048-01",
+        "TC-048-02",
+        "TC-048-03",
+        "TC-048-04",
+        "TC-048-05",
+        "TC-048-06",
+        "TC-048-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-048-12",
+      "prd": "PRD-048-ts-api-reference-generation.md",
+      "acceptance_tests": [
+        "TC-048-01",
+        "TC-048-02",
+        "TC-048-03",
+        "TC-048-04",
+        "TC-048-05",
+        "TC-048-06",
+        "TC-048-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-048-13",
+      "prd": "PRD-048-ts-api-reference-generation.md",
+      "acceptance_tests": [
+        "TC-048-01",
+        "TC-048-02",
+        "TC-048-03",
+        "TC-048-04",
+        "TC-048-05",
+        "TC-048-06",
+        "TC-048-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-048-14",
+      "prd": "PRD-048-ts-api-reference-generation.md",
+      "acceptance_tests": [
+        "TC-048-01",
+        "TC-048-02",
+        "TC-048-03",
+        "TC-048-04",
+        "TC-048-05",
+        "TC-048-06",
+        "TC-048-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-048-15",
+      "prd": "PRD-048-ts-api-reference-generation.md",
+      "acceptance_tests": [
+        "TC-048-01",
+        "TC-048-02",
+        "TC-048-03",
+        "TC-048-04",
+        "TC-048-05",
+        "TC-048-06",
+        "TC-048-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-048-16",
+      "prd": "PRD-048-ts-api-reference-generation.md",
+      "acceptance_tests": [
+        "TC-048-01",
+        "TC-048-02",
+        "TC-048-03",
+        "TC-048-04",
+        "TC-048-05",
+        "TC-048-06",
+        "TC-048-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-048-17",
+      "prd": "PRD-048-ts-api-reference-generation.md",
+      "acceptance_tests": [
+        "TC-048-01",
+        "TC-048-02",
+        "TC-048-03",
+        "TC-048-04",
+        "TC-048-05",
+        "TC-048-06",
+        "TC-048-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-048-18",
+      "prd": "PRD-048-ts-api-reference-generation.md",
+      "acceptance_tests": [
+        "TC-048-01",
+        "TC-048-02",
+        "TC-048-03",
+        "TC-048-04",
+        "TC-048-05",
+        "TC-048-06",
+        "TC-048-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-049-01",
+      "prd": "PRD-049-ts-guides-and-runnable-examples.md",
+      "acceptance_tests": [
+        "TC-049-01",
+        "TC-049-02",
+        "TC-049-03",
+        "TC-049-04",
+        "TC-049-05",
+        "TC-049-06",
+        "TC-049-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-049-02",
+      "prd": "PRD-049-ts-guides-and-runnable-examples.md",
+      "acceptance_tests": [
+        "TC-049-01",
+        "TC-049-02",
+        "TC-049-03",
+        "TC-049-04",
+        "TC-049-05",
+        "TC-049-06",
+        "TC-049-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-049-03",
+      "prd": "PRD-049-ts-guides-and-runnable-examples.md",
+      "acceptance_tests": [
+        "TC-049-01",
+        "TC-049-02",
+        "TC-049-03",
+        "TC-049-04",
+        "TC-049-05",
+        "TC-049-06",
+        "TC-049-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-049-04",
+      "prd": "PRD-049-ts-guides-and-runnable-examples.md",
+      "acceptance_tests": [
+        "TC-049-01",
+        "TC-049-02",
+        "TC-049-03",
+        "TC-049-04",
+        "TC-049-05",
+        "TC-049-06",
+        "TC-049-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-049-05",
+      "prd": "PRD-049-ts-guides-and-runnable-examples.md",
+      "acceptance_tests": [
+        "TC-049-01",
+        "TC-049-02",
+        "TC-049-03",
+        "TC-049-04",
+        "TC-049-05",
+        "TC-049-06",
+        "TC-049-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-049-06",
+      "prd": "PRD-049-ts-guides-and-runnable-examples.md",
+      "acceptance_tests": [
+        "TC-049-01",
+        "TC-049-02",
+        "TC-049-03",
+        "TC-049-04",
+        "TC-049-05",
+        "TC-049-06",
+        "TC-049-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-049-07",
+      "prd": "PRD-049-ts-guides-and-runnable-examples.md",
+      "acceptance_tests": [
+        "TC-049-01",
+        "TC-049-02",
+        "TC-049-03",
+        "TC-049-04",
+        "TC-049-05",
+        "TC-049-06",
+        "TC-049-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-049-08",
+      "prd": "PRD-049-ts-guides-and-runnable-examples.md",
+      "acceptance_tests": [
+        "TC-049-01",
+        "TC-049-02",
+        "TC-049-03",
+        "TC-049-04",
+        "TC-049-05",
+        "TC-049-06",
+        "TC-049-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-049-09",
+      "prd": "PRD-049-ts-guides-and-runnable-examples.md",
+      "acceptance_tests": [
+        "TC-049-01",
+        "TC-049-02",
+        "TC-049-03",
+        "TC-049-04",
+        "TC-049-05",
+        "TC-049-06",
+        "TC-049-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-049-10",
+      "prd": "PRD-049-ts-guides-and-runnable-examples.md",
+      "acceptance_tests": [
+        "TC-049-01",
+        "TC-049-02",
+        "TC-049-03",
+        "TC-049-04",
+        "TC-049-05",
+        "TC-049-06",
+        "TC-049-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-049-11",
+      "prd": "PRD-049-ts-guides-and-runnable-examples.md",
+      "acceptance_tests": [
+        "TC-049-01",
+        "TC-049-02",
+        "TC-049-03",
+        "TC-049-04",
+        "TC-049-05",
+        "TC-049-06",
+        "TC-049-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-049-12",
+      "prd": "PRD-049-ts-guides-and-runnable-examples.md",
+      "acceptance_tests": [
+        "TC-049-01",
+        "TC-049-02",
+        "TC-049-03",
+        "TC-049-04",
+        "TC-049-05",
+        "TC-049-06",
+        "TC-049-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-049-13",
+      "prd": "PRD-049-ts-guides-and-runnable-examples.md",
+      "acceptance_tests": [
+        "TC-049-01",
+        "TC-049-02",
+        "TC-049-03",
+        "TC-049-04",
+        "TC-049-05",
+        "TC-049-06",
+        "TC-049-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-049-14",
+      "prd": "PRD-049-ts-guides-and-runnable-examples.md",
+      "acceptance_tests": [
+        "TC-049-01",
+        "TC-049-02",
+        "TC-049-03",
+        "TC-049-04",
+        "TC-049-05",
+        "TC-049-06",
+        "TC-049-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-049-15",
+      "prd": "PRD-049-ts-guides-and-runnable-examples.md",
+      "acceptance_tests": [
+        "TC-049-01",
+        "TC-049-02",
+        "TC-049-03",
+        "TC-049-04",
+        "TC-049-05",
+        "TC-049-06",
+        "TC-049-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-049-16",
+      "prd": "PRD-049-ts-guides-and-runnable-examples.md",
+      "acceptance_tests": [
+        "TC-049-01",
+        "TC-049-02",
+        "TC-049-03",
+        "TC-049-04",
+        "TC-049-05",
+        "TC-049-06",
+        "TC-049-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-049-17",
+      "prd": "PRD-049-ts-guides-and-runnable-examples.md",
+      "acceptance_tests": [
+        "TC-049-01",
+        "TC-049-02",
+        "TC-049-03",
+        "TC-049-04",
+        "TC-049-05",
+        "TC-049-06",
+        "TC-049-07"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-050-01",
+      "prd": "PRD-050-ts-runtime-compatibility-and-performance.md",
+      "acceptance_tests": [
+        "TC-050-01",
+        "TC-050-02",
+        "TC-050-03",
+        "TC-050-04",
+        "TC-050-05",
+        "TC-050-06",
+        "TC-050-07",
+        "TC-050-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-050-02",
+      "prd": "PRD-050-ts-runtime-compatibility-and-performance.md",
+      "acceptance_tests": [
+        "TC-050-01",
+        "TC-050-02",
+        "TC-050-03",
+        "TC-050-04",
+        "TC-050-05",
+        "TC-050-06",
+        "TC-050-07",
+        "TC-050-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-050-03",
+      "prd": "PRD-050-ts-runtime-compatibility-and-performance.md",
+      "acceptance_tests": [
+        "TC-050-01",
+        "TC-050-02",
+        "TC-050-03",
+        "TC-050-04",
+        "TC-050-05",
+        "TC-050-06",
+        "TC-050-07",
+        "TC-050-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-050-04",
+      "prd": "PRD-050-ts-runtime-compatibility-and-performance.md",
+      "acceptance_tests": [
+        "TC-050-01",
+        "TC-050-02",
+        "TC-050-03",
+        "TC-050-04",
+        "TC-050-05",
+        "TC-050-06",
+        "TC-050-07",
+        "TC-050-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-050-05",
+      "prd": "PRD-050-ts-runtime-compatibility-and-performance.md",
+      "acceptance_tests": [
+        "TC-050-01",
+        "TC-050-02",
+        "TC-050-03",
+        "TC-050-04",
+        "TC-050-05",
+        "TC-050-06",
+        "TC-050-07",
+        "TC-050-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-050-06",
+      "prd": "PRD-050-ts-runtime-compatibility-and-performance.md",
+      "acceptance_tests": [
+        "TC-050-01",
+        "TC-050-02",
+        "TC-050-03",
+        "TC-050-04",
+        "TC-050-05",
+        "TC-050-06",
+        "TC-050-07",
+        "TC-050-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-050-07",
+      "prd": "PRD-050-ts-runtime-compatibility-and-performance.md",
+      "acceptance_tests": [
+        "TC-050-01",
+        "TC-050-02",
+        "TC-050-03",
+        "TC-050-04",
+        "TC-050-05",
+        "TC-050-06",
+        "TC-050-07",
+        "TC-050-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-050-08",
+      "prd": "PRD-050-ts-runtime-compatibility-and-performance.md",
+      "acceptance_tests": [
+        "TC-050-01",
+        "TC-050-02",
+        "TC-050-03",
+        "TC-050-04",
+        "TC-050-05",
+        "TC-050-06",
+        "TC-050-07",
+        "TC-050-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-050-09",
+      "prd": "PRD-050-ts-runtime-compatibility-and-performance.md",
+      "acceptance_tests": [
+        "TC-050-01",
+        "TC-050-02",
+        "TC-050-03",
+        "TC-050-04",
+        "TC-050-05",
+        "TC-050-06",
+        "TC-050-07",
+        "TC-050-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-050-10",
+      "prd": "PRD-050-ts-runtime-compatibility-and-performance.md",
+      "acceptance_tests": [
+        "TC-050-01",
+        "TC-050-02",
+        "TC-050-03",
+        "TC-050-04",
+        "TC-050-05",
+        "TC-050-06",
+        "TC-050-07",
+        "TC-050-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-050-11",
+      "prd": "PRD-050-ts-runtime-compatibility-and-performance.md",
+      "acceptance_tests": [
+        "TC-050-01",
+        "TC-050-02",
+        "TC-050-03",
+        "TC-050-04",
+        "TC-050-05",
+        "TC-050-06",
+        "TC-050-07",
+        "TC-050-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-050-12",
+      "prd": "PRD-050-ts-runtime-compatibility-and-performance.md",
+      "acceptance_tests": [
+        "TC-050-01",
+        "TC-050-02",
+        "TC-050-03",
+        "TC-050-04",
+        "TC-050-05",
+        "TC-050-06",
+        "TC-050-07",
+        "TC-050-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-050-13",
+      "prd": "PRD-050-ts-runtime-compatibility-and-performance.md",
+      "acceptance_tests": [
+        "TC-050-01",
+        "TC-050-02",
+        "TC-050-03",
+        "TC-050-04",
+        "TC-050-05",
+        "TC-050-06",
+        "TC-050-07",
+        "TC-050-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-050-14",
+      "prd": "PRD-050-ts-runtime-compatibility-and-performance.md",
+      "acceptance_tests": [
+        "TC-050-01",
+        "TC-050-02",
+        "TC-050-03",
+        "TC-050-04",
+        "TC-050-05",
+        "TC-050-06",
+        "TC-050-07",
+        "TC-050-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-050-15",
+      "prd": "PRD-050-ts-runtime-compatibility-and-performance.md",
+      "acceptance_tests": [
+        "TC-050-01",
+        "TC-050-02",
+        "TC-050-03",
+        "TC-050-04",
+        "TC-050-05",
+        "TC-050-06",
+        "TC-050-07",
+        "TC-050-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-050-16",
+      "prd": "PRD-050-ts-runtime-compatibility-and-performance.md",
+      "acceptance_tests": [
+        "TC-050-01",
+        "TC-050-02",
+        "TC-050-03",
+        "TC-050-04",
+        "TC-050-05",
+        "TC-050-06",
+        "TC-050-07",
+        "TC-050-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-050-17",
+      "prd": "PRD-050-ts-runtime-compatibility-and-performance.md",
+      "acceptance_tests": [
+        "TC-050-01",
+        "TC-050-02",
+        "TC-050-03",
+        "TC-050-04",
+        "TC-050-05",
+        "TC-050-06",
+        "TC-050-07",
+        "TC-050-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-050-18",
+      "prd": "PRD-050-ts-runtime-compatibility-and-performance.md",
+      "acceptance_tests": [
+        "TC-050-01",
+        "TC-050-02",
+        "TC-050-03",
+        "TC-050-04",
+        "TC-050-05",
+        "TC-050-06",
+        "TC-050-07",
+        "TC-050-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-050-19",
+      "prd": "PRD-050-ts-runtime-compatibility-and-performance.md",
+      "acceptance_tests": [
+        "TC-050-01",
+        "TC-050-02",
+        "TC-050-03",
+        "TC-050-04",
+        "TC-050-05",
+        "TC-050-06",
+        "TC-050-07",
+        "TC-050-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-050-20",
+      "prd": "PRD-050-ts-runtime-compatibility-and-performance.md",
+      "acceptance_tests": [
+        "TC-050-01",
+        "TC-050-02",
+        "TC-050-03",
+        "TC-050-04",
+        "TC-050-05",
+        "TC-050-06",
+        "TC-050-07",
+        "TC-050-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-050-21",
+      "prd": "PRD-050-ts-runtime-compatibility-and-performance.md",
+      "acceptance_tests": [
+        "TC-050-01",
+        "TC-050-02",
+        "TC-050-03",
+        "TC-050-04",
+        "TC-050-05",
+        "TC-050-06",
+        "TC-050-07",
+        "TC-050-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-050-22",
+      "prd": "PRD-050-ts-runtime-compatibility-and-performance.md",
+      "acceptance_tests": [
+        "TC-050-01",
+        "TC-050-02",
+        "TC-050-03",
+        "TC-050-04",
+        "TC-050-05",
+        "TC-050-06",
+        "TC-050-07",
+        "TC-050-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-051-01",
+      "prd": "PRD-051-ts-dependency-and-supply-chain-controls.md",
+      "acceptance_tests": [
+        "TC-051-01",
+        "TC-051-02",
+        "TC-051-03",
+        "TC-051-04",
+        "TC-051-05",
+        "TC-051-06",
+        "TC-051-07",
+        "TC-051-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-051-02",
+      "prd": "PRD-051-ts-dependency-and-supply-chain-controls.md",
+      "acceptance_tests": [
+        "TC-051-01",
+        "TC-051-02",
+        "TC-051-03",
+        "TC-051-04",
+        "TC-051-05",
+        "TC-051-06",
+        "TC-051-07",
+        "TC-051-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-051-03",
+      "prd": "PRD-051-ts-dependency-and-supply-chain-controls.md",
+      "acceptance_tests": [
+        "TC-051-01",
+        "TC-051-02",
+        "TC-051-03",
+        "TC-051-04",
+        "TC-051-05",
+        "TC-051-06",
+        "TC-051-07",
+        "TC-051-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-051-04",
+      "prd": "PRD-051-ts-dependency-and-supply-chain-controls.md",
+      "acceptance_tests": [
+        "TC-051-01",
+        "TC-051-02",
+        "TC-051-03",
+        "TC-051-04",
+        "TC-051-05",
+        "TC-051-06",
+        "TC-051-07",
+        "TC-051-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-051-05",
+      "prd": "PRD-051-ts-dependency-and-supply-chain-controls.md",
+      "acceptance_tests": [
+        "TC-051-01",
+        "TC-051-02",
+        "TC-051-03",
+        "TC-051-04",
+        "TC-051-05",
+        "TC-051-06",
+        "TC-051-07",
+        "TC-051-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-051-06",
+      "prd": "PRD-051-ts-dependency-and-supply-chain-controls.md",
+      "acceptance_tests": [
+        "TC-051-01",
+        "TC-051-02",
+        "TC-051-03",
+        "TC-051-04",
+        "TC-051-05",
+        "TC-051-06",
+        "TC-051-07",
+        "TC-051-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-051-07",
+      "prd": "PRD-051-ts-dependency-and-supply-chain-controls.md",
+      "acceptance_tests": [
+        "TC-051-01",
+        "TC-051-02",
+        "TC-051-03",
+        "TC-051-04",
+        "TC-051-05",
+        "TC-051-06",
+        "TC-051-07",
+        "TC-051-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-051-08",
+      "prd": "PRD-051-ts-dependency-and-supply-chain-controls.md",
+      "acceptance_tests": [
+        "TC-051-01",
+        "TC-051-02",
+        "TC-051-03",
+        "TC-051-04",
+        "TC-051-05",
+        "TC-051-06",
+        "TC-051-07",
+        "TC-051-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-051-09",
+      "prd": "PRD-051-ts-dependency-and-supply-chain-controls.md",
+      "acceptance_tests": [
+        "TC-051-01",
+        "TC-051-02",
+        "TC-051-03",
+        "TC-051-04",
+        "TC-051-05",
+        "TC-051-06",
+        "TC-051-07",
+        "TC-051-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-051-10",
+      "prd": "PRD-051-ts-dependency-and-supply-chain-controls.md",
+      "acceptance_tests": [
+        "TC-051-01",
+        "TC-051-02",
+        "TC-051-03",
+        "TC-051-04",
+        "TC-051-05",
+        "TC-051-06",
+        "TC-051-07",
+        "TC-051-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-051-11",
+      "prd": "PRD-051-ts-dependency-and-supply-chain-controls.md",
+      "acceptance_tests": [
+        "TC-051-01",
+        "TC-051-02",
+        "TC-051-03",
+        "TC-051-04",
+        "TC-051-05",
+        "TC-051-06",
+        "TC-051-07",
+        "TC-051-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-051-12",
+      "prd": "PRD-051-ts-dependency-and-supply-chain-controls.md",
+      "acceptance_tests": [
+        "TC-051-01",
+        "TC-051-02",
+        "TC-051-03",
+        "TC-051-04",
+        "TC-051-05",
+        "TC-051-06",
+        "TC-051-07",
+        "TC-051-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-051-13",
+      "prd": "PRD-051-ts-dependency-and-supply-chain-controls.md",
+      "acceptance_tests": [
+        "TC-051-01",
+        "TC-051-02",
+        "TC-051-03",
+        "TC-051-04",
+        "TC-051-05",
+        "TC-051-06",
+        "TC-051-07",
+        "TC-051-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-051-14",
+      "prd": "PRD-051-ts-dependency-and-supply-chain-controls.md",
+      "acceptance_tests": [
+        "TC-051-01",
+        "TC-051-02",
+        "TC-051-03",
+        "TC-051-04",
+        "TC-051-05",
+        "TC-051-06",
+        "TC-051-07",
+        "TC-051-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-052-01",
+      "prd": "PRD-052-ts-ci-quality-gates.md",
+      "acceptance_tests": [
+        "TC-052-01",
+        "TC-052-02",
+        "TC-052-03",
+        "TC-052-04",
+        "TC-052-05",
+        "TC-052-06",
+        "TC-052-07",
+        "TC-052-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-052-02",
+      "prd": "PRD-052-ts-ci-quality-gates.md",
+      "acceptance_tests": [
+        "TC-052-01",
+        "TC-052-02",
+        "TC-052-03",
+        "TC-052-04",
+        "TC-052-05",
+        "TC-052-06",
+        "TC-052-07",
+        "TC-052-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-052-03",
+      "prd": "PRD-052-ts-ci-quality-gates.md",
+      "acceptance_tests": [
+        "TC-052-01",
+        "TC-052-02",
+        "TC-052-03",
+        "TC-052-04",
+        "TC-052-05",
+        "TC-052-06",
+        "TC-052-07",
+        "TC-052-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-052-04",
+      "prd": "PRD-052-ts-ci-quality-gates.md",
+      "acceptance_tests": [
+        "TC-052-01",
+        "TC-052-02",
+        "TC-052-03",
+        "TC-052-04",
+        "TC-052-05",
+        "TC-052-06",
+        "TC-052-07",
+        "TC-052-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-052-05",
+      "prd": "PRD-052-ts-ci-quality-gates.md",
+      "acceptance_tests": [
+        "TC-052-01",
+        "TC-052-02",
+        "TC-052-03",
+        "TC-052-04",
+        "TC-052-05",
+        "TC-052-06",
+        "TC-052-07",
+        "TC-052-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-052-06",
+      "prd": "PRD-052-ts-ci-quality-gates.md",
+      "acceptance_tests": [
+        "TC-052-01",
+        "TC-052-02",
+        "TC-052-03",
+        "TC-052-04",
+        "TC-052-05",
+        "TC-052-06",
+        "TC-052-07",
+        "TC-052-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-052-07",
+      "prd": "PRD-052-ts-ci-quality-gates.md",
+      "acceptance_tests": [
+        "TC-052-01",
+        "TC-052-02",
+        "TC-052-03",
+        "TC-052-04",
+        "TC-052-05",
+        "TC-052-06",
+        "TC-052-07",
+        "TC-052-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-052-08",
+      "prd": "PRD-052-ts-ci-quality-gates.md",
+      "acceptance_tests": [
+        "TC-052-01",
+        "TC-052-02",
+        "TC-052-03",
+        "TC-052-04",
+        "TC-052-05",
+        "TC-052-06",
+        "TC-052-07",
+        "TC-052-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-052-09",
+      "prd": "PRD-052-ts-ci-quality-gates.md",
+      "acceptance_tests": [
+        "TC-052-01",
+        "TC-052-02",
+        "TC-052-03",
+        "TC-052-04",
+        "TC-052-05",
+        "TC-052-06",
+        "TC-052-07",
+        "TC-052-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-052-10",
+      "prd": "PRD-052-ts-ci-quality-gates.md",
+      "acceptance_tests": [
+        "TC-052-01",
+        "TC-052-02",
+        "TC-052-03",
+        "TC-052-04",
+        "TC-052-05",
+        "TC-052-06",
+        "TC-052-07",
+        "TC-052-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-052-11",
+      "prd": "PRD-052-ts-ci-quality-gates.md",
+      "acceptance_tests": [
+        "TC-052-01",
+        "TC-052-02",
+        "TC-052-03",
+        "TC-052-04",
+        "TC-052-05",
+        "TC-052-06",
+        "TC-052-07",
+        "TC-052-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-052-12",
+      "prd": "PRD-052-ts-ci-quality-gates.md",
+      "acceptance_tests": [
+        "TC-052-01",
+        "TC-052-02",
+        "TC-052-03",
+        "TC-052-04",
+        "TC-052-05",
+        "TC-052-06",
+        "TC-052-07",
+        "TC-052-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-052-13",
+      "prd": "PRD-052-ts-ci-quality-gates.md",
+      "acceptance_tests": [
+        "TC-052-01",
+        "TC-052-02",
+        "TC-052-03",
+        "TC-052-04",
+        "TC-052-05",
+        "TC-052-06",
+        "TC-052-07",
+        "TC-052-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-052-14",
+      "prd": "PRD-052-ts-ci-quality-gates.md",
+      "acceptance_tests": [
+        "TC-052-01",
+        "TC-052-02",
+        "TC-052-03",
+        "TC-052-04",
+        "TC-052-05",
+        "TC-052-06",
+        "TC-052-07",
+        "TC-052-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-052-15",
+      "prd": "PRD-052-ts-ci-quality-gates.md",
+      "acceptance_tests": [
+        "TC-052-01",
+        "TC-052-02",
+        "TC-052-03",
+        "TC-052-04",
+        "TC-052-05",
+        "TC-052-06",
+        "TC-052-07",
+        "TC-052-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-052-16",
+      "prd": "PRD-052-ts-ci-quality-gates.md",
+      "acceptance_tests": [
+        "TC-052-01",
+        "TC-052-02",
+        "TC-052-03",
+        "TC-052-04",
+        "TC-052-05",
+        "TC-052-06",
+        "TC-052-07",
+        "TC-052-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-052-17",
+      "prd": "PRD-052-ts-ci-quality-gates.md",
+      "acceptance_tests": [
+        "TC-052-01",
+        "TC-052-02",
+        "TC-052-03",
+        "TC-052-04",
+        "TC-052-05",
+        "TC-052-06",
+        "TC-052-07",
+        "TC-052-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-052-18",
+      "prd": "PRD-052-ts-ci-quality-gates.md",
+      "acceptance_tests": [
+        "TC-052-01",
+        "TC-052-02",
+        "TC-052-03",
+        "TC-052-04",
+        "TC-052-05",
+        "TC-052-06",
+        "TC-052-07",
+        "TC-052-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-052-19",
+      "prd": "PRD-052-ts-ci-quality-gates.md",
+      "acceptance_tests": [
+        "TC-052-01",
+        "TC-052-02",
+        "TC-052-03",
+        "TC-052-04",
+        "TC-052-05",
+        "TC-052-06",
+        "TC-052-07",
+        "TC-052-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-052-20",
+      "prd": "PRD-052-ts-ci-quality-gates.md",
+      "acceptance_tests": [
+        "TC-052-01",
+        "TC-052-02",
+        "TC-052-03",
+        "TC-052-04",
+        "TC-052-05",
+        "TC-052-06",
+        "TC-052-07",
+        "TC-052-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-052-21",
+      "prd": "PRD-052-ts-ci-quality-gates.md",
+      "acceptance_tests": [
+        "TC-052-01",
+        "TC-052-02",
+        "TC-052-03",
+        "TC-052-04",
+        "TC-052-05",
+        "TC-052-06",
+        "TC-052-07",
+        "TC-052-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-052-22",
+      "prd": "PRD-052-ts-ci-quality-gates.md",
+      "acceptance_tests": [
+        "TC-052-01",
+        "TC-052-02",
+        "TC-052-03",
+        "TC-052-04",
+        "TC-052-05",
+        "TC-052-06",
+        "TC-052-07",
+        "TC-052-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-053-01",
+      "prd": "PRD-053-ts-npm-publishing.md",
+      "acceptance_tests": [
+        "TC-053-01",
+        "TC-053-02",
+        "TC-053-03",
+        "TC-053-04",
+        "TC-053-05",
+        "TC-053-06",
+        "TC-053-07",
+        "TC-053-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-053-02",
+      "prd": "PRD-053-ts-npm-publishing.md",
+      "acceptance_tests": [
+        "TC-053-01",
+        "TC-053-02",
+        "TC-053-03",
+        "TC-053-04",
+        "TC-053-05",
+        "TC-053-06",
+        "TC-053-07",
+        "TC-053-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-053-03",
+      "prd": "PRD-053-ts-npm-publishing.md",
+      "acceptance_tests": [
+        "TC-053-01",
+        "TC-053-02",
+        "TC-053-03",
+        "TC-053-04",
+        "TC-053-05",
+        "TC-053-06",
+        "TC-053-07",
+        "TC-053-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-053-04",
+      "prd": "PRD-053-ts-npm-publishing.md",
+      "acceptance_tests": [
+        "TC-053-01",
+        "TC-053-02",
+        "TC-053-03",
+        "TC-053-04",
+        "TC-053-05",
+        "TC-053-06",
+        "TC-053-07",
+        "TC-053-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-053-05",
+      "prd": "PRD-053-ts-npm-publishing.md",
+      "acceptance_tests": [
+        "TC-053-01",
+        "TC-053-02",
+        "TC-053-03",
+        "TC-053-04",
+        "TC-053-05",
+        "TC-053-06",
+        "TC-053-07",
+        "TC-053-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-053-06",
+      "prd": "PRD-053-ts-npm-publishing.md",
+      "acceptance_tests": [
+        "TC-053-01",
+        "TC-053-02",
+        "TC-053-03",
+        "TC-053-04",
+        "TC-053-05",
+        "TC-053-06",
+        "TC-053-07",
+        "TC-053-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-053-07",
+      "prd": "PRD-053-ts-npm-publishing.md",
+      "acceptance_tests": [
+        "TC-053-01",
+        "TC-053-02",
+        "TC-053-03",
+        "TC-053-04",
+        "TC-053-05",
+        "TC-053-06",
+        "TC-053-07",
+        "TC-053-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-053-08",
+      "prd": "PRD-053-ts-npm-publishing.md",
+      "acceptance_tests": [
+        "TC-053-01",
+        "TC-053-02",
+        "TC-053-03",
+        "TC-053-04",
+        "TC-053-05",
+        "TC-053-06",
+        "TC-053-07",
+        "TC-053-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-053-09",
+      "prd": "PRD-053-ts-npm-publishing.md",
+      "acceptance_tests": [
+        "TC-053-01",
+        "TC-053-02",
+        "TC-053-03",
+        "TC-053-04",
+        "TC-053-05",
+        "TC-053-06",
+        "TC-053-07",
+        "TC-053-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-053-10",
+      "prd": "PRD-053-ts-npm-publishing.md",
+      "acceptance_tests": [
+        "TC-053-01",
+        "TC-053-02",
+        "TC-053-03",
+        "TC-053-04",
+        "TC-053-05",
+        "TC-053-06",
+        "TC-053-07",
+        "TC-053-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-053-11",
+      "prd": "PRD-053-ts-npm-publishing.md",
+      "acceptance_tests": [
+        "TC-053-01",
+        "TC-053-02",
+        "TC-053-03",
+        "TC-053-04",
+        "TC-053-05",
+        "TC-053-06",
+        "TC-053-07",
+        "TC-053-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-053-12",
+      "prd": "PRD-053-ts-npm-publishing.md",
+      "acceptance_tests": [
+        "TC-053-01",
+        "TC-053-02",
+        "TC-053-03",
+        "TC-053-04",
+        "TC-053-05",
+        "TC-053-06",
+        "TC-053-07",
+        "TC-053-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-053-13",
+      "prd": "PRD-053-ts-npm-publishing.md",
+      "acceptance_tests": [
+        "TC-053-01",
+        "TC-053-02",
+        "TC-053-03",
+        "TC-053-04",
+        "TC-053-05",
+        "TC-053-06",
+        "TC-053-07",
+        "TC-053-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-053-14",
+      "prd": "PRD-053-ts-npm-publishing.md",
+      "acceptance_tests": [
+        "TC-053-01",
+        "TC-053-02",
+        "TC-053-03",
+        "TC-053-04",
+        "TC-053-05",
+        "TC-053-06",
+        "TC-053-07",
+        "TC-053-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-053-15",
+      "prd": "PRD-053-ts-npm-publishing.md",
+      "acceptance_tests": [
+        "TC-053-01",
+        "TC-053-02",
+        "TC-053-03",
+        "TC-053-04",
+        "TC-053-05",
+        "TC-053-06",
+        "TC-053-07",
+        "TC-053-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-053-16",
+      "prd": "PRD-053-ts-npm-publishing.md",
+      "acceptance_tests": [
+        "TC-053-01",
+        "TC-053-02",
+        "TC-053-03",
+        "TC-053-04",
+        "TC-053-05",
+        "TC-053-06",
+        "TC-053-07",
+        "TC-053-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-053-17",
+      "prd": "PRD-053-ts-npm-publishing.md",
+      "acceptance_tests": [
+        "TC-053-01",
+        "TC-053-02",
+        "TC-053-03",
+        "TC-053-04",
+        "TC-053-05",
+        "TC-053-06",
+        "TC-053-07",
+        "TC-053-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-053-18",
+      "prd": "PRD-053-ts-npm-publishing.md",
+      "acceptance_tests": [
+        "TC-053-01",
+        "TC-053-02",
+        "TC-053-03",
+        "TC-053-04",
+        "TC-053-05",
+        "TC-053-06",
+        "TC-053-07",
+        "TC-053-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-053-19",
+      "prd": "PRD-053-ts-npm-publishing.md",
+      "acceptance_tests": [
+        "TC-053-01",
+        "TC-053-02",
+        "TC-053-03",
+        "TC-053-04",
+        "TC-053-05",
+        "TC-053-06",
+        "TC-053-07",
+        "TC-053-08"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-054-01",
+      "prd": "PRD-054-ts-release-smoke-and-readiness.md",
+      "acceptance_tests": [
+        "TC-054-01",
+        "TC-054-02",
+        "TC-054-03",
+        "TC-054-04",
+        "TC-054-05",
+        "TC-054-06",
+        "TC-054-07",
+        "TC-054-08",
+        "TC-054-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-054-02",
+      "prd": "PRD-054-ts-release-smoke-and-readiness.md",
+      "acceptance_tests": [
+        "TC-054-01",
+        "TC-054-02",
+        "TC-054-03",
+        "TC-054-04",
+        "TC-054-05",
+        "TC-054-06",
+        "TC-054-07",
+        "TC-054-08",
+        "TC-054-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-054-03",
+      "prd": "PRD-054-ts-release-smoke-and-readiness.md",
+      "acceptance_tests": [
+        "TC-054-01",
+        "TC-054-02",
+        "TC-054-03",
+        "TC-054-04",
+        "TC-054-05",
+        "TC-054-06",
+        "TC-054-07",
+        "TC-054-08",
+        "TC-054-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-054-04",
+      "prd": "PRD-054-ts-release-smoke-and-readiness.md",
+      "acceptance_tests": [
+        "TC-054-01",
+        "TC-054-02",
+        "TC-054-03",
+        "TC-054-04",
+        "TC-054-05",
+        "TC-054-06",
+        "TC-054-07",
+        "TC-054-08",
+        "TC-054-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-054-05",
+      "prd": "PRD-054-ts-release-smoke-and-readiness.md",
+      "acceptance_tests": [
+        "TC-054-01",
+        "TC-054-02",
+        "TC-054-03",
+        "TC-054-04",
+        "TC-054-05",
+        "TC-054-06",
+        "TC-054-07",
+        "TC-054-08",
+        "TC-054-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-054-06",
+      "prd": "PRD-054-ts-release-smoke-and-readiness.md",
+      "acceptance_tests": [
+        "TC-054-01",
+        "TC-054-02",
+        "TC-054-03",
+        "TC-054-04",
+        "TC-054-05",
+        "TC-054-06",
+        "TC-054-07",
+        "TC-054-08",
+        "TC-054-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-054-07",
+      "prd": "PRD-054-ts-release-smoke-and-readiness.md",
+      "acceptance_tests": [
+        "TC-054-01",
+        "TC-054-02",
+        "TC-054-03",
+        "TC-054-04",
+        "TC-054-05",
+        "TC-054-06",
+        "TC-054-07",
+        "TC-054-08",
+        "TC-054-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-054-08",
+      "prd": "PRD-054-ts-release-smoke-and-readiness.md",
+      "acceptance_tests": [
+        "TC-054-01",
+        "TC-054-02",
+        "TC-054-03",
+        "TC-054-04",
+        "TC-054-05",
+        "TC-054-06",
+        "TC-054-07",
+        "TC-054-08",
+        "TC-054-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-054-09",
+      "prd": "PRD-054-ts-release-smoke-and-readiness.md",
+      "acceptance_tests": [
+        "TC-054-01",
+        "TC-054-02",
+        "TC-054-03",
+        "TC-054-04",
+        "TC-054-05",
+        "TC-054-06",
+        "TC-054-07",
+        "TC-054-08",
+        "TC-054-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-054-10",
+      "prd": "PRD-054-ts-release-smoke-and-readiness.md",
+      "acceptance_tests": [
+        "TC-054-01",
+        "TC-054-02",
+        "TC-054-03",
+        "TC-054-04",
+        "TC-054-05",
+        "TC-054-06",
+        "TC-054-07",
+        "TC-054-08",
+        "TC-054-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-054-11",
+      "prd": "PRD-054-ts-release-smoke-and-readiness.md",
+      "acceptance_tests": [
+        "TC-054-01",
+        "TC-054-02",
+        "TC-054-03",
+        "TC-054-04",
+        "TC-054-05",
+        "TC-054-06",
+        "TC-054-07",
+        "TC-054-08",
+        "TC-054-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-054-12",
+      "prd": "PRD-054-ts-release-smoke-and-readiness.md",
+      "acceptance_tests": [
+        "TC-054-01",
+        "TC-054-02",
+        "TC-054-03",
+        "TC-054-04",
+        "TC-054-05",
+        "TC-054-06",
+        "TC-054-07",
+        "TC-054-08",
+        "TC-054-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-054-13",
+      "prd": "PRD-054-ts-release-smoke-and-readiness.md",
+      "acceptance_tests": [
+        "TC-054-01",
+        "TC-054-02",
+        "TC-054-03",
+        "TC-054-04",
+        "TC-054-05",
+        "TC-054-06",
+        "TC-054-07",
+        "TC-054-08",
+        "TC-054-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-054-14",
+      "prd": "PRD-054-ts-release-smoke-and-readiness.md",
+      "acceptance_tests": [
+        "TC-054-01",
+        "TC-054-02",
+        "TC-054-03",
+        "TC-054-04",
+        "TC-054-05",
+        "TC-054-06",
+        "TC-054-07",
+        "TC-054-08",
+        "TC-054-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    },
+    {
+      "requirement": "R-054-15",
+      "prd": "PRD-054-ts-release-smoke-and-readiness.md",
+      "acceptance_tests": [
+        "TC-054-01",
+        "TC-054-02",
+        "TC-054-03",
+        "TC-054-04",
+        "TC-054-05",
+        "TC-054-06",
+        "TC-054-07",
+        "TC-054-08",
+        "TC-054-09"
+      ],
+      "evidence_kind": "prd-acceptance-case"
+    }
+  ]
+}

@@ -1,0 +1,531 @@
+{
+  "contractVersion": "1.0.0",
+  "operations": {
+    "me.get": {
+      "method": "GET",
+      "path": "/v1/me",
+      "requestBody": null,
+      "response": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Me"
+            }
+          }
+        },
+        "description": "Caller profile and workspace"
+      },
+      "successStatus": 200
+    },
+    "records.list": {
+      "method": "GET",
+      "path": "/v1/records",
+      "requestBody": null,
+      "response": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "items": {
+                "$ref": "#/components/schemas/Record"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "description": "Owned record entries"
+      },
+      "successStatus": 200
+    },
+    "sessions.checkpoint": {
+      "method": "POST",
+      "path": "/v1/sessions/{id}/checkpoint",
+      "requestBody": {
+        "$ref": "#/components/schemas/CheckpointRequest"
+      },
+      "response": {
+        "$ref": "#/components/responses/Ok"
+      },
+      "successStatus": 200
+    },
+    "sessions.create": {
+      "method": "POST",
+      "path": "/v1/sessions",
+      "requestBody": {
+        "$ref": "#/components/schemas/SdkCreateSession"
+      },
+      "response": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Session"
+            }
+          }
+        },
+        "description": "Completed session observation"
+      },
+      "successStatus": 201
+    },
+    "sessions.delete": {
+      "method": "DELETE",
+      "path": "/v1/sessions/{id}",
+      "requestBody": null,
+      "response": {
+        "$ref": "#/components/responses/Ok"
+      },
+      "successStatus": 200
+    },
+    "sessions.exec": {
+      "method": "POST",
+      "path": "/v1/sessions/{id}/exec",
+      "requestBody": {
+        "$ref": "#/components/schemas/ExecRequest"
+      },
+      "response": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ExecResult"
+            }
+          }
+        },
+        "description": "Buffered command result"
+      },
+      "successStatus": 200
+    },
+    "sessions.get": {
+      "method": "GET",
+      "path": "/v1/sessions/{id}",
+      "requestBody": null,
+      "response": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Session"
+            }
+          }
+        },
+        "description": "Owned session"
+      },
+      "successStatus": 200
+    },
+    "sessions.list": {
+      "method": "GET",
+      "path": "/v1/sessions",
+      "requestBody": null,
+      "response": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "items": {
+                "$ref": "#/components/schemas/Session"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "description": "Owned sessions"
+      },
+      "successStatus": 200
+    },
+    "sessions.open": {
+      "method": "POST",
+      "path": "/v1/sessions/{id}/open",
+      "requestBody": null,
+      "response": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/OpenResult"
+            }
+          }
+        },
+        "description": "Single-use 60-second handoff capability"
+      },
+      "successStatus": 200
+    },
+    "sessions.pause": {
+      "method": "POST",
+      "path": "/v1/sessions/{id}/pause",
+      "requestBody": null,
+      "response": {
+        "$ref": "#/components/responses/Session"
+      },
+      "successStatus": 200
+    },
+    "sessions.resume": {
+      "method": "POST",
+      "path": "/v1/sessions/{id}/resume",
+      "requestBody": null,
+      "response": {
+        "$ref": "#/components/responses/Session"
+      },
+      "successStatus": 200
+    },
+    "sessions.start": {
+      "method": "POST",
+      "path": "/v1/sessions/{id}/start",
+      "requestBody": null,
+      "response": {
+        "$ref": "#/components/responses/Session"
+      },
+      "successStatus": 200
+    },
+    "sessions.stop": {
+      "method": "POST",
+      "path": "/v1/sessions/{id}/stop",
+      "requestBody": null,
+      "response": {
+        "$ref": "#/components/responses/Session"
+      },
+      "successStatus": 200
+    }
+  },
+  "schemas": {
+    "CheckpointRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "maxLength": 80,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "type": "object"
+    },
+    "Error": {
+      "additionalProperties": false,
+      "properties": {
+        "error": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "error"
+      ],
+      "type": "object"
+    },
+    "ExecRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "args": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "command": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "cwd": {
+          "type": "string"
+        },
+        "timeout_secs": {
+          "maximum": 600,
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "command"
+      ],
+      "type": "object"
+    },
+    "ExecResult": {
+      "additionalProperties": false,
+      "properties": {
+        "duration_ms": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "exit_code": {
+          "type": "integer"
+        },
+        "stderr": {
+          "type": "string"
+        },
+        "stderr_truncated": {
+          "type": "boolean"
+        },
+        "stdout": {
+          "type": "string"
+        },
+        "stdout_truncated": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "exit_code",
+        "stdout",
+        "stderr",
+        "duration_ms",
+        "stdout_truncated",
+        "stderr_truncated"
+      ],
+      "type": "object"
+    },
+    "Me": {
+      "additionalProperties": false,
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "id": {
+          "$ref": "#/components/schemas/Uuid"
+        },
+        "workspace": {
+          "oneOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "assigned": {
+                  "const": true
+                },
+                "usage": {
+                  "properties": {
+                    "est_remaining_usd": {
+                      "type": "number"
+                    },
+                    "est_spend_usd": {
+                      "type": "number"
+                    },
+                    "note": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "est_spend_usd",
+                    "est_remaining_usd",
+                    "note"
+                  ],
+                  "type": "object"
+                }
+              },
+              "required": [
+                "assigned",
+                "usage"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "assigned": {
+                  "const": false
+                },
+                "waitlist_position": {
+                  "minimum": 0,
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "assigned",
+                "waitlist_position"
+              ],
+              "type": "object"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "email",
+        "workspace"
+      ],
+      "type": "object"
+    },
+    "Ok": {
+      "additionalProperties": false,
+      "properties": {
+        "ok": {
+          "const": true
+        }
+      },
+      "required": [
+        "ok"
+      ],
+      "type": "object"
+    },
+    "OpenResult": {
+      "additionalProperties": false,
+      "properties": {
+        "url": {
+          "pattern": "^https://[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\\.runacode\\.cloud/__runa/auth\\?t=[^&#]+$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "url"
+      ],
+      "type": "object"
+    },
+    "Record": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "detail": {},
+        "id": {
+          "$ref": "#/components/schemas/Uuid"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "session_id": {
+          "$ref": "#/components/schemas/Uuid"
+        },
+        "summary": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "session_id",
+        "kind",
+        "summary",
+        "detail",
+        "created_at"
+      ],
+      "type": "object"
+    },
+    "RuntimeUrl": {
+      "pattern": "^https://[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\\.runacode\\.cloud$",
+      "type": "string"
+    },
+    "SdkCreateSession": {
+      "additionalProperties": false,
+      "properties": {
+        "agent": {
+          "enum": [
+            "claude-code",
+            "codex",
+            "openclaw"
+          ]
+        },
+        "allowed_hosts": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 128,
+          "type": "array"
+        },
+        "memory_mib": {
+          "maximum": 16384,
+          "minimum": 512,
+          "type": "integer"
+        },
+        "name": {
+          "maxLength": 80,
+          "minLength": 1,
+          "type": "string"
+        },
+        "runtime_port": {
+          "maximum": 65535,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "vcpus": {
+          "maximum": 8,
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "type": "object"
+    },
+    "Session": {
+      "additionalProperties": false,
+      "properties": {
+        "agent": {
+          "enum": [
+            "claude-code",
+            "codex",
+            "openclaw"
+          ]
+        },
+        "created_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "id": {
+          "$ref": "#/components/schemas/Uuid"
+        },
+        "memory_mib": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "running_seconds": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "slug": {
+          "pattern": "^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "creating",
+            "running",
+            "paused",
+            "suspended",
+            "stopped",
+            "deleted",
+            "error"
+          ]
+        },
+        "updated_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "url": {
+          "$ref": "#/components/schemas/RuntimeUrl"
+        },
+        "user_id": {
+          "$ref": "#/components/schemas/Uuid"
+        },
+        "vcpus": {
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "user_id",
+        "slug",
+        "name",
+        "vcpus",
+        "memory_mib",
+        "status",
+        "running_seconds",
+        "created_at",
+        "updated_at",
+        "url"
+      ],
+      "type": "object"
+    },
+    "Uuid": {
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+      "type": "string"
+    }
+  },
+  "wire": {
+    "followRedirects": false,
+    "maxResponseBytes": 8388608,
+    "requestAccept": "application/json",
+    "requestContentTypeWithBody": "application/json; charset=utf-8",
+    "responseEncoding": "utf-8",
+    "responseMediaType": "application/json",
+    "sdkOperationCount": 13
+  }
+}

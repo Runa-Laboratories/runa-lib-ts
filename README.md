@@ -1,55 +1,57 @@
-<div align="center">
-
 # @runa/sdk
 
-**The TypeScript SDK for Runa — give agents the work, never the keys.**
-
-</div>
-
----
-
-Create Runa sessions, run commands inside them, checkpoint their work, and read
-the record — from TypeScript or JavaScript.
-
-Runa exposes a REST API at `https://api.runacode.io`. This package is a small,
-typed wrapper around it, so you can write:
-
-```ts
-import { Runa } from "@runa/sdk";
-
-const runa = new Runa(); // reads RUNA_API_KEY from the environment
-
-const session = await runa.sessions.create({ name: "hello", agent: "claude-code" });
-try {
-  const result = await session.exec("echo hello from runa");
-  console.log(result.stdoutText);
-} finally {
-  await session.delete();
-}
-```
-
-## Status
-
-Early development. This repository is being built from the product requirements
-documents in the workspace `prds/` folder. The public API is not yet stable.
-
-## Authentication
-
-Set a Runa API key:
-
-```bash
-export RUNA_API_KEY="runa_sk_..."
-```
-
-Requests go to `https://api.runacode.io` by default; override with
-`new Runa({ baseUrl: "..." })` or `RUNA_BASE_URL`. Never commit a real key.
+The official, ESM-only TypeScript client for the Runa API. Node.js 22 or
+newer is required.
 
 ## Install
 
-```bash
+```sh
 npm install @runa/sdk
 ```
 
-## License
+Set `RUNA_API_KEY` or pass an API key directly:
 
-TODO — to be decided before the first public release.
+```ts
+import { Runa, stdoutText } from "@runa/sdk";
+
+const runa = new Runa({ apiKey: process.env.RUNA_API_KEY });
+
+try {
+  const session = await runa.sessions.create("first-session", {
+    agent: "codex",
+  });
+  const result = await session.exec(["printf", "%s", "hello"]);
+  process.stdout.write(stdoutText(result));
+  await session.delete();
+} finally {
+  await runa.close();
+}
+```
+
+Configuration precedence is constructor options, environment variables, the
+optional configuration file, then the default API endpoint. A present but
+invalid higher-precedence value is an error; it never falls through.
+
+## Resources
+
+- `runa.sessions.create(name, options)`, `list()`, and `get(id)`
+- `Session` lifecycle methods, `exec()`, `checkpoint()`, and `open()`
+- `runa.records.list()`
+- `runa.me()`
+
+`Session.open()` returns a short-lived sensitive value. Use it only for the
+immediate handoff and do not print, persist, cache, or fetch it automatically.
+
+See [guides](docs/guides/README.md) and the generated
+[API reference](docs/api/README.md). Public errors have fixed safe messages:
+`ConfigError`, `ApiError`, and the non-constructible `CommandError` marker.
+
+## Development
+
+```sh
+npm ci
+npm run quality
+npm pack --dry-run
+```
+
+The package has no runtime dependencies and exposes only its root ESM entry.
