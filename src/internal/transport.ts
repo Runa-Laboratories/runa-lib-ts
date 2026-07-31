@@ -53,6 +53,18 @@ export type DispatchResult =
   | SessionSnapshot
   | readonly SessionSnapshot[];
 
+export interface CancelableTimer {
+  cancel(): void;
+}
+
+export interface TransportRuntime {
+  now(): number;
+  timer(callback: () => void, delayMs: number): CancelableTimer;
+  sleep(delayMs: number, signal?: AbortSignal): Promise<void>;
+  randomUint32(): number;
+  requestId(): string;
+}
+
 interface PreparedRequest {
   readonly url: string;
   readonly method: "GET" | "POST" | "DELETE";
@@ -153,6 +165,10 @@ function cancellationFailure(): DOMException {
   return new DOMException("The Runa request was cancelled.", "AbortError");
 }
 
+function signalAborted(signal?: AbortSignal): boolean {
+  return signal?.aborted === true;
+}
+
 async function disposition(
   response: Response,
   operationKey: OperationKey,
@@ -220,16 +236,19 @@ function deadlineFor(operationKey: OperationKey, timeoutSecs?: number): number {
   return 60_000;
 }
 
-function uniformDelay(cap: number): number {
+function uniformDelay(cap: number, randomUint32: () => number): number {
   const limit = cap + 1;
   const largest = Math.floor(0x1_0000_0000 / limit) * limit;
   for (;;) {
-    const raw = randomBytes(4).readUInt32BE(0);
+    const raw = randomUint32();
     if (raw < largest) return raw % limit;
   }
 }
 
-function wait(delayMs: number, signal?: AbortSignal): Promise<void> {
+function productionSleep(
+  delayMs: number,
+  signal?: AbortSignal,
+): Promise<void> {
   return new Promise((resolve, reject) => {
     if (signal?.aborted === true) {
       reject(cancellationFailure());
@@ -249,11 +268,27 @@ function wait(delayMs: number, signal?: AbortSignal): Promise<void> {
   });
 }
 
+const PRODUCTION_RUNTIME: TransportRuntime = Object.freeze({
+  now: () => performance.now(),
+  timer: (callback: () => void, delayMs: number): CancelableTimer => {
+    const handle = setTimeout(callback, delayMs);
+    return Object.freeze({ cancel: () => clearTimeout(handle) });
+  },
+  sleep: productionSleep,
+  randomUint32: () => randomBytes(4).readUInt32BE(0),
+  requestId: () => `runa_req_${randomBytes(16).toString("hex")}`,
+});
+
 export class FetchTransport {
   readonly #config: EffectiveConfig;
+  readonly #runtime: TransportRuntime;
 
-  constructor(config: EffectiveConfig) {
+  constructor(
+    config: EffectiveConfig,
+    runtime: TransportRuntime = PRODUCTION_RUNTIME,
+  ) {
     this.#config = config;
+    this.#runtime = runtime;
   }
 
   async execute(
@@ -268,18 +303,22 @@ export class FetchTransport {
       descriptor,
       this.#config.diagnostics,
       this.#config.tracing,
+      {
+        now: () => this.#runtime.now(),
+        requestId: () => this.#runtime.requestId(),
+      },
     );
     observer.start();
-    const startedAt = performance.now();
+    const startedAt = this.#runtime.now();
     const totalDeadline = READS.has(operationKey) ? 30_000 : deadlineFor(operationKey, input.timeoutSecs);
     const maximumAttempts = READS.has(operationKey) ? 3 : 1;
     const callerSignal = input.signal;
     let attempt = 0;
     try {
       while (attempt < maximumAttempts) {
-        if (callerSignal?.aborted === true) throw cancellationFailure();
+        if (signalAborted(callerSignal)) throw cancellationFailure();
         attempt += 1;
-        const elapsed = performance.now() - startedAt;
+        const elapsed = this.#runtime.now() - startedAt;
         if (elapsed >= totalDeadline) throw timeoutFailure();
         const attemptDeadline = Math.min(
           deadlineFor(operationKey, input.timeoutSecs),
@@ -290,7 +329,10 @@ export class FetchTransport {
         callerSignal?.addEventListener("abort", onCallerAbort, {
           once: true,
         });
-        const timer = setTimeout(() => controller.abort(), attemptDeadline);
+        const timer = this.#runtime.timer(
+          () => controller.abort(),
+          attemptDeadline,
+        );
         observer.attempt(attempt);
         let response: Response;
         try {
@@ -302,44 +344,45 @@ export class FetchTransport {
             signal: controller.signal,
           });
         } catch {
-          clearTimeout(timer);
+          timer.cancel();
           callerSignal?.removeEventListener("abort", onCallerAbort);
-          if (callerSignal?.aborted === true) throw cancellationFailure();
+          if (signalAborted(callerSignal)) throw cancellationFailure();
           const canRetry =
             READS.has(operationKey) &&
             attempt < maximumAttempts &&
-            performance.now() - startedAt < totalDeadline;
+            this.#runtime.now() - startedAt < totalDeadline;
           if (!canRetry) {
             if (controller.signal.aborted) throw timeoutFailure();
             throw safeTransportFailure();
           }
-          const delay = uniformDelay(Math.min(100 * 2 ** (attempt - 1), 1_000));
-          if (performance.now() - startedAt + delay >= totalDeadline) {
+          const delay = uniformDelay(
+            Math.min(100 * 2 ** (attempt - 1), 1_000),
+            () => this.#runtime.randomUint32(),
+          );
+          if (this.#runtime.now() - startedAt + delay >= totalDeadline) {
             throw timeoutFailure();
           }
           observer.retry(attempt + 1, delay);
-          await wait(delay, callerSignal);
+          await this.#runtime.sleep(delay, callerSignal);
           continue;
         }
         try {
-          if (callerSignal?.aborted === true) throw cancellationFailure();
+          if (signalAborted(callerSignal)) throw cancellationFailure();
           const result = await disposition(
             response,
             operationKey,
             controller.signal,
           );
-          clearTimeout(timer);
+          timer.cancel();
           callerSignal?.removeEventListener("abort", onCallerAbort);
-          if (callerSignal?.aborted === true) throw cancellationFailure();
+          if (signalAborted(callerSignal)) throw cancellationFailure();
           observer.end(attempt);
           return result;
         } catch (error) {
-          clearTimeout(timer);
+          timer.cancel();
           callerSignal?.removeEventListener("abort", onCallerAbort);
-          if (callerSignal?.aborted === true) throw cancellationFailure();
-          if (controller.signal.aborted && !(error instanceof ApiError)) {
-            throw timeoutFailure();
-          }
+          if (signalAborted(callerSignal)) throw cancellationFailure();
+          if (controller.signal.aborted) throw timeoutFailure();
           throw error;
         }
       }
