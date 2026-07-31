@@ -213,3 +213,76 @@ test("PRD-008 deadline remains authoritative while streaming a response", async 
   );
   assert.equal(dispatches, 1);
 });
+
+test("PRD-008 timeout cancels a response body that hangs after headers", async () => {
+  let fireDeadline;
+  let bodyCancelled = 0;
+  let reads = 0;
+  const runtime = {
+    now: () => 0,
+    timer(callback) {
+      fireDeadline = callback;
+      return { cancel() {} };
+    },
+    sleep: async () => {},
+    randomUint32: () => 0,
+    requestId: () => `runa_req_${"0".repeat(32)}`,
+  };
+  const transport = new FetchTransport(
+    config(async () => new Response(new ReadableStream({
+      pull() {
+        reads += 1;
+        fireDeadline();
+      },
+      cancel() {
+        bodyCancelled += 1;
+      },
+    }), {
+      status: 200,
+      headers: { "content-type": "application/json" },
+    })),
+    runtime,
+  );
+  await assert.rejects(
+    transport.execute("me.get"),
+    (error) => error instanceof DOMException && error.name === "TimeoutError",
+  );
+  assert.equal(reads, 1);
+  assert.equal(bodyCancelled, 1);
+});
+
+test("PRD-008 caller abort cancels a hung post-headers body without late decode", async () => {
+  const caller = new AbortController();
+  let bodyCancelled = 0;
+  let decodeReached = 0;
+  let bodyController;
+  const transport = new FetchTransport(
+    config(async () => new Response(new ReadableStream({
+      start(controller) {
+        bodyController = controller;
+      },
+      pull() {
+        caller.abort();
+      },
+      cancel() {
+        bodyCancelled += 1;
+      },
+    }), {
+      status: 200,
+      headers: { "content-type": "application/json" },
+    })),
+  );
+  await assert.rejects(
+    transport.execute("me.get", { signal: caller.signal }),
+    (error) => error instanceof DOMException && error.name === "AbortError",
+  );
+  try {
+    bodyController.enqueue(new TextEncoder().encode(JSON.stringify(meFixture())));
+    decodeReached += 1;
+  } catch {
+    // Cancellation closes the controller; late chunks are rejected.
+  }
+  await Promise.resolve();
+  assert.equal(bodyCancelled, 1);
+  assert.equal(decodeReached, 0);
+});

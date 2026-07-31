@@ -40,7 +40,10 @@ const requireTrusted = async (file, gate, role) => {
 };
 const projection = await readFile("contracts/runa-sdk.projection.json");
 const projectionSha = createHash("sha256").update(projection).digest("hex");
-const provenance = await requirePass("contracts/runa-sdk-contract.provenance.json", "canonical-contract-provenance");
+const provenance = await readJson("contracts/runa-sdk-contract.provenance.json", "canonical-contract-provenance");
+if (provenance !== undefined && provenance.status !== "APPROVED") {
+  blockers.push({ gate: "canonical-contract-provenance", reason: "Canonical repository provenance is not approved." });
+}
 if (provenance !== undefined && provenance.projection_sha256 !== projectionSha) {
   blockers.push({ gate: "canonical-contract-provenance", reason: "Projection digest does not match provenance." });
 }
@@ -66,6 +69,7 @@ if (quality !== undefined && candidate !== undefined &&
     quality.commit_sha !== candidate.source_commit) {
   blockers.push({ gate: "quality", reason: "Quality evidence is not bound to the candidate source commit." });
 }
+await requirePass("evidence/docs-readiness.json", "documentation");
 const matrix = await requireTrusted("evidence/compatibility-matrix.json", "compatibility-matrix", "compatibility");
 if (matrix !== undefined && (!Array.isArray(matrix.cells) || matrix.cells.length !== 6 ||
     matrix.cells.some((cell) => cell.status !== "PASS"))) {
@@ -112,8 +116,18 @@ if (sbom !== undefined && (sbom.bomFormat !== "CycloneDX" || sbom.specVersion !=
     sbom.metadata?.component?.hashes?.[0]?.content !== candidate?.sha256)) {
   blockers.push({ gate: "sbom", reason: "CycloneDX identity or candidate binding is invalid." });
 }
-await requirePass("evidence/sbom-validation.json", "sbom-validation");
-await requirePass("evidence/external-release-interfaces.json", "external-release-interfaces");
+const sbomValidation = await requireTrusted(
+  "evidence/sbom-validation.json", "sbom-validation", "sbom-validation");
+if (sbomValidation !== undefined && candidate !== undefined &&
+    sbomValidation.candidate_sha256 !== candidate.sha256) {
+  blockers.push({ gate: "sbom-validation", reason: "SBOM validation is not bound to the candidate." });
+}
+const externalInterfaces = await requireTrusted(
+  "evidence/external-release-interfaces.json", "external-release-interfaces", "external-interfaces");
+if (externalInterfaces !== undefined && candidate !== undefined &&
+    externalInterfaces.candidate_sha256 !== candidate.sha256) {
+  blockers.push({ gate: "external-release-interfaces", reason: "External interface evidence is not bound to the candidate." });
+}
 const report = {
   schema_version: 2,
   decision: blockers.length === 0 ? "PASS" : "BLOCKED",

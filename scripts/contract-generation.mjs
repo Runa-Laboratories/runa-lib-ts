@@ -84,3 +84,26 @@ ${entries}
 });
 `;
 }
+
+export function validateContractProvenance(provenance, expected) {
+  if (provenance?.schema_version !== 1 ||
+      provenance.canonical_repository !== "Runa-Laboratories/runa-sdk-contract" ||
+      provenance.canonical_contract_sha256 !== expected.canonical ||
+      provenance.projection_sha256 !== expected.projection ||
+      provenance.openapi_sha256 !== expected.openapi) return false;
+  if (provenance.status === "BLOCKED") {
+    return provenance.canonical_ref === null &&
+      provenance.approval_sha === null &&
+      typeof provenance.reason === "string" &&
+      provenance.reason.length > 0;
+  }
+  if (provenance.status === "APPROVED") {
+    return /^[0-9a-f]{40}(?:[0-9a-f]{24})?$/.test(provenance.canonical_ref) &&
+      /^[0-9a-f]{40}(?:[0-9a-f]{24})?$/.test(provenance.approval_sha) &&
+      typeof provenance.approver_identity === "string" &&
+      /^https:\/\/github\.com\/[^/\s]+\/[^/\s]+$/.test(provenance.approver_identity) &&
+      typeof provenance.approved_at === "string" &&
+      Number.isFinite(Date.parse(provenance.approved_at));
+  }
+  return false;
+}

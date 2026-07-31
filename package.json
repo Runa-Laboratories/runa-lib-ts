@@ -39,6 +39,7 @@
     "release:candidate": "node scripts/build-release-candidate.mjs",
     "release:local-gates": "node scripts/verify-local-release-gates.mjs",
     "release:smoke": "node scripts/verify-release-smoke.mjs",
+    "release:authority:import": "node scripts/import-release-authority.mjs",
     "evidence": "node scripts/build-evidence.mjs",
     "quality": "npm run lint && npm run typecheck && npm run contract:verify && npm test && npm run docs:api && npm run surface:verify && npm run docs:verify && npm run security:verify && npm run dependencies:verify && npm run duplicates:verify && npm run pack:verify && npm run evidence",
     "prepack": "npm run build"
