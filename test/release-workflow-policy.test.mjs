@@ -34,6 +34,16 @@ test("release workflow is one protected dispatch with pinned signing and at-most
     ciRetain < ciCore, true);
   assert.match(workflow, /evidence\/\$\{\{ needs\.admission\.outputs\.filename \}\}\.intoto\.jsonl/u);
   assert.doesNotMatch(workflow, /RUNA_AUTHORITY_READ_TOKEN|personal.access.token|github.app/iu);
+  assert.equal((workflow.match(/release:authority:download/gu) ?? []).length, 2);
+  assert.doesNotMatch(workflow,
+    /repository: \$\{\{ (?:steps|needs)\.phase-a\.outputs\.authority_repository \}\}/u);
+  const authoritySteps = workflow.match(
+    /- name: (?:Verify independent authority run identity(?: before tagging)?|Retrieve public signed release-authority assets without credentials)[\s\S]*?(?=\n\s+- (?:name|uses|run|id):)/gu,
+  ) ?? [];
+  assert.equal(authoritySteps.length, 4);
+  for (const step of authoritySteps) {
+    assert.doesNotMatch(step, /GH_TOKEN|github-token|RUNA_AUTHORITY_READ_TOKEN/u);
+  }
   assert.match(workflow, /gh release create/u);
   assert.match(workflow, /gh release upload/u);
   assert.match(workflow, /release:assets:verify/u);
