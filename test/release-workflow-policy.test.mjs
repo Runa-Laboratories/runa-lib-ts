@@ -4,6 +4,7 @@ import { test } from "vitest";
 
 test("release workflow is one protected dispatch with pinned signing and at-most-once gates", async () => {
   const workflow = await readFile(".github/workflows/release.yml", "utf8");
+  const ci = await readFile(".github/workflows/ci.yml", "utf8");
   assert.match(workflow, /workflow_dispatch:/u);
   assert.doesNotMatch(workflow, /push:\s*\n\s+tags:/u);
   assert.match(workflow, /cancel-in-progress: false/u);
@@ -20,4 +21,7 @@ test("release workflow is one protected dispatch with pinned signing and at-most
   const attest = workflow.indexOf("id: attest");
   const publish = workflow.indexOf("npm publish");
   assert.equal(preflight >= 0 && preflight < attest && attest < publish, true);
+  assert.match(ci, /release-admission:\s*\n\s+name: release-admission/u);
+  assert.match(ci, /name: release-admission\s*\n\s+needs: \[candidate, compatibility\]/u);
+  assert.match(ci, /npm run release:ci:admission/u);
 });

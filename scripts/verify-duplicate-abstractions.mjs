@@ -1,20 +1,27 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
+import path from "node:path";
 
-const files = [
+async function scriptFiles(root) {
+  const found = [];
+  for (const entry of await readdir(root, { withFileTypes: true })) {
+    const target = path.join(root, entry.name).replaceAll("\\", "/");
+    if (entry.isDirectory()) found.push(...await scriptFiles(target));
+    else if (entry.name.endsWith(".mjs")) found.push(target);
+  }
+  return found;
+}
+
+const runtimeFiles = [
   "src/domain.ts",
   "src/client.ts",
   "src/session.ts",
   "src/internal/transport.ts",
   "src/internal/sanitize.ts",
   "src/internal/boundary-policy.ts",
-  "scripts/build-evidence.mjs",
-  "scripts/build-release-candidate.mjs",
-  "scripts/release-readiness.mjs",
-  "scripts/verify-local-release-gates.mjs",
-  "scripts/verify-security.mjs",
 ];
+const files = [...runtimeFiles, ...(await scriptFiles("scripts")).sort()];
 const sources = Object.fromEntries(await Promise.all(files.map(async (file) =>
   [file, await readFile(file, "utf8")])));
 const occurrences = (pattern, selected = files) => selected.reduce((total, file) =>

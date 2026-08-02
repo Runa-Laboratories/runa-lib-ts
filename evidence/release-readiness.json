@@ -2,7 +2,7 @@
   "schema_version": 2,
   "decision": "BLOCKED",
   "projection_sha256": "02a554b22592f0267475b847a2bb1c7df64e2b688cdb69b0a4a8b392695e1c55",
-  "candidate_sha256": "60c42a842b05a573e51b7c0e5d81e1d1bf65196953b6976067d07e959519fd78",
+  "candidate_sha256": "efe1bc34088ae2946c8a1e7dd5bd9517d521a8f851f9ed2052497214a4b447a5",
   "blockers": [
     {
       "id": "TS-REL-001",
@@ -36,38 +36,38 @@
     },
     {
       "id": "TS-REL-007",
+      "gate": "semver-classification",
+      "reason": "Missing or invalid evidence: evidence/version-classification.json"
+    },
+    {
+      "id": "TS-REL-008",
       "gate": "requirement-test-map",
       "reason": "Mandatory requirements or acceptance tests remain NOT_RUN."
     },
     {
-      "id": "TS-REL-008",
+      "id": "TS-REL-009",
       "gate": "compatibility-matrix",
       "reason": "Missing or invalid evidence: evidence/compatibility-matrix.json"
     },
     {
-      "id": "TS-REL-009",
+      "id": "TS-REL-010",
       "gate": "repository-controls",
       "reason": "Missing or invalid evidence: evidence/repository-controls.json"
     },
     {
-      "id": "TS-REL-010",
+      "id": "TS-REL-011",
       "gate": "cross-language",
       "reason": "Missing or invalid evidence: evidence/cross-language.json"
     },
     {
-      "id": "TS-REL-011",
+      "id": "TS-REL-012",
       "gate": "publication-readiness",
       "reason": "Missing or invalid evidence: evidence/publication-readiness.json"
     },
     {
-      "id": "TS-REL-012",
+      "id": "TS-REL-013",
       "gate": "sbom-validation",
       "reason": "No accepted release trust root is configured."
-    },
-    {
-      "id": "TS-REL-013",
-      "gate": "sbom-schema-toolchain",
-      "reason": "The official CycloneDX 1.6 schema/tool digest is not yet accepted locally; signed external validation remains required."
     },
     {
       "id": "TS-REL-014",
