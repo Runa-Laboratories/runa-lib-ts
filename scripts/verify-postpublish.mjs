@@ -10,6 +10,7 @@ import {
   validateReleaseMapping,
 } from "./postpublish-policy.mjs";
 import { validateAttestationJsonl } from "./attestation-bundle.mjs";
+import { appendReleaseManifestState } from "./release-manifest-envelope.mjs";
 
 const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const mapping = JSON.parse(await readFile("governance/release-mapping.json", "utf8"));
@@ -93,6 +94,10 @@ try {
   };
   assert.equal(validatePostpublishReceipt(receipt, candidate, mapping), true);
   await writeFile(receiptPath, `${JSON.stringify(receipt, null, 2)}\n`);
+  await appendReleaseManifestState("registry-verified", {
+    postpublish: receiptPath,
+    attestation: bundle,
+  });
   console.log(`postpublish: PASS (${candidate.version}, ${release.dist_tag})`);
 } catch (error) {
   await writeState(transitions.at(-1), {

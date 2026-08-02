@@ -56,6 +56,7 @@
     "release:authority:run:verify": "node scripts/verify-authority-run.mjs",
     "release:authority:config:verify": "node scripts/verify-authority-configuration.mjs",
     "release:context:verify": "node scripts/verify-public-release-context.mjs",
+    "release:pretag:verify": "node scripts/verify-pretag-release-gates.mjs",
     "release:tag:verify": "node scripts/verify-release-tag.mjs",
     "release:ci:admission": "node scripts/verify-ci-release-admission.mjs",
     "release:registry:preflight": "node scripts/verify-registry-version-absent.mjs",
@@ -67,9 +68,11 @@
   },
   "devDependencies": {
     "@types/node": "22.15.3",
+    "ajv": "8.17.1",
+    "ajv-formats": "3.0.1",
     "esbuild": "0.25.5",
-    "typescript": "5.8.3",
     "typedoc": "0.28.20",
+    "typescript": "5.8.3",
     "vitest": "3.2.7"
   }
 }

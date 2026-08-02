@@ -21,6 +21,9 @@ test("release manifest core uses deterministic canonical JSON", () => {
     .update(releaseManifestCoreBytes(value)).digest("hex");
   assert.equal(digest(first), digest(JSON.parse(JSON.stringify(second, null, 4))));
   assert.throws(() => canonicalizeJson({ value: Number.NaN }));
+  assert.throws(() => canonicalizeJson({ value: "\ud800" }));
+  assert.throws(() => canonicalizeJson({ "\udc00": true }));
+  assert.equal(canonicalizeJson({ emoji: "\ud83d\ude00" }), '{"emoji":"😀"}');
 });
 
 test("version-controlled release policy matches the exact accepted policy", async () => {

@@ -59,6 +59,11 @@ jobs:
       - name: Require accepted independent authority configuration
         id: authority
         run: npm run release:authority:config:verify
+      - name: Verify independent authority run identity before tagging
+        run: npm run release:authority:run:verify
+        env:
+          GH_TOKEN: ${{ secrets.RUNA_AUTHORITY_READ_TOKEN }}
+          RUNA_AUTHORITY_RUN_ID: ${{ inputs.authority_run_id }}
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
           name: npm-release-candidate
@@ -68,6 +73,20 @@ jobs:
         env:
           RUNA_REQUESTED_VERSION: ${{ inputs.version }}
         run: node -e "const c=require('./release-artifacts/candidate.json');if(c.source_commit!==process.env.GITHUB_SHA||c.version!==process.env.RUNA_REQUESTED_VERSION||c.source_tree_clean!==true)process.exit(1)"
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          repository: ${{ steps.authority.outputs.repository }}
+          name: ${{ steps.authority.outputs.artifact }}
+          path: authority-preflight
+          run-id: ${{ inputs.authority_run_id }}
+          github-token: ${{ secrets.RUNA_AUTHORITY_READ_TOKEN }}
+      - name: Verify non-approval authority evidence and bindings before tagging
+        run: npm run release:authority:import
+        env:
+          RUNA_AUTHORITY_PREFLIGHT: '1'
+          RUNA_AUTHORITY_INPUT_DIR: authority-preflight
+      - name: Verify all local non-approval gates before tagging
+        run: npm run release:pretag:verify
       - id: candidate
         run: echo "filename=$(node -p 'require(\"./release-artifacts/candidate.json\").filename')" >> "$GITHUB_OUTPUT"
       - name: Pre-tag registry absence check
@@ -148,7 +167,7 @@ jobs:
       - name: Verify independent authority run identity
         run: npm run release:authority:run:verify
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.RUNA_AUTHORITY_READ_TOKEN }}
           RUNA_AUTHORITY_RUN_ID: ${{ inputs.authority_run_id }}
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
@@ -156,7 +175,7 @@ jobs:
           name: ${{ needs.phase-a.outputs.authority_artifact }}
           path: authority-input
           run-id: ${{ inputs.authority_run_id }}
-          github-token: ${{ github.token }}
+          github-token: ${{ secrets.RUNA_AUTHORITY_READ_TOKEN }}
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
           name: npm-release-candidate

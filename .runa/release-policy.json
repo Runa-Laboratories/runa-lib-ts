@@ -29,8 +29,8 @@
   },
   "sbom": {
     "format": "CycloneDX 1.6 JSON",
-    "schemaPath": null,
-    "verifier": "external-authority-required"
+    "schemaPath": ".runa/schemas/cyclonedx-1.6.schema.json",
+    "verifier": "cyclonedx-cli@0.32.0 validate --input-format json --input-version v1_6"
   },
   "sourceControl": {
     "branchProtection": {

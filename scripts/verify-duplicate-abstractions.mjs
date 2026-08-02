@@ -3,25 +3,18 @@ import { createHash } from "node:crypto";
 import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-async function scriptFiles(root) {
+async function recursiveFiles(root, extension) {
   const found = [];
   for (const entry of await readdir(root, { withFileTypes: true })) {
     const target = path.join(root, entry.name).replaceAll("\\", "/");
-    if (entry.isDirectory()) found.push(...await scriptFiles(target));
-    else if (entry.name.endsWith(".mjs")) found.push(target);
+    if (entry.isDirectory()) found.push(...await recursiveFiles(target, extension));
+    else if (entry.name.endsWith(extension)) found.push(target);
   }
   return found;
 }
 
-const runtimeFiles = [
-  "src/domain.ts",
-  "src/client.ts",
-  "src/session.ts",
-  "src/internal/transport.ts",
-  "src/internal/sanitize.ts",
-  "src/internal/boundary-policy.ts",
-];
-const files = [...runtimeFiles, ...(await scriptFiles("scripts")).sort()];
+const runtimeFiles = (await recursiveFiles("src", ".ts")).sort();
+const files = [...runtimeFiles, ...(await recursiveFiles("scripts", ".mjs")).sort()];
 const sources = Object.fromEntries(await Promise.all(files.map(async (file) =>
   [file, await readFile(file, "utf8")])));
 const occurrences = (pattern, selected = files) => selected.reduce((total, file) =>
@@ -120,6 +113,7 @@ await writeFile("evidence/duplicate-abstraction-audit.json", `${JSON.stringify({
   method: "scripts/verify-duplicate-abstractions.mjs",
   audited_source_sha256: digest.digest("hex"),
   audited_files: files,
+  exclusions: [],
   decisions,
 }, null, 2)}\n`);
 console.log(`duplicate abstractions: PASS (${decisions.length} governed concepts)`);

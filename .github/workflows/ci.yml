@@ -22,6 +22,14 @@ jobs:
       - run: npm ci
       - run: npm run quality
       - run: npm run release:candidate
+      - name: Install checksum-pinned CycloneDX CLI
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/cyclonedx-bin"
+          curl --proto '=https' --tlsv1.2 --location --fail --show-error --output "$RUNNER_TEMP/cyclonedx-bin/cyclonedx-cli" "https://github.com/CycloneDX/cyclonedx-cli/releases/download/v0.32.0/cyclonedx-linux-x64"
+          echo "454879e6a4a405c8a13bff49b8982adcb0596f3019b26b0811c66e4d7f0783e1  $RUNNER_TEMP/cyclonedx-bin/cyclonedx-cli" | sha256sum --check --strict
+          chmod 0555 "$RUNNER_TEMP/cyclonedx-bin/cyclonedx-cli"
+          echo "RUNA_CYCLONEDX_CLI=$RUNNER_TEMP/cyclonedx-bin/cyclonedx-cli" >> "$GITHUB_ENV"
       - run: npm run release:local-gates
       - run: npm run release:smoke
       - run: node scripts/record-quality-gate.mjs
