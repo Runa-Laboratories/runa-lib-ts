@@ -21,10 +21,11 @@ import {
 const blockers = [];
 const releasePolicy = JSON.parse(await readFile(".runa/release-policy.json", "utf8"));
 if (releasePolicy.postPublishRecovery?.status !== "configured" ||
-    releasePolicy.postPublishRecovery?.resumeAfterUpload !== true) {
+    releasePolicy.postPublishRecovery?.mode !== "withdrawal-only-audit" ||
+    releasePolicy.postPublishRecovery?.resumeAfterUpload !== false) {
   blockers.push({
     gate: "postpublish-recovery",
-    reason: "Idempotent verify-only resume after an uploaded-unverified failure is not configured.",
+    reason: "Normative no-republish withdrawal/audit recovery policy is not configured.",
   });
 }
 const readJson = async (file, gate) => {
