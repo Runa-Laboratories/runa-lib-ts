@@ -66,7 +66,6 @@
     "release:provenance:record": "node scripts/record-provenance-state.mjs",
     "release:provenance:evidence": "node scripts/record-provenance-evidence.mjs",
     "release:provenance:verify": "node scripts/verify-controlled-provenance.mjs",
-    "release:provenance:predicate": "node scripts/build-provenance-predicate.mjs",
     "release:recovery:plan": "node scripts/plan-release-recovery.mjs",
     "release:recovery:verify": "node scripts/verify-release-recovery.mjs",
     "evidence": "node scripts/build-evidence.mjs",

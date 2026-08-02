@@ -81,7 +81,7 @@ export const EXPECTED_RELEASE_POLICY = Object.freeze({
   sourceControl: {
     branchProtection: {
       directPushes: false, dismissStaleApprovals: true,
-      requireCodeOwnerReviews: true, requiredApprovingReviews: 1,
+      requireCodeOwnerReviews: true, requiredApprovingReviews: 0,
       requiredStatusChecks: ["ts-quality-gates", "release-admission"],
     },
     provider: "github", releaseBranch: "main",

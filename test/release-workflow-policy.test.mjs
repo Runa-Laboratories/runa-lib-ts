@@ -22,16 +22,15 @@ test("release workflow is one protected dispatch with pinned signing and at-most
   assert.doesNotMatch(workflow, /recovery_mode|RUNA_VERIFY_ONLY|--clobber/u);
   assert.doesNotMatch(workflow, /actions\/attest-build-provenance/u);
   assert.match(ci, /actions\/attest@508db95dd578ae2727ebd6217d5ba78e4fbda05d/u);
-  assert.match(ci, /predicate-type: https:\/\/slsa\.dev\/provenance\/v1/u);
-  assert.match(ci, /predicate-path: evidence\/provenance-predicate\.json/u);
+  assert.match(ci, /subject-path: release-artifacts\/\*\.tgz/u);
+  assert.doesNotMatch(ci, /predicate-type:|predicate-path:|release:provenance:predicate/u);
   assert.match(ci, /npm run release:provenance:verify/u);
   assert.match(ci, /npm run release:provenance:evidence/u);
-  const ciPredicate = ci.indexOf("npm run release:provenance:predicate");
   const ciAttest = ci.indexOf("id: attest");
   const ciVerify = ci.indexOf("npm run release:provenance:verify");
   const ciRetain = ci.indexOf("npm run release:provenance:evidence");
   const ciCore = ci.indexOf("npm run release:manifest:core");
-  assert.equal(ciPredicate >= 0 && ciPredicate < ciAttest && ciAttest < ciVerify && ciVerify < ciRetain &&
+  assert.equal(ciAttest >= 0 && ciAttest < ciVerify && ciVerify < ciRetain &&
     ciRetain < ciCore, true);
   assert.match(workflow, /evidence\/\$\{\{ needs\.admission\.outputs\.filename \}\}\.intoto\.jsonl/u);
   assert.doesNotMatch(workflow, /RUNA_AUTHORITY_READ_TOKEN|personal.access.token|github.app/iu);
