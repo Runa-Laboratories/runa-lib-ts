@@ -55,3 +55,8 @@ npm pack --dry-run
 ```
 
 The package has no runtime dependencies and exposes only its root ESM entry.
+
+## License
+
+Copyright 2026 Runa Laboratories. Licensed under the
+[Apache License 2.0](LICENSE).

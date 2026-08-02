@@ -5,7 +5,7 @@
 SemVer class: initial minor release.
 
 - Additions: initial ESM-only `@runa_laboratories/sdk` client, session and record managers, typed errors, deterministic resilience, and generated API reference.
-- Fixes: none; this is the initial release candidate.
+- Fixes: replace the non-GA license placeholder with the approved Apache-2.0 license and package metadata.
 - Deprecations: none.
 - Removals: none.
-- Known limitations: general-availability publication remains blocked until all release-governance evidence and the final license are approved.
+- Known limitations: general-availability publication remains blocked until the independent release authority is configured and admitted.

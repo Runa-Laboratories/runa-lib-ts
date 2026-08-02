@@ -5,6 +5,7 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { npmSpawnSync } from "./npm-process.mjs";
+import { validateApprovedLicense } from "./license-policy.mjs";
 
 const commandOptions = { encoding: "utf8" };
 const npmRun = (arguments_, options = {}) =>
@@ -13,6 +14,9 @@ const packed = npmRun(["pack", "--json", "--ignore-scripts"]);
 if (packed.status !== 0) throw new Error("Package creation failed.");
 const [metadata] = JSON.parse(packed.stdout);
 const packedManifest = JSON.parse(await readFile("package.json", "utf8"));
+assert.equal(validateApprovedLicense(
+  await readFile("LICENSE", "utf8"), packedManifest,
+), true);
 assert.deepEqual(packedManifest.repository, {
   type: "git",
   url: "git+https://github.com/Runa-Laboratories/runa-lib-ts.git",
