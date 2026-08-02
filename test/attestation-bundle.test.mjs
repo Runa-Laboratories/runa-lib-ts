@@ -2,7 +2,10 @@ import assert from "node:assert/strict";
 import { test } from "vitest";
 import { validateAttestationJsonl } from "../scripts/attestation-bundle.mjs";
 
-const candidate = { filename: "runa-sdk-1.2.3.tgz", sha256: "a".repeat(64) };
+const candidate = {
+  filename: "runa_laboratories-sdk-1.2.3.tgz",
+  sha256: "a".repeat(64),
+};
 const statement = {
   _type: "https://in-toto.io/Statement/v1",
   subject: [{

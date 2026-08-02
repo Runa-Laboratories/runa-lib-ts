@@ -67,14 +67,14 @@ try {
     version: "0.0.0",
     private: true,
     type: "module",
-    dependencies: { "@runa/sdk": `file:${artifactPath.replaceAll("\\", "/")}` },
+    dependencies: { "@runa_laboratories/sdk": `file:${artifactPath.replaceAll("\\", "/")}` },
   })}\n`);
   const install = npmSpawnSync([
     "install", "--ignore-scripts", "--offline", "--cache", cache,
     "--no-audit", "--no-fund",
   ], { cwd: workspace });
   assert.equal(install.status, 0, "R-050-03: isolated profile install failed");
-  const packageRoot = path.join(workspace, "node_modules", "@runa", "sdk");
+  const packageRoot = path.join(workspace, "node_modules", "@runa_laboratories", "sdk");
   const sdk = await import(pathToFileURL(path.join(packageRoot, "dist", "index.js")));
   const seam = await import(pathToFileURL(
     path.join(packageRoot, "dist", "internal", "performance-seam.js"),

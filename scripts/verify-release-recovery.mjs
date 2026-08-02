@@ -110,7 +110,7 @@ try {
   ], { encoding: "utf8" });
   assert.equal(attestation.status, 0, attestation.stderr);
   const metadataResponse = await fetch(
-    `${mapping.registry.replace(/\/$/u, "")}/@runa%2fsdk/${candidate.version}`,
+    `${mapping.registry.replace(/\/$/u, "")}/@runa_laboratories%2fsdk/${candidate.version}`,
     { redirect: "error" },
   );
   assert.equal(metadataResponse.status, 200);
@@ -122,7 +122,7 @@ try {
   assert.equal(hash(Buffer.from(await registryResponse.arrayBuffer())), candidate.sha256);
   const channel = resolveReleaseChannel(mapping, candidate.version);
   const tagsResponse = await fetch(
-    `${mapping.registry.replace(/\/$/u, "")}/-/package/@runa/sdk/dist-tags`,
+    `${mapping.registry.replace(/\/$/u, "")}/-/package/@runa_laboratories/sdk/dist-tags`,
     { redirect: "error" },
   );
   assert.equal(tagsResponse.status, 200);

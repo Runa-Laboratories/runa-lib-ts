@@ -21,7 +21,29 @@ const run = spawnSync(process.execPath, [
 ], { encoding: "utf8", stdio: ["inherit", "pipe", "pipe"] });
 if (run.stdout) process.stdout.write(run.stdout);
 if (run.stderr) process.stderr.write(run.stderr);
-if (run.status !== 0) process.exit(run.status ?? 1);
+if (run.status !== 0) {
+  try {
+    const failureReport = JSON.parse(await readFile(resultsFile, "utf8"));
+    const failures = (failureReport.testResults ?? []).flatMap((suite) =>
+      (suite.assertionResults ?? [])
+        .filter((result) => result.status === "failed")
+        .map((result) => ({
+          failureMessages: result.failureMessages ?? [],
+          testFile: suite.name,
+          testName: result.fullName ?? result.title ?? "unknown",
+        })),
+    );
+    process.stderr.write(`${JSON.stringify({
+      failedSuites: failureReport.numFailedTestSuites ?? null,
+      failedTests: failureReport.numFailedTests ?? failures.length,
+      failures,
+    }, null, 2)}\n`);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    process.stderr.write(`Unable to read Vitest failure report: ${message}\n`);
+  }
+  process.exit(run.status ?? 1);
+}
 
 const resultsBytes = await readFile(resultsFile);
 const report = JSON.parse(resultsBytes.toString("utf8"));

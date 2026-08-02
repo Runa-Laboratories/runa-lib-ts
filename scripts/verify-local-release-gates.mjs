@@ -26,7 +26,7 @@ for (let run = 0; run < 2; run += 1) {
     await writeFile(path.join(workspace, "package.json"), `${JSON.stringify({
       name: "runa-release-clean-room", version: "0.0.0",
       private: true, type: "module",
-      dependencies: { "@runa/sdk": `file:${archivePath.replaceAll("\\", "/")}` }
+      dependencies: { "@runa_laboratories/sdk": `file:${archivePath.replaceAll("\\", "/")}` }
     })}\n`);
     const runNpm = (arguments_) => npmSpawnSync(arguments_, { cwd: workspace });
     const lock = runNpm(["install", "--package-lock-only", "--ignore-scripts",
@@ -37,8 +37,8 @@ for (let run = 0; run < 2; run += 1) {
       cache, "--no-audit", "--no-fund"]);
     if (install.status !== 0) throw new Error("Isolated immutable offline install failed.");
     assert.deepEqual(await readFile(path.join(workspace, "package-lock.json")), lockBefore);
-    const installed = JSON.parse(await readFile(path.join(workspace, "node_modules/@runa/sdk/package.json"), "utf8"));
-    assert.equal(installed.name, "@runa/sdk");
+    const installed = JSON.parse(await readFile(path.join(workspace, "node_modules/@runa_laboratories/sdk/package.json"), "utf8"));
+    assert.equal(installed.name, "@runa_laboratories/sdk");
     assert.equal(installed.version, candidate.version);
     assert.equal(Object.keys(installed.dependencies ?? {}).length, 0);
     const closure = hash(Buffer.from(JSON.stringify({
@@ -66,17 +66,17 @@ const sbom = {
   version: 1,
   metadata: {
     component: {
-      "bom-ref": `pkg:npm/%40runa/sdk@${candidate.version}`,
+      "bom-ref": `pkg:npm/%40runa_laboratories/sdk@${candidate.version}`,
       type: "library",
-      name: "@runa/sdk",
+      name: "@runa_laboratories/sdk",
       version: candidate.version,
-      purl: `pkg:npm/%40runa/sdk@${candidate.version}`,
+      purl: `pkg:npm/%40runa_laboratories/sdk@${candidate.version}`,
       hashes: [{ alg: "SHA-256", content: candidate.sha256 }],
     },
   },
   components: [],
   dependencies: [{
-    ref: `pkg:npm/%40runa/sdk@${candidate.version}`,
+    ref: `pkg:npm/%40runa_laboratories/sdk@${candidate.version}`,
     dependsOn: [],
   }],
 };

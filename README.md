@@ -1,4 +1,4 @@
-# @runa/sdk
+# @runa_laboratories/sdk
 
 The official, ESM-only TypeScript client for the Runa API. Node.js 22 or
 newer is required.
@@ -6,13 +6,13 @@ newer is required.
 ## Install
 
 ```sh
-npm install @runa/sdk
+npm install @runa_laboratories/sdk
 ```
 
 Set `RUNA_API_KEY` or pass an API key directly:
 
 ```ts
-import { Runa, stdoutText } from "@runa/sdk";
+import { Runa, stdoutText } from "@runa_laboratories/sdk";
 
 const runa = new Runa({ apiKey: process.env.RUNA_API_KEY });
 

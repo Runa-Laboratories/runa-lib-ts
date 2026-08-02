@@ -21,7 +21,7 @@ try {
     version: "0.0.0",
     private: true,
     type: "module",
-    dependencies: { "@runa/sdk": `file:${artifact.replaceAll("\\", "/")}` },
+    dependencies: { "@runa_laboratories/sdk": `file:${artifact.replaceAll("\\", "/")}` },
   })}\n`);
   const install = npmSpawnSync([
     "install", "--ignore-scripts", "--offline", "--cache", cache,
@@ -32,7 +32,7 @@ try {
   const constructionSamples = [];
   const probe = [
     "const s=performance.now();",
-    "const m=await import('@runa/sdk');",
+    "const m=await import('@runa_laboratories/sdk');",
     "const i=performance.now()-s;",
     "const c=performance.now();",
     "const x=new m.Runa({apiKey:['runa','sk','synthetic'].join('_')});",

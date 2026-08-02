@@ -16,7 +16,7 @@ const candidate = { version: "1.2.3", sha256: digest };
 const clean = {
   schema_version: 1,
   state: "handoff",
-  package_name: "@runa/sdk",
+  package_name: "@runa_laboratories/sdk",
   version: "1.2.3",
   dist_tag: "latest",
   candidate_sha256: digest,

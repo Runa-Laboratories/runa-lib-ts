@@ -9,10 +9,10 @@ import {
 test("registry preflight allows only an authoritative 404", async () => {
   const url = registryVersionUrl(
     "https://registry.npmjs.org",
-    "@runa/sdk",
+    "@runa_laboratories/sdk",
     "0.1.0",
   );
-  assert.equal(url, "https://registry.npmjs.org/%40runa%2Fsdk/0.1.0");
+  assert.equal(url, "https://registry.npmjs.org/%40runa_laboratories%2Fsdk/0.1.0");
   const invoke = (status) => assertRegistryVersionAbsent({
     fetchImpl: async (target, init) => {
       assert.equal(target, url);
@@ -21,7 +21,7 @@ test("registry preflight allows only an authoritative 404", async () => {
       return { status };
     },
     registry: "https://registry.npmjs.org",
-    packageName: "@runa/sdk",
+    packageName: "@runa_laboratories/sdk",
     version: "0.1.0",
   });
   assert.equal((await invoke(404)).status, "PASS");

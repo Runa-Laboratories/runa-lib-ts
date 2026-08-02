@@ -35,7 +35,7 @@ test("trusted signatures cannot substitute for closed release-role semantics", (
       classification: "initial",
     },
     publication: {
-      ...common, candidate_sha256: digest, package_name: "@runa/sdk",
+      ...common, candidate_sha256: digest, package_name: "@runa_laboratories/sdk",
       version: "0.1.0", registry: "https://registry.npmjs.org",
       dist_tag: "next", oidc_trusted_publisher: true,
       provenance_attestation_required: true,

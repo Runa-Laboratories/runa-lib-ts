@@ -1,7 +1,7 @@
 {
 	"schemaVersion": "2.0",
 	"id": 0,
-	"name": "@runa/sdk",
+	"name": "@runa_laboratories/sdk",
 	"variant": "project",
 	"kind": 1,
 	"flags": {},
@@ -190,7 +190,7 @@
 										"type": "reference",
 										"target": 190,
 										"name": "SessionCreateOptions",
-										"package": "@runa/sdk"
+										"package": "@runa_laboratories/sdk"
 									}
 								}
 							],
@@ -206,7 +206,7 @@
 										"type": "reference",
 										"target": 14,
 										"name": "Session",
-										"package": "@runa/sdk"
+										"package": "@runa_laboratories/sdk"
 									}
 								],
 								"name": "Promise",
@@ -332,7 +332,7 @@
 												"type": "reference",
 												"target": 14,
 												"name": "Session",
-												"package": "@runa/sdk"
+												"package": "@runa_laboratories/sdk"
 											}
 										}
 									}
@@ -485,7 +485,7 @@
 										"type": "reference",
 										"target": 14,
 										"name": "Session",
-										"package": "@runa/sdk"
+										"package": "@runa_laboratories/sdk"
 									}
 								],
 								"name": "Promise",
@@ -656,7 +656,7 @@
 												"type": "reference",
 												"target": 168,
 												"name": "Record",
-												"package": "@runa/sdk"
+												"package": "@runa_laboratories/sdk"
 											}
 										}
 									}
@@ -840,7 +840,7 @@
 										"type": "reference",
 										"target": 175,
 										"name": "RunaConfig",
-										"package": "@runa/sdk"
+										"package": "@runa_laboratories/sdk"
 									}
 								}
 							],
@@ -848,7 +848,7 @@
 								"type": "reference",
 								"target": 1,
 								"name": "Runa",
-								"package": "@runa/sdk"
+								"package": "@runa_laboratories/sdk"
 							}
 						}
 					]
@@ -891,7 +891,7 @@
 							"type": "reference",
 							"target": 131,
 							"name": "SessionsManager",
-							"package": "@runa/sdk"
+							"package": "@runa_laboratories/sdk"
 						}
 					}
 				},
@@ -933,7 +933,7 @@
 							"type": "reference",
 							"target": 128,
 							"name": "RecordsManager",
-							"package": "@runa/sdk"
+							"package": "@runa_laboratories/sdk"
 						}
 					}
 				},
@@ -1049,7 +1049,7 @@
 										"type": "reference",
 										"target": 161,
 										"name": "Me",
-										"package": "@runa/sdk"
+										"package": "@runa_laboratories/sdk"
 									}
 								],
 								"name": "Promise",
@@ -1677,7 +1677,7 @@
 								"type": "reference",
 								"target": 100,
 								"name": "RunaError",
-								"package": "@runa/sdk"
+								"package": "@runa_laboratories/sdk"
 							},
 							"inheritedFrom": {
 								"type": "reference",
@@ -1741,7 +1741,7 @@
 								"type": "reference",
 								"target": 100,
 								"name": "RunaError",
-								"package": "@runa/sdk"
+								"package": "@runa_laboratories/sdk"
 							},
 							"inheritedFrom": {
 								"type": "reference",
@@ -2018,7 +2018,7 @@
 								"type": "reference",
 								"target": 82,
 								"name": "ConfigError",
-								"package": "@runa/sdk"
+								"package": "@runa_laboratories/sdk"
 							},
 							"overwrites": {
 								"type": "reference",
@@ -2361,7 +2361,7 @@
 					"type": "reference",
 					"target": 100,
 					"name": "RunaError",
-					"package": "@runa/sdk"
+					"package": "@runa_laboratories/sdk"
 				}
 			]
 		},
@@ -2674,7 +2674,7 @@
 								"type": "reference",
 								"target": 43,
 								"name": "ApiError",
-								"package": "@runa/sdk"
+								"package": "@runa_laboratories/sdk"
 							},
 							"overwrites": {
 								"type": "reference",
@@ -3018,7 +3018,7 @@
 					"type": "reference",
 					"target": 100,
 					"name": "RunaError",
-					"package": "@runa/sdk"
+					"package": "@runa_laboratories/sdk"
 				}
 			]
 		},
@@ -3472,7 +3472,7 @@
 					"type": "reference",
 					"target": 100,
 					"name": "RunaError",
-					"package": "@runa/sdk"
+					"package": "@runa_laboratories/sdk"
 				}
 			]
 		},
@@ -3580,7 +3580,7 @@
 							"type": "reference",
 							"target": 196,
 							"name": "SessionSnapshot",
-							"package": "@runa/sdk"
+							"package": "@runa_laboratories/sdk"
 						}
 					}
 				},
@@ -3696,7 +3696,7 @@
 										"type": "reference",
 										"target": 14,
 										"name": "Session",
-										"package": "@runa/sdk"
+										"package": "@runa_laboratories/sdk"
 									}
 								],
 								"name": "Promise",
@@ -3817,7 +3817,7 @@
 										"type": "reference",
 										"target": 14,
 										"name": "Session",
-										"package": "@runa/sdk"
+										"package": "@runa_laboratories/sdk"
 									}
 								],
 								"name": "Promise",
@@ -3938,7 +3938,7 @@
 										"type": "reference",
 										"target": 14,
 										"name": "Session",
-										"package": "@runa/sdk"
+										"package": "@runa_laboratories/sdk"
 									}
 								],
 								"name": "Promise",
@@ -4059,7 +4059,7 @@
 										"type": "reference",
 										"target": 14,
 										"name": "Session",
-										"package": "@runa/sdk"
+										"package": "@runa_laboratories/sdk"
 									}
 								],
 								"name": "Promise",
@@ -4180,7 +4180,7 @@
 										"type": "reference",
 										"target": 14,
 										"name": "Session",
-										"package": "@runa/sdk"
+										"package": "@runa_laboratories/sdk"
 									}
 								],
 								"name": "Promise",
@@ -4301,7 +4301,7 @@
 										"type": "reference",
 										"target": 141,
 										"name": "Acknowledgement",
-										"package": "@runa/sdk"
+										"package": "@runa_laboratories/sdk"
 									}
 								],
 								"name": "Promise",
@@ -4484,7 +4484,7 @@
 										"type": "reference",
 										"target": 151,
 										"name": "ExecOptions",
-										"package": "@runa/sdk"
+										"package": "@runa_laboratories/sdk"
 									}
 								}
 							],
@@ -4500,7 +4500,7 @@
 										"type": "reference",
 										"target": 154,
 										"name": "ExecResult",
-										"package": "@runa/sdk"
+										"package": "@runa_laboratories/sdk"
 									}
 								],
 								"name": "Promise",
@@ -4651,7 +4651,7 @@
 										"type": "reference",
 										"target": 141,
 										"name": "Acknowledgement",
-										"package": "@runa/sdk"
+										"package": "@runa_laboratories/sdk"
 									}
 								],
 								"name": "Promise",
@@ -4772,7 +4772,7 @@
 										"type": "reference",
 										"target": 166,
 										"name": "OpenSessionResult",
-										"package": "@runa/sdk"
+										"package": "@runa_laboratories/sdk"
 									}
 								],
 								"name": "Promise",
@@ -4914,7 +4914,7 @@
 								"type": "reference",
 								"target": 154,
 								"name": "ExecResult",
-								"package": "@runa/sdk"
+								"package": "@runa_laboratories/sdk"
 							}
 						}
 					],
@@ -5035,7 +5035,7 @@
 								"type": "reference",
 								"target": 154,
 								"name": "ExecResult",
-								"package": "@runa/sdk"
+								"package": "@runa_laboratories/sdk"
 							}
 						}
 					],
@@ -5374,7 +5374,7 @@
 						"type": "reference",
 						"target": 189,
 						"name": "SessionAgent",
-						"package": "@runa/sdk"
+						"package": "@runa_laboratories/sdk"
 					}
 				},
 				{
@@ -5460,7 +5460,7 @@
 						"type": "reference",
 						"target": 209,
 						"name": "SessionStatus",
-						"package": "@runa/sdk"
+						"package": "@runa_laboratories/sdk"
 					}
 				},
 				{
@@ -5657,7 +5657,7 @@
 						"type": "reference",
 						"target": 189,
 						"name": "SessionAgent",
-						"package": "@runa/sdk"
+						"package": "@runa_laboratories/sdk"
 					}
 				},
 				{
@@ -6690,7 +6690,7 @@
 						"type": "reference",
 						"target": 147,
 						"name": "EstimatedUsage",
-						"package": "@runa/sdk"
+						"package": "@runa_laboratories/sdk"
 					}
 				},
 				{
@@ -6910,13 +6910,13 @@
 						"type": "reference",
 						"target": 143,
 						"name": "AssignedWorkspace",
-						"package": "@runa/sdk"
+						"package": "@runa_laboratories/sdk"
 					},
 					{
 						"type": "reference",
 						"target": 210,
 						"name": "UnassignedWorkspace",
-						"package": "@runa/sdk"
+						"package": "@runa_laboratories/sdk"
 					}
 				]
 			}
@@ -7030,7 +7030,7 @@
 						"type": "reference",
 						"target": 214,
 						"name": "Workspace",
-						"package": "@runa/sdk"
+						"package": "@runa_laboratories/sdk"
 					}
 				}
 			],
@@ -7422,12 +7422,12 @@
 					"type": {
 						"type": "reference",
 						"target": {
-							"packageName": "@runa/sdk",
+							"packageName": "@runa_laboratories/sdk",
 							"packagePath": "src/types.ts",
 							"qualifiedName": "DiagnosticSink"
 						},
 						"name": "DiagnosticSink",
-						"package": "@runa/sdk"
+						"package": "@runa_laboratories/sdk"
 					}
 				},
 				{
@@ -7457,12 +7457,12 @@
 					"type": {
 						"type": "reference",
 						"target": {
-							"packageName": "@runa/sdk",
+							"packageName": "@runa_laboratories/sdk",
 							"packagePath": "src/types.ts",
 							"qualifiedName": "TraceSink"
 						},
 						"name": "TraceSink",
-						"package": "@runa/sdk"
+						"package": "@runa_laboratories/sdk"
 					}
 				}
 			],
@@ -7536,205 +7536,205 @@
 			]
 		}
 	],
-	"packageName": "@runa/sdk",
+	"packageName": "@runa_laboratories/sdk",
 	"symbolIdMap": {
 		"0": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/index.ts",
 			"qualifiedName": ""
 		},
 		"1": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/client.ts",
 			"qualifiedName": "Runa"
 		},
 		"2": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/client.ts",
 			"qualifiedName": "Runa.__constructor"
 		},
 		"3": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/client.ts",
 			"qualifiedName": "Runa"
 		},
 		"4": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/client.ts",
 			"qualifiedName": "config"
 		},
 		"6": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/client.ts",
 			"qualifiedName": "Runa.sessions"
 		},
 		"7": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/client.ts",
 			"qualifiedName": "Runa.sessions"
 		},
 		"8": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/client.ts",
 			"qualifiedName": "Runa.records"
 		},
 		"9": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/client.ts",
 			"qualifiedName": "Runa.records"
 		},
 		"10": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/client.ts",
 			"qualifiedName": "Runa.me"
 		},
 		"11": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/client.ts",
 			"qualifiedName": "Runa.me"
 		},
 		"12": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/client.ts",
 			"qualifiedName": "Runa.close"
 		},
 		"13": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/client.ts",
 			"qualifiedName": "Runa.close"
 		},
 		"14": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/session.ts",
 			"qualifiedName": "Session"
 		},
 		"18": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/session.ts",
 			"qualifiedName": "Session.id"
 		},
 		"19": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/session.ts",
 			"qualifiedName": "Session.id"
 		},
 		"20": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/session.ts",
 			"qualifiedName": "Session.snapshot"
 		},
 		"21": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/session.ts",
 			"qualifiedName": "Session.snapshot"
 		},
 		"22": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/session.ts",
 			"qualifiedName": "Session.refresh"
 		},
 		"23": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/session.ts",
 			"qualifiedName": "Session.refresh"
 		},
 		"24": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/session.ts",
 			"qualifiedName": "Session.start"
 		},
 		"25": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/session.ts",
 			"qualifiedName": "Session.start"
 		},
 		"26": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/session.ts",
 			"qualifiedName": "Session.pause"
 		},
 		"27": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/session.ts",
 			"qualifiedName": "Session.pause"
 		},
 		"28": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/session.ts",
 			"qualifiedName": "Session.resume"
 		},
 		"29": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/session.ts",
 			"qualifiedName": "Session.resume"
 		},
 		"30": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/session.ts",
 			"qualifiedName": "Session.stop"
 		},
 		"31": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/session.ts",
 			"qualifiedName": "Session.stop"
 		},
 		"32": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/session.ts",
 			"qualifiedName": "Session.delete"
 		},
 		"33": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/session.ts",
 			"qualifiedName": "Session.delete"
 		},
 		"34": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/session.ts",
 			"qualifiedName": "Session.exec"
 		},
 		"35": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/session.ts",
 			"qualifiedName": "Session.exec"
 		},
 		"36": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/session.ts",
 			"qualifiedName": "command"
 		},
 		"37": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/session.ts",
 			"qualifiedName": "options"
 		},
 		"38": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/session.ts",
 			"qualifiedName": "Session.checkpoint"
 		},
 		"39": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/session.ts",
 			"qualifiedName": "Session.checkpoint"
 		},
 		"40": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/session.ts",
 			"qualifiedName": "name"
 		},
 		"41": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/session.ts",
 			"qualifiedName": "Session.open"
 		},
 		"42": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/session.ts",
 			"qualifiedName": "Session.open"
 		},
 		"43": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/errors.ts",
 			"qualifiedName": "ApiError"
 		},
@@ -7789,42 +7789,42 @@
 			"qualifiedName": "__global.ErrorConstructor.stackTraceLimit"
 		},
 		"54": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/errors.ts",
 			"qualifiedName": "ApiError.__constructor"
 		},
 		"55": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/errors.ts",
 			"qualifiedName": "ApiError"
 		},
 		"56": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/errors.ts",
 			"qualifiedName": "status"
 		},
 		"57": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/errors.ts",
 			"qualifiedName": "code"
 		},
 		"58": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/errors.ts",
 			"qualifiedName": "ApiError.name"
 		},
 		"59": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/errors.ts",
 			"qualifiedName": "ApiError.code"
 		},
 		"60": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/errors.ts",
 			"qualifiedName": "ApiError.status"
 		},
 		"61": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/errors.ts",
 			"qualifiedName": "ApiError.message"
 		},
@@ -7839,7 +7839,7 @@
 			"qualifiedName": "Error.cause"
 		},
 		"64": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/errors.ts",
 			"qualifiedName": "CommandError"
 		},
@@ -7894,17 +7894,17 @@
 			"qualifiedName": "__global.ErrorConstructor.stackTraceLimit"
 		},
 		"77": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/errors.ts",
 			"qualifiedName": "CommandError.name"
 		},
 		"78": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/errors.ts",
 			"qualifiedName": "CommandError.code"
 		},
 		"79": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/errors.ts",
 			"qualifiedName": "CommandError.message"
 		},
@@ -7919,7 +7919,7 @@
 			"qualifiedName": "Error.cause"
 		},
 		"82": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/errors.ts",
 			"qualifiedName": "ConfigError"
 		},
@@ -7974,27 +7974,27 @@
 			"qualifiedName": "__global.ErrorConstructor.stackTraceLimit"
 		},
 		"93": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/errors.ts",
 			"qualifiedName": "ConfigError.__constructor"
 		},
 		"94": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/errors.ts",
 			"qualifiedName": "ConfigError"
 		},
 		"95": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/errors.ts",
 			"qualifiedName": "ConfigError.name"
 		},
 		"96": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/errors.ts",
 			"qualifiedName": "ConfigError.code"
 		},
 		"97": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/errors.ts",
 			"qualifiedName": "ConfigError.message"
 		},
@@ -8009,7 +8009,7 @@
 			"qualifiedName": "Error.cause"
 		},
 		"100": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/errors.ts",
 			"qualifiedName": "RunaError"
 		},
@@ -8094,12 +8094,12 @@
 			"qualifiedName": "options"
 		},
 		"117": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/errors.ts",
 			"qualifiedName": "RunaError.name"
 		},
 		"118": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/errors.ts",
 			"qualifiedName": "RunaError.code"
 		},
@@ -8119,292 +8119,292 @@
 			"qualifiedName": "Error.cause"
 		},
 		"122": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/text.ts",
 			"qualifiedName": "stderrText"
 		},
 		"123": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/text.ts",
 			"qualifiedName": "stderrText"
 		},
 		"124": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/text.ts",
 			"qualifiedName": "result"
 		},
 		"125": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/text.ts",
 			"qualifiedName": "stdoutText"
 		},
 		"126": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/text.ts",
 			"qualifiedName": "stdoutText"
 		},
 		"127": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/text.ts",
 			"qualifiedName": "result"
 		},
 		"128": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/client.ts",
 			"qualifiedName": "RecordsManager"
 		},
 		"129": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/client.ts",
 			"qualifiedName": "RecordsManager.list"
 		},
 		"130": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/client.ts",
 			"qualifiedName": "RecordsManager.list"
 		},
 		"131": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/client.ts",
 			"qualifiedName": "SessionsManager"
 		},
 		"132": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/client.ts",
 			"qualifiedName": "SessionsManager.create"
 		},
 		"133": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/client.ts",
 			"qualifiedName": "SessionsManager.create"
 		},
 		"134": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/client.ts",
 			"qualifiedName": "name"
 		},
 		"135": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/client.ts",
 			"qualifiedName": "options"
 		},
 		"136": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/client.ts",
 			"qualifiedName": "SessionsManager.list"
 		},
 		"137": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/client.ts",
 			"qualifiedName": "SessionsManager.list"
 		},
 		"138": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/client.ts",
 			"qualifiedName": "SessionsManager.get"
 		},
 		"139": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/client.ts",
 			"qualifiedName": "SessionsManager.get"
 		},
 		"140": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/client.ts",
 			"qualifiedName": "id"
 		},
 		"141": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "Acknowledgement"
 		},
 		"142": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "Acknowledgement.ok"
 		},
 		"143": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "AssignedWorkspace"
 		},
 		"144": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "AssignedWorkspace.assigned"
 		},
 		"145": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "AssignedWorkspace.usage"
 		},
 		"146": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "AssignedWorkspace.waitlistPosition"
 		},
 		"147": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "EstimatedUsage"
 		},
 		"148": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "EstimatedUsage.estimatedSpendUsd"
 		},
 		"149": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "EstimatedUsage.estimatedRemainingUsd"
 		},
 		"150": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "EstimatedUsage.note"
 		},
 		"151": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "ExecOptions"
 		},
 		"152": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "ExecOptions.cwd"
 		},
 		"153": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "ExecOptions.timeoutSecs"
 		},
 		"154": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "ExecResult"
 		},
 		"155": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "ExecResult.exitCode"
 		},
 		"156": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "ExecResult.stdout"
 		},
 		"157": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "ExecResult.stderr"
 		},
 		"158": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "ExecResult.durationMs"
 		},
 		"159": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "ExecResult.stdoutTruncated"
 		},
 		"160": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "ExecResult.stderrTruncated"
 		},
 		"161": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "Me"
 		},
 		"162": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "Me.id"
 		},
 		"163": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "Me.email"
 		},
 		"164": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "Me.workspace"
 		},
 		"165": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "OpaqueWireValue"
 		},
 		"166": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "OpenSessionResult"
 		},
 		"167": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "OpenSessionResult.url"
 		},
 		"168": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "Record"
 		},
 		"169": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "Record.id"
 		},
 		"170": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "Record.sessionId"
 		},
 		"171": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "Record.kind"
 		},
 		"172": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "Record.summary"
 		},
 		"173": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "Record.detail"
 		},
 		"174": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "Record.createdAt"
 		},
 		"175": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "RunaConfig"
 		},
 		"176": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "RunaConfig.apiKey"
 		},
 		"177": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "RunaConfig.baseUrl"
 		},
 		"178": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "RunaConfig.configFile"
 		},
 		"179": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "RunaConfig.fetch"
 		},
@@ -8444,142 +8444,142 @@
 			"qualifiedName": "init"
 		},
 		"187": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "RunaConfig.diagnostics"
 		},
 		"188": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "RunaConfig.tracing"
 		},
 		"189": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "SessionAgent"
 		},
 		"190": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "SessionCreateOptions"
 		},
 		"191": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "SessionCreateOptions.agent"
 		},
 		"192": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "SessionCreateOptions.vcpus"
 		},
 		"193": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "SessionCreateOptions.memoryMiB"
 		},
 		"194": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "SessionCreateOptions.allowedHosts"
 		},
 		"195": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "SessionCreateOptions.runtimePort"
 		},
 		"196": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "SessionSnapshot"
 		},
 		"197": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "SessionSnapshot.id"
 		},
 		"198": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "SessionSnapshot.userId"
 		},
 		"199": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "SessionSnapshot.slug"
 		},
 		"200": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "SessionSnapshot.name"
 		},
 		"201": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "SessionSnapshot.agent"
 		},
 		"202": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "SessionSnapshot.vcpus"
 		},
 		"203": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "SessionSnapshot.memoryMiB"
 		},
 		"204": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "SessionSnapshot.status"
 		},
 		"205": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "SessionSnapshot.runningSeconds"
 		},
 		"206": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "SessionSnapshot.createdAt"
 		},
 		"207": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "SessionSnapshot.updatedAt"
 		},
 		"208": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "SessionSnapshot.url"
 		},
 		"209": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "SessionStatus"
 		},
 		"210": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "UnassignedWorkspace"
 		},
 		"211": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "UnassignedWorkspace.assigned"
 		},
 		"212": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "UnassignedWorkspace.waitlistPosition"
 		},
 		"213": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "UnassignedWorkspace.usage"
 		},
 		"214": {
-			"packageName": "@runa/sdk",
+			"packageName": "@runa_laboratories/sdk",
 			"packagePath": "src/types.ts",
 			"qualifiedName": "Workspace"
 		}

@@ -70,8 +70,8 @@ export const EXPECTED_RELEASE_POLICY = Object.freeze({
     workflow: ".github/workflows/release.yml",
   } },
   registry: {
-    package: "@runa/sdk", url: "https://registry.npmjs.org/",
-    verificationPath: "GET https://registry.npmjs.org/@runa%2fsdk/${version}",
+    package: "@runa_laboratories/sdk", url: "https://registry.npmjs.org/",
+    verificationPath: "GET https://registry.npmjs.org/@runa_laboratories%2fsdk/${version}",
   },
   sbom: {
     format: "CycloneDX 1.6 JSON",

@@ -2,7 +2,7 @@
   "schema_version": 2,
   "status": "PASS",
   "candidate_sha256": "efe1bc34088ae2946c8a1e7dd5bd9517d521a8f851f9ed2052497214a4b447a5",
-  "candidate_package": "@runa/sdk",
+  "candidate_package": "@runa_laboratories/sdk",
   "candidate_version": "0.1.0",
   "synthetic": true,
   "clean_room_count": 150,

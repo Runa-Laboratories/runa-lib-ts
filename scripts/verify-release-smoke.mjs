@@ -10,7 +10,7 @@ const candidate = JSON.parse(await readFile("release-artifacts/candidate.json", 
 const archivePath = path.resolve("release-artifacts", candidate.filename);
 const archive = await readFile(archivePath);
 assert.equal(createHash("sha256").update(archive).digest("hex"), candidate.sha256);
-assert.equal(candidate.package, "@runa/sdk");
+assert.equal(candidate.package, "@runa_laboratories/sdk");
 
 const collect = (child) => new Promise((resolve, reject) => {
   let stdout = "";
@@ -37,7 +37,7 @@ import assert from "node:assert/strict";
 import { syncBuiltinESMExports } from "node:module";
 import http from "node:http";
 import https from "node:https";
-import { Runa } from "@runa/sdk";
+import { Runa } from "@runa_laboratories/sdk";
 
 const journey = process.argv[2];
 const sessionId = "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa";
@@ -181,7 +181,7 @@ const installManifest = `${JSON.stringify({
   version: "0.0.0",
   private: true,
   type: "module",
-  dependencies: { "@runa/sdk": `file:${archivePath.replaceAll("\\", "/")}` },
+  dependencies: { "@runa_laboratories/sdk": `file:${archivePath.replaceAll("\\", "/")}` },
 })}\n`;
 const lockRoom = await mkdtemp(path.join(tmpdir(), "runa-ts054-lock-"));
 let lockBefore;
@@ -196,8 +196,8 @@ try {
   assert.equal(lock.status, 0, "R-054-03: exact offline lock creation failed.");
   lockBefore = await readFile(path.join(lockRoom, "package-lock.json"));
   const lockJson = JSON.parse(lockBefore);
-  assert.equal(lockJson.packages["node_modules/@runa/sdk"].version, candidate.version);
-  assert.match(lockJson.packages["node_modules/@runa/sdk"].resolved,
+  assert.equal(lockJson.packages["node_modules/@runa_laboratories/sdk"].version, candidate.version);
+  assert.match(lockJson.packages["node_modules/@runa_laboratories/sdk"].resolved,
     new RegExp(`${candidate.filename.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}$`));
 } finally {
   await rm(lockRoom, { recursive: true, force: true });
@@ -221,7 +221,7 @@ const execute = async ({ run, journey }) => {
     assert.equal(install.status, 0, "R-054-03: exact offline install failed.");
     assert.deepEqual(await readFile(path.join(workspace, "package-lock.json")), lockBefore);
     const installed = JSON.parse(await readFile(
-      path.join(workspace, "node_modules/@runa/sdk/package.json"), "utf8"));
+      path.join(workspace, "node_modules/@runa_laboratories/sdk/package.json"), "utf8"));
     assert.equal(installed.name, candidate.package);
     assert.equal(installed.version, candidate.version);
     assert.equal(Object.keys(installed.dependencies ?? {}).length, 0);

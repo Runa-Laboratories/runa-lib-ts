@@ -29,9 +29,9 @@
     }
   },
   "registry": {
-    "package": "@runa/sdk",
+    "package": "@runa_laboratories/sdk",
     "url": "https://registry.npmjs.org/",
-    "verificationPath": "GET https://registry.npmjs.org/@runa%2fsdk/${version}"
+    "verificationPath": "GET https://registry.npmjs.org/@runa_laboratories%2fsdk/${version}"
   },
   "sbom": {
     "format": "CycloneDX 1.6 JSON",
