@@ -2,7 +2,7 @@
   "schema_version": 2,
   "status": "PASS",
   "method": "scripts/verify-duplicate-abstractions.mjs",
-  "audited_source_sha256": "2d6e359f46657203ae2717f9ee325af698232de4d8024811e175810ca56eb8e2",
+  "audited_source_sha256": "d38493a2ebf844cda4b66025b7c6a639d09a7c2278b43bc2bbac9f3e47e04f7e",
   "audited_files": [
     "src/client.ts",
     "src/config.ts",
@@ -34,6 +34,7 @@
     "scripts/evidence-policy.mjs",
     "scripts/generate-api-docs.mjs",
     "scripts/import-release-authority.mjs",
+    "scripts/license-policy.mjs",
     "scripts/lint.mjs",
     "scripts/npm-process.mjs",
     "scripts/plan-release-recovery.mjs",
