@@ -5,10 +5,12 @@ import { npmSpawnSync } from "./npm-process.mjs";
 
 await rm("release-artifacts", { recursive: true, force: true });
 await mkdir("release-artifacts");
+const buildStartedAt = new Date().toISOString();
 const npmPack = npmSpawnSync([
   "pack", "--json", "--ignore-scripts", "--pack-destination", "release-artifacts",
 ]);
 if (npmPack.status !== 0) throw new Error("Candidate package creation failed.");
+const buildFinishedAt = new Date().toISOString();
 const [metadata] = JSON.parse(npmPack.stdout);
 const archive = await readFile(`release-artifacts/${metadata.filename}`);
 const sourceCommit = process.env.GITHUB_SHA ??
@@ -40,6 +42,11 @@ const manifest = {
   source_tree_clean: sourceTreeClean,
   source_change_count: sourceTreeChanges.length,
   generated_output_roots: generatedOutputRoots,
+  build_started_at: buildStartedAt,
+  build_finished_at: buildFinishedAt,
 };
+if (Date.parse(manifest.build_finished_at) < Date.parse(manifest.build_started_at)) {
+  throw new Error("Candidate build timestamps are invalid.");
+}
 await writeFile("release-artifacts/candidate.json", `${JSON.stringify(manifest, null, 2)}\n`);
 console.log(`${manifest.filename} ${manifest.sha256}`);

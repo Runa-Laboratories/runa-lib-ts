@@ -115,18 +115,25 @@ jobs:
         env:
           RUNA_COMPAT_SIGNING_KEY_ID: ${{ vars.RUNA_COMPAT_SIGNING_KEY_ID }}
           RUNA_COMPAT_SIGNING_KEY_PEM: ${{ secrets.RUNA_COMPAT_SIGNING_KEY_PEM }}
+      - name: Build exact SLSA v1 predicate before signing
+        run: npm run release:provenance:predicate
       - id: attest
-        uses: actions/attest-build-provenance@0f67c3f4856b2e3261c31976d6725780e5e4c373
+        uses: actions/attest@508db95dd578ae2727ebd6217d5ba78e4fbda05d
         with:
           subject-path: release-artifacts/*.tgz
+          predicate-type: https://slsa.dev/provenance/v1
+          predicate-path: evidence/provenance-predicate.json
       - name: Verify controlled-build provenance through GitHub verifier
         run: npm run release:provenance:verify
         env:
           GH_TOKEN: ${{ github.token }}
+          RUNA_ATTESTATION_BUNDLE: ${{ steps.attest.outputs.bundle-path }}
       - name: Retain exact controlled-build provenance
         run: npm run release:provenance:evidence
         env:
           RUNA_ATTESTATION_BUNDLE: ${{ steps.attest.outputs.bundle-path }}
+          RUNA_ATTESTATION_ID: ${{ steps.attest.outputs.attestation-id }}
+          RUNA_ATTESTATION_URL: ${{ steps.attest.outputs.attestation-url }}
       - run: npm run release:manifest:core
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:

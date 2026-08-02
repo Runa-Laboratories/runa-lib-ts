@@ -11,7 +11,7 @@ const findEnvelope = (value) => {
   return undefined;
 };
 
-export function validateAttestationJsonl(text, candidate) {
+export function extractAttestationStatement(text, candidate) {
   const lines = text.split(/\r?\n/).filter((line) => line.trim() !== "");
   assert(lines.length > 0, "R-018-10: attestation bundle is empty");
   const statements = lines.map((line) => {
@@ -32,5 +32,10 @@ export function validateAttestationJsonl(text, candidate) {
       subject.digest?.sha256 === candidate.sha256));
   assert.equal(matching.length, 1,
     "R-018-11: exact artifact subject provenance is absent or ambiguous");
+  return matching[0];
+}
+
+export function validateAttestationJsonl(text, candidate) {
+  extractAttestationStatement(text, candidate);
   return true;
 }

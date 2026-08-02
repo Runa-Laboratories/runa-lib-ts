@@ -55,13 +55,13 @@ export const EXPECTED_RELEASE_POLICY = Object.freeze({
     authority: null,
   },
   postPublishRecovery: {
-    status: "blocked",
-    mode: "read-only-audit",
+    status: "configured",
+    mode: "withdrawal-only-audit",
     resumeAfterUpload: false,
-    reason: "Idempotent post-upload resume and isolated promotion are not yet accepted governance capabilities.",
+    reason: "Post-upload verification failure enters no-yank or externally authorized withdrawal decision; republish and automatic promotion are forbidden.",
   },
   provenance: {
-    attestation: "actions/attest-build-provenance@0f67c3f4856b2e3261c31976d6725780e5e4c373",
+    attestation: "actions/attest@508db95dd578ae2727ebd6217d5ba78e4fbda05d",
     verifier: "gh attestation verify <artifact> --repo Runa-Laboratories/runa-lib-ts --signer-workflow Runa-Laboratories/runa-lib-ts/.github/workflows/ci.yml",
   },
   publisher: { ci: {
@@ -125,6 +125,9 @@ export async function createReleaseManifestCore({
   assert.deepEqual(releasePolicy, EXPECTED_RELEASE_POLICY);
   assert.equal(candidate.package, packageJson.name);
   assert.equal(candidate.version, packageJson.version);
+  assert.equal(Number.isFinite(Date.parse(candidate.build_started_at)), true);
+  assert.equal(Number.isFinite(Date.parse(candidate.build_finished_at)), true);
+  assert(Date.parse(candidate.build_finished_at) >= Date.parse(candidate.build_started_at));
   const evidenceFiles = [
     "ci-candidate-manifest.json",
     "compatibility-matrix.json",
@@ -132,6 +135,7 @@ export async function createReleaseManifestCore({
     "docs-readiness.json",
     "performance-local.json",
     "provenance-manifest.json",
+    "provenance-predicate.json",
     "provenance-verifier.json",
     "quality-gate.json",
     "release-smoke.json",
@@ -165,6 +169,9 @@ export async function createReleaseManifestCore({
     EXPECTED_RELEASE_POLICY.provenance.attestation);
   assert.equal(provenanceManifest.verifier,
     EXPECTED_RELEASE_POLICY.provenance.verifier);
+  assert.match(provenanceManifest.attestation_id, /^[A-Za-z0-9._:-]+$/u);
+  assert.match(provenanceManifest.attestation_url,
+    /^https:\/\/github\.com\/Runa-Laboratories\/runa-lib-ts\/attestations\/[A-Za-z0-9._:-]+$/u);
   const provenanceVerifierBytes = await readBytes(
     handoffRoot, "evidence/provenance-verifier.json");
   const provenanceVerifier = JSON.parse(provenanceVerifierBytes.toString("utf8"));
@@ -174,6 +181,8 @@ export async function createReleaseManifestCore({
     provenanceManifest.signer_workflow);
   assert.equal(provenanceVerifier.source_commit, candidate.source_commit);
   assert.equal(provenanceVerifier.intended_tag, `ts-v${candidate.version}`);
+  assert.equal(provenanceVerifier.build_started_at, candidate.build_started_at);
+  assert.equal(provenanceVerifier.build_finished_at, candidate.build_finished_at);
   assert.equal(provenanceVerifier.lockfile_sha256,
     sha256(await readBytes(repositoryRoot, "package-lock.json")));
   assert.equal(provenanceVerifier.build_definition_sha256,
@@ -181,12 +190,16 @@ export async function createReleaseManifestCore({
   assert.equal(provenanceVerifier.builder_identity,
     "https://github.com/Runa-Laboratories/runa-lib-ts/.github/workflows/ci.yml@refs/heads/main");
   assert.equal(Number.isFinite(Date.parse(provenanceVerifier.verified_at)), true);
+  assert(Date.parse(provenanceVerifier.verified_at) >=
+    Date.parse(provenanceVerifier.build_finished_at));
   for (const field of [
     "source_commit", "intended_tag", "lockfile_sha256", "build_definition_sha256",
-    "builder_identity", "verified_at",
+    "builder_identity", "build_started_at", "build_finished_at", "verified_at",
   ]) assert.equal(provenanceManifest[field], provenanceVerifier[field]);
   assert.equal(provenanceManifest.verifier_receipt_sha256,
     sha256(provenanceVerifierBytes));
+  assert.equal(provenanceManifest.predicate_sha256,
+    sha256(await readBytes(handoffRoot, "evidence/provenance-predicate.json")));
   const provenanceBytes = await readBytes(
     handoffRoot, `evidence/${provenanceManifest.filename}`);
   assert.equal(sha256(provenanceBytes), provenanceManifest.sha256);
@@ -204,6 +217,8 @@ export async function createReleaseManifestCore({
       filename: candidate.filename,
       sha256: candidate.sha256,
       source_commit: candidate.source_commit,
+      build_started_at: candidate.build_started_at,
+      build_finished_at: candidate.build_finished_at,
     },
     release: {
       tag: `ts-v${candidate.version}`,
@@ -241,6 +256,11 @@ export async function createReleaseManifestCore({
       build_definition_sha256: provenanceManifest.build_definition_sha256,
       builder_identity: provenanceManifest.builder_identity,
       verified_at: provenanceManifest.verified_at,
+      build_started_at: provenanceManifest.build_started_at,
+      build_finished_at: provenanceManifest.build_finished_at,
+      predicate_sha256: provenanceManifest.predicate_sha256,
+      attestation_id: provenanceManifest.attestation_id,
+      attestation_url: provenanceManifest.attestation_url,
     },
     runtime_closure_sha256: runtimeClosure.closure_sha256,
     sbom_artifact_subject_sha256:
