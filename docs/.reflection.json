@@ -7120,7 +7120,7 @@
 						"summary": [
 							{
 								"kind": "text",
-								"text": "Optional normalized HTTPS API origin override."
+								"text": "Optional explicit Runa API origin; only https://api.runacode.io is accepted."
 							}
 						]
 					},

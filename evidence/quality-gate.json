@@ -1,7 +1,12 @@
 {
   "schema_version": 1,
-  "status": "PASS",
+  "status": "BLOCKED",
   "commit_sha": "8b75b2154a78ac231e3e44190d8ddc5c6893caa0",
   "workflow_run_id": null,
-  "blockers": []
+  "blockers": [
+    {
+      "gate": "requirement-test-map",
+      "evidence": "evidence/requirement-test-map.json"
+    }
+  ]
 }

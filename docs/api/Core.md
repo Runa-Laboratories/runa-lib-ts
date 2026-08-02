@@ -137,7 +137,7 @@ apiKey?: string
 
 #### baseUrl
 
-Optional normalized HTTPS API origin override.
+Optional explicit canonical Runa API origin.
 
 ```ts
 baseUrl?: string

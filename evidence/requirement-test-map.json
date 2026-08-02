@@ -1,20 +1,365 @@
 {
   "schema_version": 2,
+  "status": "BLOCKED",
   "generated_from": [
     "prds/libs/shared",
     "prds/libs/typescript"
   ],
-  "source_digest": "2825e02125fcb6210faa51bf7217370e6a121c2cf3cf6e8bef85602eacc9bd5a",
-  "requirement_count": 984,
-  "acceptance_test_count": 522,
+  "source_digest": "f7ef78bea330dfd36f10f1f044aa7deb259c84c9b7608391c83f4783909a13b9",
+  "source_files": [
+    {
+      "file": "prds/libs/shared/PRD-001-sdk-boundary-and-laws.md",
+      "sha256": "cb068159e502be7ae2f0a5c009c42c2e33ccfc95f7d1f6376f4af67d5c2946b5",
+      "requirement_count": 19,
+      "acceptance_test_count": 11
+    },
+    {
+      "file": "prds/libs/shared/PRD-002-rest-contract-baseline.md",
+      "sha256": "cb6c0c69c7a1e5777098b43b89b6f87eaf49108a3355d09abb4c2841f17c24df",
+      "requirement_count": 25,
+      "acceptance_test_count": 20
+    },
+    {
+      "file": "prds/libs/shared/PRD-003-contract-binding-and-schema-provenance.md",
+      "sha256": "839fb1455b2bb4deaef07a9f27881280815a48603164620da4d1940612b10549",
+      "requirement_count": 28,
+      "acceptance_test_count": 12
+    },
+    {
+      "file": "prds/libs/shared/PRD-004-public-api-blueprint.md",
+      "sha256": "40323b30aae1cc525b3176f09e8b3c0b492db8e8d0c6aaefebc8da0b8575b5ea",
+      "requirement_count": 32,
+      "acceptance_test_count": 12
+    },
+    {
+      "file": "prds/libs/shared/PRD-005-domain-model-and-wire-mapping.md",
+      "sha256": "f5f0158339eaa8b099d1c8931b4b268edf3a7f28c1f877937bce1576c1ec50fa",
+      "requirement_count": 17,
+      "acceptance_test_count": 11
+    },
+    {
+      "file": "prds/libs/shared/PRD-006-auth-and-config-resolution.md",
+      "sha256": "73ed849c9e52ea4baeb03fdf0280858c8ab1a3e84557b612f2fc70f5863bdbbf",
+      "requirement_count": 20,
+      "acceptance_test_count": 10
+    },
+    {
+      "file": "prds/libs/shared/PRD-007-error-taxonomy-and-normalization.md",
+      "sha256": "c903eeac3ff2e025824517739cea39b28c7c095912919620bba2a1044f9f8441",
+      "requirement_count": 16,
+      "acceptance_test_count": 11
+    },
+    {
+      "file": "prds/libs/shared/PRD-008-transport-and-middleware-contract.md",
+      "sha256": "7f279fff6ca18551dae08f8403d6dcd216121b679a0962c7f9a1203bc3f5c353",
+      "requirement_count": 25,
+      "acceptance_test_count": 11
+    },
+    {
+      "file": "prds/libs/shared/PRD-009-retry-timeout-backoff-and-idempotency.md",
+      "sha256": "67b4d47342b715f7bc58c86c771059385dda7851a385e0ce70763133155d7d78",
+      "requirement_count": 22,
+      "acceptance_test_count": 15
+    },
+    {
+      "file": "prds/libs/shared/PRD-010-session-lifecycle-and-polling.md",
+      "sha256": "3288e633b83aa7a55de19e91084f9d0c2e50e5f8e34aea0c0abed60356691748",
+      "requirement_count": 16,
+      "acceptance_test_count": 9
+    },
+    {
+      "file": "prds/libs/shared/PRD-011-collection-and-pagination-semantics.md",
+      "sha256": "a79217ab20fac4b534a9cf977ad7636c885d2b60b4a86e01c6595b6ec4649686",
+      "requirement_count": 14,
+      "acceptance_test_count": 9
+    },
+    {
+      "file": "prds/libs/shared/PRD-012-observability-and-redaction.md",
+      "sha256": "f82d5e8ec45996c57899f33bcd3889950784a0f57cfb95b4d3a353eb1bc3e251",
+      "requirement_count": 18,
+      "acceptance_test_count": 10
+    },
+    {
+      "file": "prds/libs/shared/PRD-013-security-hardening.md",
+      "sha256": "05b9ea4e7e4269401468fdc1ed43d7f402be3618bbeb4fd8f368e570380c7ef8",
+      "requirement_count": 21,
+      "acceptance_test_count": 11
+    },
+    {
+      "file": "prds/libs/shared/PRD-014-versioning-compatibility-and-deprecation.md",
+      "sha256": "f574b3bcac28b4966078911dde85171ed30e1f00d6a12b817e00a579c84a4d0d",
+      "requirement_count": 22,
+      "acceptance_test_count": 10
+    },
+    {
+      "file": "prds/libs/shared/PRD-015-testing-mocks-and-conformance-strategy.md",
+      "sha256": "ae7885524cd94b1d643153d777671ddd18bab5e21c029b3ca6b85fd96899d94a",
+      "requirement_count": 23,
+      "acceptance_test_count": 12
+    },
+    {
+      "file": "prds/libs/shared/PRD-016-documentation-and-examples-standard.md",
+      "sha256": "e951074cd5546b9376ad2796d74bff0d3a2d3f55e0718d6a4336e0b1e0c2fcab",
+      "requirement_count": 24,
+      "acceptance_test_count": 9
+    },
+    {
+      "file": "prds/libs/shared/PRD-017-dependency-performance-and-memory-budgets.md",
+      "sha256": "ae555878737ffed761c1e3b88f48dd962914781b14ceab499b93d2083988161c",
+      "requirement_count": 21,
+      "acceptance_test_count": 10
+    },
+    {
+      "file": "prds/libs/shared/PRD-018-release-and-supply-chain-policy.md",
+      "sha256": "6edf77aecd7930be9aab798b39bfec18f6eb8e9eb06f38e55a0b40d385742937",
+      "requirement_count": 27,
+      "acceptance_test_count": 10
+    },
+    {
+      "file": "prds/libs/shared/PRD-019-sdk-dx-metrics.md",
+      "sha256": "c684112eb6f4df09ec48c3220938139db4bf455838bc3562347a9a1fcb8b6b0d",
+      "requirement_count": 19,
+      "acceptance_test_count": 11
+    },
+    {
+      "file": "prds/libs/shared/PRD-097-brand-secret-and-language-audit.md",
+      "sha256": "06715ff437b871925a8a72480783af771dadb1c840e4dad57a5a9e74da005138",
+      "requirement_count": 12,
+      "acceptance_test_count": 7
+    },
+    {
+      "file": "prds/libs/shared/PRD-098-cross-language-conformance.md",
+      "sha256": "636736aaae64a67c108c9c05c079193577547db2c17995d1c8aaf78d108aa5f6",
+      "requirement_count": 19,
+      "acceptance_test_count": 12
+    },
+    {
+      "file": "prds/libs/shared/PRD-099-coordinated-ga-readiness.md",
+      "sha256": "ab529cfb7f611fdb4f1de608500fb4fed92a979bfe0dd87e122023dac74a186f",
+      "requirement_count": 18,
+      "acceptance_test_count": 8
+    },
+    {
+      "file": "prds/libs/typescript/PRD-020-ts-package-and-build-foundation.md",
+      "sha256": "1282f1c6320b99b3a493c7b6a1464275539a37971b0644e3bec9f8fc5e1b1289",
+      "requirement_count": 19,
+      "acceptance_test_count": 8
+    },
+    {
+      "file": "prds/libs/typescript/PRD-021-ts-contract-bindings.md",
+      "sha256": "e374901295c71640c257623d4155c1e949a7a01e4a23e56c10f636d6e3089766",
+      "requirement_count": 22,
+      "acceptance_test_count": 8
+    },
+    {
+      "file": "prds/libs/typescript/PRD-022-ts-domain-types-and-serialization.md",
+      "sha256": "510030548159c2d2139e3d1e9254037c116dfc8f9a59295b92753b3f245f919c",
+      "requirement_count": 20,
+      "acceptance_test_count": 10
+    },
+    {
+      "file": "prds/libs/typescript/PRD-023-ts-config-and-api-key-resolution.md",
+      "sha256": "6acf9fcf8e63689eb1d0748d9f203e471e4573ff13e5e9b2b78681d34fc9a8b8",
+      "requirement_count": 20,
+      "acceptance_test_count": 9
+    },
+    {
+      "file": "prds/libs/typescript/PRD-024-ts-error-classes.md",
+      "sha256": "fdee40860c602d4aceb3a0b5f7b948849e3bb5dc4631408c16b88dd98aa1aeac",
+      "requirement_count": 7,
+      "acceptance_test_count": 6
+    },
+    {
+      "file": "prds/libs/typescript/PRD-025-ts-fetch-transport.md",
+      "sha256": "f14f40f45ad1816e0a65dcd027ae8bd4f82713315649caba594a7f7e2af89328",
+      "requirement_count": 12,
+      "acceptance_test_count": 9
+    },
+    {
+      "file": "prds/libs/typescript/PRD-026-ts-resilience-policy.md",
+      "sha256": "ce1d43fa4dd301213dbe9ef203697013bb7a38eca935ca3abb8e593931c31d0c",
+      "requirement_count": 9,
+      "acceptance_test_count": 8
+    },
+    {
+      "file": "prds/libs/typescript/PRD-027-ts-runa-client-lifecycle.md",
+      "sha256": "91349649e426e19897e868b3fed2b1509489ac2e5969ce69cfad78d4c1b5ca69",
+      "requirement_count": 22,
+      "acceptance_test_count": 11
+    },
+    {
+      "file": "prds/libs/typescript/PRD-028-ts-session-creation.md",
+      "sha256": "bdd7b351addd45db7bd9cfd2aa80d4ca541989be522d3be3c6f6c2f180fa3870",
+      "requirement_count": 15,
+      "acceptance_test_count": 9
+    },
+    {
+      "file": "prds/libs/typescript/PRD-029-ts-session-listing.md",
+      "sha256": "fbed7f56cf9e447819aeb3102f3c7c55acdc3b813dfc2f849c98305176adfabb",
+      "requirement_count": 17,
+      "acceptance_test_count": 9
+    },
+    {
+      "file": "prds/libs/typescript/PRD-030-ts-session-lookup.md",
+      "sha256": "5528c3870b88e4ff442db22cf6a0df84112e50a0f0a94fb83627f96c61c85212",
+      "requirement_count": 8,
+      "acceptance_test_count": 6
+    },
+    {
+      "file": "prds/libs/typescript/PRD-031-ts-session-rich-handle.md",
+      "sha256": "3f33488ede7b20ebd48de79570ea040adfaf0c28668d407cc33f96132de668a9",
+      "requirement_count": 10,
+      "acceptance_test_count": 6
+    },
+    {
+      "file": "prds/libs/typescript/PRD-032-ts-session-lifecycle-actions.md",
+      "sha256": "e8d5b91799a457ae68c6694beafd1e2c4bba43bb0ec854888d16be5adf20a2bf",
+      "requirement_count": 9,
+      "acceptance_test_count": 7
+    },
+    {
+      "file": "prds/libs/typescript/PRD-033-ts-session-exec.md",
+      "sha256": "64bd996752afdd39edf96635ba6790195f327d8b7ce232f359cf8f48066ad317",
+      "requirement_count": 12,
+      "acceptance_test_count": 9
+    },
+    {
+      "file": "prds/libs/typescript/PRD-034-ts-session-checkpoint.md",
+      "sha256": "db1706f94748ea8561991bfd850e8653ac19cdd80afd0cf61462a88df4cff439",
+      "requirement_count": 14,
+      "acceptance_test_count": 5
+    },
+    {
+      "file": "prds/libs/typescript/PRD-035-ts-session-open-handshake.md",
+      "sha256": "9d373d06190e742a77caa2e1dc406ac1a753c82d55ed0b979c8852ed0225da49",
+      "requirement_count": 16,
+      "acceptance_test_count": 6
+    },
+    {
+      "file": "prds/libs/typescript/PRD-036-ts-records-resource.md",
+      "sha256": "80f159f7d05fb7c6e1979692a07f3556a386d0704cd5404510bd5ce5128b5633",
+      "requirement_count": 19,
+      "acceptance_test_count": 9
+    },
+    {
+      "file": "prds/libs/typescript/PRD-037-ts-me-resource.md",
+      "sha256": "36954df9a1306483ce10f1bd3ce4605fed8b1f714ae18d09c6ca148d717d3a37",
+      "requirement_count": 14,
+      "acceptance_test_count": 7
+    },
+    {
+      "file": "prds/libs/typescript/PRD-038-ts-public-exports.md",
+      "sha256": "6881a8d9c76d6103df4b7b9b0aa4160557a504a1375f2583eca86fe842f24176",
+      "requirement_count": 14,
+      "acceptance_test_count": 7
+    },
+    {
+      "file": "prds/libs/typescript/PRD-039-ts-observability-hooks.md",
+      "sha256": "f52fc0005f4b42eba4bfd794206258c79af8c955524a1ba8f004359a131c2555",
+      "requirement_count": 18,
+      "acceptance_test_count": 10
+    },
+    {
+      "file": "prds/libs/typescript/PRD-040-ts-security-hardening.md",
+      "sha256": "05891bdc61818052c23b5d53454494607ab2e54128a884a5fafc8ebffbd07116",
+      "requirement_count": 12,
+      "acceptance_test_count": 8
+    },
+    {
+      "file": "prds/libs/typescript/PRD-041-ts-test-harness.md",
+      "sha256": "d1e08d719e2a41dca230db7acbc5b38a0623e9bd5aadc2cc0e1ad6d93684539e",
+      "requirement_count": 20,
+      "acceptance_test_count": 12
+    },
+    {
+      "file": "prds/libs/typescript/PRD-042-ts-config-error-transport-tests.md",
+      "sha256": "39ad18c00c074271ccd999f6866fdef1f16632752b2591b2d0fdb364737c11f7",
+      "requirement_count": 11,
+      "acceptance_test_count": 9
+    },
+    {
+      "file": "prds/libs/typescript/PRD-043-ts-contract-and-model-tests.md",
+      "sha256": "0c5d9a258e8f3719286ec058b08e2a0b70cee883c3f592cb42770b323a0c8de1",
+      "requirement_count": 17,
+      "acceptance_test_count": 9
+    },
+    {
+      "file": "prds/libs/typescript/PRD-044-ts-session-lifecycle-tests.md",
+      "sha256": "daa92c6463c464aaf171666a38a459ff2294c8dba723a4794a863e6983e162ff",
+      "requirement_count": 8,
+      "acceptance_test_count": 9
+    },
+    {
+      "file": "prds/libs/typescript/PRD-045-ts-exec-and-checkpoint-tests.md",
+      "sha256": "bf7e032bc59a4cde0cffc2b4f01e79a8beb07f7646c5cefa1cdbfcb2c9389b97",
+      "requirement_count": 9,
+      "acceptance_test_count": 8
+    },
+    {
+      "file": "prds/libs/typescript/PRD-046-ts-open-handshake-security-tests.md",
+      "sha256": "9154aa36b3f6efee8286a42e605ecf545079afdd54a9d1b83610fed0d9640081",
+      "requirement_count": 13,
+      "acceptance_test_count": 7
+    },
+    {
+      "file": "prds/libs/typescript/PRD-047-ts-me-and-records-tests.md",
+      "sha256": "5399e275478a8685aaee21f7005c84ccdcef3b24f60c96e61e98774f1cdf1a88",
+      "requirement_count": 14,
+      "acceptance_test_count": 8
+    },
+    {
+      "file": "prds/libs/typescript/PRD-048-ts-api-reference-generation.md",
+      "sha256": "9185b41aa4a9c48f978cbb25e6150fc48d136492561e02aef92a61c7ae884a9c",
+      "requirement_count": 18,
+      "acceptance_test_count": 7
+    },
+    {
+      "file": "prds/libs/typescript/PRD-049-ts-guides-and-runnable-examples.md",
+      "sha256": "9903cb3361d5dd8d97963e0110809c35b8ee823464f72672b6f858315a27cc12",
+      "requirement_count": 17,
+      "acceptance_test_count": 7
+    },
+    {
+      "file": "prds/libs/typescript/PRD-050-ts-runtime-compatibility-and-performance.md",
+      "sha256": "3b9eb9463271289cfc1ce00d1152e039944c445405d7514b68ff316e0bf00f11",
+      "requirement_count": 22,
+      "acceptance_test_count": 8
+    },
+    {
+      "file": "prds/libs/typescript/PRD-051-ts-dependency-and-supply-chain-controls.md",
+      "sha256": "9b37b6d872c12b64f60419df1cc29b05af6668e77623b15509458e414c069210",
+      "requirement_count": 14,
+      "acceptance_test_count": 8
+    },
+    {
+      "file": "prds/libs/typescript/PRD-052-ts-ci-quality-gates.md",
+      "sha256": "dbe5adcad51ffb577ac37e1556747406fea5f282cb00972c44931f132b527ce0",
+      "requirement_count": 23,
+      "acceptance_test_count": 8
+    },
+    {
+      "file": "prds/libs/typescript/PRD-053-ts-npm-publishing.md",
+      "sha256": "a9140e88c297f45b6325dd7658f8b6804c4785883d0828f1e6da99348328b890",
+      "requirement_count": 21,
+      "acceptance_test_count": 10
+    },
+    {
+      "file": "prds/libs/typescript/PRD-054-ts-release-smoke-and-readiness.md",
+      "sha256": "1fc107497499385796ade0a45f20de6ba4d28a105064d6af82388cbbf853e898",
+      "requirement_count": 15,
+      "acceptance_test_count": 9
+    }
+  ],
+  "requirement_count": 989,
+  "acceptance_test_count": 527,
   "requirement_status_summary": {
-    "NOT_RUN": 984,
-    "PASS": 0,
+    "NOT_RUN": 971,
+    "PASS": 18,
     "BLOCKED": 0
   },
   "acceptance_status_summary": {
     "PASS": 17,
-    "NOT_RUN": 505
+    "NOT_RUN": 510
   },
   "acceptance_test_ids": [
     "TC-001-01",
@@ -27,6 +372,7 @@
     "TC-001-08",
     "TC-001-09",
     "TC-001-10",
+    "TC-001-11",
     "TC-002-01",
     "TC-002-02",
     "TC-002-03",
@@ -218,6 +564,7 @@
     "TC-018-07",
     "TC-018-08",
     "TC-018-09",
+    "TC-018-10",
     "TC-019-01",
     "TC-019-02",
     "TC-019-03",
@@ -278,6 +625,7 @@
     "TC-025-06",
     "TC-025-07",
     "TC-025-08",
+    "TC-025-09",
     "TC-026-01",
     "TC-026-02",
     "TC-026-03",
@@ -503,6 +851,8 @@
     "TC-053-06",
     "TC-053-07",
     "TC-053-08",
+    "TC-053-09",
+    "TC-053-10",
     "TC-054-01",
     "TC-054-02",
     "TC-054-03",
@@ -588,6 +938,11 @@
     },
     {
       "test_id": "TC-001-10",
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
+    },
+    {
+      "test_id": "TC-001-11",
       "status": "NOT_RUN",
       "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
@@ -1547,6 +1902,11 @@
       "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
+      "test_id": "TC-018-10",
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
+    },
+    {
       "test_id": "TC-019-01",
       "status": "NOT_RUN",
       "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
@@ -1843,6 +2203,11 @@
     },
     {
       "test_id": "TC-025-08",
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
+    },
+    {
+      "test_id": "TC-025-09",
       "status": "NOT_RUN",
       "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
@@ -2972,6 +3337,16 @@
       "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
     },
     {
+      "test_id": "TC-053-09",
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
+    },
+    {
+      "test_id": "TC-053-10",
+      "status": "NOT_RUN",
+      "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
+    },
+    {
       "test_id": "TC-054-01",
       "status": "NOT_RUN",
       "reason": "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one."
@@ -3167,7 +3542,8 @@
         "TC-001-07",
         "TC-001-08",
         "TC-001-09",
-        "TC-001-10"
+        "TC-001-10",
+        "TC-001-11"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -3186,7 +3562,8 @@
         "TC-001-07",
         "TC-001-08",
         "TC-001-09",
-        "TC-001-10"
+        "TC-001-10",
+        "TC-001-11"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -3205,7 +3582,8 @@
         "TC-001-07",
         "TC-001-08",
         "TC-001-09",
-        "TC-001-10"
+        "TC-001-10",
+        "TC-001-11"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -3224,7 +3602,8 @@
         "TC-001-07",
         "TC-001-08",
         "TC-001-09",
-        "TC-001-10"
+        "TC-001-10",
+        "TC-001-11"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -3243,7 +3622,8 @@
         "TC-001-07",
         "TC-001-08",
         "TC-001-09",
-        "TC-001-10"
+        "TC-001-10",
+        "TC-001-11"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -3262,7 +3642,8 @@
         "TC-001-07",
         "TC-001-08",
         "TC-001-09",
-        "TC-001-10"
+        "TC-001-10",
+        "TC-001-11"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -3281,7 +3662,8 @@
         "TC-001-07",
         "TC-001-08",
         "TC-001-09",
-        "TC-001-10"
+        "TC-001-10",
+        "TC-001-11"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -3300,7 +3682,8 @@
         "TC-001-07",
         "TC-001-08",
         "TC-001-09",
-        "TC-001-10"
+        "TC-001-10",
+        "TC-001-11"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -3319,7 +3702,8 @@
         "TC-001-07",
         "TC-001-08",
         "TC-001-09",
-        "TC-001-10"
+        "TC-001-10",
+        "TC-001-11"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -3338,7 +3722,8 @@
         "TC-001-07",
         "TC-001-08",
         "TC-001-09",
-        "TC-001-10"
+        "TC-001-10",
+        "TC-001-11"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -3357,7 +3742,8 @@
         "TC-001-07",
         "TC-001-08",
         "TC-001-09",
-        "TC-001-10"
+        "TC-001-10",
+        "TC-001-11"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -3376,7 +3762,8 @@
         "TC-001-07",
         "TC-001-08",
         "TC-001-09",
-        "TC-001-10"
+        "TC-001-10",
+        "TC-001-11"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -3395,7 +3782,8 @@
         "TC-001-07",
         "TC-001-08",
         "TC-001-09",
-        "TC-001-10"
+        "TC-001-10",
+        "TC-001-11"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -3414,7 +3802,8 @@
         "TC-001-07",
         "TC-001-08",
         "TC-001-09",
-        "TC-001-10"
+        "TC-001-10",
+        "TC-001-11"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -3433,7 +3822,8 @@
         "TC-001-07",
         "TC-001-08",
         "TC-001-09",
-        "TC-001-10"
+        "TC-001-10",
+        "TC-001-11"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -3452,7 +3842,8 @@
         "TC-001-07",
         "TC-001-08",
         "TC-001-09",
-        "TC-001-10"
+        "TC-001-10",
+        "TC-001-11"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -3471,7 +3862,8 @@
         "TC-001-07",
         "TC-001-08",
         "TC-001-09",
-        "TC-001-10"
+        "TC-001-10",
+        "TC-001-11"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -3490,7 +3882,8 @@
         "TC-001-07",
         "TC-001-08",
         "TC-001-09",
-        "TC-001-10"
+        "TC-001-10",
+        "TC-001-11"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -3509,7 +3902,8 @@
         "TC-001-07",
         "TC-001-08",
         "TC-001-09",
-        "TC-001-10"
+        "TC-001-10",
+        "TC-001-11"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -10614,7 +11008,8 @@
         "TC-018-06",
         "TC-018-07",
         "TC-018-08",
-        "TC-018-09"
+        "TC-018-09",
+        "TC-018-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -10632,7 +11027,8 @@
         "TC-018-06",
         "TC-018-07",
         "TC-018-08",
-        "TC-018-09"
+        "TC-018-09",
+        "TC-018-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -10650,7 +11046,8 @@
         "TC-018-06",
         "TC-018-07",
         "TC-018-08",
-        "TC-018-09"
+        "TC-018-09",
+        "TC-018-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -10668,7 +11065,8 @@
         "TC-018-06",
         "TC-018-07",
         "TC-018-08",
-        "TC-018-09"
+        "TC-018-09",
+        "TC-018-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -10686,7 +11084,8 @@
         "TC-018-06",
         "TC-018-07",
         "TC-018-08",
-        "TC-018-09"
+        "TC-018-09",
+        "TC-018-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -10704,7 +11103,8 @@
         "TC-018-06",
         "TC-018-07",
         "TC-018-08",
-        "TC-018-09"
+        "TC-018-09",
+        "TC-018-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -10722,7 +11122,8 @@
         "TC-018-06",
         "TC-018-07",
         "TC-018-08",
-        "TC-018-09"
+        "TC-018-09",
+        "TC-018-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -10740,7 +11141,8 @@
         "TC-018-06",
         "TC-018-07",
         "TC-018-08",
-        "TC-018-09"
+        "TC-018-09",
+        "TC-018-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -10758,7 +11160,8 @@
         "TC-018-06",
         "TC-018-07",
         "TC-018-08",
-        "TC-018-09"
+        "TC-018-09",
+        "TC-018-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -10776,7 +11179,8 @@
         "TC-018-06",
         "TC-018-07",
         "TC-018-08",
-        "TC-018-09"
+        "TC-018-09",
+        "TC-018-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -10794,7 +11198,8 @@
         "TC-018-06",
         "TC-018-07",
         "TC-018-08",
-        "TC-018-09"
+        "TC-018-09",
+        "TC-018-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -10812,7 +11217,8 @@
         "TC-018-06",
         "TC-018-07",
         "TC-018-08",
-        "TC-018-09"
+        "TC-018-09",
+        "TC-018-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -10830,7 +11236,8 @@
         "TC-018-06",
         "TC-018-07",
         "TC-018-08",
-        "TC-018-09"
+        "TC-018-09",
+        "TC-018-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -10848,7 +11255,8 @@
         "TC-018-06",
         "TC-018-07",
         "TC-018-08",
-        "TC-018-09"
+        "TC-018-09",
+        "TC-018-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -10866,7 +11274,8 @@
         "TC-018-06",
         "TC-018-07",
         "TC-018-08",
-        "TC-018-09"
+        "TC-018-09",
+        "TC-018-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -10884,7 +11293,8 @@
         "TC-018-06",
         "TC-018-07",
         "TC-018-08",
-        "TC-018-09"
+        "TC-018-09",
+        "TC-018-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -10902,7 +11312,8 @@
         "TC-018-06",
         "TC-018-07",
         "TC-018-08",
-        "TC-018-09"
+        "TC-018-09",
+        "TC-018-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -10920,7 +11331,8 @@
         "TC-018-06",
         "TC-018-07",
         "TC-018-08",
-        "TC-018-09"
+        "TC-018-09",
+        "TC-018-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -10938,7 +11350,8 @@
         "TC-018-06",
         "TC-018-07",
         "TC-018-08",
-        "TC-018-09"
+        "TC-018-09",
+        "TC-018-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -10956,7 +11369,8 @@
         "TC-018-06",
         "TC-018-07",
         "TC-018-08",
-        "TC-018-09"
+        "TC-018-09",
+        "TC-018-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -10974,7 +11388,8 @@
         "TC-018-06",
         "TC-018-07",
         "TC-018-08",
-        "TC-018-09"
+        "TC-018-09",
+        "TC-018-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -10992,7 +11407,8 @@
         "TC-018-06",
         "TC-018-07",
         "TC-018-08",
-        "TC-018-09"
+        "TC-018-09",
+        "TC-018-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -11010,7 +11426,8 @@
         "TC-018-06",
         "TC-018-07",
         "TC-018-08",
-        "TC-018-09"
+        "TC-018-09",
+        "TC-018-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -11028,7 +11445,8 @@
         "TC-018-06",
         "TC-018-07",
         "TC-018-08",
-        "TC-018-09"
+        "TC-018-09",
+        "TC-018-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -11046,7 +11464,8 @@
         "TC-018-06",
         "TC-018-07",
         "TC-018-08",
-        "TC-018-09"
+        "TC-018-09",
+        "TC-018-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -11064,7 +11483,27 @@
         "TC-018-06",
         "TC-018-07",
         "TC-018-08",
-        "TC-018-09"
+        "TC-018-09",
+        "TC-018-10"
+      ],
+      "status": "NOT_RUN",
+      "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
+    },
+    {
+      "requirement": "R-018-27",
+      "scope": "shared-applicable",
+      "prd": "prds/libs/shared/PRD-018-release-and-supply-chain-policy.md",
+      "acceptance_test_ids": [
+        "TC-018-01",
+        "TC-018-02",
+        "TC-018-03",
+        "TC-018-04",
+        "TC-018-05",
+        "TC-018-06",
+        "TC-018-07",
+        "TC-018-08",
+        "TC-018-09",
+        "TC-018-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -13900,7 +14339,8 @@
         "TC-025-05",
         "TC-025-06",
         "TC-025-07",
-        "TC-025-08"
+        "TC-025-08",
+        "TC-025-09"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -13917,7 +14357,8 @@
         "TC-025-05",
         "TC-025-06",
         "TC-025-07",
-        "TC-025-08"
+        "TC-025-08",
+        "TC-025-09"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -13934,7 +14375,8 @@
         "TC-025-05",
         "TC-025-06",
         "TC-025-07",
-        "TC-025-08"
+        "TC-025-08",
+        "TC-025-09"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -13951,7 +14393,8 @@
         "TC-025-05",
         "TC-025-06",
         "TC-025-07",
-        "TC-025-08"
+        "TC-025-08",
+        "TC-025-09"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -13968,7 +14411,8 @@
         "TC-025-05",
         "TC-025-06",
         "TC-025-07",
-        "TC-025-08"
+        "TC-025-08",
+        "TC-025-09"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -13985,7 +14429,8 @@
         "TC-025-05",
         "TC-025-06",
         "TC-025-07",
-        "TC-025-08"
+        "TC-025-08",
+        "TC-025-09"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -14002,7 +14447,8 @@
         "TC-025-05",
         "TC-025-06",
         "TC-025-07",
-        "TC-025-08"
+        "TC-025-08",
+        "TC-025-09"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -14019,7 +14465,8 @@
         "TC-025-05",
         "TC-025-06",
         "TC-025-07",
-        "TC-025-08"
+        "TC-025-08",
+        "TC-025-09"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -14036,7 +14483,8 @@
         "TC-025-05",
         "TC-025-06",
         "TC-025-07",
-        "TC-025-08"
+        "TC-025-08",
+        "TC-025-09"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -14053,7 +14501,8 @@
         "TC-025-05",
         "TC-025-06",
         "TC-025-07",
-        "TC-025-08"
+        "TC-025-08",
+        "TC-025-09"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -14070,7 +14519,26 @@
         "TC-025-05",
         "TC-025-06",
         "TC-025-07",
-        "TC-025-08"
+        "TC-025-08",
+        "TC-025-09"
+      ],
+      "status": "NOT_RUN",
+      "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
+    },
+    {
+      "requirement": "R-025-12",
+      "scope": "typescript",
+      "prd": "prds/libs/typescript/PRD-025-ts-fetch-transport.md",
+      "acceptance_test_ids": [
+        "TC-025-01",
+        "TC-025-02",
+        "TC-025-03",
+        "TC-025-04",
+        "TC-025-05",
+        "TC-025-06",
+        "TC-025-07",
+        "TC-025-08",
+        "TC-025-09"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -19326,8 +19794,7 @@
         "TC-048-06",
         "TC-048-07"
       ],
-      "status": "NOT_RUN",
-      "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
+      "status": "PASS"
     },
     {
       "requirement": "R-048-02",
@@ -19342,8 +19809,7 @@
         "TC-048-06",
         "TC-048-07"
       ],
-      "status": "NOT_RUN",
-      "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
+      "status": "PASS"
     },
     {
       "requirement": "R-048-03",
@@ -19358,8 +19824,7 @@
         "TC-048-06",
         "TC-048-07"
       ],
-      "status": "NOT_RUN",
-      "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
+      "status": "PASS"
     },
     {
       "requirement": "R-048-04",
@@ -19374,8 +19839,7 @@
         "TC-048-06",
         "TC-048-07"
       ],
-      "status": "NOT_RUN",
-      "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
+      "status": "PASS"
     },
     {
       "requirement": "R-048-05",
@@ -19390,8 +19854,7 @@
         "TC-048-06",
         "TC-048-07"
       ],
-      "status": "NOT_RUN",
-      "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
+      "status": "PASS"
     },
     {
       "requirement": "R-048-06",
@@ -19406,8 +19869,7 @@
         "TC-048-06",
         "TC-048-07"
       ],
-      "status": "NOT_RUN",
-      "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
+      "status": "PASS"
     },
     {
       "requirement": "R-048-07",
@@ -19422,8 +19884,7 @@
         "TC-048-06",
         "TC-048-07"
       ],
-      "status": "NOT_RUN",
-      "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
+      "status": "PASS"
     },
     {
       "requirement": "R-048-08",
@@ -19438,8 +19899,7 @@
         "TC-048-06",
         "TC-048-07"
       ],
-      "status": "NOT_RUN",
-      "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
+      "status": "PASS"
     },
     {
       "requirement": "R-048-09",
@@ -19454,8 +19914,7 @@
         "TC-048-06",
         "TC-048-07"
       ],
-      "status": "NOT_RUN",
-      "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
+      "status": "PASS"
     },
     {
       "requirement": "R-048-10",
@@ -19470,8 +19929,7 @@
         "TC-048-06",
         "TC-048-07"
       ],
-      "status": "NOT_RUN",
-      "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
+      "status": "PASS"
     },
     {
       "requirement": "R-048-11",
@@ -19486,8 +19944,7 @@
         "TC-048-06",
         "TC-048-07"
       ],
-      "status": "NOT_RUN",
-      "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
+      "status": "PASS"
     },
     {
       "requirement": "R-048-12",
@@ -19502,8 +19959,7 @@
         "TC-048-06",
         "TC-048-07"
       ],
-      "status": "NOT_RUN",
-      "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
+      "status": "PASS"
     },
     {
       "requirement": "R-048-13",
@@ -19518,8 +19974,7 @@
         "TC-048-06",
         "TC-048-07"
       ],
-      "status": "NOT_RUN",
-      "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
+      "status": "PASS"
     },
     {
       "requirement": "R-048-14",
@@ -19534,8 +19989,7 @@
         "TC-048-06",
         "TC-048-07"
       ],
-      "status": "NOT_RUN",
-      "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
+      "status": "PASS"
     },
     {
       "requirement": "R-048-15",
@@ -19550,8 +20004,7 @@
         "TC-048-06",
         "TC-048-07"
       ],
-      "status": "NOT_RUN",
-      "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
+      "status": "PASS"
     },
     {
       "requirement": "R-048-16",
@@ -19566,8 +20019,7 @@
         "TC-048-06",
         "TC-048-07"
       ],
-      "status": "NOT_RUN",
-      "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
+      "status": "PASS"
     },
     {
       "requirement": "R-048-17",
@@ -19582,8 +20034,7 @@
         "TC-048-06",
         "TC-048-07"
       ],
-      "status": "NOT_RUN",
-      "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
+      "status": "PASS"
     },
     {
       "requirement": "R-048-18",
@@ -19598,8 +20049,7 @@
         "TC-048-06",
         "TC-048-07"
       ],
-      "status": "NOT_RUN",
-      "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
+      "status": "PASS"
     },
     {
       "requirement": "R-049-01",
@@ -20860,6 +21310,23 @@
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
     },
     {
+      "requirement": "R-052-23",
+      "scope": "typescript",
+      "prd": "prds/libs/typescript/PRD-052-ts-ci-quality-gates.md",
+      "acceptance_test_ids": [
+        "TC-052-01",
+        "TC-052-02",
+        "TC-052-03",
+        "TC-052-04",
+        "TC-052-05",
+        "TC-052-06",
+        "TC-052-07",
+        "TC-052-08"
+      ],
+      "status": "NOT_RUN",
+      "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
+    },
+    {
       "requirement": "R-053-01",
       "scope": "typescript",
       "prd": "prds/libs/typescript/PRD-053-ts-npm-publishing.md",
@@ -20871,7 +21338,9 @@
         "TC-053-05",
         "TC-053-06",
         "TC-053-07",
-        "TC-053-08"
+        "TC-053-08",
+        "TC-053-09",
+        "TC-053-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -20888,7 +21357,9 @@
         "TC-053-05",
         "TC-053-06",
         "TC-053-07",
-        "TC-053-08"
+        "TC-053-08",
+        "TC-053-09",
+        "TC-053-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -20905,7 +21376,9 @@
         "TC-053-05",
         "TC-053-06",
         "TC-053-07",
-        "TC-053-08"
+        "TC-053-08",
+        "TC-053-09",
+        "TC-053-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -20922,7 +21395,9 @@
         "TC-053-05",
         "TC-053-06",
         "TC-053-07",
-        "TC-053-08"
+        "TC-053-08",
+        "TC-053-09",
+        "TC-053-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -20939,7 +21414,9 @@
         "TC-053-05",
         "TC-053-06",
         "TC-053-07",
-        "TC-053-08"
+        "TC-053-08",
+        "TC-053-09",
+        "TC-053-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -20956,7 +21433,9 @@
         "TC-053-05",
         "TC-053-06",
         "TC-053-07",
-        "TC-053-08"
+        "TC-053-08",
+        "TC-053-09",
+        "TC-053-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -20973,7 +21452,9 @@
         "TC-053-05",
         "TC-053-06",
         "TC-053-07",
-        "TC-053-08"
+        "TC-053-08",
+        "TC-053-09",
+        "TC-053-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -20990,7 +21471,9 @@
         "TC-053-05",
         "TC-053-06",
         "TC-053-07",
-        "TC-053-08"
+        "TC-053-08",
+        "TC-053-09",
+        "TC-053-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -21007,7 +21490,9 @@
         "TC-053-05",
         "TC-053-06",
         "TC-053-07",
-        "TC-053-08"
+        "TC-053-08",
+        "TC-053-09",
+        "TC-053-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -21024,7 +21509,9 @@
         "TC-053-05",
         "TC-053-06",
         "TC-053-07",
-        "TC-053-08"
+        "TC-053-08",
+        "TC-053-09",
+        "TC-053-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -21041,7 +21528,9 @@
         "TC-053-05",
         "TC-053-06",
         "TC-053-07",
-        "TC-053-08"
+        "TC-053-08",
+        "TC-053-09",
+        "TC-053-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -21058,7 +21547,9 @@
         "TC-053-05",
         "TC-053-06",
         "TC-053-07",
-        "TC-053-08"
+        "TC-053-08",
+        "TC-053-09",
+        "TC-053-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -21075,7 +21566,9 @@
         "TC-053-05",
         "TC-053-06",
         "TC-053-07",
-        "TC-053-08"
+        "TC-053-08",
+        "TC-053-09",
+        "TC-053-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -21092,7 +21585,9 @@
         "TC-053-05",
         "TC-053-06",
         "TC-053-07",
-        "TC-053-08"
+        "TC-053-08",
+        "TC-053-09",
+        "TC-053-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -21109,7 +21604,9 @@
         "TC-053-05",
         "TC-053-06",
         "TC-053-07",
-        "TC-053-08"
+        "TC-053-08",
+        "TC-053-09",
+        "TC-053-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -21126,7 +21623,9 @@
         "TC-053-05",
         "TC-053-06",
         "TC-053-07",
-        "TC-053-08"
+        "TC-053-08",
+        "TC-053-09",
+        "TC-053-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -21143,7 +21642,9 @@
         "TC-053-05",
         "TC-053-06",
         "TC-053-07",
-        "TC-053-08"
+        "TC-053-08",
+        "TC-053-09",
+        "TC-053-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -21160,7 +21661,9 @@
         "TC-053-05",
         "TC-053-06",
         "TC-053-07",
-        "TC-053-08"
+        "TC-053-08",
+        "TC-053-09",
+        "TC-053-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
@@ -21177,7 +21680,47 @@
         "TC-053-05",
         "TC-053-06",
         "TC-053-07",
-        "TC-053-08"
+        "TC-053-08",
+        "TC-053-09",
+        "TC-053-10"
+      ],
+      "status": "NOT_RUN",
+      "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
+    },
+    {
+      "requirement": "R-053-20",
+      "scope": "typescript",
+      "prd": "prds/libs/typescript/PRD-053-ts-npm-publishing.md",
+      "acceptance_test_ids": [
+        "TC-053-01",
+        "TC-053-02",
+        "TC-053-03",
+        "TC-053-04",
+        "TC-053-05",
+        "TC-053-06",
+        "TC-053-07",
+        "TC-053-08",
+        "TC-053-09",
+        "TC-053-10"
+      ],
+      "status": "NOT_RUN",
+      "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
+    },
+    {
+      "requirement": "R-053-21",
+      "scope": "typescript",
+      "prd": "prds/libs/typescript/PRD-053-ts-npm-publishing.md",
+      "acceptance_test_ids": [
+        "TC-053-01",
+        "TC-053-02",
+        "TC-053-03",
+        "TC-053-04",
+        "TC-053-05",
+        "TC-053-06",
+        "TC-053-07",
+        "TC-053-08",
+        "TC-053-09",
+        "TC-053-10"
       ],
       "status": "NOT_RUN",
       "evidence_missing": "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
