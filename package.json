@@ -2,6 +2,15 @@
   "name": "@runa/sdk",
   "version": "0.1.0",
   "description": "The official TypeScript SDK for Runa.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Runa-Laboratories/runa-lib-ts.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org",
+    "provenance": true
+  },
   "type": "module",
   "sideEffects": false,
   "engines": {
@@ -24,6 +33,8 @@
     "typecheck": "tsc --project tsconfig.json --noEmit && tsc --project tsconfig.type-tests.json --noEmit",
     "build": "npm run clean && tsc --project tsconfig.build.json",
     "test": "npm run build && vitest run --maxWorkers=1 --no-file-parallelism",
+    "test:watch": "npm run build && vitest --watch --maxWorkers=1 --no-file-parallelism",
+    "test:live": "npm run build && vitest run --config vitest.live.config.ts --maxWorkers=1 --no-file-parallelism",
     "docs:api": "npm run build && typedoc --options docs/reference.config.json && node scripts/generate-api-docs.mjs",
     "lint": "node scripts/lint.mjs",
     "contract:verify": "node scripts/verify-contract.mjs",
@@ -41,6 +52,7 @@
     "release:local-gates": "node scripts/verify-local-release-gates.mjs",
     "release:smoke": "node scripts/verify-release-smoke.mjs",
     "release:authority:import": "node scripts/import-release-authority.mjs",
+    "release:tag:verify": "node scripts/verify-release-tag.mjs",
     "release:postpublish:verify": "node scripts/verify-postpublish.mjs",
     "release:recovery:plan": "node scripts/plan-release-recovery.mjs",
     "evidence": "node scripts/build-evidence.mjs",

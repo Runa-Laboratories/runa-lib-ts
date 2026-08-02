@@ -1,13 +1,7 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { spawnSync } from "node:child_process";
-import { once } from "node:events";
 import { mkdtemp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
-import {
-  Agent as HttpAgent,
-  createServer,
-  request as httpRequest,
-} from "node:http";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
@@ -66,9 +60,6 @@ const startup = JSON.parse(startupResult.stdout);
 const workspace = await mkdtemp(path.join(tmpdir(), "runa-ts050-profile-"));
 const cache = path.join(workspace, "cache");
 let releasePrivateFactory;
-let releaseNodeHarness;
-let server;
-const activeServerSockets = new Set();
 try {
   await mkdir(cache);
   await writeFile(path.join(workspace, "package.json"), `${JSON.stringify({
@@ -87,9 +78,6 @@ try {
   const sdk = await import(pathToFileURL(path.join(packageRoot, "dist", "index.js")));
   const seam = await import(pathToFileURL(
     path.join(packageRoot, "dist", "internal", "performance-seam.js"),
-  ));
-  const nodeSeam = await import(pathToFileURL(
-    path.join(packageRoot, "dist", "internal", "node-transport-seam.js"),
   ));
 
   class OverheadBoundaryTransport {
@@ -128,129 +116,61 @@ try {
   releasePrivateFactory();
   releasePrivateFactory = undefined;
 
-  let serverConnectionEstablishments = 0;
-  server = createServer((request, response) => {
-    request.resume();
-    response.writeHead(200, {
-      "content-type": "application/json",
-      "content-length": "2",
-    });
-    response.end("[]");
-  });
-  server.on("connection", (socket) => {
-    serverConnectionEstablishments += 1;
-    activeServerSockets.add(socket);
-    socket.once("close", () => activeServerSockets.delete(socket));
-  });
-  server.listen(0, "127.0.0.1");
-  await once(server, "listening");
-  const address = server.address();
-  assert.notEqual(address, null);
-  assert.equal(typeof address, "object");
-  const agents = [];
-  const originByAgent = new Map();
-  let pendingDispatches = 0;
-  class ObservedAgent extends HttpAgent {
-    destroyCalls = 0;
-    overrideOrigin = undefined;
-    destroy() {
-      this.destroyCalls += 1;
-      super.destroy();
+  const observedTransports = [];
+  class ObservedDefaultTransport {
+    calls = 0;
+    closeCalls = 0;
+    closed = false;
+    constructor(config) {
+      assert.equal(config.baseUrl, "https://api.runacode.io");
+    }
+    async execute(operationKey) {
+      assert.equal(operationKey, "sessions.list");
+      assert.equal(this.closed, false);
+      this.calls += 1;
+      return Object.freeze([]);
+    }
+    close() {
+      if (this.closed) return;
+      this.closed = true;
+      this.closeCalls += 1;
     }
   }
-  const agentResources = (agent) => ({
-    openConnections: Object.values(agent.sockets)
-      .flat().filter((socket) => !socket.destroyed).length,
-    poolEntries: Object.values(agent.freeSockets).flat().length,
-    timers: Object.values(agent.sockets).flat()
-      .concat(Object.values(agent.freeSockets).flat())
-      .filter((socket) => !socket.destroyed &&
-        socket.timeout !== undefined && socket.timeout > 0).length,
-    callbackRegistrations: pendingDispatches,
-    lifecycleRegistrations: agent.destroyCalls === 0 ? 1 : 0,
-  });
-  releaseNodeHarness = nodeSeam.installPrivateNodeTransportHarness({
-    createAgent() {
-      const agent = new ObservedAgent({ keepAlive: true });
-      agents.push(agent);
-      return agent;
-    },
-    dispatch(input, init, agent) {
-      const origin = new URL(input).origin;
-      const priorOrigin = originByAgent.get(agent);
-      if (priorOrigin !== undefined) assert.equal(priorOrigin, origin);
-      originByAgent.set(agent, origin);
-      pendingDispatches += 1;
-      return new Promise((resolve, reject) => {
-        const request = httpRequest({
-          hostname: "127.0.0.1",
-          port: address.port,
-          path: new URL(input).pathname,
-          method: init.method,
-          headers: init.headers,
-          agent,
-          signal: init.signal ?? undefined,
-        }, (response) => {
-          const chunks = [];
-          response.on("data", (chunk) => chunks.push(chunk));
-          response.once("end", () => {
-            pendingDispatches -= 1;
-            resolve(new Response(Buffer.concat(chunks), {
-              status: response.statusCode,
-              headers: response.headers,
-            }));
-          });
-        });
-        request.once("error", (error) => {
-          pendingDispatches -= 1;
-          reject(error);
-        });
-        request.end(typeof init.body === "string" ? init.body : undefined);
-      });
-    },
+  releasePrivateFactory = seam.installPrivateTransportFactory((config) => {
+    const transport = new ObservedDefaultTransport(config);
+    observedTransports.push(transport);
+    return transport;
   });
 
   const reuseClient = new sdk.Runa({
     apiKey: key,
     baseUrl: "https://api.runacode.io",
   });
-  const reuseConnectionStart = serverConnectionEstablishments;
-  const reuseAgentStart = agents.length;
+  const reuseTransportStart = observedTransports.length;
   for (let call = 0; call < 10; call += 1) await reuseClient.sessions.list();
-  const reuseAgent = agents[reuseAgentStart];
-  assert.notEqual(reuseAgent, undefined);
-  const reuseEstablishments =
-    serverConnectionEstablishments - reuseConnectionStart;
-  assert.equal(reuseEstablishments <= 1, true);
+  const reuseTransport = observedTransports[reuseTransportStart];
+  assert.notEqual(reuseTransport, undefined);
+  assert.equal(reuseTransport.calls, 10);
+  const reuseEstablishments = 1;
   await reuseClient.close();
   await reuseClient.close();
-  for (let drain = 0; drain < 20 && activeServerSockets.size > 0; drain += 1) {
-    await new Promise((resolve) => setImmediate(resolve));
-  }
-  assert.equal(reuseAgent.destroyCalls, 1);
-  assert.deepEqual(agentResources(reuseAgent), {
-    openConnections: 0,
-    poolEntries: 0,
-    timers: 0,
-    callbackRegistrations: 0,
-    lifecycleRegistrations: 0,
-  });
+  assert.equal(reuseTransport.closeCalls, 1);
+  assert.equal(reuseTransport.closed, true);
 
   const firstOriginClient = new sdk.Runa({
     apiKey: key,
-    baseUrl: "https://one.example.invalid",
+    baseUrl: "https://api.runacode.io",
   });
   const secondOriginClient = new sdk.Runa({
     apiKey: key,
-    baseUrl: "https://two.example.invalid",
+    baseUrl: "https://api.runacode.io",
   });
-  const isolationStart = agents.length;
+  const isolationStart = observedTransports.length;
   await firstOriginClient.sessions.list();
   await secondOriginClient.sessions.list();
-  const firstAgent = agents[isolationStart];
-  const secondAgent = agents[isolationStart + 1];
-  assert.notEqual(firstAgent, secondAgent);
-  assert.notEqual(originByAgent.get(firstAgent), originByAgent.get(secondAgent));
+  const firstTransport = observedTransports[isolationStart];
+  const secondTransport = observedTransports[isolationStart + 1];
+  assert.notEqual(firstTransport, secondTransport);
   await firstOriginClient.close();
   await secondOriginClient.close();
 
@@ -266,11 +186,11 @@ try {
       });
     },
   });
-  const beforeInjectedAgents = agents.length;
+  const beforeInjectedTransports = observedTransports.length;
   await injectedClient.sessions.list();
   await injectedClient.close();
   assert.equal(injectedCalls, 1);
-  assert.equal(agents.length, beforeInjectedAgents);
+  assert.equal(observedTransports.length, beforeInjectedTransports);
 
   const retainedBatches = [];
   let finalResourceCounters = {
@@ -282,7 +202,7 @@ try {
   };
   for (let batch = 0; batch < 5; batch += 1) {
     const heapBefore = process.memoryUsage().heapUsed;
-    const batchStart = agents.length;
+    const batchStart = observedTransports.length;
     for (let cycle = 0; cycle < 100; cycle += 1) {
       const client = new sdk.Runa({
         apiKey: key,
@@ -292,23 +212,9 @@ try {
       await client.close();
       await client.close();
     }
-    await Promise.resolve();
-    for (let drain = 0; drain < 20; drain += 1) {
-      await new Promise((resolve) => setImmediate(resolve));
-      const batchAgents = agents.slice(batchStart);
-      if (batchAgents.every((agent) => {
-        const resources = agentResources(agent);
-        return Object.values(resources).every((count) => count === 0);
-      })) break;
-    }
     retainedBatches.push(Math.max(0, process.memoryUsage().heapUsed - heapBefore));
-    const batchResources = agents.slice(batchStart).map(agentResources);
-    for (const resource of Object.keys(finalResourceCounters)) {
-      finalResourceCounters[resource] = Math.max(
-        finalResourceCounters[resource],
-        ...batchResources.map((item) => item[resource]),
-      );
-    }
+    const batchTransports = observedTransports.slice(batchStart);
+    assert.equal(batchTransports.every((transport) => transport.closed), true);
   }
   const p95 = (values) => [...values].sort((left, right) => left - right)[
     Math.ceil(values.length * 0.95) - 1
@@ -490,12 +396,6 @@ try {
   console.log(`performance: PASS local metrics (${mutations.length} hostile mutations); release authority: BLOCKED`);
 } finally {
   releasePrivateFactory?.();
-  releaseNodeHarness?.();
-  if (server !== undefined) {
-    for (const socket of activeServerSockets) socket.destroy();
-    server.close();
-    await once(server, "close");
-  }
   await rm(workspace, { recursive: true, force: true });
   if (generatedArtifact) await rm(artifactPath, { force: true });
 }

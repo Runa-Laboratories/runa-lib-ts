@@ -9,9 +9,9 @@ import {
   type DispatchResult,
 } from "./internal/transport.js";
 import {
-  takePrivateTransportFactory,
   type ClientTransport,
 } from "./internal/performance-seam.js";
+import { createDefaultTransport } from "./internal/test-seams.js";
 import { Session, constructSession } from "./session.js";
 import type {
   Me,
@@ -111,11 +111,9 @@ class ClientContext implements ClientPort {
     this.#active += 1;
     try {
       if (this.#transport === undefined) {
-        const privateFactory = this.#config.fetch === undefined
-          ? takePrivateTransportFactory()
-          : undefined;
-        this.#transport = privateFactory?.(this.#config) ??
-          new FetchTransport(this.#config);
+        this.#transport = this.#config.fetch === undefined
+          ? createDefaultTransport(this.#config)
+          : new FetchTransport(this.#config);
       }
       return await this.#transport.execute(operationKey, input);
     } finally {
