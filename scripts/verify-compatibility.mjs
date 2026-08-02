@@ -64,20 +64,8 @@ try {
   const installed = JSON.parse(await readFile(path.join(workspace, "node_modules/@runa_laboratories/sdk/package.json"), "utf8"));
   assert.deepEqual(Object.keys(installed.exports), ["."]);
   assert.equal(installed.sideEffects, false);
-  probe = "runtime-performance";
-  const importStarted = performance.now();
+  probe = "runtime-smoke";
   const sdk = await import(new URL(`file://${path.join(workspace, "node_modules/@runa_laboratories/sdk/dist/index.js").replaceAll("\\", "/")}`));
-  const importMs = performance.now() - importStarted;
-  const construction = [];
-  for (let index = 0; index < 20; index += 1) {
-    const started = performance.now();
-    const client = new sdk.Runa({ apiKey: "runa_sk_synthetic" });
-    construction.push(performance.now() - started);
-    await client.close();
-  }
-  construction.sort((left, right) => left - right);
-  const request = [];
-  const heapBefore = process.memoryUsage().heapUsed;
   const client = new sdk.Runa({
     apiKey: "runa_sk_synthetic",
     baseUrl: "https://api.runacode.io",
@@ -87,25 +75,9 @@ try {
       workspace: { assigned: false, waitlist_position: 0 }
     }), { status: 200, headers: { "content-type": "application/json" } })
   });
-  for (let index = 0; index < 20; index += 1) {
-    const started = performance.now();
-    await client.me();
-    request.push(performance.now() - started);
-  }
+  const account = await client.me();
+  assert.equal(account.workspace.assigned, false);
   await client.close();
-  request.sort((left, right) => left - right);
-  metrics = {
-    tarball_bytes: archive.byteLength,
-    import_ms: importMs,
-    construction_p95_ms: construction[18],
-    request_p95_ms: request[18],
-    allocation_delta_bytes: Math.max(0, process.memoryUsage().heapUsed - heapBefore)
-  };
-  assert(metrics.tarball_bytes <= catalog.profile.metrics.payload.cap);
-  assert(metrics.import_ms <= catalog.profile.metrics.import.cap);
-  assert(metrics.construction_p95_ms <= catalog.profile.metrics.construction.cap);
-  assert(metrics.request_p95_ms <= catalog.profile.metrics.request_overhead.cap);
-  assert(metrics.allocation_delta_bytes <= catalog.profile.metrics.allocation_delta.cap);
   probe = "readme";
   const readme = await readFile(path.join(workspace, "node_modules/@runa_laboratories/sdk/README.md"), "utf8");
   assert.match(readme, /npm install @runa_laboratories\/sdk/);
@@ -134,14 +106,14 @@ try {
     "scripts/verify-performance.mjs", "--artifact", archivePath,
   ], { cwd: path.resolve("."), encoding: "utf8", timeout: 180_000 });
   assert.equal(performanceRun.status, 0, performanceRun.stderr || performanceRun.stdout);
-  const performance = JSON.parse(
+  const performanceReceipt = JSON.parse(
     await readFile("evidence/performance-local.json", "utf8"),
   );
-  assert.equal(performance.status, "PASS");
-  assert.equal(performance.identity.artifact_sha256, candidate.sha256);
-  assert.equal(performance.identity.matrix_cell, cell.id);
+  assert.equal(performanceReceipt.status, "PASS");
+  assert.equal(performanceReceipt.identity.artifact_sha256, candidate.sha256);
+  assert.equal(performanceReceipt.identity.matrix_cell, cell.id);
   performanceStatus = "PASS";
-  metrics = performance.metrics;
+  metrics = performanceReceipt.metrics;
   status = "PASS";
 } catch (error) {
   status = "FAIL";

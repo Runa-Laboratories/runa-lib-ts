@@ -3,14 +3,14 @@
   "status": "PASS",
   "identity": {
     "artifact_sha256": "beecdc02ef8efa38cc02968912e42ad42b7c61131414296c3418bca4f1265a15",
-    "catalog_sha256": "aa502e0df11c142f21e6d251abb0965f5996abcc183e0b7e82f409ad84f7537f",
+    "catalog_sha256": "cd52a60ba3c71da47d4ddf2b9a41c1e98cc93b7d443c5e44eeee0340840fded5",
     "catalog_revision": "TS-050-EVIDENCE-V1",
-    "matrix_cell": null,
-    "environment_classification": "local-non-matrix"
+    "matrix_cell": "ts050-node24-windows-x64",
+    "environment_classification": "exact-matrix-cell"
   },
   "runtime": {
-    "node": "24.18.0",
-    "npm": "11.16.0",
+    "node": "24.4.1",
+    "npm": "11.4.2",
     "platform": "win32",
     "arch": "x64"
   },
@@ -22,12 +22,13 @@
     "vitest_security_substitution": "3.2.7"
   },
   "profile": {
-    "id": "P-017-TS-NPM-V1-local-non-matrix",
+    "id": "P-017-TS-NPM-V1-ts050-node24-windows-x64",
     "revision": 1,
     "baseline_reference": "bootstrap-v1",
     "isolated_import_runs": 20,
     "isolated_construction_runs": 20,
     "isolated_request_invocations": 20,
+    "request_warmup_invocations": 100,
     "sequential_calls": 10,
     "cleanup_calls": 2,
     "leak_batches": 5,
@@ -35,12 +36,12 @@
   },
   "metrics": {
     "tarball_bytes": 37570,
-    "import_p95_ms": 44.939,
-    "construction_p95_ms": 0.5140999999999991,
-    "request_overhead_p95_ms": 0.009099999999307329,
-    "allocation_delta_bytes_max": 330896,
+    "import_p95_ms": 33.2073,
+    "construction_p95_ms": 0.41919999999999646,
+    "request_overhead_p95_ms": 0.003899999999703141,
+    "allocation_delta_bytes_max": 123520,
     "connection_establishments": 1,
-    "retained_memory_delta_bytes_p95": 989728,
+    "retained_memory_delta_bytes_p95": 1401288,
     "openConnections": 0,
     "poolEntries": 0,
     "timers": 0,
@@ -86,6 +87,10 @@
     },
     {
       "name": "profile-fact",
+      "status": "REJECTED"
+    },
+    {
+      "name": "warmup",
       "status": "REJECTED"
     },
     {

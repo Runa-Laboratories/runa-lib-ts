@@ -61,6 +61,7 @@
       "startup": "node tools/ts050/measure-startup.mjs --artifact <tarball> --runs 20",
       "request_reuse_cleanup": "npm run performance:verify"
     },
+    "request_warmup_invocations": 100,
     "metrics": {
       "payload": {"statistic":"single","unit":"bytes","cap":1048576},
       "import": {"statistic":"p95","samples":20,"unit":"milliseconds","cap":250},
