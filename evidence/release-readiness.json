@@ -2,7 +2,7 @@
   "schema_version": 2,
   "decision": "BLOCKED",
   "projection_sha256": "02a554b22592f0267475b847a2bb1c7df64e2b688cdb69b0a4a8b392695e1c55",
-  "candidate_sha256": "0674b6808331db4ffbf4637404780be322f2e2f14ceffeb1752ad4ae9139e831",
+  "candidate_sha256": "60c42a842b05a573e51b7c0e5d81e1d1bf65196953b6976067d07e959519fd78",
   "blockers": [
     {
       "id": "TS-REL-001",
@@ -16,31 +16,61 @@
     },
     {
       "id": "TS-REL-003",
+      "gate": "candidate-identity",
+      "reason": "Candidate is not bound to a clean source commit."
+    },
+    {
+      "id": "TS-REL-004",
+      "gate": "quality",
+      "reason": "evidence/quality-gate.json does not record PASS."
+    },
+    {
+      "id": "TS-REL-005",
+      "gate": "release-manifest",
+      "reason": "Missing or invalid evidence: release-artifacts/release-manifest-core.json"
+    },
+    {
+      "id": "TS-REL-006",
+      "gate": "release-approval",
+      "reason": "Missing or invalid evidence: evidence/release-approval.json"
+    },
+    {
+      "id": "TS-REL-007",
+      "gate": "requirement-test-map",
+      "reason": "Mandatory requirements or acceptance tests remain NOT_RUN."
+    },
+    {
+      "id": "TS-REL-008",
       "gate": "compatibility-matrix",
       "reason": "Missing or invalid evidence: evidence/compatibility-matrix.json"
     },
     {
-      "id": "TS-REL-004",
+      "id": "TS-REL-009",
       "gate": "repository-controls",
       "reason": "Missing or invalid evidence: evidence/repository-controls.json"
     },
     {
-      "id": "TS-REL-005",
+      "id": "TS-REL-010",
       "gate": "cross-language",
       "reason": "Missing or invalid evidence: evidence/cross-language.json"
     },
     {
-      "id": "TS-REL-006",
+      "id": "TS-REL-011",
       "gate": "publication-readiness",
       "reason": "Missing or invalid evidence: evidence/publication-readiness.json"
     },
     {
-      "id": "TS-REL-007",
+      "id": "TS-REL-012",
       "gate": "sbom-validation",
       "reason": "No accepted release trust root is configured."
     },
     {
-      "id": "TS-REL-008",
+      "id": "TS-REL-013",
+      "gate": "sbom-schema-toolchain",
+      "reason": "The official CycloneDX 1.6 schema/tool digest is not yet accepted locally; signed external validation remains required."
+    },
+    {
+      "id": "TS-REL-014",
       "gate": "external-release-interfaces",
       "reason": "No accepted release trust root is configured."
     }

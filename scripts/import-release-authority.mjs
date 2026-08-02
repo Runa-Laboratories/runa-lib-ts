@@ -32,6 +32,7 @@ const exact = [
   "repository_controls",
   "sbom_validation",
   "schema_version",
+  "version_classification",
 ].sort();
 assert.equal(bundle.schema_version, 1);
 assert.deepEqual(Object.keys(bundle).sort(), exact);
@@ -76,6 +77,10 @@ const entries = [
     (payload) => payload.candidate_sha256 === candidate.sha256 &&
       payload.artifact_sha256 === candidate.sha256 &&
       payload.release_manifest_core_sha256 === hash(releaseManifestCoreBytes)],
+  ["version_classification", "version-classification", "version-classification",
+    (payload) => payload.candidate_sha256 === candidate.sha256 &&
+      payload.version === candidate.version &&
+      payload.release_manifest_core_sha256 === hash(releaseManifestCoreBytes)],
   ["repository_controls", "repository-controls", "repository-controls",
     (payload) => payload.commit_sha === candidate.source_commit],
   ["cross_language", "cross-language", "cross-language",
@@ -96,7 +101,7 @@ for (const [field, role, filename, binding] of entries) {
   const envelope = bundle[field];
   const payload = verifyTrustedEnvelope(envelope, trustPolicy, role);
   assert.notEqual(payload, undefined, `Invalid trusted ${field} evidence.`);
-  if (["approval", "publication", "sbom-validation", "external-interfaces"].includes(role)) {
+  if (["approval", "version-classification", "publication", "sbom-validation", "external-interfaces"].includes(role)) {
     assert.equal(validateTrustedRolePayload(role, payload), true);
   }
   assert.equal(binding(payload), true, `Mismatched ${field} candidate binding.`);

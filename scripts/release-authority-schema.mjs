@@ -28,6 +28,16 @@ export function validateTrustedRolePayload(role, payload) {
     assert.equal(payload.approval_decision, "APPROVE");
     assert.match(payload.approver_role, /^[A-Za-z0-9._-]+$/);
     assert.match(payload.policy_id, /^[A-Za-z0-9._-]+$/);
+  } else if (role === "version-classification") {
+    exact(payload, [
+      "candidate_sha256", "classification", "expires_at", "issued_at",
+      "release_manifest_core_sha256", "status", "version",
+    ]);
+    sha256(payload.candidate_sha256, "candidate_sha256");
+    sha256(payload.release_manifest_core_sha256,
+      "release_manifest_core_sha256");
+    assert.match(payload.version, /^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/);
+    assert.match(payload.classification, /^(?:initial|major|minor|patch)$/);
   } else if (role === "publication") {
     exact(payload, [
       "candidate_sha256", "dist_tag", "expires_at", "issued_at",
