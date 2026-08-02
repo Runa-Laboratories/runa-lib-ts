@@ -49,7 +49,7 @@ const requireTrusted = async (file, gate, role) => {
     blockers.push({ gate, reason: "Evidence signature, role, status, or freshness is invalid." });
     return undefined;
   }
-  if (["approval", "publication", "sbom-validation", "external-interfaces"].includes(role)) {
+  if (["approval", "version-classification", "publication", "sbom-validation", "external-interfaces"].includes(role)) {
     try {
       validateTrustedRolePayload(role, payload);
     } catch {
@@ -122,6 +122,27 @@ if (approval !== undefined && candidate !== undefined) {
     blockers.push({
       gate: "release-approval",
       reason: "Approval is not bound to the exact release manifest core and tarball.",
+    });
+  }
+}
+const versionClassification = await requireTrusted(
+  "evidence/version-classification.json",
+  "semver-classification",
+  "version-classification",
+);
+if (versionClassification !== undefined && candidate !== undefined &&
+    releaseManifestCore !== undefined) {
+  try {
+    validateTrustedRolePayload("version-classification", versionClassification);
+    const coreBytes = await readFile("release-artifacts/release-manifest-core.json");
+    if (versionClassification.candidate_sha256 !== candidate.sha256 ||
+        versionClassification.version !== candidate.version ||
+        versionClassification.release_manifest_core_sha256 !==
+          createHash("sha256").update(coreBytes).digest("hex")) throw new Error();
+  } catch {
+    blockers.push({
+      gate: "semver-classification",
+      reason: "Version classification is not bound to the exact release manifest core.",
     });
   }
 }

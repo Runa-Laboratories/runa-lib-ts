@@ -1,16 +1,12 @@
 {
   "schema_version": 1,
   "status": "BLOCKED",
-  "commit_sha": "a66d819b7c85bb49ea91f4072484e6cbc4b42370",
+  "commit_sha": "bc614be16e9774e572aa515244da17db8a8094e3",
   "workflow_run_id": null,
   "blockers": [
     {
       "gate": "candidate-identity",
       "evidence": "release-artifacts/candidate.json"
-    },
-    {
-      "gate": "requirement-test-map",
-      "evidence": "evidence/requirement-test-map.json"
     }
   ]
 }

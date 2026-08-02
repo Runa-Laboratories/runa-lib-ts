@@ -20,6 +20,11 @@ test("trusted signatures cannot substitute for closed release-role semantics", (
       release_manifest_core_sha256: digest, approval_decision: "APPROVE",
       approver_role: "release-owner", policy_id: "TS-RELEASE-V1",
     },
+    "version-classification": {
+      ...common, candidate_sha256: digest,
+      release_manifest_core_sha256: digest, version: "0.1.0",
+      classification: "initial",
+    },
     publication: {
       ...common, candidate_sha256: digest, package_name: "@runa/sdk",
       version: "0.1.0", registry: "https://registry.npmjs.org",

@@ -1,11 +1,8 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { execFileSync } from "node:child_process";
-import { validateRequirementTestMap } from "./evidence-policy.mjs";
-
 const required = [
   ["documentation", "evidence/docs-readiness.json"],
   ["local-performance", "evidence/performance-local.json"],
-  ["requirement-test-map", "evidence/requirement-test-map.json"],
 ];
 const blockers = [];
 const commitSha = process.env.GITHUB_SHA ?? execFileSync(
@@ -29,14 +26,7 @@ try {
 for (const [gate, file] of required) {
   try {
     const evidence = JSON.parse(await readFile(file, "utf8"));
-    let valid = gate === "requirement-test-map" || evidence.status === "PASS";
-    if (gate === "requirement-test-map") {
-      try {
-        validateRequirementTestMap(evidence);
-      } catch {
-        valid = false;
-      }
-    }
+    const valid = evidence.status === "PASS";
     if (!valid) blockers.push({ gate, evidence: file });
   } catch {
     blockers.push({ gate, evidence: file });

@@ -23,6 +23,53 @@ export function canonicalizeJson(value) {
     `${JSON.stringify(key)}:${canonicalizeJson(value[key])}`).join(",")}}`;
 }
 
+export const EXPECTED_RELEASE_POLICY = Object.freeze({
+  packageMetadata: { repository: "https://github.com/Runa-Laboratories/runa-lib-ts" },
+  provenance: {
+    attestation: "actions/attest-build-provenance@0f67c3f4856b2e3261c31976d6725780e5e4c373",
+    verifier: "gh attestation verify <artifact> --repo Runa-Laboratories/runa-lib-ts --signer-workflow Runa-Laboratories/runa-lib-ts/.github/workflows/release.yml",
+  },
+  publisher: { ci: {
+    environment: "npm", idToken: "write", minimumNode: "22.14.0",
+    minimumNpm: "11.5.1", platform: "github-hosted-github-actions",
+    workflow: ".github/workflows/release.yml",
+  } },
+  registry: {
+    package: "@runa/sdk", url: "https://registry.npmjs.org/",
+    verificationPath: "GET https://registry.npmjs.org/@runa%2fsdk/${version}",
+  },
+  sbom: {
+    format: "CycloneDX 1.6 JSON",
+    schemaPath: null,
+    verifier: "external-authority-required",
+  },
+  sourceControl: {
+    branchProtection: {
+      directPushes: false, dismissStaleApprovals: true,
+      requireCodeOwnerReviews: true, requiredApprovingReviews: 1,
+      requiredStatusChecks: ["ts-quality-gates", "release-admission"],
+    },
+    provider: "github", releaseBranch: "main",
+    repository: "Runa-Laboratories/runa-lib-ts",
+    repositoryUri: "https://github.com/Runa-Laboratories/runa-lib-ts",
+  },
+  tag: {
+    signature: {
+      certificateIdentity: "https://github.com/Runa-Laboratories/runa-lib-ts/.github/workflows/release.yml@refs/heads/main",
+      issuer: "https://token.actions.githubusercontent.com",
+      technology: "sigstore-keyless",
+    },
+    template: "ts-v${version}",
+  },
+  trustedPublisher: {
+    allowedAction: "npm publish", audience: "npm:registry.npmjs.org",
+    environment: "npm", issuer: "https://token.actions.githubusercontent.com",
+    organization: "Runa-Laboratories", repository: "runa-lib-ts",
+    subject: "repo:Runa-Laboratories/runa-lib-ts:environment:npm",
+    workflow: "release.yml",
+  },
+});
+
 const readBytes = (root, file) => readFile(path.join(root, file));
 const jsonDigest = async (root, file) => sha256(Buffer.from(canonicalizeJson(
   JSON.parse((await readBytes(root, file)).toString("utf8")),
@@ -38,6 +85,9 @@ export async function createReleaseManifestCore({
     repositoryRoot, "package.json")).toString("utf8"));
   const compatibilityCatalog = JSON.parse((await readBytes(
     repositoryRoot, "compatibility/ts-050-evidence-v1.json")).toString("utf8"));
+  const releasePolicy = JSON.parse((await readBytes(
+    repositoryRoot, ".runa/release-policy.json")).toString("utf8"));
+  assert.deepEqual(releasePolicy, EXPECTED_RELEASE_POLICY);
   assert.equal(candidate.package, packageJson.name);
   assert.equal(candidate.version, packageJson.version);
   const evidenceFiles = [
@@ -76,7 +126,11 @@ export async function createReleaseManifestCore({
     },
     release: {
       tag: `ts-v${candidate.version}`,
-      semver_class: candidate.version.includes("-") ? "prerelease" : "stable",
+      release_channel: candidate.version.includes("-") ? "prerelease" : "stable",
+      semver_classification: {
+        status: "external-authority-required",
+        evidence_role: "version-classification",
+      },
       compatibility_matrix_revision: compatibilityCatalog.catalog_revision,
     },
     inputs: {
@@ -104,4 +158,4 @@ export async function validateReleaseManifestCore(core, options) {
 }
 
 export const releaseManifestCoreBytes = (core) =>
-  Buffer.from(`${canonicalizeJson(core)}\n`);
+  Buffer.from(canonicalizeJson(core));
