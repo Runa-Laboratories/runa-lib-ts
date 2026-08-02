@@ -78,10 +78,20 @@ export function verifyTrustedEnvelope(envelope, policy, role, now = Date.now(), 
 export function verifyDetachedAuthorityBundle(bundleBytes, bundle, detached, policy) {
   try {
     if (!exactKeys(detached, [
-      "bundle_sha256", "canonical_sha256", "canonicalization", "key_id",
-      "schema_version", "signature",
+      "authority_head_sha", "authority_repository", "authority_run_attempt",
+      "authority_run_id", "authority_workflow", "bundle_sha256", "canonical_sha256",
+      "canonicalization", "key_id", "schema_version", "signature",
     ]) || detached.schema_version !== 2 ||
         detached.canonicalization !== "RFC8785-JCS") return false;
+    if (detached.authority_repository !==
+          "Runa-Laboratories/runa-release-authority" ||
+        detached.authority_workflow !==
+          ".github/workflows/release-authority.yml" ||
+        !Number.isSafeInteger(detached.authority_run_id) ||
+        detached.authority_run_id <= 0 ||
+        !Number.isSafeInteger(detached.authority_run_attempt) ||
+        detached.authority_run_attempt <= 0 ||
+        !/^[a-f0-9]{40}$/u.test(detached.authority_head_sha)) return false;
     const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
     if (detached.bundle_sha256 !== sha256(bundleBytes)) return false;
     const canonicalBytes = jcsBytes(bundle);

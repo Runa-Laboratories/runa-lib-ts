@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { readFile, writeFile } from "node:fs/promises";
 import { verifyTrustedEnvelope } from "./trusted-evidence.mjs";
 import {
+  validateAuthorityPayloadRelations,
   validateSbomEvidenceBinding,
   validateTrustedRolePayload,
 } from "./release-authority-schema.mjs";
@@ -64,7 +65,7 @@ const requireTrusted = async (file, gate, role) => {
     blockers.push({ gate, reason: "Evidence signature, role, status, or freshness is invalid." });
     return undefined;
   }
-  if (["approval", "version-classification", "publication", "sbom-validation", "external-interfaces"].includes(role)) {
+  if (role !== "compatibility") {
     try {
       validateTrustedRolePayload(role, payload);
     } catch {
@@ -170,15 +171,17 @@ if (versionClassification !== undefined && candidate !== undefined &&
 }
 const requirementMap = await readJson(
   "evidence/requirement-test-map.json", "requirement-test-map");
+let externalAcceptance;
+let authorityRun;
 if (requirementMap !== undefined) {
-  const externalAcceptance = await requireTrusted(
+  externalAcceptance = await requireTrusted(
     "evidence/external-acceptance.json", "requirement-test-map", "acceptance-results",
   );
   try {
     if (externalAcceptance === undefined) {
       validateRequirementTestMap(requirementMap);
     } else {
-      const authorityRun = await readJson(
+      authorityRun = await readJson(
         "evidence/authority-run.json", "release-authority-run",
       );
       const coreBytes = await readFile("release-artifacts/release-manifest-core.json");
@@ -251,9 +254,18 @@ if (repository !== undefined && candidate !== undefined && repository.commit_sha
   blockers.push({ gate: "repository-controls", reason: "Repository-control evidence is not bound to the candidate source commit." });
 }
 const crossLanguage = await requireTrusted("evidence/cross-language.json", "cross-language", "cross-language");
-if (crossLanguage !== undefined && provenance !== undefined &&
-    crossLanguage.canonical_contract_sha256 !== provenance.canonical_contract_sha256) {
-  blockers.push({ gate: "cross-language", reason: "Cross-language evidence is not bound to the canonical contract." });
+if (crossLanguage !== undefined && provenance !== undefined && candidate !== undefined) {
+  if (authorityRun === undefined) {
+    authorityRun = await readJson("evidence/authority-run.json", "release-authority-run");
+  }
+  if (crossLanguage.canonical_contract_sha256 !== provenance.canonical_contract_sha256 ||
+      crossLanguage.candidate_sha256 !== candidate.sha256 ||
+      crossLanguage.candidate_source_commit !== candidate.source_commit ||
+      crossLanguage.typescript_artifact.sha256 !== candidate.sha256 ||
+      crossLanguage.typescript_artifact.filename !== candidate.filename ||
+      crossLanguage.authority_head_sha !== authorityRun?.head_sha) {
+    blockers.push({ gate: "cross-language", reason: "Cross-language evidence is not bound to the exact contract, candidate, source, and authority run." });
+  }
 }
 const publication = await requireTrusted("evidence/publication-readiness.json", "publication-readiness", "publication");
 if (publication !== undefined && candidate !== undefined && publication.candidate_sha256 !== candidate.sha256) {
@@ -323,6 +335,28 @@ const externalInterfaces = await requireTrusted(
 if (externalInterfaces !== undefined && candidate !== undefined &&
     externalInterfaces.candidate_sha256 !== candidate.sha256) {
   blockers.push({ gate: "external-release-interfaces", reason: "External interface evidence is not bound to the candidate." });
+}
+if ([approval, versionClassification, repository, crossLanguage, publication,
+  sbomValidation, externalInterfaces, externalAcceptance].every(
+  (payload) => payload !== undefined,
+) && provenance !== undefined) {
+  try {
+    validateAuthorityPayloadRelations({
+      approval_receipt: approval,
+      version_classification: versionClassification,
+      repository_controls: repository,
+      cross_language: crossLanguage,
+      publication_readiness: publication,
+      sbom_validation: sbomValidation,
+      external_release_interfaces: externalInterfaces,
+      acceptance_results: externalAcceptance,
+    }, provenance);
+  } catch {
+    blockers.push({
+      gate: "release-authority-relations",
+      reason: "Trusted role payloads contradict one another.",
+    });
+  }
 }
 const report = {
   schema_version: 2,

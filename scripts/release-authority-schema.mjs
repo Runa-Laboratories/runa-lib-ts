@@ -173,7 +173,7 @@ export function validateTrustedRolePayload(role, payload) {
     assert.equal(payload.schema_version, 1);
     sha256(payload.candidate_sha256, "candidate_sha256");
     sha256(payload.release_manifest_core_sha256, "release_manifest_core_sha256");
-    assert.match(payload.prd_source_digest, /^sha256:[a-f0-9]{64}$/u);
+    sha256(payload.prd_source_digest, "prd_source_digest");
     exact(payload.oracle, [
       "head_sha", "provider", "repository", "run_attempt", "run_id", "workflow",
     ], "acceptance oracle");

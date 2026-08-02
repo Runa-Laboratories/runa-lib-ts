@@ -5,6 +5,10 @@ import {
   verifyDetachedAuthorityBundle,
   verifyTrustedEnvelope,
 } from "./trusted-evidence.mjs";
+import {
+  validateAuthorityPayloadRelations,
+  validateTrustedRolePayload,
+} from "./release-authority-schema.mjs";
 
 export const AUTHORITY_REPOSITORY = "Runa-Laboratories/runa-release-authority";
 export const AUTHORITY_WORKFLOW = ".github/workflows/release-authority.yml";
@@ -54,6 +58,14 @@ const apiHeaders = Object.freeze({
 });
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
 
+export function parseProducerJson(bytes, label) {
+  assert(Buffer.isBuffer(bytes), `${label} is not a byte buffer.`);
+  const value = JSON.parse(bytes.toString("utf8"));
+  assert.deepEqual(bytes, Buffer.from(`${JSON.stringify(value, null, 2)}\n`),
+    `${label} is not the unique producer JSON serialization.`);
+  return value;
+}
+
 async function limitedBytes(response, maximumBytes, label) {
   const length = response.headers.get("content-length");
   if (length !== null) {
@@ -100,6 +112,26 @@ export function validateAuthorityRun(run, expected, runId) {
   assert.match(run.head_sha, /^[0-9a-f]{40}$/u);
   assert(Number.isSafeInteger(run.run_attempt) && run.run_attempt > 0);
   return run;
+}
+
+export function validateAuthorityContinuity(actual, expected = {}) {
+  assert.match(actual.bundleSha256, /^[a-f0-9]{64}$/u);
+  assert.match(actual.headSha, /^[a-f0-9]{40}$/u);
+  assert(Number.isSafeInteger(actual.runId) && actual.runId > 0);
+  assert(Number.isSafeInteger(actual.runAttempt) && actual.runAttempt > 0);
+  for (const [field, pattern] of [
+    ["bundleSha256", /^[a-f0-9]{64}$/u],
+    ["headSha", /^[a-f0-9]{40}$/u],
+    ["runId", /^[1-9][0-9]*$/u],
+    ["runAttempt", /^[1-9][0-9]*$/u],
+  ]) {
+    if (expected[field] !== undefined) {
+      assert.match(String(expected[field]), pattern);
+      assert.equal(String(actual[field]), String(expected[field]),
+        `Authority ${field} changed after phase A.`);
+    }
+  }
+  return true;
 }
 
 export async function fetchAuthorityRun(expected, runId, fetchImpl = fetch) {
@@ -168,7 +200,7 @@ async function downloadAsset(url, maximumBytes, fetchImpl) {
   return limitedBytes(response, maximumBytes, "Public release asset");
 }
 
-export function verifyAuthorityAssets(assets, trustPolicy, now = Date.now()) {
+export function verifyAuthorityAssets(assets, trustPolicy, now = Date.now(), authorityRun) {
   const bundleBytes = assets.get("release-authority-bundle.json");
   const signatureBytes = assets.get("release-authority-bundle.json.sig");
   const checksumBytes = assets.get("release-authority-bundle.json.sha256");
@@ -178,16 +210,29 @@ export function verifyAuthorityAssets(assets, trustPolicy, now = Date.now()) {
   const match = /^([a-f0-9]{64})  release-authority-bundle\.json\n$/u.exec(checksum);
   assert.notEqual(match, null, "Authority checksum file is invalid.");
   assert.equal(sha256(bundleBytes), match[1], "Authority bundle SHA-256 differs.");
-  const bundle = JSON.parse(bundleBytes.toString("utf8"));
-  const detached = JSON.parse(signatureBytes.toString("utf8"));
+  const bundle = parseProducerJson(bundleBytes, "Authority bundle");
+  const detached = parseProducerJson(signatureBytes, "Detached authority signature");
+  assert.equal(authorityRun !== null && typeof authorityRun === "object", true,
+    "Expected authority run identity is absent.");
+  assert.equal(detached.authority_repository, AUTHORITY_REPOSITORY);
+  assert.equal(detached.authority_workflow, AUTHORITY_WORKFLOW);
+  assert.equal(detached.authority_run_id, authorityRun.id ?? authorityRun.run_id);
+  assert.equal(detached.authority_run_attempt, authorityRun.run_attempt);
+  assert.equal(detached.authority_head_sha, authorityRun.head_sha);
   assert.equal(verifyDetachedAuthorityBundle(
     bundleBytes, bundle, detached, trustPolicy,
   ), true, "Detached authority signature is invalid.");
+  const payloads = {};
   for (const [field, role] of ROLE_FIELDS) {
-    assert.notEqual(verifyTrustedEnvelope(
+    const payload = verifyTrustedEnvelope(
       bundle[field], trustPolicy, role, now, { requiredSchemaVersion: 2 },
-    ), undefined, `Embedded ${role} JCS signature is invalid.`);
+    );
+    assert.notEqual(payload, undefined, `Embedded ${role} JCS signature is invalid.`);
+    assert.equal(validateTrustedRolePayload(role, payload), true,
+      `Embedded ${role} payload is invalid.`);
+    payloads[field] = payload;
   }
+  assert.equal(validateAuthorityPayloadRelations(payloads, bundle.contract_provenance), true);
   return { bundle, bundleBytes, detached };
 }
 
@@ -207,6 +252,6 @@ export async function retrievePublicAuthorityAssets(expected, runId, trustPolicy
       urls.get(name), PUBLIC_ASSET_LIMITS[name], fetchImpl,
     ));
   }
-  const verified = verifyAuthorityAssets(assets, trustPolicy, now);
+  const verified = verifyAuthorityAssets(assets, trustPolicy, now, run);
   return { ...verified, assets, run };
 }

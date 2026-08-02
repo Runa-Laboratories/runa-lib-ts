@@ -66,7 +66,7 @@ test("release workflow is one protected dispatch with pinned signing and at-most
   assert.match(workflow, /sign-tag:\s*\n\s+needs: phase-a/u);
   assert.match(workflow, /admission:\s*\n\s+name: release-admission\s*\n\s+needs: \[phase-a, sign-tag\]/u);
   assert.match(workflow, /asset-staging:\s*\n\s+needs: admission/u);
-  assert.match(workflow, /publish:\s*\n\s+needs: asset-staging/u);
+  assert.match(workflow, /publish:\s*\n\s+needs: \[phase-a, asset-staging\]/u);
   assert.match(workflow, /release-promotion:\s*\n\s+needs: publish/u);
   const assetBody = workflow.slice(
     workflow.indexOf("  asset-staging:"), workflow.indexOf("  publish:"),
@@ -87,6 +87,15 @@ test("release workflow is one protected dispatch with pinned signing and at-most
   const publish = workflow.indexOf("npm publish");
   assert.equal(preflight >= 0 && preflight < provenance &&
     provenance < assets && assets < publish, true);
+  const publishRevalidation = workflow.indexOf(
+    "Revalidate exact authority bytes, identity, bindings, and freshness",
+  );
+  assert.equal(publishRevalidation >= 0 && publishRevalidation < publish, true);
+  assert.match(workflow,
+    /authority_bundle_sha256: \$\{\{ steps\.authority_bundle\.outputs\.bundle_sha256 \}\}/u);
+  assert.equal((workflow.match(/authority-input\//gu) ?? []).length >= 2, true);
+  assert.match(workflow,
+    /RUNA_EXPECTED_AUTHORITY_BUNDLE_SHA256: \$\{\{ needs\.phase-a\.outputs\.authority_bundle_sha256 \}\}/u);
   assert.match(ci, /release-admission:\s*\n\s+name: release-admission/u);
   assert.match(ci, /name: release-admission\s*\n\s+needs: \[candidate, compatibility\]/u);
   assert.match(ci, /npm run release:ci:admission/u);

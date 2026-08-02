@@ -6,6 +6,7 @@ import { validateExternalAcceptancePayload } from "./acceptance-receipts.mjs";
 import { appendReleaseManifestState } from "./release-manifest-envelope.mjs";
 import { verifyTrustedEnvelope } from "./trusted-evidence.mjs";
 import {
+  validateAuthorityPayloadRelations,
   validateSbomEvidenceBinding,
   validateTrustedRolePayload,
 } from "./release-authority-schema.mjs";
@@ -13,14 +14,15 @@ import {
   resolveReleaseChannel,
   validateReleaseMapping,
 } from "./postpublish-policy.mjs";
+import { verifyAuthorityAssets } from "./public-authority-transport.mjs";
 
 const preflightOnly = process.env.RUNA_AUTHORITY_PREFLIGHT === "1";
 const authorityInput = process.env.RUNA_AUTHORITY_INPUT_DIR ?? "authority-input";
 let bundle;
+let bundleBytes;
 try {
-  bundle = JSON.parse(await readFile(
-    `${authorityInput}/release-authority-bundle.json`, "utf8",
-  ));
+  bundleBytes = await readFile(`${authorityInput}/release-authority-bundle.json`);
+  bundle = JSON.parse(bundleBytes.toString("utf8"));
 } catch {
   throw new Error("Independently downloaded release authority bundle is missing or invalid.");
 }
@@ -49,6 +51,21 @@ try {
   console.log("release authority import: BLOCKED (no accepted trust root)");
   process.exit(0);
 }
+const authorityAssets = new Map([
+  ["release-authority-bundle.json", bundleBytes],
+  ["release-authority-bundle.json.sig",
+    await readFile(`${authorityInput}/release-authority-bundle.json.sig`)],
+  ["release-authority-bundle.json.sha256",
+    await readFile(`${authorityInput}/release-authority-bundle.json.sha256`)],
+]);
+const verifiedAuthority = verifyAuthorityAssets(authorityAssets, trustPolicy, Date.now());
+bundle = verifiedAuthority.bundle;
+const expectedBundleSha = process.env.RUNA_EXPECTED_AUTHORITY_BUNDLE_SHA256;
+if (expectedBundleSha !== undefined) {
+  assert.match(expectedBundleSha, /^[a-f0-9]{64}$/u);
+  assert.equal(verifiedAuthority.detached.bundle_sha256, expectedBundleSha,
+    "Authority bytes differ from the phase-A identity.");
+}
 const releasePolicy = JSON.parse(await readFile(".runa/release-policy.json", "utf8"));
 const authorityRun = JSON.parse(await readFile("evidence/authority-run.json", "utf8"));
 assert.deepEqual(Object.keys(authorityRun).sort(), [
@@ -64,6 +81,18 @@ assert.equal(authorityRun.artifact, releasePolicy.releaseAuthority.authority.art
 assert.match(authorityRun.head_sha, /^[0-9a-f]{40}$/u);
 assert(Number.isSafeInteger(authorityRun.run_id) && authorityRun.run_id > 0);
 assert(Number.isSafeInteger(authorityRun.run_attempt) && authorityRun.run_attempt > 0);
+for (const [environment, actual, pattern] of [
+  ["RUNA_EXPECTED_AUTHORITY_HEAD_SHA", authorityRun.head_sha, /^[a-f0-9]{40}$/u],
+  ["RUNA_EXPECTED_AUTHORITY_RUN_ID", String(authorityRun.run_id), /^[1-9][0-9]*$/u],
+  ["RUNA_EXPECTED_AUTHORITY_RUN_ATTEMPT", String(authorityRun.run_attempt), /^[1-9][0-9]*$/u],
+]) {
+  const expectedValue = process.env[environment];
+  if (expectedValue !== undefined) {
+    assert.match(expectedValue, pattern);
+    assert.equal(String(actual), expectedValue,
+      `${environment} differs from the phase-A authority identity.`);
+  }
+}
 const candidateBytes = await readFile("release-artifacts/candidate.json");
 const candidate = JSON.parse(candidateBytes.toString("utf8"));
 const releaseManifestCoreBytes = await readFile(
@@ -105,7 +134,12 @@ const entries = [
   ["repository_controls", "repository-controls", "repository-controls",
     (payload) => payload.commit_sha === candidate.source_commit],
   ["cross_language", "cross-language", "cross-language",
-    (payload) => payload.canonical_contract_sha256 === canonical],
+    (payload) => payload.canonical_contract_sha256 === canonical &&
+      payload.candidate_sha256 === candidate.sha256 &&
+      payload.candidate_source_commit === candidate.source_commit &&
+      payload.typescript_artifact.sha256 === candidate.sha256 &&
+      payload.typescript_artifact.filename === candidate.filename &&
+      payload.authority_head_sha === authorityRun.head_sha],
   ["publication_readiness", "publication", "publication-readiness",
     (payload) => payload.candidate_sha256 === candidate.sha256 &&
       payload.package_name === releaseMapping.package_name &&
@@ -136,15 +170,15 @@ const entries = [
     }],
 ];
 const retained = [];
+const payloads = {};
 for (const [field, role, filename, binding] of entries) {
   const envelope = bundle[field];
   const payload = verifyTrustedEnvelope(envelope, trustPolicy, role, Date.now(), {
     requiredSchemaVersion: 2,
   });
   assert.notEqual(payload, undefined, `Invalid trusted ${field} evidence.`);
-  if (["approval", "version-classification", "publication", "sbom-validation", "external-interfaces"].includes(role)) {
-    assert.equal(validateTrustedRolePayload(role, payload), true);
-  }
+  assert.equal(validateTrustedRolePayload(role, payload), true);
+  payloads[field] = payload;
   assert.equal(binding(payload), true, `Mismatched ${field} candidate binding.`);
   if (role === "sbom-validation") {
     assert.equal(validateSbomEvidenceBinding(payload, {
@@ -156,6 +190,7 @@ for (const [field, role, filename, binding] of entries) {
   }
   retained.push([`evidence/${filename}.json`, envelope]);
 }
+assert.equal(validateAuthorityPayloadRelations(payloads, bundle.contract_provenance), true);
 if (!preflightOnly) {
   await mkdir("evidence", { recursive: true });
   await writeFile("contracts/runa-sdk-contract.provenance.json",
