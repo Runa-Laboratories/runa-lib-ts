@@ -13,25 +13,26 @@ const lockfileSha256 = createHash("sha256").update(
 const workflowSha256 = createHash("sha256").update(
   await readFile(".github/workflows/ci.yml"),
 ).digest("hex");
-const predicateBytes = await readFile("evidence/provenance-predicate.json");
-const predicate = JSON.parse(predicateBytes.toString("utf8"));
 const bundleBytes = await readFile(process.env.RUNA_ATTESTATION_BUNDLE);
 const statement = extractAttestationStatement(bundleBytes.toString("utf8"), candidate);
-assert.deepEqual(statement.predicate, predicate,
-  "Signed DSSE predicate differs from retained predicate.");
+const predicate = statement.predicate;
+const predicateBytes = Buffer.from(`${JSON.stringify(predicate, null, 2)}\n`);
 const builderIdentity =
   "https://github.com/Runa-Laboratories/runa-lib-ts/.github/workflows/ci.yml@refs/heads/main";
+assert.match(process.env.GITHUB_REPOSITORY_ID ?? "", /^\d+$/u);
+assert.match(process.env.GITHUB_REPOSITORY_OWNER_ID ?? "", /^\d+$/u);
 validateSignedProvenancePredicate(predicate, {
   sourceCommit: candidate.source_commit,
-  intendedTag: `ts-v${candidate.version}`,
-  lockfileSha256,
-  workflowSha256,
-  runId: Number(process.env.GITHUB_RUN_ID),
-  runAttempt: Number(process.env.GITHUB_RUN_ATTEMPT),
+  workflowRef: "refs/heads/main",
+  repository: "https://github.com/Runa-Laboratories/runa-lib-ts",
+  workflowPath: ".github/workflows/ci.yml",
+  eventName: "push",
+  repositoryId: process.env.GITHUB_REPOSITORY_ID,
+  repositoryOwnerId: process.env.GITHUB_REPOSITORY_OWNER_ID,
+  runnerEnvironment: "github-hosted",
+  sourceUri: "git+https://github.com/Runa-Laboratories/runa-lib-ts@refs/heads/main",
   builderIdentity,
   invocationId: `https://github.com/Runa-Laboratories/runa-lib-ts/actions/runs/${process.env.GITHUB_RUN_ID}/attempts/${process.env.GITHUB_RUN_ATTEMPT}`,
-  buildStartedAt: candidate.build_started_at,
-  buildFinishedAt: candidate.build_finished_at,
 });
 const command = [
   "attestation", "verify", `release-artifacts/${candidate.filename}`,
@@ -45,6 +46,7 @@ const verifiedAt = new Date().toISOString();
 const version = spawnSync("gh", ["--version"], { encoding: "utf8" });
 assert.equal(version.status, 0);
 await mkdir("evidence", { recursive: true });
+await writeFile("evidence/provenance-predicate.json", predicateBytes);
 await writeFile("evidence/provenance-verifier.json", `${JSON.stringify({
   schema_version: 1,
   status: "PASS",
@@ -52,12 +54,12 @@ await writeFile("evidence/provenance-verifier.json", `${JSON.stringify({
   command: ["gh", ...command],
   signer_workflow: "Runa-Laboratories/runa-lib-ts/.github/workflows/ci.yml",
   builder_identity: builderIdentity,
-  source_commit: predicate.buildDefinition.externalParameters.source_commit,
-  intended_tag: predicate.buildDefinition.externalParameters.intended_tag,
+  source_commit: candidate.source_commit,
+  intended_tag: `ts-v${candidate.version}`,
   lockfile_sha256: lockfileSha256,
   build_definition_sha256: workflowSha256,
-  build_started_at: predicate.runDetails.metadata.startedOn,
-  build_finished_at: predicate.runDetails.metadata.finishedOn,
+  build_started_at: candidate.build_started_at,
+  build_finished_at: candidate.build_finished_at,
   verified_at: verifiedAt,
   predicate_sha256: createHash("sha256").update(predicateBytes).digest("hex"),
   verifier_version_sha256: createHash("sha256")

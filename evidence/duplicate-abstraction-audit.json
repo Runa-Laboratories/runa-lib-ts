@@ -2,7 +2,7 @@
   "schema_version": 2,
   "status": "PASS",
   "method": "scripts/verify-duplicate-abstractions.mjs",
-  "audited_source_sha256": "861a1dcf010e9ee40f12324e0f19eb2cf3aaf1810210f353ba35aad4a6718ad4",
+  "audited_source_sha256": "2d6e359f46657203ae2717f9ee325af698232de4d8024811e175810ca56eb8e2",
   "audited_files": [
     "src/client.ts",
     "src/config.ts",
@@ -26,7 +26,6 @@
     "scripts/aggregate-compatibility.mjs",
     "scripts/attestation-bundle.mjs",
     "scripts/build-evidence.mjs",
-    "scripts/build-provenance-predicate.mjs",
     "scripts/build-release-candidate.mjs",
     "scripts/build-release-manifest-core.mjs",
     "scripts/ci-run-policy.mjs",
@@ -137,7 +136,6 @@
       "disposition": "accepted-job-local",
       "owners": [
         "scripts/acceptance-receipts.mjs",
-        "scripts/build-provenance-predicate.mjs",
         "scripts/build-release-candidate.mjs",
         "scripts/import-release-authority.mjs",
         "scripts/prd-catalog.mjs",
@@ -169,7 +167,7 @@
         "scripts/verify-release-smoke.mjs"
       ],
       "observed": {
-        "sha256_call_sites": 46
+        "sha256_call_sites": 45
       },
       "rationale": "Release tools are independently executable trust-boundary gates; their one-line SHA-256 calculations remain local and compare the same candidate rather than sharing mutable evidence state."
     },
