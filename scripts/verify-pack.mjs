@@ -12,6 +12,16 @@ const npmRun = (arguments_, options = {}) =>
 const packed = npmRun(["pack", "--json", "--ignore-scripts"]);
 if (packed.status !== 0) throw new Error("Package creation failed.");
 const [metadata] = JSON.parse(packed.stdout);
+const packedManifest = JSON.parse(await readFile("package.json", "utf8"));
+assert.deepEqual(packedManifest.repository, {
+  type: "git",
+  url: "git+https://github.com/Runa-Laboratories/runa-lib-ts.git",
+});
+assert.deepEqual(packedManifest.publishConfig, {
+  access: "public",
+  registry: "https://registry.npmjs.org",
+  provenance: true,
+});
 assert(metadata.size <= 1_048_576);
 const allowed = /^(?:package\/)?(?:package\.json|README\.md|LICENSE|dist\/.+)$/;
 for (const file of metadata.files) assert.match(file.path, allowed);

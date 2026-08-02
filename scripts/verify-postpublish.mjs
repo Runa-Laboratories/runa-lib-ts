@@ -56,20 +56,14 @@ try {
   const registryBytes = Buffer.from(await response.arrayBuffer());
   const registrySha256 = hash(registryBytes);
   assert.equal(registrySha256, candidate.sha256);
-  transitions.push("registry-verified");
-  await writeState("registry-verified", {
-    registry_tarball_sha256: registrySha256,
-    registry_metadata_verified: true,
-  });
-
   const repository = process.env.GITHUB_REPOSITORY;
-  assert.equal(typeof repository, "string");
-  assert.match(repository, /^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/);
+  assert.equal(repository, "Runa-Laboratories/runa-lib-ts");
   assert.equal(path.extname(bundle), ".jsonl");
   const verifyResult = spawnSync("gh", [
     "attestation", "verify",
     path.resolve("release-artifacts", candidate.filename),
     "--repo", repository,
+    "--signer-workflow", "Runa-Laboratories/runa-lib-ts/.github/workflows/release.yml",
   ], { encoding: "utf8" });
   assert.equal(verifyResult.status, 0, "R-018-12: GitHub attestation verification failed");
   const apiResult = spawnSync("gh", [
@@ -81,6 +75,7 @@ try {
     await readFile(bundle, "utf8"),
     candidate,
   ), true);
+  transitions.push("registry-verified");
   transitions.push("handoff");
   const receipt = {
     schema_version: 1,

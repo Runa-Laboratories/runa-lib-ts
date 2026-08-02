@@ -1,8 +1,10 @@
 import { readFile, writeFile } from "node:fs/promises";
+import { validateRequirementTestMap } from "./evidence-policy.mjs";
 
 const required = [
   ["documentation", "evidence/docs-readiness.json"],
   ["local-performance", "evidence/performance-local.json"],
+  ["requirement-test-map", "evidence/requirement-test-map.json"],
 ];
 const blockers = [];
 let commitSha = process.env.GITHUB_SHA ?? null;
@@ -23,6 +25,13 @@ for (const [gate, file] of required) {
   try {
     const evidence = JSON.parse(await readFile(file, "utf8"));
     if (evidence.status !== "PASS") blockers.push({ gate, evidence: file });
+    if (gate === "requirement-test-map") {
+      try {
+        validateRequirementTestMap(evidence);
+      } catch {
+        blockers.push({ gate, evidence: file });
+      }
+    }
   } catch {
     blockers.push({ gate, evidence: file });
   }

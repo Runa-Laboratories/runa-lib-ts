@@ -18,9 +18,9 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: 22.17.1
+      - run: node scripts/verify-release-tag.mjs
       - run: npm install --global npm@10.9.2
       - run: npm ci
-      - run: npm run release:tag:verify
       - run: npm run quality
       - run: npm run release:candidate
       - run: npm run release:local-gates
@@ -131,7 +131,7 @@ jobs:
         uses: actions/attest-build-provenance@0f67c3f4856b2e3261c31976d6725780e5e4c373
         with:
           subject-path: release-artifacts/${{ needs.admission.outputs.filename }}
-      - run: npm publish "release-artifacts/${{ needs.admission.outputs.filename }}" --provenance --access public --tag "${{ steps.mapping.outputs.dist_tag }}"
+      - run: npm publish "release-artifacts/${{ needs.admission.outputs.filename }}" --provenance --access public --registry https://registry.npmjs.org/ --tag "${{ steps.mapping.outputs.dist_tag }}"
       - run: npm run release:postpublish:verify
         env:
           RUNA_ATTESTATION_BUNDLE: ${{ steps.attest.outputs.bundle-path }}

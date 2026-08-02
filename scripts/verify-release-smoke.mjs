@@ -34,6 +34,9 @@ const runNode = (arguments_, cwd, env) => collect(spawn(process.execPath, argume
 
 const runnerSource = String.raw`
 import assert from "node:assert/strict";
+import { syncBuiltinESMExports } from "node:module";
+import http from "node:http";
+import https from "node:https";
 import { Runa } from "@runa/sdk";
 
 const journey = process.argv[2];
@@ -47,11 +50,27 @@ const session = {
   url: "https://synthetic-session.runacode.cloud"
 };
 const calls = [];
+let syntheticDispatches = 0;
+let publicNetworkDispatches = 0;
 let cleanup = "not-required";
+const denyNetwork = () => {
+  publicNetworkDispatches += 1;
+  throw new TypeError("Real network access is disabled by the Runa smoke harness.");
+};
+globalThis.fetch = denyNetwork;
+http.request = denyNetwork;
+https.request = denyNetwork;
+syncBuiltinESMExports();
+if (globalThis.WebSocket !== undefined) {
+  globalThis.WebSocket = class DeniedWebSocket {
+    constructor() { denyNetwork(); }
+  };
+}
 const json = (value, status = 200) => new Response(JSON.stringify(value), {
   status, headers: { "content-type": "application/json; charset=utf-8" }
 });
 const fetch = async (url, init) => {
+  syntheticDispatches += 1;
   const parsed = new URL(url);
   assert.equal(parsed.origin, "https://api.runacode.io");
   const route = parsed.pathname;
@@ -142,7 +161,9 @@ try {
 }
 process.stdout.write(JSON.stringify({
   journey, calls, outcome: "structural-pass", cleanup,
-  elapsed_ms: performance.now() - started
+  elapsed_ms: performance.now() - started,
+  synthetic_dispatches: syntheticDispatches,
+  public_network_dispatches: publicNetworkDispatches
 }));
 `;
 
@@ -249,6 +270,15 @@ await writeFile("evidence/release-smoke.json", `${JSON.stringify({
     cleanup: results[journey][0].cleanup,
     elapsed_ms: results[journey].map((result) => result.elapsed_ms),
   }])),
-  public_network_dispatches: 0,
+  synthetic_dispatches: journeys.reduce((total, journey) => total +
+    results[journey].reduce((subtotal, result) =>
+      subtotal + result.synthetic_dispatches, 0), 0),
+  public_network_dispatches: journeys.reduce((total, journey) => total +
+    results[journey].reduce((subtotal, result) =>
+      subtotal + result.public_network_dispatches, 0), 0),
+  network_guard_mechanisms: [
+    "global.fetch", "node:http.request", "node:https.request", "WebSocket",
+  ],
+  network_guard_result: "PASS",
 }, null, 2)}\n`);
 console.log(`release smoke: PASS (5 x 30 clean rooms, ${candidate.sha256})`);

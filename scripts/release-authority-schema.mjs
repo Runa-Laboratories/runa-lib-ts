@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 
 const sha256 = (value, field) =>
   assert.match(value, /^[a-f0-9]{64}$/, `Invalid ${field}.`);
@@ -55,5 +56,27 @@ export function validateTrustedRolePayload(role, payload) {
     ]);
     assert.equal(payload.withdrawal_policy_id, "TS-053-WITHDRAWAL-V1");
   }
+  return true;
+}
+
+export function validateSbomEvidenceBinding(payload, {
+  candidateSha256,
+  sbomBytes,
+  runtimeClosure,
+}) {
+  validateTrustedRolePayload("sbom-validation", payload);
+  assert.equal(payload.candidate_sha256, candidateSha256);
+  assert.equal(payload.artifact_subject_sha256, candidateSha256);
+  assert.equal(
+    payload.sbom_sha256,
+    createHash("sha256").update(sbomBytes).digest("hex"),
+  );
+  assert.equal(runtimeClosure.status, "PASS");
+  assert.equal(runtimeClosure.candidate_sha256, candidateSha256);
+  sha256(runtimeClosure.closure_sha256, "runtimeClosure.closure_sha256");
+  assert.equal(
+    payload.dependency_closure_sha256,
+    runtimeClosure.closure_sha256,
+  );
   return true;
 }

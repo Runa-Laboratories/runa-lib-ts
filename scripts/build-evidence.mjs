@@ -121,13 +121,27 @@ const acceptanceResults = [...acceptanceTestIds].sort().map((testId) =>
     : { test_id: testId, status: "NOT_RUN", reason: "No exact-ID execution receipt is retained; external-state cases remain blocked until their owning gate supplies one." }
 );
 const passedCount = acceptanceResults.filter((result) => result.status === "PASS").length;
+for (const row of rows) {
+  if (row.acceptance_test_ids.every((testId) => receipted.has(testId))) {
+    row.status = "PASS";
+    delete row.evidence_missing;
+  }
+}
+const passedRequirements = rows.filter((row) => row.status === "PASS").length;
 await writeFile("evidence/requirement-test-map.json", `${JSON.stringify({
   schema_version: 2,
+  status: passedCount === acceptanceResults.length && passedRequirements === rows.length
+    ? "PASS"
+    : "BLOCKED",
   generated_from: ["prds/libs/shared", "prds/libs/typescript"],
   source_digest: createHash("sha256").update(JSON.stringify(rows)).digest("hex"),
   requirement_count: rows.length,
   acceptance_test_count: acceptanceTestIds.size,
-  requirement_status_summary: { NOT_RUN: rows.length, PASS: 0, BLOCKED: 0 },
+  requirement_status_summary: {
+    NOT_RUN: rows.length - passedRequirements,
+    PASS: passedRequirements,
+    BLOCKED: 0,
+  },
   acceptance_status_summary: { PASS: passedCount, NOT_RUN: acceptanceResults.length - passedCount },
   acceptance_test_ids: [...acceptanceTestIds].sort(),
   acceptance_results: acceptanceResults,
