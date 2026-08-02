@@ -11,6 +11,10 @@ on:
         description: Successful main CI run containing npm-release-candidate
         required: true
         type: string
+      authority_run_id:
+        description: Successful independent authority run containing signed release evidence
+        required: true
+        type: string
 
 permissions:
   actions: read
@@ -21,12 +25,13 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  admission:
-    name: release-admission
+  phase-a:
+    name: phase-a-pre-tag
     runs-on: ubuntu-22.04
-    environment: release-evidence
     outputs:
       filename: ${{ steps.candidate.outputs.filename }}
+      authority_repository: ${{ steps.authority.outputs.repository }}
+      authority_artifact: ${{ steps.authority.outputs.artifact }}
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
@@ -47,6 +52,13 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           RUNA_CANDIDATE_RUN_ID: ${{ inputs.candidate_run_id }}
+      - name: Require public provenance-capable release context
+        run: npm run release:context:verify
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - name: Require accepted independent authority configuration
+        id: authority
+        run: npm run release:authority:config:verify
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
           name: npm-release-candidate
@@ -56,24 +68,14 @@ jobs:
         env:
           RUNA_REQUESTED_VERSION: ${{ inputs.version }}
         run: node -e "const c=require('./release-artifacts/candidate.json');if(c.source_commit!==process.env.GITHUB_SHA||c.version!==process.env.RUNA_REQUESTED_VERSION||c.source_tree_clean!==true)process.exit(1)"
-      - run: npm run release:authority:import
-        env:
-          RUNA_RELEASE_AUTHORITY_BUNDLE_BASE64: ${{ secrets.RUNA_RELEASE_AUTHORITY_BUNDLE_BASE64 }}
       - id: candidate
         run: echo "filename=$(node -p 'require(\"./release-artifacts/candidate.json\").filename')" >> "$GITHUB_OUTPUT"
-      - run: npm run release:readiness
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: admitted-npm-release-candidate
-          path: |
-            release-artifacts/
-            evidence/
-          if-no-files-found: error
+      - name: Pre-tag registry absence check
+        run: npm run release:registry:preflight
 
   sign-tag:
-    needs: admission
+    needs: phase-a
     runs-on: ubuntu-22.04
-    environment: release-evidence
     permissions:
       contents: write
       id-token: write
@@ -108,8 +110,76 @@ jobs:
             "$RUNA_RELEASE_TAG"
           git push origin "refs/tags/$RUNA_RELEASE_TAG"
 
+  admission:
+    name: release-admission
+    needs: [phase-a, sign-tag]
+    runs-on: ubuntu-22.04
+    environment: release-evidence
+    outputs:
+      filename: ${{ steps.candidate.outputs.filename }}
+    permissions:
+      actions: read
+      contents: read
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: refs/tags/ts-v${{ inputs.version }}
+      - uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c
+        with:
+          go-version: '1.25.9'
+          cache: false
+      - name: Install pinned gitsign
+        run: |
+          mkdir -p "$RUNNER_TEMP/gitsign-bin"
+          GOBIN="$RUNNER_TEMP/gitsign-bin" go install github.com/sigstore/gitsign@v0.16.0
+          echo "$RUNNER_TEMP/gitsign-bin" >> "$GITHUB_PATH"
+      - name: Verify immutable tag before authority retrieval
+        run: node scripts/verify-release-tag.mjs
+        env:
+          RUNA_RELEASE_TAG: ts-v${{ inputs.version }}
+          RUNA_RELEASE_COMMIT: ${{ github.sha }}
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 22.17.1
+      - run: npm install --global npm@11.19.0
+      - run: npm ci
+      - name: Verify independent authority run identity
+        run: npm run release:authority:run:verify
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUNA_AUTHORITY_RUN_ID: ${{ inputs.authority_run_id }}
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          repository: ${{ needs.phase-a.outputs.authority_repository }}
+          name: ${{ needs.phase-a.outputs.authority_artifact }}
+          path: authority-input
+          run-id: ${{ inputs.authority_run_id }}
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: npm-release-candidate
+          run-id: ${{ inputs.candidate_run_id }}
+          github-token: ${{ github.token }}
+      - name: Validate downloaded candidate identity
+        env:
+          RUNA_REQUESTED_VERSION: ${{ inputs.version }}
+        run: node -e "const c=require('./release-artifacts/candidate.json');if(c.source_commit!==process.env.GITHUB_SHA||c.version!==process.env.RUNA_REQUESTED_VERSION||c.source_tree_clean!==true)process.exit(1)"
+      - run: npm run release:authority:import
+      - id: candidate
+        run: echo "filename=$(node -p 'require(\"./release-artifacts/candidate.json\").filename')" >> "$GITHUB_OUTPUT"
+      - run: npm run release:readiness
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: admitted-npm-release-candidate
+          path: |
+            release-artifacts/
+            evidence/
+          if-no-files-found: error
+
   publish:
-    needs: [admission, sign-tag]
+    needs: admission
     runs-on: ubuntu-22.04
     environment: npm
     permissions:

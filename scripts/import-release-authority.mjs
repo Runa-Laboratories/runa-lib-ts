@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { validateContractProvenance } from "./contract-generation.mjs";
+import { validateExternalAcceptancePayload } from "./acceptance-receipts.mjs";
+import { appendReleaseManifestState } from "./release-manifest-envelope.mjs";
 import { verifyTrustedEnvelope } from "./trusted-evidence.mjs";
 import {
   validateSbomEvidenceBinding,
@@ -12,22 +14,20 @@ import {
   validateReleaseMapping,
 } from "./postpublish-policy.mjs";
 
-const encoded = process.env.RUNA_RELEASE_AUTHORITY_BUNDLE_BASE64;
-if (encoded === undefined || encoded === "") {
-  console.log("release authority import: BLOCKED (no authority bundle supplied)");
-  process.exit(0);
-}
 let bundle;
 try {
-  bundle = JSON.parse(Buffer.from(encoded, "base64").toString("utf8"));
+  bundle = JSON.parse(await readFile(
+    "authority-input/release-authority-bundle.json", "utf8",
+  ));
 } catch {
-  throw new Error("Release authority bundle is not valid base64 JSON.");
+  throw new Error("Independently downloaded release authority bundle is missing or invalid.");
 }
 const exact = [
   "contract_provenance",
   "cross_language",
   "external_release_interfaces",
   "approval_receipt",
+  "acceptance_results",
   "publication_readiness",
   "repository_controls",
   "sbom_validation",
@@ -47,6 +47,21 @@ try {
   console.log("release authority import: BLOCKED (no accepted trust root)");
   process.exit(0);
 }
+const releasePolicy = JSON.parse(await readFile(".runa/release-policy.json", "utf8"));
+const authorityRun = JSON.parse(await readFile("evidence/authority-run.json", "utf8"));
+assert.deepEqual(Object.keys(authorityRun).sort(), [
+  "artifact", "head_sha", "repository", "run_attempt", "run_id",
+  "schema_version", "status", "workflow",
+].sort());
+assert.equal(authorityRun.schema_version, 1);
+assert.equal(authorityRun.status, "PASS");
+assert.equal(releasePolicy.releaseAuthority.status, "configured");
+assert.equal(authorityRun.repository, releasePolicy.releaseAuthority.authority.repository);
+assert.equal(authorityRun.workflow, releasePolicy.releaseAuthority.authority.workflow);
+assert.equal(authorityRun.artifact, releasePolicy.releaseAuthority.authority.artifact);
+assert.match(authorityRun.head_sha, /^[0-9a-f]{40}$/u);
+assert(Number.isSafeInteger(authorityRun.run_id) && authorityRun.run_id > 0);
+assert(Number.isSafeInteger(authorityRun.run_attempt) && authorityRun.run_attempt > 0);
 const candidateBytes = await readFile("release-artifacts/candidate.json");
 const candidate = JSON.parse(candidateBytes.toString("utf8"));
 const releaseManifestCoreBytes = await readFile(
@@ -62,6 +77,9 @@ const openapi = await readFile("contracts/runa-api.openapi.json");
 const sbomBytes = await readFile("evidence/sbom.cdx.json");
 const runtimeClosure = JSON.parse(
   await readFile("evidence/runtime-closure.json", "utf8"),
+);
+const requirementMap = JSON.parse(
+  await readFile("evidence/requirement-test-map.json", "utf8"),
 );
 const canonical = (await readFile("contracts/runa-api.openapi.sha256", "utf8"))
   .trim().split(/\s+/, 1)[0];
@@ -95,6 +113,24 @@ const entries = [
     (payload) => payload.candidate_sha256 === candidate.sha256],
   ["external_release_interfaces", "external-interfaces", "external-release-interfaces",
     (payload) => payload.candidate_sha256 === candidate.sha256],
+  ["acceptance_results", "acceptance-results", "external-acceptance",
+    (payload) => {
+      validateExternalAcceptancePayload(payload, {
+        catalog: new Set(requirementMap.acceptance_test_ids),
+        prdSourceDigest: requirementMap.source_digest,
+        candidateSha256: candidate.sha256,
+        releaseManifestCoreSha256: hash(releaseManifestCoreBytes),
+        expectedOracle: {
+          provider: "github-actions",
+          repository: authorityRun.repository,
+          workflow: authorityRun.workflow,
+          run_id: authorityRun.run_id,
+          run_attempt: authorityRun.run_attempt,
+          head_sha: authorityRun.head_sha,
+        },
+      });
+      return true;
+    }],
 ];
 const retained = [];
 for (const [field, role, filename, binding] of entries) {
@@ -120,4 +156,8 @@ await writeFile("contracts/runa-sdk-contract.provenance.json",
 for (const [filename, envelope] of retained) {
   await writeFile(filename, `${JSON.stringify(envelope, null, 2)}\n`);
 }
+await appendReleaseManifestState("authority-admitted", Object.fromEntries(
+  retained.filter(([filename]) => filename !== "evidence/acceptance-results.json")
+    .map(([filename]) => [filename.split("/").at(-1).replace(/\.json$/u, ""), filename]),
+));
 console.log(`release authority import: PASS (${candidate.sha256})`);

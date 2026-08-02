@@ -48,22 +48,20 @@ export function validateExternalAcceptancePayload(payload, {
   expectedOracle,
 }) {
   exactKeys(payload, [
-    "candidate_sha256", "oracle", "prd_source_digest", "release_manifest_core_sha256",
-    "results", "schema_version", "status",
+    "candidate_sha256", "expires_at", "issued_at", "oracle", "prd_source_digest",
+    "release_manifest_core_sha256", "results", "schema_version", "status",
   ]);
   assert.equal(payload.schema_version, 1);
   assert.equal(payload.status, "PASS");
   assert.equal(payload.prd_source_digest, prdSourceDigest);
   assert.equal(payload.candidate_sha256, candidateSha256);
   assert.equal(payload.release_manifest_core_sha256, releaseManifestCoreSha256);
+  assert.equal(Number.isFinite(Date.parse(payload.issued_at)), true);
+  assert.equal(Number.isFinite(Date.parse(payload.expires_at)), true);
   exactKeys(payload.oracle, [
     "head_sha", "provider", "repository", "run_attempt", "run_id", "workflow",
   ]);
-  assert.deepEqual({
-    provider: payload.oracle.provider,
-    repository: payload.oracle.repository,
-    workflow: payload.oracle.workflow,
-  }, expectedOracle);
+  assert.deepEqual(payload.oracle, expectedOracle);
   assert.equal(payload.oracle.provider, "github-actions");
   assert.match(payload.oracle.head_sha, /^[0-9a-f]{40}$/u);
   assert(Number.isSafeInteger(payload.oracle.run_id) && payload.oracle.run_id > 0);

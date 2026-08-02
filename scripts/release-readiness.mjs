@@ -10,8 +10,11 @@ import {
   validateReleaseMapping,
 } from "./postpublish-policy.mjs";
 import { validateReleaseManifestCore } from "./release-manifest-core.mjs";
+import { validateReleaseManifestEnvelope } from "./release-manifest-envelope.mjs";
+import { validateExternalAcceptancePayload } from "./acceptance-receipts.mjs";
 import {
   validateRequirementTestMap,
+  validateRequirementTestMapWithReceipts,
   validateSmokeEvidence,
 } from "./evidence-policy.mjs";
 
@@ -149,10 +152,59 @@ if (versionClassification !== undefined && candidate !== undefined &&
 const requirementMap = await readJson(
   "evidence/requirement-test-map.json", "requirement-test-map");
 if (requirementMap !== undefined) {
+  const externalAcceptance = await requireTrusted(
+    "evidence/external-acceptance.json", "requirement-test-map", "acceptance-results",
+  );
   try {
-    validateRequirementTestMap(requirementMap);
+    if (externalAcceptance === undefined) {
+      validateRequirementTestMap(requirementMap);
+    } else {
+      const authorityRun = await readJson(
+        "evidence/authority-run.json", "release-authority-run",
+      );
+      const coreBytes = await readFile("release-artifacts/release-manifest-core.json");
+      validateExternalAcceptancePayload(externalAcceptance, {
+        catalog: new Set(requirementMap.acceptance_test_ids),
+        prdSourceDigest: requirementMap.source_digest,
+        candidateSha256: candidate.sha256,
+        releaseManifestCoreSha256:
+          createHash("sha256").update(coreBytes).digest("hex"),
+        expectedOracle: {
+          provider: "github-actions",
+          repository: authorityRun.repository,
+          workflow: authorityRun.workflow,
+          run_id: authorityRun.run_id,
+          run_attempt: authorityRun.run_attempt,
+          head_sha: authorityRun.head_sha,
+        },
+      });
+      validateRequirementTestMapWithReceipts(
+        requirementMap,
+        externalAcceptance.results.map((result) => result.test_id),
+      );
+    }
   } catch {
     blockers.push({ gate: "requirement-test-map", reason: "Mandatory requirements or acceptance tests remain NOT_RUN." });
+  }
+}
+if (releaseManifestCore !== undefined && candidate !== undefined) {
+  const envelope = await readJson(
+    "release-artifacts/release-manifest-envelope.json", "release-manifest-envelope",
+  );
+  if (envelope !== undefined) {
+    try {
+      const coreBytes = await readFile("release-artifacts/release-manifest-core.json");
+      validateReleaseManifestEnvelope(envelope, {
+        coreSha256: createHash("sha256").update(coreBytes).digest("hex"),
+        candidateSha256: candidate.sha256,
+      });
+      if (envelope.states.at(-1)?.state !== "authority-admitted") throw new Error();
+    } catch {
+      blockers.push({
+        gate: "release-manifest-envelope",
+        reason: "Append-only release envelope is missing, stale, or tampered.",
+      });
+    }
   }
 }
 await requirePass("evidence/docs-readiness.json", "documentation");

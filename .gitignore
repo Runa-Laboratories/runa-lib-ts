@@ -9,6 +9,7 @@ coverage/
 evidence/vitest-acceptance.json
 evidence/vitest-oracle.json
 evidence/vitest-results.json
+evidence/requirement-test-map.json
 release-artifacts/
 *.log
 .DS_Store

@@ -51,6 +51,16 @@ for (const source of sources) {
 if (sourceFiles.length === 0 || rows.length === 0 || acceptanceTestIds.size === 0) {
   throw new Error("Trace catalog is empty.");
 }
+const sourceDigest = createHash("sha256").update(JSON.stringify({
+  source_files: sourceFiles,
+  requirements: rows.map((row) => ({
+    requirement: row.requirement,
+    scope: row.scope,
+    prd: row.prd,
+    acceptance_test_ids: row.acceptance_test_ids,
+  })),
+  acceptance_test_ids: [...acceptanceTestIds].sort(),
+})).digest("hex");
 const receipted = new Map();
 try {
   const oracleBytes = await readFile("evidence/vitest-oracle.json");
@@ -108,7 +118,7 @@ const passedRequirements = rows.filter((row) => row.status === "PASS").length;
 await writeFile("evidence/requirement-test-map.json", `${JSON.stringify({
   schema_version: 2,
   generated_from: ["prds/libs/shared", "prds/libs/typescript"],
-  source_digest: createHash("sha256").update(JSON.stringify(rows)).digest("hex"),
+  source_digest: sourceDigest,
   requirement_count: rows.length,
   acceptance_test_count: acceptanceTestIds.size,
   requirement_status_summary: {
