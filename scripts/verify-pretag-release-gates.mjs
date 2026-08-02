@@ -3,15 +3,17 @@ import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { validateReleaseManifestCore } from "./release-manifest-core.mjs";
 import { validateSmokeEvidence } from "./evidence-policy.mjs";
+import { validateApprovedLicense } from "./license-policy.mjs";
 
 const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const candidate = JSON.parse(await readFile("release-artifacts/candidate.json", "utf8"));
 assert.equal(candidate.source_tree_clean, true);
 assert.match(candidate.source_commit, /^[0-9a-f]{40}$/u);
 assert.equal(hash(await readFile(`release-artifacts/${candidate.filename}`)), candidate.sha256);
-assert.equal((await readFile("LICENSE", "utf8")).startsWith(
-  "NON-GA LICENSE PLACEHOLDER",
-), false, "Approved GA license is required before a release tag is created.");
+assert.equal(validateApprovedLicense(
+  await readFile("LICENSE", "utf8"),
+  JSON.parse(await readFile("package.json", "utf8")),
+), true);
 const core = JSON.parse(await readFile(
   "release-artifacts/release-manifest-core.json", "utf8",
 ));

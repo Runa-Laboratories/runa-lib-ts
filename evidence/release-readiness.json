@@ -2,7 +2,7 @@
   "schema_version": 2,
   "decision": "BLOCKED",
   "projection_sha256": "02a554b22592f0267475b847a2bb1c7df64e2b688cdb69b0a4a8b392695e1c55",
-  "candidate_sha256": "efe1bc34088ae2946c8a1e7dd5bd9517d521a8f851f9ed2052497214a4b447a5",
+  "candidate_sha256": "beecdc02ef8efa38cc02968912e42ad42b7c61131414296c3418bca4f1265a15",
   "blockers": [
     {
       "id": "TS-REL-001",
@@ -11,43 +11,43 @@
     },
     {
       "id": "TS-REL-002",
-      "gate": "license-approval",
-      "reason": "LICENSE remains the non-GA placeholder."
-    },
-    {
-      "id": "TS-REL-003",
-      "gate": "candidate-identity",
-      "reason": "Candidate is not bound to a clean source commit."
-    },
-    {
-      "id": "TS-REL-004",
       "gate": "quality",
       "reason": "evidence/quality-gate.json does not record PASS."
     },
     {
-      "id": "TS-REL-005",
+      "id": "TS-REL-003",
+      "gate": "quality",
+      "reason": "Quality evidence is not bound to the candidate source commit."
+    },
+    {
+      "id": "TS-REL-004",
       "gate": "release-manifest",
       "reason": "Missing or invalid evidence: release-artifacts/release-manifest-core.json"
     },
     {
-      "id": "TS-REL-006",
+      "id": "TS-REL-005",
       "gate": "release-approval",
       "reason": "Missing or invalid evidence: evidence/release-approval.json"
     },
     {
-      "id": "TS-REL-007",
+      "id": "TS-REL-006",
       "gate": "semver-classification",
       "reason": "Missing or invalid evidence: evidence/version-classification.json"
     },
     {
-      "id": "TS-REL-008",
+      "id": "TS-REL-007",
       "gate": "requirement-test-map",
       "reason": "Missing or invalid evidence: evidence/external-acceptance.json"
     },
     {
-      "id": "TS-REL-009",
+      "id": "TS-REL-008",
       "gate": "requirement-test-map",
       "reason": "Mandatory requirements or acceptance tests remain NOT_RUN."
+    },
+    {
+      "id": "TS-REL-009",
+      "gate": "local-performance",
+      "reason": "Local performance evidence is not bound to the candidate archive."
     },
     {
       "id": "TS-REL-010",
@@ -71,11 +71,31 @@
     },
     {
       "id": "TS-REL-014",
+      "gate": "runtime-closure",
+      "reason": "Runtime closure is not bound to the candidate."
+    },
+    {
+      "id": "TS-REL-015",
+      "gate": "synthetic-release-smoke",
+      "reason": "Smoke evidence is incomplete or not bound to the candidate."
+    },
+    {
+      "id": "TS-REL-016",
+      "gate": "ci-candidate-manifest",
+      "reason": "CI manifest is not bound to the candidate."
+    },
+    {
+      "id": "TS-REL-017",
+      "gate": "sbom",
+      "reason": "CycloneDX identity or candidate binding is invalid."
+    },
+    {
+      "id": "TS-REL-018",
       "gate": "sbom-validation",
       "reason": "No accepted release trust root is configured."
     },
     {
-      "id": "TS-REL-015",
+      "id": "TS-REL-019",
       "gate": "external-release-interfaces",
       "reason": "No accepted release trust root is configured."
     }
