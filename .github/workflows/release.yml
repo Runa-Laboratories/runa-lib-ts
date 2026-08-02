@@ -15,11 +15,6 @@ on:
         description: Successful independent authority run containing signed release evidence
         required: true
         type: string
-      recovery_mode:
-        description: Verify-only recovery for the exact already-uploaded candidate and existing signed tag
-        required: true
-        default: false
-        type: boolean
 
 permissions:
   actions: read
@@ -96,8 +91,6 @@ jobs:
         run: echo "filename=$(node -p 'require(\"./release-artifacts/candidate.json\").filename')" >> "$GITHUB_OUTPUT"
       - name: Pre-tag registry absence check
         run: npm run release:registry:preflight
-        env:
-          RUNA_VERIFY_ONLY: ${{ inputs.recovery_mode }}
 
   sign-tag:
     needs: phase-a
@@ -123,26 +116,18 @@ jobs:
         env:
           GITSIGN_TOKEN_PROVIDER: github-actions
           RUNA_RELEASE_TAG: ts-v${{ inputs.version }}
-          RUNA_VERIFY_ONLY: ${{ inputs.recovery_mode }}
         run: |
           git fetch --no-tags origin main
           test "$(git rev-parse origin/main)" = "$GITHUB_SHA"
           git config --local gpg.format x509
           git config --local gpg.x509.program gitsign
-          if [ "$RUNA_VERIFY_ONLY" = "true" ]; then
-            git fetch origin "refs/tags/$RUNA_RELEASE_TAG:refs/tags/$RUNA_RELEASE_TAG"
-            test "$(git rev-list -n 1 "$RUNA_RELEASE_TAG")" = "$GITHUB_SHA"
-          else
-            test -z "$(git ls-remote --tags origin "refs/tags/$RUNA_RELEASE_TAG")"
-            git tag -s -m "Release $RUNA_RELEASE_TAG" "$RUNA_RELEASE_TAG" "$GITHUB_SHA"
-          fi
+          test -z "$(git ls-remote --tags origin "refs/tags/$RUNA_RELEASE_TAG")"
+          git tag -s -m "Release $RUNA_RELEASE_TAG" "$RUNA_RELEASE_TAG" "$GITHUB_SHA"
           gitsign verify \
             --certificate-identity=https://github.com/Runa-Laboratories/runa-lib-ts/.github/workflows/release.yml@refs/heads/main \
             --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
             "$RUNA_RELEASE_TAG"
-          if [ "$RUNA_VERIFY_ONLY" != "true" ]; then
-            git push origin "refs/tags/$RUNA_RELEASE_TAG"
-          fi
+          git push origin "refs/tags/$RUNA_RELEASE_TAG"
 
   admission:
     name: release-admission
@@ -254,8 +239,6 @@ jobs:
       - id: mapping
         run: node scripts/resolve-release-channel.mjs
       - run: npm run release:registry:preflight
-        env:
-          RUNA_VERIFY_ONLY: ${{ inputs.recovery_mode }}
       - id: attest
         # v4, resolved from the official annotated tag on 2026-08-02.
         uses: actions/attest-build-provenance@0f67c3f4856b2e3261c31976d6725780e5e4c373
@@ -267,13 +250,13 @@ jobs:
           RUNA_RELEASE_TAG: ts-v${{ inputs.version }}
           RUNA_ATTESTATION_BUNDLE: ${{ steps.attest.outputs.bundle-path }}
         run: |
-          if ! gh release view "$RUNA_RELEASE_TAG" >/dev/null 2>&1; then
-            gh release create "$RUNA_RELEASE_TAG" --draft --verify-tag --title "$RUNA_RELEASE_TAG"
-          fi
-          gh release upload "$RUNA_RELEASE_TAG" --clobber \
+          cp release-artifacts/release-manifest-envelope.json \
+            release-artifacts/release-manifest-envelope.authority-admitted.json
+          gh release create "$RUNA_RELEASE_TAG" --draft --verify-tag --title "$RUNA_RELEASE_TAG"
+          gh release upload "$RUNA_RELEASE_TAG" \
             "release-artifacts/${{ needs.admission.outputs.filename }}" \
             release-artifacts/release-manifest-core.json \
-            release-artifacts/release-manifest-envelope.json \
+            release-artifacts/release-manifest-envelope.authority-admitted.json \
             evidence/sbom.cdx.json \
             "$RUNA_ATTESTATION_BUNDLE"
       - name: Re-download and verify every GitHub Release asset before npm promotion
@@ -281,9 +264,8 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           RUNA_RELEASE_TAG: ts-v${{ inputs.version }}
-          RUNA_RELEASE_ASSETS_JSON: '["release-artifacts/${{ needs.admission.outputs.filename }}","release-artifacts/release-manifest-core.json","release-artifacts/release-manifest-envelope.json","evidence/sbom.cdx.json","${{ steps.attest.outputs.bundle-path }}"]'
-      - if: inputs.recovery_mode == false
-        run: npm publish "release-artifacts/${{ needs.admission.outputs.filename }}" --provenance --access public --registry https://registry.npmjs.org/ --tag "${{ steps.mapping.outputs.dist_tag }}"
+          RUNA_RELEASE_ASSETS_JSON: '["release-artifacts/${{ needs.admission.outputs.filename }}","release-artifacts/release-manifest-core.json","release-artifacts/release-manifest-envelope.authority-admitted.json","evidence/sbom.cdx.json","${{ steps.attest.outputs.bundle-path }}"]'
+      - run: npm publish "release-artifacts/${{ needs.admission.outputs.filename }}" --provenance --access public --registry https://registry.npmjs.org/ --tag "${{ steps.mapping.outputs.dist_tag }}"
       - name: Persist exact uploaded-unverified state before final promotion checks
         run: npm run release:postpublish:verify
         env:
@@ -303,13 +285,13 @@ jobs:
         run: |
           gh release upload "$RUNA_RELEASE_TAG" \
             release-artifacts/release-manifest-envelope.json \
-            evidence/postpublish-receipt.json --clobber
+            evidence/postpublish-receipt.json
       - name: Re-download and verify final GitHub Release state
         run: npm run release:assets:verify
         env:
           GH_TOKEN: ${{ github.token }}
           RUNA_RELEASE_TAG: ts-v${{ inputs.version }}
-          RUNA_RELEASE_ASSETS_JSON: '["release-artifacts/${{ needs.admission.outputs.filename }}","release-artifacts/release-manifest-core.json","release-artifacts/release-manifest-envelope.json","evidence/sbom.cdx.json","${{ steps.attest.outputs.bundle-path }}","evidence/postpublish-receipt.json"]'
+          RUNA_RELEASE_ASSETS_JSON: '["release-artifacts/${{ needs.admission.outputs.filename }}","release-artifacts/release-manifest-core.json","release-artifacts/release-manifest-envelope.authority-admitted.json","release-artifacts/release-manifest-envelope.json","evidence/sbom.cdx.json","${{ steps.attest.outputs.bundle-path }}","evidence/postpublish-receipt.json"]'
       - name: Promote verified GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}

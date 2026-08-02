@@ -4,6 +4,7 @@ import { test } from "vitest";
 
 test("release workflow is one protected dispatch with pinned signing and at-most-once gates", async () => {
   const workflow = await readFile(".github/workflows/release.yml", "utf8");
+  const recovery = await readFile(".github/workflows/release-recovery.yml", "utf8");
   const ci = await readFile(".github/workflows/ci.yml", "utf8");
   assert.match(workflow, /workflow_dispatch:/u);
   assert.doesNotMatch(workflow, /push:\s*\n\s+tags:/u);
@@ -18,11 +19,21 @@ test("release workflow is one protected dispatch with pinned signing and at-most
   assert.match(workflow, /actions: read/u);
   assert.match(workflow, /node scripts\/verify-ci-run\.mjs/u);
   assert.doesNotMatch(workflow, /RUNA_RELEASE_AUTHORITY_BUNDLE_BASE64/u);
+  assert.doesNotMatch(workflow, /recovery_mode|RUNA_VERIFY_ONLY|--clobber/u);
   assert.doesNotMatch(workflow, /RUNA_AUTHORITY_READ_TOKEN|personal.access.token|github.app/iu);
   assert.match(workflow, /gh release create/u);
   assert.match(workflow, /gh release upload/u);
   assert.match(workflow, /release:assets:verify/u);
   assert.match(workflow, /gh release edit/u);
+  assert.match(workflow, /release-manifest-envelope\.authority-admitted\.json/u);
+  assert.match(recovery, /name: release-recovery-read-only/u);
+  assert.match(recovery, /ref: refs\/tags\/ts-v\$\{\{ inputs\.version \}\}/u);
+  assert.match(recovery, /RUNA_SOURCE_COMMIT: \$\{\{ env\.RUNA_SOURCE_COMMIT \}\}/u);
+  assert.match(recovery, /release:recovery:verify/u);
+  assert.equal((recovery.match(/contents: read/gu) ?? []).length >= 2, true);
+  assert.equal((recovery.match(/actions: read/gu) ?? []).length >= 2, true);
+  assert.doesNotMatch(recovery,
+    /contents: write|id-token: write|attest-build-provenance|npm publish|npm dist-tag|git push|git tag -s|gh release (?:create|upload|edit|delete)|upload-artifact|--clobber|appendReleaseManifestState/u);
   const phaseA = workflow.indexOf("  phase-a:");
   const signTag = workflow.indexOf("  sign-tag:");
   const admission = workflow.indexOf("  admission:");
