@@ -5,12 +5,12 @@
     "artifact_sha256": "beecdc02ef8efa38cc02968912e42ad42b7c61131414296c3418bca4f1265a15",
     "catalog_sha256": "cd52a60ba3c71da47d4ddf2b9a41c1e98cc93b7d443c5e44eeee0340840fded5",
     "catalog_revision": "TS-050-EVIDENCE-V1",
-    "matrix_cell": "ts050-node24-windows-x64",
-    "environment_classification": "exact-matrix-cell"
+    "matrix_cell": null,
+    "environment_classification": "local-non-matrix"
   },
   "runtime": {
-    "node": "24.4.1",
-    "npm": "11.4.2",
+    "node": "24.18.0",
+    "npm": "11.16.0",
     "platform": "win32",
     "arch": "x64"
   },
@@ -22,7 +22,7 @@
     "vitest_security_substitution": "3.2.7"
   },
   "profile": {
-    "id": "P-017-TS-NPM-V1-ts050-node24-windows-x64",
+    "id": "P-017-TS-NPM-V1-local-non-matrix",
     "revision": 1,
     "baseline_reference": "bootstrap-v1",
     "isolated_import_runs": 20,
@@ -36,12 +36,12 @@
   },
   "metrics": {
     "tarball_bytes": 37570,
-    "import_p95_ms": 33.2073,
-    "construction_p95_ms": 0.41919999999999646,
-    "request_overhead_p95_ms": 0.003899999999703141,
-    "allocation_delta_bytes_max": 123520,
+    "import_p95_ms": 46.754599999999996,
+    "construction_p95_ms": 0.49670000000000414,
+    "request_overhead_p95_ms": 0.008100000000922591,
+    "allocation_delta_bytes_max": 122760,
     "connection_establishments": 1,
-    "retained_memory_delta_bytes_p95": 1401288,
+    "retained_memory_delta_bytes_p95": 690792,
     "openConnections": 0,
     "poolEntries": 0,
     "timers": 0,
