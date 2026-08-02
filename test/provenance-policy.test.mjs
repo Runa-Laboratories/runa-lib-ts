@@ -16,7 +16,7 @@ test("signed provenance predicate rejects every identity and build-input mutatio
   };
   const valid = {
     buildDefinition: {
-      buildType: "https://runacode.io/attestations/typescript-sdk-release/v1",
+      buildType: "https://actions.github.io/buildtypes/workflow/v1",
       externalParameters: {
         source_commit: commit, intended_tag: "ts-v0.1.0",
         package_lock_sha256: digest, ci_workflow_sha256: digest,

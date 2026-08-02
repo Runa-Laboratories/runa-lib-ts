@@ -14,7 +14,7 @@ assert.equal(Number.isFinite(Date.parse(candidate.build_finished_at)), true);
 assert(Date.parse(candidate.build_finished_at) >= Date.parse(candidate.build_started_at));
 const predicate = {
   buildDefinition: {
-    buildType: "https://runacode.io/attestations/typescript-sdk-release/v1",
+    buildType: "https://actions.github.io/buildtypes/workflow/v1",
     externalParameters: {
       source_commit: candidate.source_commit,
       intended_tag: `ts-v${candidate.version}`,

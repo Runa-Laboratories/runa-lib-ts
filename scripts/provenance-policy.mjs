@@ -11,7 +11,7 @@ export function validateSignedProvenancePredicate(predicate, expected) {
     "finishedOn", "invocationId", "startedOn",
   ]);
   assert.equal(predicate.buildDefinition.buildType,
-    "https://runacode.io/attestations/typescript-sdk-release/v1");
+    "https://actions.github.io/buildtypes/workflow/v1");
   assert.deepEqual(predicate.buildDefinition.externalParameters, {
     source_commit: expected.sourceCommit,
     intended_tag: expected.intendedTag,
