@@ -33,7 +33,7 @@ import {
   upstreamName,
 } from "./helpers.mjs";
 
-test("TC-023-01 resolves terminal precedence and strict files", () => {
+test("PRD-023 resolves terminal precedence and strict files", () => {
   const priorKey = process.env.RUNA_API_KEY;
   const priorUrl = process.env.RUNA_BASE_URL;
   const directory = mkdtempSync(join(tmpdir(), "runa-config-"));
@@ -92,7 +92,7 @@ test("PRD-023 rejects non-object runtime configuration safely", () => {
   }
 });
 
-test("TC-001-11 rejects prohibited hosts including trailing dot", () => {
+test("PRD-001/023 reject prohibited hosts including trailing dot", () => {
   const label = upstreamName();
   assert.equal(containsProhibitedMarker(label), true);
   assert.equal(containsProhibitedMarker(encodeURIComponent(label)), true);
@@ -114,7 +114,7 @@ test("TC-001-11 rejects prohibited hosts including trailing dot", () => {
   );
 });
 
-test("TC-023-05 accepts only the canonical Runa API origin", () => {
+test("PRD-023 accepts only the canonical Runa API origin", () => {
   for (const baseUrl of [
     "https://example.invalid",
     "https://api.runacode.io.example.invalid",
@@ -130,7 +130,7 @@ test("TC-023-05 accepts only the canonical Runa API origin", () => {
   }).baseUrl, "https://api.runacode.io");
 });
 
-test("TC-024-01 exposes the closed error surface", () => {
+test("PRD-024 exposes the closed error surface", () => {
   const config = new ConfigError();
   assert.equal(config.message, "Runa SDK configuration is invalid.");
   assert(config instanceof Error);
@@ -177,7 +177,7 @@ test("TC-024-01 exposes the closed error surface", () => {
   );
 });
 
-test("TC-022-02 enforces the canonical schema and preserves only detail identity", () => {
+test("PRD-022 enforces the canonical schema and preserves only detail identity", () => {
   const detail = { nested_key: ["value"] };
   const [record] = decodeRecords([recordFixture({ detail })]);
   assert.equal(record.detail, detail);

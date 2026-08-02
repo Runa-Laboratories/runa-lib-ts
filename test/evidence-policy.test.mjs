@@ -1,5 +1,7 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { test } from "vitest";
+import { validateVitestAcceptanceReceipt } from "../scripts/acceptance-receipts.mjs";
 
 import {
   validateRequirementTestMap,
@@ -24,6 +26,38 @@ test("quality rejects every mandatory NOT_RUN acceptance path", () => {
     mutate(candidate);
     assert.throws(() => validateRequirementTestMap(candidate));
   }
+});
+
+test("Vitest exact-ID receipts reject tamper, unknown IDs, and failed assertions", () => {
+  const report = (status = "PASS", testId = "TC-025-02") => Buffer.from(JSON.stringify({
+    schema_version: 1, status: "PASS",
+    assertions: [{ status, test_file: "test/transport.test.mjs", test_id: testId }],
+  }));
+  const binding = {
+    source_commit: "a".repeat(40), test_input_sha256: "b".repeat(64),
+    prd_source_sha256: "c".repeat(64), package_lock_sha256: "d".repeat(64),
+    toolchain: { node: "v22.17.1", vitest: "3.2.7" },
+  };
+  const receipt = (bytes, ids = ["TC-025-02"]) => ({
+    schema_version: 1, status: "PASS", runner: "vitest",
+    oracle_sha256: createHash("sha256").update(bytes).digest("hex"),
+    passed_assertion_count: 1, acceptance_tests: ids, ...binding,
+  });
+  const valid = report();
+  assert.deepEqual(validateVitestAcceptanceReceipt(
+    receipt(valid), valid, new Set(["TC-025-02"]), binding,
+  ), ["TC-025-02"]);
+  assert.throws(() => validateVitestAcceptanceReceipt(
+    receipt(valid), Buffer.concat([valid, Buffer.from(" ")]), new Set(["TC-025-02"]), binding,
+  ));
+  const unknown = report("PASS", "TC-999-99");
+  assert.throws(() => validateVitestAcceptanceReceipt(
+    receipt(unknown, ["TC-999-99"]), unknown, new Set(["TC-025-02"]), binding,
+  ));
+  const failed = report("FAIL");
+  assert.throws(() => validateVitestAcceptanceReceipt(
+    receipt(failed), failed, new Set(["TC-025-02"]), binding,
+  ));
 });
 
 test("readiness rejects fabricated smoke counters and missing guards", () => {

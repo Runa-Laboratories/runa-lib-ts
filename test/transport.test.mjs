@@ -44,7 +44,7 @@ function operationFetch(captures) {
   };
 }
 
-test("TC-008-01 dispatches exactly 13 canonical operations", async () => {
+test("PRD-021/025/028-037 dispatch exactly 13 canonical operations", async () => {
   const captures = [];
   const runa = new Runa({
     apiKey: API_KEY,
@@ -129,7 +129,7 @@ test("TC-008-01 dispatches exactly 13 canonical operations", async () => {
   await runa.close();
 });
 
-test("TC-024-03 maps exact status, media, redirect and errors", async () => {
+test("PRD-024/025 map exact status, media, redirect and errors", async () => {
   const scenarios = [
     {
       response: new Response("", { status: 404 }),
@@ -174,6 +174,15 @@ test("TC-024-03 maps exact status, media, redirect and errors", async () => {
 
 test("TC-025-02 selects the exact global fetch when no callable is injected", async () => {
   const originalFetch = globalThis.fetch;
+  let injectedCalls = 0;
+  const injected = async () => {
+    injectedCalls += 1;
+    return jsonResponse(meFixture());
+  };
+  const injectedClient = new Runa({ apiKey: API_KEY, fetch: injected });
+  await injectedClient.me();
+  assert.equal(injectedCalls, 1);
+  await injectedClient.close();
   let calls = 0;
   const selected = async (url, init) => {
     calls += 1;
@@ -192,16 +201,18 @@ test("TC-025-02 selects the exact global fetch when no callable is injected", as
   }
 });
 
-test("TC-040-02 cancels every rejected response body without awaiting it", async () => {
+test("TC-040-02 rejects hostile redirects with one request and no exposure", async () => {
+  const hostile = "https://steal.example.invalid/private?token=hostile";
   for (const responseInit of [
     { status: 500, headers: { "content-type": "application/json" } },
-    { status: 302, headers: { location: "https://redirect.example.invalid" } },
+    { status: 302, headers: { location: hostile } },
     { status: 200, headers: { "content-type": "text/plain" } },
   ]) {
     let cancellations = 0;
+    let requests = 0;
     const body = new ReadableStream({
       pull(controller) {
-        controller.enqueue(new Uint8Array([0x7b]));
+        controller.enqueue(new TextEncoder().encode(hostile));
       },
       cancel() {
         cancellations += 1;
@@ -211,15 +222,23 @@ test("TC-040-02 cancels every rejected response body without awaiting it", async
     const runa = new Runa({
       apiKey: API_KEY,
       baseUrl: "https://api.runacode.io",
-      fetch: async () => new Response(body, responseInit),
+      fetch: async () => {
+        requests += 1;
+        return new Response(body, responseInit);
+      },
     });
-    await assert.rejects(runa.me(), ApiError);
+    await assert.rejects(runa.me(), (error) => {
+      assert(error instanceof ApiError);
+      assert.equal(JSON.stringify(error).includes(hostile), false);
+      return true;
+    });
+    assert.equal(requests, 1);
     assert.equal(cancellations, 1);
     await runa.close();
   }
 });
 
-test("TC-040-04 enforces the response cap and invalid UTF-8", async () => {
+test("PRD-025/040 enforce the response cap and invalid UTF-8", async () => {
   const over = new Uint8Array(8_388_609);
   over.fill(0x20);
   for (const response of [
@@ -317,7 +336,7 @@ test("TC-025-07 rejects local invalid values before I/O", async () => {
   await runa.close();
 });
 
-test("TC-028-03 snapshots caller-owned create arrays before dispatch", async () => {
+test("PRD-028 snapshots caller-owned create arrays before dispatch", async () => {
   let capturedBody;
   let release;
   const fetch = async (_url, init) => {
@@ -342,5 +361,30 @@ test("TC-028-03 snapshots caller-owned create arrays before dispatch", async () 
     name: "snapshot",
     allowed_hosts: ["first.example.invalid"],
   });
+  await runa.close();
+});
+
+test("TC-033-05 accepts only integer timeoutSecs from 1 through 600", async () => {
+  let dispatches = 0;
+  const runa = new Runa({
+    apiKey: API_KEY,
+    fetch: async (url) => {
+      dispatches += 1;
+      if (new URL(url).pathname.endsWith("/exec")) {
+        return jsonResponse({
+          exit_code: 0, stdout: "", stderr: "", duration_ms: 0,
+          stdout_truncated: false, stderr_truncated: false,
+        });
+      }
+      return jsonResponse(sessionFixture());
+    },
+  });
+  const session = await runa.sessions.get(SESSION_ID);
+  for (const timeoutSecs of [1, 600]) await session.exec("true", { timeoutSecs });
+  const afterValid = dispatches;
+  for (const timeoutSecs of [0, 601, 1.5, Infinity, null, "1"]) {
+    await assert.rejects(session.exec("true", { timeoutSecs }), TypeError);
+  }
+  assert.equal(dispatches, afterValid);
   await runa.close();
 });
