@@ -1,6 +1,8 @@
 import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { createHash } from "node:crypto";
+import { validateVitestAcceptanceReceipt } from "./acceptance-receipts.mjs";
+import { computeTestEvidenceBinding } from "./test-evidence-binding.mjs";
 
 const sources = [
   { root: path.resolve("../../prds/libs/shared"), scope: "shared-applicable" },
@@ -50,6 +52,15 @@ if (sourceFiles.length === 0 || rows.length === 0 || acceptanceTestIds.size === 
   throw new Error("Trace catalog is empty.");
 }
 const receipted = new Map();
+try {
+  const oracleBytes = await readFile("evidence/vitest-oracle.json");
+  const receipt = JSON.parse(await readFile("evidence/vitest-acceptance.json", "utf8"));
+  for (const testId of validateVitestAcceptanceReceipt(
+    receipt, oracleBytes, acceptanceTestIds, await computeTestEvidenceBinding(),
+  )) receipted.set(testId, "evidence/vitest-acceptance.json");
+} catch (error) {
+  if (error?.code !== "ENOENT") throw error;
+}
 const receiptOracles = [
   {
     file: "evidence/docs-readiness.json",

@@ -2,10 +2,14 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { spawnSync } from "node:child_process";
+import path from "node:path";
+import { computeTestEvidenceBinding } from "./test-evidence-binding.mjs";
 
-const resultsFile = "evidence/vitest-results.json";
+const resultsFile = ".runa-tmp/vitest-results.json";
+const oracleFile = "evidence/vitest-oracle.json";
 const receiptFile = "evidence/vitest-acceptance.json";
 await mkdir("evidence", { recursive: true });
+await mkdir(".runa-tmp", { recursive: true });
 
 const run = spawnSync(process.execPath, [
   "node_modules/vitest/vitest.mjs",
@@ -23,26 +27,43 @@ const resultsBytes = await readFile(resultsFile);
 const report = JSON.parse(resultsBytes.toString("utf8"));
 assert.equal(report.success, true, "Vitest did not report a successful run.");
 const assertions = (report.testResults ?? []).flatMap(
-  (suite) => suite.assertionResults ?? [],
+  (suite) => (suite.assertionResults ?? []).map((result) => ({
+    ...result,
+    testFile: suite.name,
+  })),
 );
 assert(assertions.length > 0, "Vitest reported no assertions.");
 const passedIds = new Set();
+const oracleAssertions = [];
 for (const result of assertions) {
   if (result.status !== "passed") continue;
   const title = result.fullName ?? result.title ?? "";
   for (const testId of title.match(/TC-\d{3}-\d{2}/gu) ?? []) {
     assert.equal(passedIds.has(testId), false, `Duplicate exact TC receipt: ${testId}`);
     passedIds.add(testId);
+    const absoluteFile = result.testFile ?? "";
+    const relativeFile = absoluteFile === "" ? "unknown" :
+      path.relative(process.cwd(), absoluteFile).replaceAll("\\", "/");
+    oracleAssertions.push({ test_file: relativeFile, test_id: testId, status: "PASS" });
   }
 }
 assert(passedIds.size > 0, "No passed assertion carried an exact TC identifier.");
 const acceptanceTests = [...passedIds].sort();
+oracleAssertions.sort((a, b) => a.test_id.localeCompare(b.test_id));
+const oracleBytes = Buffer.from(`${JSON.stringify({
+  schema_version: 1,
+  status: "PASS",
+  assertions: oracleAssertions,
+}, null, 2)}\n`);
+await writeFile(oracleFile, oracleBytes);
+const binding = await computeTestEvidenceBinding();
 await writeFile(receiptFile, `${JSON.stringify({
   schema_version: 1,
   status: "PASS",
   runner: "vitest",
-  results_sha256: createHash("sha256").update(resultsBytes).digest("hex"),
+  oracle_sha256: createHash("sha256").update(oracleBytes).digest("hex"),
   passed_assertion_count: assertions.filter((item) => item.status === "passed").length,
   acceptance_tests: acceptanceTests,
+  ...binding,
 }, null, 2)}\n`);
 console.log(`vitest acceptance receipt: PASS (${acceptanceTests.length} exact TC IDs)`);

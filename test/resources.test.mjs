@@ -14,7 +14,7 @@ import {
   upstreamName,
 } from "./helpers.mjs";
 
-test("TC-027-02 managers are lazy, stable and client-owned", async () => {
+test("PRD-027 managers are lazy, stable and client-owned", async () => {
   let calls = 0;
   const fetch = async () => {
     calls += 1;
@@ -79,7 +79,7 @@ test("PRD-029/031/032 preserve collection order and snapshot identity rules", as
   await runa.close();
 });
 
-test("TC-031-04 preserves snapshot on refresh failure", async () => {
+test("PRD-031 preserves snapshot on refresh failure", async () => {
   let call = 0;
   const runa = new Runa({
     apiKey: API_KEY,
@@ -101,7 +101,7 @@ test("TC-031-04 preserves snapshot on refresh failure", async () => {
   await runa.close();
 });
 
-test("TC-033-05 keeps exec/checkpoint/open cache-neutral", async () => {
+test("PRD-033/034/035 keep exec/checkpoint/open cache-neutral", async () => {
   const fetch = async (url) => {
     const path = new URL(url).pathname;
     if (path.endsWith("/exec")) {
@@ -132,7 +132,7 @@ test("TC-033-05 keeps exec/checkpoint/open cache-neutral", async () => {
   await runa.close();
 });
 
-test("TC-035-04 rejects hostile open capability without retaining it", async () => {
+test("PRD-035 rejects hostile open capability without retaining it", async () => {
   const invalid = `https://${upstreamName()}.example.invalid/__runa/auth?t=value`;
   const runa = new Runa({
     apiKey: API_KEY,
@@ -154,7 +154,7 @@ test("TC-035-04 rejects hostile open capability without retaining it", async () 
   await runa.close();
 });
 
-test("TC-036-06 returns plain fresh values and both workspace variants", async () => {
+test("PRD-036/037 return plain fresh values and both workspace variants", async () => {
   let assigned = true;
   const runa = new Runa({
     apiKey: API_KEY,
@@ -183,7 +183,7 @@ test("TC-036-06 returns plain fresh values and both workspace variants", async (
   await runa.close();
 });
 
-test("TC-013-08 fails closed on protected wire content without truncation", async () => {
+test("PRD-013/022 fail closed on protected wire content without truncation", async () => {
   const protectedValue = upstreamName();
   const responses = [
     [recordFixture({ detail: { nested_key: [protectedValue] } })],
@@ -212,7 +212,7 @@ test("TC-013-08 fails closed on protected wire content without truncation", asyn
   await runa.close();
 });
 
-test("TC-027-10 close waits for admitted work and blocks later work", async () => {
+test("PRD-027 close waits for admitted work and blocks later work", async () => {
   let resolveFetch;
   let calls = 0;
   const runa = new Runa({
@@ -244,4 +244,26 @@ test("TC-027-10 close waits for admitted work and blocks later work", async () =
     message: "The Runa client is closed.",
   });
   assert.equal(calls, 1);
+});
+
+test("TC-036-06 returns fresh ordered record arrays without caching or merging", async () => {
+  let call = 0;
+  const runa = new Runa({
+    apiKey: API_KEY,
+    fetch: async () => {
+      call += 1;
+      if (call === 1) return jsonResponse([]);
+      return jsonResponse([recordFixture({ detail: { marker: call } })]);
+    },
+  });
+  const empty = await runa.records.list();
+  const first = await runa.records.list();
+  const second = await runa.records.list();
+  assert.equal(Object.isFrozen(empty), true);
+  assert.deepEqual(empty, []);
+  assert.notEqual(empty, first);
+  assert.deepEqual(first.map((record) => record.detail.marker), [2]);
+  assert.deepEqual(second.map((record) => record.detail.marker), [3]);
+  assert.equal(call, 3);
+  await runa.close();
 });

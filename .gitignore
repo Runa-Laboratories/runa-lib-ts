@@ -5,6 +5,10 @@ dist/
 .env.*
 !.env.example
 coverage/
+.runa-tmp/
+evidence/vitest-acceptance.json
+evidence/vitest-oracle.json
+evidence/vitest-results.json
 release-artifacts/
 *.log
 .DS_Store

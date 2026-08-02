@@ -34,7 +34,7 @@ function deterministicRuntime(randomValues = []) {
   };
 }
 
-test("TC-026-01 retries only pre-response reads with unbiased mapping", async () => {
+test("PRD-009/026 retry only pre-response reads with unbiased mapping", async () => {
   let calls = 0;
   const rejected = Math.floor(0x1_0000_0000 / 101) * 101;
   const { runtime, delays } = deterministicRuntime([rejected, 37, 151]);
@@ -69,7 +69,7 @@ test("TC-026-02 never retries a response or write", async () => {
   }
 });
 
-test("TC-008-07 pre-cancellation performs zero dispatch", async () => {
+test("PRD-008/009 pre-cancellation performs zero dispatch", async () => {
   let calls = 0;
   const controller = new AbortController();
   controller.abort();
@@ -88,7 +88,7 @@ test("TC-008-07 pre-cancellation performs zero dispatch", async () => {
   assert.equal(calls, 0);
 });
 
-test("TC-008-06 in-flight caller cancellation wins", async () => {
+test("PRD-008/009 in-flight caller cancellation wins", async () => {
   let calls = 0;
   const controller = new AbortController();
   const transport = new FetchTransport(
@@ -113,7 +113,7 @@ test("TC-008-06 in-flight caller cancellation wins", async () => {
   assert.equal(calls, 1);
 });
 
-test("TC-039-04 emits exact safe retry order and isolates failing hooks", async () => {
+test("PRD-039 emits exact safe retry order and isolates failing hooks", async () => {
   const events = [];
   const trace = [];
   let calls = 0;
