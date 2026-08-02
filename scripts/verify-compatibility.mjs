@@ -26,6 +26,7 @@ let failure = null;
 let metrics = null;
 let compatibilityStatus = "PASS";
 let performanceStatus = "BLOCKED";
+let probe = "clean-room-setup";
 try {
   await mkdir(cache);
   await writeFile(path.join(workspace, "package.json"), `${JSON.stringify({
@@ -33,15 +34,19 @@ try {
     private: true, type: "module",
     dependencies: { "@runa_laboratories/sdk": `file:${archivePath.replaceAll("\\", "/")}` }
   })}\n`);
+  probe = "isolated-offline-lockfile";
   let result = runNpm(["install", "--package-lock-only", "--ignore-scripts", "--offline",
     "--cache", cache, "--no-audit", "--no-fund"]);
-  assert.equal(result.status, 0);
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  probe = "isolated-offline-install";
   result = runNpm(["ci", "--ignore-scripts", "--offline", "--cache", cache, "--no-audit", "--no-fund"]);
-  assert.equal(result.status, 0);
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  probe = "root-esm-import";
   const imported = spawnSync(process.execPath, ["--input-type=module", "-e",
     "import('@runa_laboratories/sdk').then(m=>{if(Object.keys(m).sort().join(',')!=='ApiError,CommandError,ConfigError,Runa,RunaError,Session,stderrText,stdoutText')process.exit(2)})"],
     { cwd: workspace, encoding: "utf8" });
-  assert.equal(imported.status, 0);
+  assert.equal(imported.status, 0, imported.stderr || imported.stdout);
+  probe = "declarations";
   await writeFile(path.join(workspace, "consumer.mts"),
     "import { Runa, stdoutText } from '@runa_laboratories/sdk'; import type { AssignedWorkspace } from '@runa_laboratories/sdk'; const r: Runa = new Runa({apiKey: 'runa_sk_synthetic'}); const x: true = (null as unknown as AssignedWorkspace).assigned; void stdoutText; void r;\n");
   await writeFile(path.join(workspace, "tsconfig.json"), JSON.stringify({
@@ -54,10 +59,12 @@ try {
   const tsc = spawnSync(process.execPath,
     [path.resolve("node_modules/typescript/bin/tsc"), "--project", path.join(workspace, "tsconfig.json")],
     { cwd: workspace, encoding: "utf8" });
-  assert.equal(tsc.status, 0);
+  assert.equal(tsc.status, 0, tsc.stderr || tsc.stdout);
+  probe = "package-surface";
   const installed = JSON.parse(await readFile(path.join(workspace, "node_modules/@runa_laboratories/sdk/package.json"), "utf8"));
   assert.deepEqual(Object.keys(installed.exports), ["."]);
   assert.equal(installed.sideEffects, false);
+  probe = "runtime-performance";
   const importStarted = performance.now();
   const sdk = await import(new URL(`file://${path.join(workspace, "node_modules/@runa_laboratories/sdk/dist/index.js").replaceAll("\\", "/")}`));
   const importMs = performance.now() - importStarted;
@@ -99,8 +106,10 @@ try {
   assert(metrics.construction_p95_ms <= catalog.profile.metrics.construction.cap);
   assert(metrics.request_p95_ms <= catalog.profile.metrics.request_overhead.cap);
   assert(metrics.allocation_delta_bytes <= catalog.profile.metrics.allocation_delta.cap);
+  probe = "readme";
   const readme = await readFile(path.join(workspace, "node_modules/@runa_laboratories/sdk/README.md"), "utf8");
   assert.match(readme, /npm install @runa_laboratories\/sdk/);
+  probe = "tree-shaking";
   await writeFile(path.join(workspace, "bundle-entry.mjs"),
     "export { stdoutText } from '@runa_laboratories/sdk';\n");
   const bundleResult = await bundle({
@@ -114,12 +123,17 @@ try {
     metafile: true,
     write: true
   });
-  assert.equal(Object.keys(bundleResult.metafile.inputs).some((input) =>
-    input.replaceAll("\\", "/").endsWith("/dist/client.js")), false);
+  const emittedInputs = Object.values(bundleResult.metafile.outputs)
+    .flatMap((output) => Object.entries(output.inputs));
+  const clientBytes = emittedInputs
+    .filter(([input]) => input.replaceAll("\\", "/").endsWith("/dist/client.js"))
+    .reduce((total, [, contribution]) => total + contribution.bytesInOutput, 0);
+  assert.equal(clientBytes, 0);
+  probe = "performance-receipt";
   const performanceRun = spawnSync(process.execPath, [
     "scripts/verify-performance.mjs", "--artifact", archivePath,
   ], { cwd: path.resolve("."), encoding: "utf8", timeout: 180_000 });
-  assert.equal(performanceRun.status, 0);
+  assert.equal(performanceRun.status, 0, performanceRun.stderr || performanceRun.stdout);
   const performance = JSON.parse(
     await readFile("evidence/performance-local.json", "utf8"),
   );
@@ -129,10 +143,12 @@ try {
   performanceStatus = "PASS";
   metrics = performance.metrics;
   status = "PASS";
-} catch {
+} catch (error) {
   status = "FAIL";
   compatibilityStatus = "FAIL";
-  failure = "compatibility-probe";
+  const reason = error instanceof Error ? error.message : String(error);
+  failure = `${probe}: ${reason}`;
+  console.error(`compatibility: FAIL (${failure})`);
 } finally {
   await mkdir("evidence/compatibility-receipts", { recursive: true });
   await writeFile(`evidence/compatibility-receipts/${cell.id}.json`, `${JSON.stringify({
