@@ -40,12 +40,12 @@ test("PRD-023 resolves terminal precedence and strict files", () => {
   const file = join(directory, "config.json");
   try {
     process.env.RUNA_API_KEY = [API_KEY, "environment"].join("_");
-    process.env.RUNA_BASE_URL = "https://environment.example.invalid/";
+    process.env.RUNA_BASE_URL = "https://api.runacode.io/";
     writeFileSync(
       file,
       JSON.stringify({
         api_key: [API_KEY, "file"].join("_"),
-        base_url: "https://file.example.invalid/",
+        base_url: "https://api.runacode.io",
       }),
       "utf8",
     );
@@ -54,13 +54,13 @@ test("PRD-023 resolves terminal precedence and strict files", () => {
     };
     const resolved = resolveConfig({
       apiKey: [API_KEY, "constructor"].join("_"),
-      baseUrl: "https://constructor.example.invalid/",
+      baseUrl: "https://api.runacode.io/",
       configFile: file,
       fetch: customFetch,
     });
     assert.equal(resolved.apiKeySource, "constructor");
     assert.equal(resolved.baseUrlSource, "constructor");
-    assert.equal(resolved.baseUrl, "https://constructor.example.invalid");
+    assert.equal(resolved.baseUrl, "https://api.runacode.io");
     assert.equal(resolved.fetch, customFetch);
 
     assert.throws(
@@ -112,6 +112,22 @@ test("PRD-001 and PRD-023 reject prohibited hosts including trailing dot", () =>
       }),
     ConfigError,
   );
+});
+
+test("PRD-023 accepts only the canonical Runa API origin", () => {
+  for (const baseUrl of [
+    "https://example.invalid",
+    "https://api.runacode.io.example.invalid",
+    "https://api.runacode.io:443",
+    "http://api.runacode.io",
+    "https://api.runacode.io/v1",
+  ]) {
+    assert.throws(() => resolveConfig({ apiKey: API_KEY, baseUrl }), ConfigError);
+  }
+  assert.equal(resolveConfig({
+    apiKey: API_KEY,
+    baseUrl: "https://api.runacode.io/",
+  }).baseUrl, "https://api.runacode.io");
 });
 
 test("PRD-024 exposes the closed error surface", () => {

@@ -48,7 +48,7 @@ test("PRD-021/025/028-037 dispatch exactly 13 canonical operations", async () =>
   const captures = [];
   const runa = new Runa({
     apiKey: API_KEY,
-    baseUrl: "https://sdk.example.invalid",
+    baseUrl: "https://api.runacode.io",
     fetch: operationFetch(captures),
   });
   await runa.me();
@@ -95,7 +95,7 @@ test("PRD-021/025/028-037 dispatch exactly 13 canonical operations", async () =>
     ],
   );
   for (const { target, init } of captures) {
-    assert.equal(target.origin, "https://sdk.example.invalid");
+    assert.equal(target.origin, "https://api.runacode.io");
     assert.equal(init.redirect, "manual");
     assert.equal(init.headers.Accept, "application/json");
     assert.equal(init.headers.Authorization, `Bearer ${API_KEY}`);
@@ -158,7 +158,7 @@ test("PRD-024/025 exact status, media, redirect and error mapping", async () => 
   for (const scenario of scenarios) {
     const runa = new Runa({
       apiKey: API_KEY,
-      baseUrl: "https://sdk.example.invalid",
+      baseUrl: "https://api.runacode.io",
       fetch: async () => scenario.response,
     });
     await assert.rejects(runa.me(), (error) => {
@@ -187,7 +187,7 @@ test("PRD-025/040 enforce the response cap and invalid UTF-8", async () => {
   ]) {
     const runa = new Runa({
       apiKey: API_KEY,
-      baseUrl: "https://sdk.example.invalid",
+      baseUrl: "https://api.runacode.io",
       fetch: async () => response,
     });
     await assert.rejects(
@@ -202,7 +202,7 @@ test("PRD-030/033 reject local invalid values before I/O", async () => {
   let dispatches = 0;
   const runa = new Runa({
     apiKey: API_KEY,
-    baseUrl: "https://sdk.example.invalid",
+    baseUrl: "https://api.runacode.io",
     fetch: async () => {
       dispatches += 1;
       return jsonResponse(sessionFixture());
@@ -249,7 +249,7 @@ test("PRD-028 snapshots caller-owned create arrays before dispatch", async () =>
   };
   const runa = new Runa({
     apiKey: API_KEY,
-    baseUrl: "https://sdk.example.invalid",
+    baseUrl: "https://api.runacode.io",
     fetch,
   });
   const allowedHosts = ["first.example.invalid"];

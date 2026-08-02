@@ -7,7 +7,6 @@ import type {
   RunaConfig,
   TraceSink,
 } from "./types.js";
-import { containsProhibitedMarker } from "./internal/boundary-policy.js";
 
 export const DEFAULT_BASE_URL = "https://api.runacode.io";
 
@@ -83,11 +82,6 @@ function validApiKey(value: unknown): value is string {
   );
 }
 
-function isProhibitedHost(hostname: string): boolean {
-  const host = hostname.toLowerCase().replace(/\.$/, "");
-  return containsProhibitedMarker(host);
-}
-
 function normalizeBaseUrl(value: unknown): string {
   if (typeof value !== "string") fail();
   let parsed: URL;
@@ -104,11 +98,11 @@ function normalizeBaseUrl(value: unknown): string {
     (parsed.pathname !== "" && parsed.pathname !== "/") ||
     parsed.search !== "" ||
     parsed.hash !== "" ||
-    isProhibitedHost(parsed.hostname)
+    parsed.origin !== DEFAULT_BASE_URL
   ) {
     fail();
   }
-  return parsed.origin;
+  return DEFAULT_BASE_URL;
 }
 
 function validateDiagnostics(value: unknown): DiagnosticSink | undefined {

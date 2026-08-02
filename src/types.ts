@@ -309,7 +309,7 @@ export interface TraceSink {
 export interface RunaConfig {
   /** Optional constructor API key selected before environment or explicit-file sources. */
   readonly apiKey?: string;
-  /** Optional normalized HTTPS API origin override. */
+  /** Optional explicit Runa API origin; only https://api.runacode.io is accepted. */
   readonly baseUrl?: string;
   /** Optional explicit JSON configuration file, or null to disable file loading. */
   readonly configFile?: string | null;

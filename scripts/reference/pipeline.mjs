@@ -341,7 +341,7 @@ const memberDescriptions = Object.freeze({
   allowedHosts: "Optional ordered host allowlist copied into the create request.",
   apiKey: "Optional constructor API key selected before environment or explicit-file sources.",
   assigned: "Literal discriminator for the workspace assignment variant.",
-  baseUrl: "Optional normalized HTTPS API origin override.",
+  baseUrl: "Optional explicit canonical Runa API origin.",
   checkpoint: "Creates one named checkpoint through the owning session handle.",
   close: "Closes this client after already admitted work completes.",
   code: "Stable normalized public error code.",
