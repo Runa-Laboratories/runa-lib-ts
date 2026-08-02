@@ -9,29 +9,43 @@ permissions:
   contents: read
 
 jobs:
-  quality:
+  candidate:
+    name: ts-quality-gates
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 22.17.1
+          cache: npm
+      - run: npm install --global npm@10.9.2
+      - run: npm ci
+      - run: npm run quality
+      - run: npm run release:candidate
+      - run: npm run release:local-gates
+      - run: npm run release:smoke
+      - run: node scripts/record-quality-gate.mjs
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: npm-release-candidate-base
+          path: |
+            release-artifacts/
+            evidence/
+          if-no-files-found: error
+
+  compatibility:
+    needs: candidate
     strategy:
       fail-fast: false
       matrix:
         include:
-          - os: ubuntu-22.04
-            node: 22.17.1
-            npm: 10.9.2
-          - os: windows-2022
-            node: 22.17.1
-            npm: 10.9.2
-          - os: macos-14
-            node: 22.17.1
-            npm: 10.9.2
-          - os: ubuntu-22.04
-            node: 24.4.1
-            npm: 11.4.2
-          - os: windows-2022
-            node: 24.4.1
-            npm: 11.4.2
-          - os: macos-14
-            node: 24.4.1
-            npm: 11.4.2
+          - { os: ubuntu-22.04, node: 22.17.1, npm: 10.9.2, id: ts050-node22-linux-x64 }
+          - { os: windows-2022, node: 22.17.1, npm: 10.9.2, id: ts050-node22-windows-x64 }
+          - { os: macos-14, node: 22.17.1, npm: 10.9.2, id: ts050-node22-macos-arm64 }
+          - { os: ubuntu-22.04, node: 24.4.1, npm: 11.4.2, id: ts050-node24-linux-x64 }
+          - { os: windows-2022, node: 24.4.1, npm: 11.4.2, id: ts050-node24-windows-x64 }
+          - { os: macos-14, node: 24.4.1, npm: 11.4.2, id: ts050-node24-macos-arm64 }
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
@@ -40,19 +54,44 @@ jobs:
           node-version: ${{ matrix.node }}
           cache: npm
       - run: npm install --global npm@${{ matrix.npm }}
-      - run: node --version
-      - run: npm --version
       - run: npm ci
-      - run: npm run quality
-      - run: npm run release:candidate
-      - run: npm run release:local-gates
-      - run: npm run release:smoke
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: npm-release-candidate-base
       - run: npm run compatibility:verify
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: always()
         with:
-          name: evidence-${{ runner.os }}-node-${{ matrix.node }}
+          name: compatibility-${{ matrix.id }}
+          path: evidence/compatibility-receipts/${{ matrix.id }}.json
+          if-no-files-found: error
+
+  handoff:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: compatibility
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 22.17.1
+      - run: npm ci
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: npm-release-candidate-base
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          pattern: compatibility-*
+          path: evidence/compatibility-receipts
+          merge-multiple: true
+      - run: npm run compatibility:aggregate
+        env:
+          RUNA_COMPAT_SIGNING_KEY_ID: ${{ vars.RUNA_COMPAT_SIGNING_KEY_ID }}
+          RUNA_COMPAT_SIGNING_KEY_PEM: ${{ secrets.RUNA_COMPAT_SIGNING_KEY_PEM }}
+      - run: npm run release:manifest:core
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: npm-release-candidate
           path: |
-            release-artifacts/candidate.json
+            release-artifacts/
             evidence/
           if-no-files-found: error

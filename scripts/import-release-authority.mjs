@@ -48,6 +48,9 @@ try {
 }
 const candidateBytes = await readFile("release-artifacts/candidate.json");
 const candidate = JSON.parse(candidateBytes.toString("utf8"));
+const releaseManifestCoreBytes = await readFile(
+  "release-artifacts/release-manifest-core.json",
+);
 const releaseMapping = JSON.parse(
   await readFile("governance/release-mapping.json", "utf8"),
 );
@@ -72,7 +75,7 @@ const entries = [
   ["approval_receipt", "approval", "release-approval",
     (payload) => payload.candidate_sha256 === candidate.sha256 &&
       payload.artifact_sha256 === candidate.sha256 &&
-      payload.candidate_manifest_sha256 === hash(candidateBytes)],
+      payload.release_manifest_core_sha256 === hash(releaseManifestCoreBytes)],
   ["repository_controls", "repository-controls", "repository-controls",
     (payload) => payload.commit_sha === candidate.source_commit],
   ["cross_language", "cross-language", "cross-language",

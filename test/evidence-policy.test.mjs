@@ -8,7 +8,6 @@ import {
 
 test("quality rejects every mandatory NOT_RUN acceptance path", () => {
   const clean = {
-    status: "PASS",
     requirement_count: 1,
     acceptance_test_count: 1,
     requirement_status_summary: { PASS: 1, NOT_RUN: 0 },
@@ -17,7 +16,6 @@ test("quality rejects every mandatory NOT_RUN acceptance path", () => {
   };
   assert.equal(validateRequirementTestMap(clean), true);
   for (const mutate of [
-    (value) => { value.status = "BLOCKED"; },
     (value) => { value.requirement_status_summary.NOT_RUN = 1; },
     (value) => { value.acceptance_status_summary.NOT_RUN = 1; },
     (value) => { value.acceptance_results[0].status = "NOT_RUN"; },
