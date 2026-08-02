@@ -96,6 +96,27 @@ const jsonResponse = (value) => new Response(JSON.stringify(value), {
   headers: { "content-type": "application/json" },
 });
 
+const producerAdditionalAssets = new Map([
+  ["release-authority-public-key.pem", Buffer.from("public key transport only")],
+  ["release-authority-public-key.pem.sha256", Buffer.from(`${"b".repeat(64)}  release-authority-public-key.pem\n`)],
+  ["inherited-evidence.json", Buffer.from("{}")],
+  ["inherited-evidence.sigstore.json", Buffer.from("{}")],
+  ["prd013-security.json", Buffer.from("{}")],
+  ["prd014-compatibility.json", Buffer.from("{}")],
+  ["prd015-conformance.json", Buffer.from("{}")],
+  ["prd016-quality.json", Buffer.from("{}")],
+  ["prd017-budgets.json", Buffer.from("{}")],
+  ["release-manifest.json", Buffer.from("{}")],
+  ["sbom-wheel.cdx.json", Buffer.from("{}")],
+  ["sbom-sdist.cdx.json", Buffer.from("{}")],
+  ["provenance-wheel.intoto.json", Buffer.from("{}")],
+  ["provenance-sdist.intoto.json", Buffer.from("{}")],
+  ["release-core-manifest.json", Buffer.from("{}")],
+  ["approval-receipt.json", Buffer.from("{}")],
+  ["approval-receipt.sig", Buffer.from("signature")],
+  ["approval-receipt.json.sha256", Buffer.from(`${"c".repeat(64)}  approval-receipt.json\n`)],
+]);
+
 function releaseFor(assets) {
   const tag = `authority-run-${runId}-${runAttempt}`;
   return {
@@ -115,7 +136,8 @@ function releaseFor(assets) {
 
 test("public authority transport is anonymous and verifies run, SHA, detached, and role signatures", async () => {
   const fixture = signedAssets();
-  const release = releaseFor(fixture.assets);
+  const releaseAssets = new Map([...fixture.assets, ...producerAdditionalAssets]);
+  const release = releaseFor(releaseAssets);
   const fetchImpl = async (input, options) => {
     const url = new URL(input);
     const headers = new Headers(options?.headers);
@@ -193,6 +215,29 @@ test("oversized public assets are rejected before download", async () => {
   await assert.rejects(retrievePublicAuthorityAssets(expected, runId, fixture.trust, {
     fetchImpl,
   }));
+});
+
+test("duplicate and uncatalogued producer asset names are rejected", async () => {
+  const fixture = signedAssets();
+  const duplicate = releaseFor(fixture.assets);
+  duplicate.assets.push({ ...duplicate.assets[0] });
+  const unexpected = releaseFor(fixture.assets);
+  unexpected.assets.push({
+    name: "../../authority-bundle.json",
+    state: "uploaded",
+    size: 1,
+    browser_download_url: "https://github.com/attacker/authority-bundle.json",
+  });
+  for (const release of [duplicate, unexpected]) {
+    const fetchImpl = async (input) => {
+      const url = new URL(input);
+      if (url.pathname.endsWith(`/runs/${runId}`)) return jsonResponse(validRun());
+      return jsonResponse(release);
+    };
+    await assert.rejects(retrievePublicAuthorityAssets(expected, runId, fixture.trust, {
+      fetchImpl,
+    }));
+  }
 });
 
 test("tampered SHA, detached signature, and legacy embedded envelopes are rejected", () => {

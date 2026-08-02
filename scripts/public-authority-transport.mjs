@@ -14,10 +14,28 @@ const ASSET_NAMES = Object.freeze([
   "release-authority-bundle.json.sig",
   "release-authority-bundle.json.sha256",
 ]);
-const MAXIMUM_BYTES = Object.freeze({
+const PUBLIC_ASSET_LIMITS = Object.freeze({
   "release-authority-bundle.json": 5_242_880,
   "release-authority-bundle.json.sig": 65_536,
   "release-authority-bundle.json.sha256": 256,
+  "release-authority-public-key.pem": 16_384,
+  "release-authority-public-key.pem.sha256": 256,
+  "inherited-evidence.json": 1_048_576,
+  "inherited-evidence.sigstore.json": 5_242_880,
+  "prd013-security.json": 1_048_576,
+  "prd014-compatibility.json": 1_048_576,
+  "prd015-conformance.json": 1_048_576,
+  "prd016-quality.json": 1_048_576,
+  "prd017-budgets.json": 1_048_576,
+  "release-manifest.json": 1_048_576,
+  "sbom-wheel.cdx.json": 5_242_880,
+  "sbom-sdist.cdx.json": 5_242_880,
+  "provenance-wheel.intoto.json": 5_242_880,
+  "provenance-sdist.intoto.json": 5_242_880,
+  "release-core-manifest.json": 5_242_880,
+  "approval-receipt.json": 1_048_576,
+  "approval-receipt.sig": 65_536,
+  "approval-receipt.json.sha256": 256,
 });
 const ROLE_FIELDS = Object.freeze([
   ["approval_receipt", "approval"],
@@ -104,14 +122,23 @@ function validateRelease(release, run) {
   assert.equal(release.draft, false);
   assert.equal(release.prerelease, false);
   assert(Array.isArray(release.assets));
-  assert.deepEqual(release.assets.map((asset) => asset.name).sort(), [...ASSET_NAMES].sort());
+  const seen = new Set();
   const result = new Map();
   for (const asset of release.assets) {
+    assert.equal(typeof asset.name, "string");
+    assert.equal(Object.hasOwn(PUBLIC_ASSET_LIMITS, asset.name), true,
+      "Public authority Release contains an unapproved asset name.");
+    assert.equal(seen.has(asset.name), false,
+      "Public authority Release contains a duplicate asset name.");
+    seen.add(asset.name);
     assert.equal(asset.state, "uploaded");
     assert.equal(asset.browser_download_url, assetUrl(tag, asset.name));
     assert(Number.isSafeInteger(asset.size) && asset.size > 0 &&
-      asset.size <= MAXIMUM_BYTES[asset.name]);
-    result.set(asset.name, asset.browser_download_url);
+      asset.size <= PUBLIC_ASSET_LIMITS[asset.name]);
+    if (ASSET_NAMES.includes(asset.name)) result.set(asset.name, asset.browser_download_url);
+  }
+  for (const required of ASSET_NAMES) {
+    assert.equal(result.has(required), true, `Required public authority asset is absent: ${required}`);
   }
   return result;
 }
@@ -176,7 +203,9 @@ export async function retrievePublicAuthorityAssets(expected, runId, trustPolicy
   const urls = validateRelease(release, run);
   const assets = new Map();
   for (const name of ASSET_NAMES) {
-    assets.set(name, await downloadAsset(urls.get(name), MAXIMUM_BYTES[name], fetchImpl));
+    assets.set(name, await downloadAsset(
+      urls.get(name), PUBLIC_ASSET_LIMITS[name], fetchImpl,
+    ));
   }
   const verified = verifyAuthorityAssets(assets, trustPolicy, now);
   return { ...verified, assets, run };

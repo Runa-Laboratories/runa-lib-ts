@@ -80,14 +80,15 @@ export function verifyDetachedAuthorityBundle(bundleBytes, bundle, detached, pol
     if (!exactKeys(detached, [
       "bundle_sha256", "canonical_sha256", "canonicalization", "key_id",
       "schema_version", "signature",
-    ]) || detached.schema_version !== 1 ||
+    ]) || detached.schema_version !== 2 ||
         detached.canonicalization !== "RFC8785-JCS") return false;
     const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
     if (detached.bundle_sha256 !== sha256(bundleBytes)) return false;
     const canonicalBytes = jcsBytes(bundle);
     if (detached.canonical_sha256 !== sha256(canonicalBytes)) return false;
     const key = trustedKey(policy, detached.key_id, "release-authority");
-    return key !== undefined && verify(null, canonicalBytes, key.public_key_pem,
+    const { signature, ...statement } = detached;
+    return key !== undefined && verify(null, jcsBytes(statement), key.public_key_pem,
       Buffer.from(detached.signature, "base64"));
   } catch {
     return false;
