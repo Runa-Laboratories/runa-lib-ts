@@ -18,6 +18,23 @@ export function validateRequirementTestMap(value) {
   return true;
 }
 
+export function validateRequirementTestMapWithReceipts(value, receiptIds) {
+  assert.equal(value.acceptance_results?.length, value.acceptance_test_count);
+  assert.equal(value.acceptance_test_ids?.length, value.acceptance_test_count);
+  const catalog = new Set(value.acceptance_test_ids);
+  const passed = new Set(value.acceptance_results
+    .filter((result) => result.status === "PASS").map((result) => result.test_id));
+  for (const testId of receiptIds) {
+    assert(catalog.has(testId), `External receipt names unknown ${testId}.`);
+    passed.add(testId);
+  }
+  assert.equal(passed.size, value.acceptance_test_count);
+  assert.equal(value.rows.length, value.requirement_count);
+  assert.equal(value.rows.every((row) =>
+    row.acceptance_test_ids.every((testId) => passed.has(testId))), true);
+  return true;
+}
+
 export function validateSmokeEvidence(value, candidateSha256) {
   assert.equal(value.status, "PASS");
   assert.equal(value.candidate_sha256, candidateSha256);

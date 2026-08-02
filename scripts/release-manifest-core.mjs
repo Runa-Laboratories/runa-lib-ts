@@ -24,7 +24,15 @@ export function canonicalizeJson(value) {
 }
 
 export const EXPECTED_RELEASE_POLICY = Object.freeze({
-  packageMetadata: { repository: "https://github.com/Runa-Laboratories/runa-lib-ts" },
+  packageMetadata: {
+    repository: "https://github.com/Runa-Laboratories/runa-lib-ts",
+    repositoryVisibility: "public",
+    packageAccess: "public",
+  },
+  releaseAuthority: {
+    status: "unconfigured",
+    authority: null,
+  },
   provenance: {
     attestation: "actions/attest-build-provenance@0f67c3f4856b2e3261c31976d6725780e5e4c373",
     verifier: "gh attestation verify <artifact> --repo Runa-Laboratories/runa-lib-ts --signer-workflow Runa-Laboratories/runa-lib-ts/.github/workflows/release.yml",
