@@ -138,7 +138,9 @@ const entries = [
 const retained = [];
 for (const [field, role, filename, binding] of entries) {
   const envelope = bundle[field];
-  const payload = verifyTrustedEnvelope(envelope, trustPolicy, role);
+  const payload = verifyTrustedEnvelope(envelope, trustPolicy, role, Date.now(), {
+    requiredSchemaVersion: 2,
+  });
   assert.notEqual(payload, undefined, `Invalid trusted ${field} evidence.`);
   if (["approval", "version-classification", "publication", "sbom-validation", "external-interfaces"].includes(role)) {
     assert.equal(validateTrustedRolePayload(role, payload), true);

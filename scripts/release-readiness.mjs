@@ -57,7 +57,9 @@ const requireTrusted = async (file, gate, role) => {
     blockers.push({ gate, reason: "No accepted release trust root is configured." });
     return undefined;
   }
-  const payload = verifyTrustedEnvelope(envelope, trustPolicy, role);
+  const payload = verifyTrustedEnvelope(envelope, trustPolicy, role, Date.now(), {
+    requiredSchemaVersion: role === "compatibility" ? 1 : 2,
+  });
   if (payload === undefined) {
     blockers.push({ gate, reason: "Evidence signature, role, status, or freshness is invalid." });
     return undefined;
