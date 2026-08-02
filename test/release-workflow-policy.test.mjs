@@ -20,6 +20,17 @@ test("release workflow is one protected dispatch with pinned signing and at-most
   assert.match(workflow, /node scripts\/verify-ci-run\.mjs/u);
   assert.doesNotMatch(workflow, /RUNA_RELEASE_AUTHORITY_BUNDLE_BASE64/u);
   assert.doesNotMatch(workflow, /recovery_mode|RUNA_VERIFY_ONLY|--clobber/u);
+  assert.doesNotMatch(workflow, /actions\/attest-build-provenance/u);
+  assert.match(ci, /actions\/attest-build-provenance@0f67c3f4856b2e3261c31976d6725780e5e4c373/u);
+  assert.match(ci, /npm run release:provenance:verify/u);
+  assert.match(ci, /npm run release:provenance:evidence/u);
+  const ciAttest = ci.indexOf("id: attest");
+  const ciVerify = ci.indexOf("npm run release:provenance:verify");
+  const ciRetain = ci.indexOf("npm run release:provenance:evidence");
+  const ciCore = ci.indexOf("npm run release:manifest:core");
+  assert.equal(ciAttest >= 0 && ciAttest < ciVerify && ciVerify < ciRetain &&
+    ciRetain < ciCore, true);
+  assert.match(workflow, /evidence\/\$\{\{ needs\.admission\.outputs\.filename \}\}\.intoto\.jsonl/u);
   assert.doesNotMatch(workflow, /RUNA_AUTHORITY_READ_TOKEN|personal.access.token|github.app/iu);
   assert.match(workflow, /gh release create/u);
   assert.match(workflow, /gh release upload/u);
@@ -44,9 +55,11 @@ test("release workflow is one protected dispatch with pinned signing and at-most
   assert.match(workflow, /admission:\s*\n\s+name: release-admission\s*\n\s+needs: \[phase-a, sign-tag\]/u);
   assert.match(workflow, /publish:\s*\n\s+needs: admission/u);
   const preflight = workflow.indexOf("npm run release:registry:preflight");
-  const attest = workflow.indexOf("id: attest");
+  const provenance = workflow.indexOf("npm run release:provenance:record");
+  const assets = workflow.indexOf("npm run release:assets:verify");
   const publish = workflow.indexOf("npm publish");
-  assert.equal(preflight >= 0 && preflight < attest && attest < publish, true);
+  assert.equal(preflight >= 0 && preflight < provenance &&
+    provenance < assets && assets < publish, true);
   assert.match(ci, /release-admission:\s*\n\s+name: release-admission/u);
   assert.match(ci, /name: release-admission\s*\n\s+needs: \[candidate, compatibility\]/u);
   assert.match(ci, /npm run release:ci:admission/u);

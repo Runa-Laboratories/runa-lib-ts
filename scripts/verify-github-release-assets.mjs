@@ -11,6 +11,13 @@ assert.match(tag ?? "", /^ts-v\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/u);
 assert(Array.isArray(configured) && configured.length >= 5);
 const names = configured.map((file) => path.basename(file));
 assert.equal(new Set(names).size, names.length);
+const view = spawnSync("gh", [
+  "release", "view", tag, "--json", "assets,tagName",
+], { encoding: "utf8" });
+assert.equal(view.status, 0, view.stderr);
+const release = JSON.parse(view.stdout);
+assert.equal(release.tagName, tag);
+assert.deepEqual(release.assets.map((asset) => asset.name).sort(), [...names].sort());
 const directory = await mkdtemp(path.join(tmpdir(), "runa-release-assets-"));
 try {
   for (const [index, file] of configured.entries()) {

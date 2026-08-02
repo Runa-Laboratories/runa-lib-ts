@@ -10,7 +10,7 @@
   },
   "provenance": {
     "attestation": "actions/attest-build-provenance@0f67c3f4856b2e3261c31976d6725780e5e4c373",
-    "verifier": "gh attestation verify <artifact> --repo Runa-Laboratories/runa-lib-ts --signer-workflow Runa-Laboratories/runa-lib-ts/.github/workflows/release.yml"
+    "verifier": "gh attestation verify <artifact> --repo Runa-Laboratories/runa-lib-ts --signer-workflow Runa-Laboratories/runa-lib-ts/.github/workflows/ci.yml"
   },
   "publisher": {
     "ci": {
