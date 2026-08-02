@@ -66,7 +66,7 @@ try {
     "attestation", "verify",
     path.resolve("release-artifacts", candidate.filename),
     "--repo", repository,
-    "--signer-workflow", "Runa-Laboratories/runa-lib-ts/.github/workflows/release.yml",
+    "--signer-workflow", "Runa-Laboratories/runa-lib-ts/.github/workflows/ci.yml",
   ], { encoding: "utf8" });
   assert.equal(verifyResult.status, 0, "R-018-12: GitHub attestation verification failed");
   const apiResult = spawnSync("gh", [

@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
+import { validateAttestationJsonl } from "./attestation-bundle.mjs";
 
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
 
@@ -55,7 +56,7 @@ export const EXPECTED_RELEASE_POLICY = Object.freeze({
   },
   provenance: {
     attestation: "actions/attest-build-provenance@0f67c3f4856b2e3261c31976d6725780e5e4c373",
-    verifier: "gh attestation verify <artifact> --repo Runa-Laboratories/runa-lib-ts --signer-workflow Runa-Laboratories/runa-lib-ts/.github/workflows/release.yml",
+    verifier: "gh attestation verify <artifact> --repo Runa-Laboratories/runa-lib-ts --signer-workflow Runa-Laboratories/runa-lib-ts/.github/workflows/ci.yml",
   },
   publisher: { ci: {
     environment: "npm", idToken: "write", minimumNode: "22.14.0",
@@ -124,6 +125,8 @@ export async function createReleaseManifestCore({
     "dependency-audit.json",
     "docs-readiness.json",
     "performance-local.json",
+    "provenance-manifest.json",
+    "provenance-verifier.json",
     "quality-gate.json",
     "release-smoke.json",
     "requirement-test-map.json",
@@ -141,6 +144,36 @@ export async function createReleaseManifestCore({
     handoffRoot, "evidence/sbom.cdx.json")).toString("utf8"));
   assert.equal(runtimeClosure.candidate_sha256, candidate.sha256);
   assert.equal(sbom.metadata?.component?.hashes?.[0]?.content, candidate.sha256);
+  const provenanceManifest = JSON.parse((await readBytes(
+    handoffRoot, "evidence/provenance-manifest.json")).toString("utf8"));
+  assert.deepEqual(provenanceManifest.subject, {
+    filename: candidate.filename, sha256: candidate.sha256,
+  });
+  assert.equal(provenanceManifest.status, "PASS");
+  assert.equal(provenanceManifest.predicate_type, "https://slsa.dev/provenance/v1");
+  assert.equal(provenanceManifest.signer_workflow,
+    "Runa-Laboratories/runa-lib-ts/.github/workflows/ci.yml");
+  assert.equal(provenanceManifest.filename,
+    `${candidate.filename}.intoto.jsonl`);
+  assert.equal(provenanceManifest.generator,
+    EXPECTED_RELEASE_POLICY.provenance.attestation);
+  assert.equal(provenanceManifest.verifier,
+    EXPECTED_RELEASE_POLICY.provenance.verifier);
+  const provenanceVerifierBytes = await readBytes(
+    handoffRoot, "evidence/provenance-verifier.json");
+  const provenanceVerifier = JSON.parse(provenanceVerifierBytes.toString("utf8"));
+  assert.equal(provenanceVerifier.status, "PASS");
+  assert.equal(provenanceVerifier.candidate_sha256, candidate.sha256);
+  assert.equal(provenanceVerifier.signer_workflow,
+    provenanceManifest.signer_workflow);
+  assert.equal(provenanceManifest.verifier_receipt_sha256,
+    sha256(provenanceVerifierBytes));
+  const provenanceBytes = await readBytes(
+    handoffRoot, `evidence/${provenanceManifest.filename}`);
+  assert.equal(sha256(provenanceBytes), provenanceManifest.sha256);
+  assert.equal(validateAttestationJsonl(
+    provenanceBytes.toString("utf8"), candidate,
+  ), true);
   return {
     schema_version: 1,
     package: {
@@ -175,6 +208,15 @@ export async function createReleaseManifestCore({
         repositoryRoot, ".github/workflows/release.yml")),
     },
     evidence,
+    provenance: {
+      filename: provenanceManifest.filename,
+      sha256: provenanceManifest.sha256,
+      predicate_type: provenanceManifest.predicate_type,
+      generator: provenanceManifest.generator,
+      signer_workflow: provenanceManifest.signer_workflow,
+      verifier: provenanceManifest.verifier,
+      verifier_receipt_sha256: provenanceManifest.verifier_receipt_sha256,
+    },
     runtime_closure_sha256: runtimeClosure.closure_sha256,
     sbom_artifact_subject_sha256:
       sbom.metadata.component.hashes[0].content,

@@ -39,6 +39,7 @@ assert.deepEqual(assetNames, [
   "postpublish-receipt.json",
   "release-manifest-core.json",
   "release-manifest-envelope.authority-admitted.json",
+  "release-manifest-envelope.provenance-attested.json",
   "release-manifest-envelope.json",
   "sbom.cdx.json",
   provenanceNames[0],
@@ -72,13 +73,24 @@ try {
   assert.deepEqual(admittedEnvelope.states.map((state) => state.state), [
     "authority-admitted",
   ]);
+  const provenanceEnvelope = JSON.parse(await readFile(
+    path.join(directory, "release-manifest-envelope.provenance-attested.json"), "utf8",
+  ));
+  assert.equal(validateReleaseManifestEnvelope(provenanceEnvelope, {
+    coreSha256: hash(coreBytes), candidateSha256: candidate.sha256,
+  }), true);
+  assert.deepEqual(provenanceEnvelope.states.map((state) => state.state), [
+    "authority-admitted", "provenance-attested",
+  ]);
   assert.equal(validateReleaseManifestEnvelope(envelope, {
     coreSha256: hash(coreBytes), candidateSha256: candidate.sha256,
   }), true);
   assert.deepEqual(envelope.states.map((state) => state.state), [
-    "authority-admitted", "uploaded-unverified", "registry-verified",
+    "authority-admitted", "provenance-attested", "uploaded-unverified",
+    "registry-verified",
   ]);
   assert.deepEqual(envelope.states[0], admittedEnvelope.states[0]);
+  assert.deepEqual(envelope.states.slice(0, 2), provenanceEnvelope.states);
   const postpublishBytes = await readFile(path.join(directory, "postpublish-receipt.json"));
   const mapping = JSON.parse(await readFile("governance/release-mapping.json", "utf8"));
   validateReleaseMapping(mapping);
@@ -89,11 +101,12 @@ try {
   assert.equal(validateAttestationJsonl(provenanceBytes.toString("utf8"), candidate), true);
   assert.equal(envelope.states[1].receipt_sha256s.attestation, hash(provenanceBytes));
   assert.equal(envelope.states[2].receipt_sha256s.attestation, hash(provenanceBytes));
-  assert.equal(envelope.states[2].receipt_sha256s.postpublish, hash(postpublishBytes));
+  assert.equal(envelope.states[3].receipt_sha256s.attestation, hash(provenanceBytes));
+  assert.equal(envelope.states[3].receipt_sha256s.postpublish, hash(postpublishBytes));
   const attestation = spawnSync("gh", [
     "attestation", "verify", path.join(directory, candidate.filename),
     "--repo", repository,
-    "--signer-workflow", "Runa-Laboratories/runa-lib-ts/.github/workflows/release.yml",
+    "--signer-workflow", "Runa-Laboratories/runa-lib-ts/.github/workflows/ci.yml",
   ], { encoding: "utf8" });
   assert.equal(attestation.status, 0, attestation.stderr);
   const metadataResponse = await fetch(

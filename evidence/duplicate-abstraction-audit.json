@@ -2,7 +2,7 @@
   "schema_version": 2,
   "status": "PASS",
   "method": "scripts/verify-duplicate-abstractions.mjs",
-  "audited_source_sha256": "e446881b24fbaa1a2baa263b78dbd8ff90c590057a564c5fb1ba2bee4c8ac84a",
+  "audited_source_sha256": "dd9ec96f5eedf8d0551b90b6f3ba2ed510c37eac05b6bf00adc57e2ac0b66aa1",
   "audited_files": [
     "src/client.ts",
     "src/config.ts",
@@ -38,6 +38,8 @@
     "scripts/npm-process.mjs",
     "scripts/plan-release-recovery.mjs",
     "scripts/postpublish-policy.mjs",
+    "scripts/record-provenance-evidence.mjs",
+    "scripts/record-provenance-state.mjs",
     "scripts/record-quality-gate.mjs",
     "scripts/reference/pipeline.mjs",
     "scripts/registry-version-policy.mjs",
@@ -58,6 +60,7 @@
     "scripts/verify-ci-run.mjs",
     "scripts/verify-compatibility.mjs",
     "scripts/verify-contract.mjs",
+    "scripts/verify-controlled-provenance.mjs",
     "scripts/verify-dependencies.mjs",
     "scripts/verify-docs.mjs",
     "scripts/verify-duplicate-abstractions.mjs",
@@ -69,6 +72,7 @@
     "scripts/verify-pretag-release-gates.mjs",
     "scripts/verify-public-release-context.mjs",
     "scripts/verify-registry-version-absent.mjs",
+    "scripts/verify-release-recovery.mjs",
     "scripts/verify-release-smoke.mjs",
     "scripts/verify-release-tag.mjs",
     "scripts/verify-security.mjs",
@@ -131,6 +135,8 @@
         "scripts/build-evidence.mjs",
         "scripts/build-release-candidate.mjs",
         "scripts/import-release-authority.mjs",
+        "scripts/record-provenance-evidence.mjs",
+        "scripts/record-provenance-state.mjs",
         "scripts/reference/pipeline.mjs",
         "scripts/release-authority-schema.mjs",
         "scripts/release-manifest-core.mjs",
@@ -142,6 +148,7 @@
         "scripts/test-evidence-binding.mjs",
         "scripts/verify-compatibility.mjs",
         "scripts/verify-contract.mjs",
+        "scripts/verify-controlled-provenance.mjs",
         "scripts/verify-duplicate-abstractions.mjs",
         "scripts/verify-github-release-assets.mjs",
         "scripts/verify-local-release-gates.mjs",
@@ -150,10 +157,11 @@
         "scripts/verify-postpublish.mjs",
         "scripts/verify-pretag-release-gates.mjs",
         "scripts/verify-registry-version-absent.mjs",
+        "scripts/verify-release-recovery.mjs",
         "scripts/verify-release-smoke.mjs"
       ],
       "observed": {
-        "sha256_call_sites": 35
+        "sha256_call_sites": 41
       },
       "rationale": "Release tools are independently executable trust-boundary gates; their one-line SHA-256 calculations remain local and compare the same candidate rather than sharing mutable evidence state."
     },
