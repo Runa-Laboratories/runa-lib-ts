@@ -81,11 +81,15 @@ const sbom = {
 assert.equal(sbom.bomFormat, "CycloneDX");
 assert.equal(sbom.specVersion, "1.6");
 await mkdir("evidence", { recursive: true });
-await writeFile("evidence/sbom.cdx.json", `${JSON.stringify(sbom, null, 2)}\n`);
+const sbomBytes = Buffer.from(`${JSON.stringify(sbom, null, 2)}\n`);
+await writeFile("evidence/sbom.cdx.json", sbomBytes);
 await writeFile("evidence/sbom-validation.json", `${JSON.stringify({
   schema_version: 1,
   status: "BLOCKED",
   candidate_sha256: candidate.sha256,
+  artifact_subject_sha256: candidate.sha256,
+  sbom_sha256: hash(sbomBytes),
+  dependency_closure_sha256: closures[0],
   local_structural_checks: "PASS",
   required_validator: "cyclonedx-cli validate --input-format json",
   reason: "The accepted CycloneDX 1.6 schema and validator receipt are not configured locally.",

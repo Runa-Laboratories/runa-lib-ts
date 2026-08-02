@@ -3,7 +3,10 @@ import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { validateContractProvenance } from "./contract-generation.mjs";
 import { verifyTrustedEnvelope } from "./trusted-evidence.mjs";
-import { validateTrustedRolePayload } from "./release-authority-schema.mjs";
+import {
+  validateSbomEvidenceBinding,
+  validateTrustedRolePayload,
+} from "./release-authority-schema.mjs";
 import {
   resolveReleaseChannel,
   validateReleaseMapping,
@@ -42,6 +45,10 @@ validateReleaseMapping(releaseMapping);
 const releaseChannel = resolveReleaseChannel(releaseMapping, candidate.version);
 const projection = await readFile("contracts/runa-sdk.projection.json");
 const openapi = await readFile("contracts/runa-api.openapi.json");
+const sbomBytes = await readFile("evidence/sbom.cdx.json");
+const runtimeClosure = JSON.parse(
+  await readFile("evidence/runtime-closure.json", "utf8"),
+);
 const canonical = (await readFile("contracts/runa-api.openapi.sha256", "utf8"))
   .trim().split(/\s+/, 1)[0];
 assert.equal(validateContractProvenance(bundle.contract_provenance, {
@@ -76,6 +83,13 @@ for (const [field, role, filename, binding] of entries) {
     assert.equal(validateTrustedRolePayload(role, payload), true);
   }
   assert.equal(binding(payload), true, `Mismatched ${field} candidate binding.`);
+  if (role === "sbom-validation") {
+    assert.equal(validateSbomEvidenceBinding(payload, {
+      candidateSha256: candidate.sha256,
+      sbomBytes,
+      runtimeClosure,
+    }), true);
+  }
   retained.push([`evidence/${filename}.json`, envelope]);
 }
 await mkdir("governance", { recursive: true });

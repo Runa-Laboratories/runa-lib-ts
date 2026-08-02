@@ -1,6 +1,10 @@
 import assert from "node:assert/strict";
 import { test } from "vitest";
-import { validateTrustedRolePayload } from "../scripts/release-authority-schema.mjs";
+import { createHash } from "node:crypto";
+import {
+  validateSbomEvidenceBinding,
+  validateTrustedRolePayload,
+} from "../scripts/release-authority-schema.mjs";
 
 const common = {
   status: "PASS",
@@ -37,5 +41,46 @@ test("trusted signatures cannot substitute for closed release-role semantics", (
     const missing = { ...payload };
     delete missing.candidate_sha256;
     assert.throws(() => validateTrustedRolePayload(role, missing));
+  }
+});
+
+test("trusted SBOM authority is bound to exact local bytes and closure", () => {
+  const candidate = "a".repeat(64);
+  const closure = "b".repeat(64);
+  const sbomBytes = Buffer.from('{"bomFormat":"CycloneDX"}\n');
+  const payload = {
+    status: "PASS",
+    issued_at: "2026-08-01T00:00:00Z",
+    expires_at: "2026-08-03T00:00:00Z",
+    candidate_sha256: candidate,
+    artifact_subject_sha256: candidate,
+    dependency_closure_sha256: closure,
+    sbom_sha256: createHash("sha256").update(sbomBytes).digest("hex"),
+    bom_format: "CycloneDX",
+    spec_version: "1.6",
+  };
+  const runtimeClosure = {
+    status: "PASS",
+    candidate_sha256: candidate,
+    closure_sha256: closure,
+  };
+  assert.equal(validateSbomEvidenceBinding(payload, {
+    candidateSha256: candidate,
+    sbomBytes,
+    runtimeClosure,
+  }), true);
+  for (const mutate of [
+    (_value, context) => { context.sbomBytes = Buffer.from("changed"); },
+    (value) => { value.dependency_closure_sha256 = "c".repeat(64); },
+    (_value, context) => { context.runtimeClosure.candidate_sha256 = "d".repeat(64); },
+  ]) {
+    const value = structuredClone(payload);
+    const context = {
+      candidateSha256: candidate,
+      sbomBytes,
+      runtimeClosure: structuredClone(runtimeClosure),
+    };
+    mutate(value, context);
+    assert.throws(() => validateSbomEvidenceBinding(value, context));
   }
 });

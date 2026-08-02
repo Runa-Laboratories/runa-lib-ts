@@ -1,11 +1,18 @@
 import { createHash } from "node:crypto";
 import { readFile, writeFile } from "node:fs/promises";
 import { verifyTrustedEnvelope } from "./trusted-evidence.mjs";
-import { validateTrustedRolePayload } from "./release-authority-schema.mjs";
+import {
+  validateSbomEvidenceBinding,
+  validateTrustedRolePayload,
+} from "./release-authority-schema.mjs";
 import {
   resolveReleaseChannel,
   validateReleaseMapping,
 } from "./postpublish-policy.mjs";
+import {
+  validateRequirementTestMap,
+  validateSmokeEvidence,
+} from "./evidence-policy.mjs";
 
 const blockers = [];
 const readJson = async (file, gate) => {
@@ -85,6 +92,17 @@ if (quality !== undefined && candidate !== undefined &&
     quality.commit_sha !== candidate.source_commit) {
   blockers.push({ gate: "quality", reason: "Quality evidence is not bound to the candidate source commit." });
 }
+const requirementMap = await requirePass(
+  "evidence/requirement-test-map.json",
+  "requirement-test-map",
+);
+if (requirementMap !== undefined) {
+  try {
+    validateRequirementTestMap(requirementMap);
+  } catch {
+    blockers.push({ gate: "requirement-test-map", reason: "Mandatory requirements or acceptance tests remain NOT_RUN." });
+  }
+}
 await requirePass("evidence/docs-readiness.json", "documentation");
 const performance = await requirePass(
   "evidence/performance-local.json",
@@ -146,10 +164,12 @@ if (closure !== undefined && candidate !== undefined && closure.candidate_sha256
   blockers.push({ gate: "runtime-closure", reason: "Runtime closure is not bound to the candidate." });
 }
 const smoke = await requirePass("evidence/release-smoke.json", "synthetic-release-smoke");
-if (smoke !== undefined && candidate !== undefined &&
-    (smoke.candidate_sha256 !== candidate.sha256 || smoke.clean_room_count !== 150 ||
-      smoke.runs_per_journey !== 30 || smoke.public_network_dispatches !== 0)) {
-  blockers.push({ gate: "synthetic-release-smoke", reason: "Smoke evidence is incomplete or not bound to the candidate." });
+if (smoke !== undefined && candidate !== undefined) {
+  try {
+    validateSmokeEvidence(smoke, candidate.sha256);
+  } catch {
+    blockers.push({ gate: "synthetic-release-smoke", reason: "Smoke evidence is incomplete or not bound to the candidate." });
+  }
 }
 const ciManifest = await requirePass("evidence/ci-candidate-manifest.json", "ci-candidate-manifest");
 if (ciManifest !== undefined && candidate !== undefined &&
@@ -163,9 +183,16 @@ if (sbom !== undefined && (sbom.bomFormat !== "CycloneDX" || sbom.specVersion !=
 }
 const sbomValidation = await requireTrusted(
   "evidence/sbom-validation.json", "sbom-validation", "sbom-validation");
-if (sbomValidation !== undefined && candidate !== undefined &&
-    sbomValidation.candidate_sha256 !== candidate.sha256) {
-  blockers.push({ gate: "sbom-validation", reason: "SBOM validation is not bound to the candidate." });
+if (sbomValidation !== undefined && candidate !== undefined) {
+  try {
+    validateSbomEvidenceBinding(sbomValidation, {
+      candidateSha256: candidate.sha256,
+      sbomBytes: await readFile("evidence/sbom.cdx.json"),
+      runtimeClosure: closure,
+    });
+  } catch {
+    blockers.push({ gate: "sbom-validation", reason: "SBOM validation is not bound to exact local SBOM and closure evidence." });
+  }
 }
 const externalInterfaces = await requireTrusted(
   "evidence/external-release-interfaces.json", "external-release-interfaces", "external-interfaces");
