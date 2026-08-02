@@ -172,6 +172,53 @@ test("PRD-024/025 exact status, media, redirect and error mapping", async () => 
   }
 });
 
+test("PRD-025 selects the exact global fetch when no callable is injected", async () => {
+  const originalFetch = globalThis.fetch;
+  let calls = 0;
+  const selected = async (url, init) => {
+    calls += 1;
+    assert.equal(new URL(url).origin, "https://api.runacode.io");
+    assert.equal(init.method, "GET");
+    return jsonResponse(meFixture());
+  };
+  globalThis.fetch = selected;
+  try {
+    const runa = new Runa({ apiKey: API_KEY });
+    assert.equal((await runa.me()).email, "sdk@example.invalid");
+    assert.equal(calls, 1);
+    await runa.close();
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("PRD-025/040 cancel every rejected response body without awaiting it", async () => {
+  for (const responseInit of [
+    { status: 500, headers: { "content-type": "application/json" } },
+    { status: 302, headers: { location: "https://redirect.example.invalid" } },
+    { status: 200, headers: { "content-type": "text/plain" } },
+  ]) {
+    let cancellations = 0;
+    const body = new ReadableStream({
+      pull(controller) {
+        controller.enqueue(new Uint8Array([0x7b]));
+      },
+      cancel() {
+        cancellations += 1;
+        return new Promise(() => {});
+      },
+    });
+    const runa = new Runa({
+      apiKey: API_KEY,
+      baseUrl: "https://api.runacode.io",
+      fetch: async () => new Response(body, responseInit),
+    });
+    await assert.rejects(runa.me(), ApiError);
+    assert.equal(cancellations, 1);
+    await runa.close();
+  }
+});
+
 test("PRD-025/040 enforce the response cap and invalid UTF-8", async () => {
   const over = new Uint8Array(8_388_609);
   over.fill(0x20);
@@ -196,6 +243,39 @@ test("PRD-025/040 enforce the response cap and invalid UTF-8", async () => {
     );
     await runa.close();
   }
+});
+
+test("PRD-025/026 overflow remains terminal when stream cancellation never settles", async () => {
+  let cancellations = 0;
+  const body = new ReadableStream({
+    start(controller) {
+      controller.enqueue(new Uint8Array(8_388_609));
+    },
+    cancel() {
+      cancellations += 1;
+      return new Promise(() => {});
+    },
+  });
+  const runa = new Runa({
+    apiKey: API_KEY,
+    baseUrl: "https://api.runacode.io",
+    fetch: async () => new Response(body, {
+      status: 200,
+      headers: { "content-type": "application/json" },
+    }),
+  });
+  let outcome;
+  void runa.me().then(
+    () => { outcome = "resolved"; },
+    (error) => { outcome = error; },
+  );
+  for (let turn = 0; turn < 10 && outcome === undefined; turn += 1) {
+    await new Promise((resolve) => setImmediate(resolve));
+  }
+  assert(outcome instanceof ApiError);
+  assert.equal(outcome.code, "malformed_response");
+  assert.equal(cancellations, 1);
+  await runa.close();
 });
 
 test("PRD-030/033 reject local invalid values before I/O", async () => {

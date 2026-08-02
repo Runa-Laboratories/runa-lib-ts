@@ -84,6 +84,7 @@ function validApiKey(value: unknown): value is string {
 
 function normalizeBaseUrl(value: unknown): string {
   if (typeof value !== "string") fail();
+  if (value !== DEFAULT_BASE_URL && value !== `${DEFAULT_BASE_URL}/`) fail();
   let parsed: URL;
   try {
     parsed = new URL(value);

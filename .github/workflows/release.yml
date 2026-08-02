@@ -12,11 +12,15 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+          persist-credentials: false
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: 22.17.1
       - run: npm install --global npm@10.9.2
       - run: npm ci
+      - run: npm run release:tag:verify
       - run: npm run quality
       - run: npm run release:candidate
       - run: npm run release:local-gates
@@ -114,7 +118,7 @@ jobs:
         with:
           node-version: 22.17.1
           registry-url: https://registry.npmjs.org
-      - run: npm install --global npm@10.9.2
+      - run: npm install --global npm@11.19.0
       - run: npm ci
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
@@ -123,7 +127,8 @@ jobs:
       - id: mapping
         run: node scripts/resolve-release-channel.mjs
       - id: attest
-        uses: actions/attest-build-provenance@v4
+        # v4, resolved from the official annotated tag on 2026-08-02.
+        uses: actions/attest-build-provenance@0f67c3f4856b2e3261c31976d6725780e5e4c373
         with:
           subject-path: release-artifacts/${{ needs.admission.outputs.filename }}
       - run: npm publish "release-artifacts/${{ needs.admission.outputs.filename }}" --provenance --access public --tag "${{ steps.mapping.outputs.dist_tag }}"
