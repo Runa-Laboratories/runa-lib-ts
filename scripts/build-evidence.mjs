@@ -1,52 +1,37 @@
-import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
-import path from "node:path";
-import { createHash } from "node:crypto";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { validateVitestAcceptanceReceipt } from "./acceptance-receipts.mjs";
+import { loadPrdCatalog } from "./prd-catalog.mjs";
 import { computeTestEvidenceBinding } from "./test-evidence-binding.mjs";
 import { requirementRowsDigest } from "./requirement-ledger-digest.mjs";
 
-const sources = [
-  { root: path.resolve("../../prds/libs/shared"), scope: "shared-applicable" },
-  { root: path.resolve("../../prds/libs/typescript"), scope: "typescript" }
-];
+const prdCatalog = await loadPrdCatalog();
 const rows = [];
 const acceptanceTestIds = new Set();
 const requirementIds = new Set();
 const sourceFiles = [];
-for (const source of sources) {
-  for (const file of (await readdir(source.root)).filter((name) => /^PRD-\d+.*\.md$/.test(name)).sort()) {
-    const text = await readFile(path.join(source.root, file), "utf8");
-    const owner = file.match(/^PRD-(\d{3})/)?.[1];
-    const requirements = [...new Set(text.match(/R-\d{3}-\d{2}/g) ?? [])]
-      .filter((id) => id.slice(2, 5) === owner)
-      .sort();
-    const tests = [...new Set(text.match(/TC-\d{3}-\d{2}/g) ?? [])]
-      .filter((id) => id.slice(3, 6) === owner)
-      .sort();
-    if (requirements.length === 0 || tests.length === 0) {
-      throw new Error(`${file} has no owner-scoped requirements or acceptance tests.`);
+for (const source of prdCatalog.sources) {
+  const requirements = source.requirements;
+  const tests = source.acceptance_tests;
+  sourceFiles.push({
+    file: source.file,
+    sha256: source.sha256,
+    requirement_count: requirements.length,
+    acceptance_test_count: tests.length,
+  });
+  for (const test of tests) acceptanceTestIds.add(test);
+  for (const requirement of requirements) {
+    if (requirementIds.has(requirement)) {
+      throw new Error(`Duplicate requirement identifier: ${requirement}`);
     }
-    sourceFiles.push({
-      file: `prds/libs/${source.scope === "typescript" ? "typescript" : "shared"}/${file}`,
-      sha256: createHash("sha256").update(text).digest("hex"),
-      requirement_count: requirements.length,
-      acceptance_test_count: tests.length,
+    requirementIds.add(requirement);
+    rows.push({
+      requirement,
+      scope: source.scope,
+      prd: source.file,
+      acceptance_test_ids: tests,
+      status: "NOT_RUN",
+      evidence_missing: "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier.",
     });
-    for (const test of tests) acceptanceTestIds.add(test);
-    for (const requirement of requirements) {
-      if (requirementIds.has(requirement)) {
-        throw new Error(`Duplicate requirement identifier: ${requirement}`);
-      }
-      requirementIds.add(requirement);
-      rows.push({
-        requirement,
-        scope: source.scope,
-        prd: `prds/libs/${source.scope === "typescript" ? "typescript" : "shared"}/${file}`,
-        acceptance_test_ids: tests,
-        status: "NOT_RUN",
-        evidence_missing: "The PRD acceptance cases are traced but have not each been executed and recorded under their exact TC identifier."
-      });
-    }
   }
 }
 if (sourceFiles.length === 0 || rows.length === 0 || acceptanceTestIds.size === 0) {
@@ -109,7 +94,9 @@ const passedRequirements = rows.filter((row) => row.status === "PASS").length;
 const sourceDigest = requirementRowsDigest(rows);
 await writeFile("evidence/requirement-test-map.json", `${JSON.stringify({
   schema_version: 2,
-  generated_from: ["prds/libs/shared", "prds/libs/typescript"],
+  generated_from: prdCatalog.catalog.generated_from,
+  prd_catalog_sha256: prdCatalog.digest,
+  source_files: sourceFiles,
   source_digest: sourceDigest,
   requirement_count: rows.length,
   acceptance_test_count: acceptanceTestIds.size,
