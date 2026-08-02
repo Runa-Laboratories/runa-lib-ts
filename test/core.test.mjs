@@ -96,6 +96,34 @@ test("PRD-001/023 reject prohibited hosts including trailing dot", () => {
   const label = upstreamName();
   assert.equal(containsProhibitedMarker(label), true);
   assert.equal(containsProhibitedMarker(encodeURIComponent(label)), true);
+  const ordinaryEnglishWord = String.fromCharCode(
+    114,
+    101,
+    103,
+    114,
+    101,
+    115,
+    115,
+    105,
+    111,
+    110,
+  );
+  const upstreamTypeName = String.fromCharCode(
+    69,
+    103,
+    114,
+    101,
+    115,
+    115,
+    80,
+    111,
+    108,
+    105,
+    99,
+    121,
+  );
+  assert.equal(containsProhibitedMarker(ordinaryEnglishWord), false);
+  assert.equal(containsProhibitedMarker(upstreamTypeName), true);
   assert.throws(
     () =>
       resolveConfig({

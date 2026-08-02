@@ -2,7 +2,7 @@
   "schema_version": 2,
   "status": "PASS",
   "method": "scripts/verify-duplicate-abstractions.mjs",
-  "audited_source_sha256": "d083c99d88b2199d05cd247c3c4c4c1d787bd95984ba45db0f8fca463129f11d",
+  "audited_source_sha256": "93244f859ae23ef68fa339976953e2354c72dae08a094c845bb212867a3f1bab",
   "audited_files": [
     "src/client.ts",
     "src/config.ts",
@@ -39,6 +39,7 @@
     "scripts/npm-process.mjs",
     "scripts/plan-release-recovery.mjs",
     "scripts/postpublish-policy.mjs",
+    "scripts/prd-catalog.mjs",
     "scripts/provenance-policy.mjs",
     "scripts/record-provenance-evidence.mjs",
     "scripts/record-provenance-state.mjs",
@@ -72,6 +73,7 @@
     "scripts/verify-pack.mjs",
     "scripts/verify-performance.mjs",
     "scripts/verify-postpublish.mjs",
+    "scripts/verify-prd-catalog.mjs",
     "scripts/verify-pretag-release-gates.mjs",
     "scripts/verify-public-release-context.mjs",
     "scripts/verify-registry-version-absent.mjs",
@@ -135,10 +137,10 @@
       "disposition": "accepted-job-local",
       "owners": [
         "scripts/acceptance-receipts.mjs",
-        "scripts/build-evidence.mjs",
         "scripts/build-provenance-predicate.mjs",
         "scripts/build-release-candidate.mjs",
         "scripts/import-release-authority.mjs",
+        "scripts/prd-catalog.mjs",
         "scripts/record-provenance-evidence.mjs",
         "scripts/record-provenance-state.mjs",
         "scripts/reference/pipeline.mjs",
@@ -160,13 +162,14 @@
         "scripts/verify-pack.mjs",
         "scripts/verify-performance.mjs",
         "scripts/verify-postpublish.mjs",
+        "scripts/verify-prd-catalog.mjs",
         "scripts/verify-pretag-release-gates.mjs",
         "scripts/verify-registry-version-absent.mjs",
         "scripts/verify-release-recovery.mjs",
         "scripts/verify-release-smoke.mjs"
       ],
       "observed": {
-        "sha256_call_sites": 45
+        "sha256_call_sites": 46
       },
       "rationale": "Release tools are independently executable trust-boundary gates; their one-line SHA-256 calculations remain local and compare the same candidate rather than sharing mutable evidence state."
     },
