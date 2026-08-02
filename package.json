@@ -63,6 +63,7 @@
     "release:postpublish:verify": "node scripts/verify-postpublish.mjs",
     "release:assets:verify": "node scripts/verify-github-release-assets.mjs",
     "release:recovery:plan": "node scripts/plan-release-recovery.mjs",
+    "release:recovery:verify": "node scripts/verify-release-recovery.mjs",
     "evidence": "node scripts/build-evidence.mjs",
     "quality": "npm run lint && npm run typecheck && npm run contract:verify && npm test && npm run docs:api && npm run surface:verify && npm run docs:verify && npm run security:verify && npm run dependencies:verify && npm run duplicates:verify && npm run pack:verify && npm run performance:verify && npm run evidence",
     "prepack": "npm run build"

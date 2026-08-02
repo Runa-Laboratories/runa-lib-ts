@@ -1,0 +1,79 @@
+name: Release Recovery Verification
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Exact historical package version to verify
+        required: true
+        type: string
+      candidate_run_id:
+        description: Original successful main CI run containing npm-release-candidate
+        required: true
+        type: string
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: release-recovery-${{ github.repository }}-${{ inputs.version }}
+  cancel-in-progress: false
+
+jobs:
+  recovery:
+    name: release-recovery-read-only
+    runs-on: ubuntu-22.04
+    permissions:
+      actions: read
+      contents: read
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: refs/tags/ts-v${{ inputs.version }}
+      - uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c
+        with:
+          go-version: '1.25.9'
+          cache: false
+      - name: Install pinned gitsign verifier
+        run: |
+          mkdir -p "$RUNNER_TEMP/gitsign-bin"
+          GOBIN="$RUNNER_TEMP/gitsign-bin" go install github.com/sigstore/gitsign@v0.16.0
+          echo "$RUNNER_TEMP/gitsign-bin" >> "$GITHUB_PATH"
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 22.17.1
+      - run: npm install --global npm@11.19.0
+      - run: npm ci
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: npm-release-candidate
+          run-id: ${{ inputs.candidate_run_id }}
+          github-token: ${{ github.token }}
+      - name: Bind recovery to candidate source commit and exact historical tag
+        env:
+          RUNA_REQUESTED_VERSION: ${{ inputs.version }}
+        run: |
+          RUNA_SOURCE_COMMIT="$(node -p 'require("./release-artifacts/candidate.json").source_commit')"
+          test "$(git rev-list -n 1 "ts-v$RUNA_REQUESTED_VERSION")" = "$RUNA_SOURCE_COMMIT"
+          test "$(node -p 'require("./release-artifacts/candidate.json").version')" = "$RUNA_REQUESTED_VERSION"
+          echo "RUNA_SOURCE_COMMIT=$RUNA_SOURCE_COMMIT" >> "$GITHUB_ENV"
+      - name: Verify original successful candidate CI run
+        run: node scripts/verify-ci-run.mjs
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUNA_CANDIDATE_RUN_ID: ${{ inputs.candidate_run_id }}
+          RUNA_SOURCE_COMMIT: ${{ env.RUNA_SOURCE_COMMIT }}
+      - name: Verify immutable historical tag identity
+        run: node scripts/verify-release-tag.mjs
+        env:
+          RUNA_RELEASE_TAG: ts-v${{ inputs.version }}
+          RUNA_RELEASE_COMMIT: ${{ env.RUNA_SOURCE_COMMIT }}
+      - name: Verify registry, provenance, envelope, and exact immutable release assets
+        run: npm run release:recovery:verify
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          RUNA_RELEASE_TAG: ts-v${{ inputs.version }}
