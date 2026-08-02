@@ -51,6 +51,8 @@ try {
   console.log("release authority import: BLOCKED (no accepted trust root)");
   process.exit(0);
 }
+const releasePolicy = JSON.parse(await readFile(".runa/release-policy.json", "utf8"));
+const authorityRun = JSON.parse(await readFile("evidence/authority-run.json", "utf8"));
 const authorityAssets = new Map([
   ["release-authority-bundle.json", bundleBytes],
   ["release-authority-bundle.json.sig",
@@ -58,7 +60,9 @@ const authorityAssets = new Map([
   ["release-authority-bundle.json.sha256",
     await readFile(`${authorityInput}/release-authority-bundle.json.sha256`)],
 ]);
-const verifiedAuthority = verifyAuthorityAssets(authorityAssets, trustPolicy, Date.now());
+const verifiedAuthority = verifyAuthorityAssets(
+  authorityAssets, trustPolicy, Date.now(), authorityRun,
+);
 bundle = verifiedAuthority.bundle;
 const expectedBundleSha = process.env.RUNA_EXPECTED_AUTHORITY_BUNDLE_SHA256;
 if (expectedBundleSha !== undefined) {
@@ -66,8 +70,6 @@ if (expectedBundleSha !== undefined) {
   assert.equal(verifiedAuthority.detached.bundle_sha256, expectedBundleSha,
     "Authority bytes differ from the phase-A identity.");
 }
-const releasePolicy = JSON.parse(await readFile(".runa/release-policy.json", "utf8"));
-const authorityRun = JSON.parse(await readFile("evidence/authority-run.json", "utf8"));
 assert.deepEqual(Object.keys(authorityRun).sort(), [
   "artifact", "head_sha", "repository", "run_attempt", "run_id",
   "schema_version", "status", "workflow",

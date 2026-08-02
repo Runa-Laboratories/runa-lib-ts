@@ -187,7 +187,7 @@ function signedAssets() {
     ["release-authority-bundle.json.sha256",
       Buffer.from(`${detached.bundle_sha256}  release-authority-bundle.json\n`)],
   ]);
-  return { assets, bundle, trust };
+  return { assets, bundle, privateKey, trust };
 }
 
 const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");
@@ -411,6 +411,19 @@ test("admission rejects a valid authority asset swapped after phase A", () => {
   assert.throws(() => validateAuthorityContinuity({
     ...phaseA, bundleSha256: digest("2"),
   }, phaseA), /bundleSha256 changed/u);
+});
+
+test("detached v2 authority identity must match the selected run", () => {
+  const fixture = signedAssets();
+  const assets = new Map(fixture.assets);
+  const detached = JSON.parse(assets.get("release-authority-bundle.json.sig"));
+  detached.authority_head_sha = "b".repeat(40);
+  const { signature: _signature, ...statement } = detached;
+  detached.signature = sign(null, jcsBytes(statement), fixture.privateKey).toString("base64");
+  assets.set("release-authority-bundle.json.sig",
+    Buffer.from(`${JSON.stringify(detached, null, 2)}\n`));
+  assert.throws(() => verifyAuthorityAssets(assets, fixture.trust,
+    Date.parse("2026-08-02T12:10:00.000Z"), validRun()));
 });
 
 test("JCS envelope verification is invariant to parsed property order", () => {
