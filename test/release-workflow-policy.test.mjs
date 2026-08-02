@@ -11,11 +11,11 @@ test("release workflow is one protected dispatch with pinned signing and at-most
   assert.match(workflow, /cancel-in-progress: false/u);
   assert.equal((workflow.match(
     /actions\/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c/gu,
-  ) ?? []).length, 3);
-  assert.equal((workflow.match(/go-version: '1\.25\.9'/gu) ?? []).length, 3);
+  ) ?? []).length, 2);
+  assert.equal((workflow.match(/go-version: '1\.25\.9'/gu) ?? []).length, 2);
   assert.equal((workflow.match(
     /go install github\.com\/sigstore\/gitsign@v0\.16\.0/gu,
-  ) ?? []).length, 3);
+  ) ?? []).length, 2);
   assert.match(workflow, /actions: read/u);
   assert.match(workflow, /node scripts\/verify-ci-run\.mjs/u);
   assert.doesNotMatch(workflow, /RUNA_RELEASE_AUTHORITY_BUNDLE_BASE64/u);
@@ -53,7 +53,22 @@ test("release workflow is one protected dispatch with pinned signing and at-most
     admission < publishJob, true);
   assert.match(workflow, /sign-tag:\s*\n\s+needs: phase-a/u);
   assert.match(workflow, /admission:\s*\n\s+name: release-admission\s*\n\s+needs: \[phase-a, sign-tag\]/u);
-  assert.match(workflow, /publish:\s*\n\s+needs: admission/u);
+  assert.match(workflow, /asset-staging:\s*\n\s+needs: admission/u);
+  assert.match(workflow, /publish:\s*\n\s+needs: asset-staging/u);
+  assert.match(workflow, /release-promotion:\s*\n\s+needs: publish/u);
+  const assetBody = workflow.slice(
+    workflow.indexOf("  asset-staging:"), workflow.indexOf("  publish:"),
+  );
+  const publishBody = workflow.slice(
+    workflow.indexOf("  publish:"), workflow.indexOf("  release-promotion:"),
+  );
+  const promotionBody = workflow.slice(workflow.indexOf("  release-promotion:"));
+  assert.match(assetBody, /contents: write/u);
+  assert.doesNotMatch(assetBody, /id-token: write|npm publish/u);
+  assert.match(publishBody, /contents: read[\s\S]*id-token: write[\s\S]*npm publish/u);
+  assert.doesNotMatch(publishBody, /contents: write|gh release (?:create|upload|edit|delete)/u);
+  assert.match(promotionBody, /contents: write/u);
+  assert.doesNotMatch(promotionBody, /id-token: write|npm publish/u);
   const preflight = workflow.indexOf("npm run release:registry:preflight");
   const provenance = workflow.indexOf("npm run release:provenance:record");
   const assets = workflow.indexOf("npm run release:assets:verify");

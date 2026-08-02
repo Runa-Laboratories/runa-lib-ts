@@ -19,6 +19,14 @@ import {
 } from "./evidence-policy.mjs";
 
 const blockers = [];
+const releasePolicy = JSON.parse(await readFile(".runa/release-policy.json", "utf8"));
+if (releasePolicy.postPublishRecovery?.status !== "configured" ||
+    releasePolicy.postPublishRecovery?.resumeAfterUpload !== true) {
+  blockers.push({
+    gate: "postpublish-recovery",
+    reason: "Idempotent verify-only resume after an uploaded-unverified failure is not configured.",
+  });
+}
 const readJson = async (file, gate) => {
   try {
     return JSON.parse(await readFile(file, "utf8"));

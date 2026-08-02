@@ -4,6 +4,13 @@ import { spawnSync } from "node:child_process";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 
 const candidate = JSON.parse(await readFile("release-artifacts/candidate.json", "utf8"));
+assert.equal(candidate.source_commit, process.env.GITHUB_SHA);
+const lockfileSha256 = createHash("sha256").update(
+  await readFile("package-lock.json"),
+).digest("hex");
+const workflowSha256 = createHash("sha256").update(
+  await readFile(".github/workflows/ci.yml"),
+).digest("hex");
 const command = [
   "attestation", "verify", `release-artifacts/${candidate.filename}`,
   "--repo", "Runa-Laboratories/runa-lib-ts",
@@ -21,6 +28,12 @@ await writeFile("evidence/provenance-verifier.json", `${JSON.stringify({
   candidate_sha256: candidate.sha256,
   command: ["gh", ...command],
   signer_workflow: "Runa-Laboratories/runa-lib-ts/.github/workflows/ci.yml",
+  builder_identity: "https://github.com/Runa-Laboratories/runa-lib-ts/.github/workflows/ci.yml@refs/heads/main",
+  source_commit: candidate.source_commit,
+  intended_tag: `ts-v${candidate.version}`,
+  lockfile_sha256: lockfileSha256,
+  build_definition_sha256: workflowSha256,
+  verified_at: new Date().toISOString(),
   verifier_version_sha256: createHash("sha256")
     .update(`${version.stdout}${version.stderr}`).digest("hex"),
   result_sha256: createHash("sha256")

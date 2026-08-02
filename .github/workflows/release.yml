@@ -197,46 +197,30 @@ jobs:
             evidence/
           if-no-files-found: error
 
-  publish:
+  asset-staging:
     needs: admission
     runs-on: ubuntu-22.04
-    environment: npm
+    outputs:
+      filename: ${{ steps.candidate.outputs.filename }}
     permissions:
       contents: write
-      id-token: write
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           fetch-depth: 0
           persist-credentials: false
           ref: refs/tags/ts-v${{ inputs.version }}
-      - uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c
-        with:
-          go-version: '1.25.9'
-          cache: false
-      - name: Install pinned gitsign
-        run: |
-          mkdir -p "$RUNNER_TEMP/gitsign-bin"
-          GOBIN="$RUNNER_TEMP/gitsign-bin" go install github.com/sigstore/gitsign@v0.16.0
-          echo "$RUNNER_TEMP/gitsign-bin" >> "$GITHUB_PATH"
-      - name: Verify admitted tag identity
-        run: node scripts/verify-release-tag.mjs
-        env:
-          RUNA_RELEASE_TAG: ts-v${{ inputs.version }}
-          RUNA_RELEASE_COMMIT: ${{ github.sha }}
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: 22.17.1
-          registry-url: https://registry.npmjs.org
       - run: npm install --global npm@11.19.0
       - run: npm ci
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
           name: admitted-npm-release-candidate
       - run: node -e "const fs=require('node:fs');const c=require('./release-artifacts/candidate.json');const h=require('node:crypto').createHash('sha256').update(fs.readFileSync('./release-artifacts/'+c.filename)).digest('hex');if(h!==c.sha256)process.exit(1)"
-      - id: mapping
-        run: node scripts/resolve-release-channel.mjs
-      - run: npm run release:registry:preflight
+      - id: candidate
+        run: echo "filename=$(node -p 'require(\"./release-artifacts/candidate.json\").filename')" >> "$GITHUB_OUTPUT"
       - name: Bind exact provenance to the immutable core without mutating it
         env:
           RUNA_ATTESTATION_BUNDLE: evidence/${{ needs.admission.outputs.filename }}.intoto.jsonl
@@ -266,19 +250,85 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           RUNA_RELEASE_TAG: ts-v${{ inputs.version }}
           RUNA_RELEASE_ASSETS_JSON: '["release-artifacts/${{ needs.admission.outputs.filename }}","release-artifacts/release-manifest-core.json","release-artifacts/release-manifest-envelope.authority-admitted.json","release-artifacts/release-manifest-envelope.provenance-attested.json","evidence/sbom.cdx.json","evidence/${{ needs.admission.outputs.filename }}.intoto.jsonl"]'
-      - run: npm publish "release-artifacts/${{ needs.admission.outputs.filename }}" --provenance --access public --registry https://registry.npmjs.org/ --tag "${{ steps.mapping.outputs.dist_tag }}"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: staged-npm-release-candidate
+          path: |
+            release-artifacts/
+            evidence/
+          if-no-files-found: error
+
+  publish:
+    needs: asset-staging
+    runs-on: ubuntu-22.04
+    environment: npm
+    outputs:
+      filename: ${{ needs.asset-staging.outputs.filename }}
+    permissions:
+      contents: read
+      id-token: write
+      attestations: read
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: refs/tags/ts-v${{ inputs.version }}
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 22.17.1
+          registry-url: https://registry.npmjs.org
+      - run: npm install --global npm@11.19.0
+      - run: npm ci
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: staged-npm-release-candidate
+      - id: mapping
+        run: node scripts/resolve-release-channel.mjs
+      - run: npm run release:registry:preflight
+      - run: npm publish "release-artifacts/${{ needs.asset-staging.outputs.filename }}" --provenance --access public --registry https://registry.npmjs.org/ --tag "${{ steps.mapping.outputs.dist_tag }}"
       - name: Persist exact uploaded-unverified state before final promotion checks
         run: npm run release:postpublish:verify
         env:
           RUNA_VERIFY_UPLOADED_ONLY: '1'
           RUNA_REGISTRY_TAG: ${{ steps.mapping.outputs.dist_tag }}
-          RUNA_ATTESTATION_BUNDLE: evidence/${{ needs.admission.outputs.filename }}.intoto.jsonl
+          RUNA_ATTESTATION_BUNDLE: evidence/${{ needs.asset-staging.outputs.filename }}.intoto.jsonl
           GH_TOKEN: ${{ github.token }}
       - name: Verify final registry, provenance, and promotion state
         run: npm run release:postpublish:verify
         env:
-          RUNA_ATTESTATION_BUNDLE: evidence/${{ needs.admission.outputs.filename }}.intoto.jsonl
+          RUNA_ATTESTATION_BUNDLE: evidence/${{ needs.asset-staging.outputs.filename }}.intoto.jsonl
           GH_TOKEN: ${{ github.token }}
+      - if: failure()
+        run: npm run release:recovery:plan
+      - if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: npm-published-verification
+          path: |
+            release-artifacts/
+            evidence/
+          if-no-files-found: warn
+
+  release-promotion:
+    needs: publish
+    runs-on: ubuntu-22.04
+    permissions:
+      actions: read
+      contents: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: refs/tags/ts-v${{ inputs.version }}
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 22.17.1
+      - run: npm ci
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: npm-published-verification
       - name: Publish final verified release envelope and receipt
         env:
           GH_TOKEN: ${{ github.token }}
@@ -292,15 +342,12 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           RUNA_RELEASE_TAG: ts-v${{ inputs.version }}
-          RUNA_RELEASE_ASSETS_JSON: '["release-artifacts/${{ needs.admission.outputs.filename }}","release-artifacts/release-manifest-core.json","release-artifacts/release-manifest-envelope.authority-admitted.json","release-artifacts/release-manifest-envelope.provenance-attested.json","release-artifacts/release-manifest-envelope.json","evidence/sbom.cdx.json","evidence/${{ needs.admission.outputs.filename }}.intoto.jsonl","evidence/postpublish-receipt.json"]'
+          RUNA_RELEASE_ASSETS_JSON: '["release-artifacts/${{ needs.publish.outputs.filename }}","release-artifacts/release-manifest-core.json","release-artifacts/release-manifest-envelope.authority-admitted.json","release-artifacts/release-manifest-envelope.provenance-attested.json","release-artifacts/release-manifest-envelope.json","evidence/sbom.cdx.json","evidence/${{ needs.publish.outputs.filename }}.intoto.jsonl","evidence/postpublish-receipt.json"]'
       - name: Promote verified GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
           RUNA_RELEASE_TAG: ts-v${{ inputs.version }}
-        run: |
-          gh release edit "$RUNA_RELEASE_TAG" --draft=false
-      - if: failure()
-        run: npm run release:recovery:plan
+        run: gh release edit "$RUNA_RELEASE_TAG" --draft=false
       - if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:

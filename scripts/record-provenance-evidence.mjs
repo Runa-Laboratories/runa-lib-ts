@@ -26,5 +26,11 @@ await writeFile("evidence/provenance-manifest.json", `${JSON.stringify({
   signer_workflow: "Runa-Laboratories/runa-lib-ts/.github/workflows/ci.yml",
   verifier: "gh attestation verify <artifact> --repo Runa-Laboratories/runa-lib-ts --signer-workflow Runa-Laboratories/runa-lib-ts/.github/workflows/ci.yml",
   verifier_receipt_sha256: createHash("sha256").update(verifierBytes).digest("hex"),
+  source_commit: verifier.source_commit,
+  intended_tag: verifier.intended_tag,
+  lockfile_sha256: verifier.lockfile_sha256,
+  build_definition_sha256: verifier.build_definition_sha256,
+  builder_identity: verifier.builder_identity,
+  verified_at: verifier.verified_at,
 }, null, 2)}\n`);
 console.log(`controlled provenance: PASS (${filename})`);

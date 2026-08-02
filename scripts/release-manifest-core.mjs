@@ -54,6 +54,12 @@ export const EXPECTED_RELEASE_POLICY = Object.freeze({
     status: "unconfigured",
     authority: null,
   },
+  postPublishRecovery: {
+    status: "blocked",
+    mode: "read-only-audit",
+    resumeAfterUpload: false,
+    reason: "Idempotent post-upload resume and isolated promotion are not yet accepted governance capabilities.",
+  },
   provenance: {
     attestation: "actions/attest-build-provenance@0f67c3f4856b2e3261c31976d6725780e5e4c373",
     verifier: "gh attestation verify <artifact> --repo Runa-Laboratories/runa-lib-ts --signer-workflow Runa-Laboratories/runa-lib-ts/.github/workflows/ci.yml",
@@ -166,6 +172,19 @@ export async function createReleaseManifestCore({
   assert.equal(provenanceVerifier.candidate_sha256, candidate.sha256);
   assert.equal(provenanceVerifier.signer_workflow,
     provenanceManifest.signer_workflow);
+  assert.equal(provenanceVerifier.source_commit, candidate.source_commit);
+  assert.equal(provenanceVerifier.intended_tag, `ts-v${candidate.version}`);
+  assert.equal(provenanceVerifier.lockfile_sha256,
+    sha256(await readBytes(repositoryRoot, "package-lock.json")));
+  assert.equal(provenanceVerifier.build_definition_sha256,
+    sha256(await readBytes(repositoryRoot, ".github/workflows/ci.yml")));
+  assert.equal(provenanceVerifier.builder_identity,
+    "https://github.com/Runa-Laboratories/runa-lib-ts/.github/workflows/ci.yml@refs/heads/main");
+  assert.equal(Number.isFinite(Date.parse(provenanceVerifier.verified_at)), true);
+  for (const field of [
+    "source_commit", "intended_tag", "lockfile_sha256", "build_definition_sha256",
+    "builder_identity", "verified_at",
+  ]) assert.equal(provenanceManifest[field], provenanceVerifier[field]);
   assert.equal(provenanceManifest.verifier_receipt_sha256,
     sha256(provenanceVerifierBytes));
   const provenanceBytes = await readBytes(
@@ -216,6 +235,12 @@ export async function createReleaseManifestCore({
       signer_workflow: provenanceManifest.signer_workflow,
       verifier: provenanceManifest.verifier,
       verifier_receipt_sha256: provenanceManifest.verifier_receipt_sha256,
+      source_commit: provenanceManifest.source_commit,
+      intended_tag: provenanceManifest.intended_tag,
+      lockfile_sha256: provenanceManifest.lockfile_sha256,
+      build_definition_sha256: provenanceManifest.build_definition_sha256,
+      builder_identity: provenanceManifest.builder_identity,
+      verified_at: provenanceManifest.verified_at,
     },
     runtime_closure_sha256: runtimeClosure.closure_sha256,
     sbom_artifact_subject_sha256:
