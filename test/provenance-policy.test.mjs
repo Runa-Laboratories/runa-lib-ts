@@ -43,6 +43,8 @@ test("signed provenance predicate rejects every identity and build-input mutatio
     (value) => { value.buildDefinition.resolvedDependencies[1].digest.sha256 = "c".repeat(64); },
     (value) => { value.runDetails.builder.id += "/alien"; },
     (value) => { value.runDetails.metadata.finishedOn = "2025-01-01T00:00:00Z"; },
+    (value) => { value.runDetails.metadata.hostile_extra = "signed-but-forbidden"; },
+    (value) => { value.buildDefinition.resolvedDependencies[0].digest.sha256 = digest; },
   ]) {
     const changed = structuredClone(valid);
     mutate(changed);

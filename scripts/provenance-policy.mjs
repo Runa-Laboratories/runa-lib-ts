@@ -2,6 +2,14 @@ import assert from "node:assert/strict";
 
 export function validateSignedProvenancePredicate(predicate, expected) {
   assert.deepEqual(Object.keys(predicate).sort(), ["buildDefinition", "runDetails"]);
+  assert.deepEqual(Object.keys(predicate.buildDefinition).sort(), [
+    "buildType", "externalParameters", "internalParameters", "resolvedDependencies",
+  ].sort());
+  assert.deepEqual(Object.keys(predicate.runDetails).sort(), ["builder", "metadata"]);
+  assert.deepEqual(Object.keys(predicate.runDetails.builder), ["id"]);
+  assert.deepEqual(Object.keys(predicate.runDetails.metadata).sort(), [
+    "finishedOn", "invocationId", "startedOn",
+  ]);
   assert.equal(predicate.buildDefinition.buildType,
     "https://runacode.io/attestations/typescript-sdk-release/v1");
   assert.deepEqual(predicate.buildDefinition.externalParameters, {
@@ -22,6 +30,11 @@ export function validateSignedProvenancePredicate(predicate, expected) {
     { uri: "file:package-lock.json", digest: { sha256: expected.lockfileSha256 } },
     { uri: "file:.github/workflows/ci.yml", digest: { sha256: expected.workflowSha256 } },
   ]);
+  for (const dependency of predicate.buildDefinition.resolvedDependencies) {
+    assert.deepEqual(Object.keys(dependency).sort(), ["digest", "uri"]);
+    const digestKey = dependency.uri.startsWith("git+") ? "gitCommit" : "sha256";
+    assert.deepEqual(Object.keys(dependency.digest), [digestKey]);
+  }
   assert.equal(predicate.runDetails.builder.id, expected.builderIdentity);
   assert.equal(predicate.runDetails.metadata.invocationId, expected.invocationId);
   assert.equal(predicate.runDetails.metadata.startedOn, expected.buildStartedAt);

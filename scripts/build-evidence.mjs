@@ -3,6 +3,7 @@ import path from "node:path";
 import { createHash } from "node:crypto";
 import { validateVitestAcceptanceReceipt } from "./acceptance-receipts.mjs";
 import { computeTestEvidenceBinding } from "./test-evidence-binding.mjs";
+import { requirementRowsDigest } from "./requirement-ledger-digest.mjs";
 
 const sources = [
   { root: path.resolve("../../prds/libs/shared"), scope: "shared-applicable" },
@@ -51,16 +52,6 @@ for (const source of sources) {
 if (sourceFiles.length === 0 || rows.length === 0 || acceptanceTestIds.size === 0) {
   throw new Error("Trace catalog is empty.");
 }
-const sourceDigest = createHash("sha256").update(JSON.stringify({
-  source_files: sourceFiles,
-  requirements: rows.map((row) => ({
-    requirement: row.requirement,
-    scope: row.scope,
-    prd: row.prd,
-    acceptance_test_ids: row.acceptance_test_ids,
-  })),
-  acceptance_test_ids: [...acceptanceTestIds].sort(),
-})).digest("hex");
 const receipted = new Map();
 try {
   const oracleBytes = await readFile("evidence/vitest-oracle.json");
@@ -115,6 +106,7 @@ for (const row of rows) {
   }
 }
 const passedRequirements = rows.filter((row) => row.status === "PASS").length;
+const sourceDigest = requirementRowsDigest(rows);
 await writeFile("evidence/requirement-test-map.json", `${JSON.stringify({
   schema_version: 2,
   generated_from: ["prds/libs/shared", "prds/libs/typescript"],

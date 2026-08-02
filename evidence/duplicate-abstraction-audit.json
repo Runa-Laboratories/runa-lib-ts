@@ -2,7 +2,7 @@
   "schema_version": 2,
   "status": "PASS",
   "method": "scripts/verify-duplicate-abstractions.mjs",
-  "audited_source_sha256": "dd9ec96f5eedf8d0551b90b6f3ba2ed510c37eac05b6bf00adc57e2ac0b66aa1",
+  "audited_source_sha256": "2daa1f5b50ccd437b54ebc3265ba5320b5ef1172a9dbea21114ba09db87d9a8c",
   "audited_files": [
     "src/client.ts",
     "src/config.ts",
@@ -26,6 +26,7 @@
     "scripts/aggregate-compatibility.mjs",
     "scripts/attestation-bundle.mjs",
     "scripts/build-evidence.mjs",
+    "scripts/build-provenance-predicate.mjs",
     "scripts/build-release-candidate.mjs",
     "scripts/build-release-manifest-core.mjs",
     "scripts/ci-run-policy.mjs",
@@ -38,6 +39,7 @@
     "scripts/npm-process.mjs",
     "scripts/plan-release-recovery.mjs",
     "scripts/postpublish-policy.mjs",
+    "scripts/provenance-policy.mjs",
     "scripts/record-provenance-evidence.mjs",
     "scripts/record-provenance-state.mjs",
     "scripts/record-quality-gate.mjs",
@@ -133,6 +135,7 @@
       "owners": [
         "scripts/acceptance-receipts.mjs",
         "scripts/build-evidence.mjs",
+        "scripts/build-provenance-predicate.mjs",
         "scripts/build-release-candidate.mjs",
         "scripts/import-release-authority.mjs",
         "scripts/record-provenance-evidence.mjs",
@@ -161,7 +164,7 @@
         "scripts/verify-release-smoke.mjs"
       ],
       "observed": {
-        "sha256_call_sites": 41
+        "sha256_call_sites": 45
       },
       "rationale": "Release tools are independently executable trust-boundary gates; their one-line SHA-256 calculations remain local and compare the same candidate rather than sharing mutable evidence state."
     },
