@@ -15,6 +15,11 @@ on:
         description: Successful independent authority run containing signed release evidence
         required: true
         type: string
+      recovery_mode:
+        description: Verify-only recovery for the exact already-uploaded candidate and existing signed tag
+        required: true
+        default: false
+        type: boolean
 
 permissions:
   actions: read
@@ -62,7 +67,7 @@ jobs:
       - name: Verify independent authority run identity before tagging
         run: npm run release:authority:run:verify
         env:
-          GH_TOKEN: ${{ secrets.RUNA_AUTHORITY_READ_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
           RUNA_AUTHORITY_RUN_ID: ${{ inputs.authority_run_id }}
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
@@ -79,7 +84,7 @@ jobs:
           name: ${{ steps.authority.outputs.artifact }}
           path: authority-preflight
           run-id: ${{ inputs.authority_run_id }}
-          github-token: ${{ secrets.RUNA_AUTHORITY_READ_TOKEN }}
+          github-token: ${{ github.token }}
       - name: Verify non-approval authority evidence and bindings before tagging
         run: npm run release:authority:import
         env:
@@ -91,6 +96,8 @@ jobs:
         run: echo "filename=$(node -p 'require(\"./release-artifacts/candidate.json\").filename')" >> "$GITHUB_OUTPUT"
       - name: Pre-tag registry absence check
         run: npm run release:registry:preflight
+        env:
+          RUNA_VERIFY_ONLY: ${{ inputs.recovery_mode }}
 
   sign-tag:
     needs: phase-a
@@ -116,18 +123,26 @@ jobs:
         env:
           GITSIGN_TOKEN_PROVIDER: github-actions
           RUNA_RELEASE_TAG: ts-v${{ inputs.version }}
+          RUNA_VERIFY_ONLY: ${{ inputs.recovery_mode }}
         run: |
           git fetch --no-tags origin main
           test "$(git rev-parse origin/main)" = "$GITHUB_SHA"
-          test -z "$(git ls-remote --tags origin "refs/tags/$RUNA_RELEASE_TAG")"
           git config --local gpg.format x509
           git config --local gpg.x509.program gitsign
-          git tag -s -m "Release $RUNA_RELEASE_TAG" "$RUNA_RELEASE_TAG" "$GITHUB_SHA"
+          if [ "$RUNA_VERIFY_ONLY" = "true" ]; then
+            git fetch origin "refs/tags/$RUNA_RELEASE_TAG:refs/tags/$RUNA_RELEASE_TAG"
+            test "$(git rev-list -n 1 "$RUNA_RELEASE_TAG")" = "$GITHUB_SHA"
+          else
+            test -z "$(git ls-remote --tags origin "refs/tags/$RUNA_RELEASE_TAG")"
+            git tag -s -m "Release $RUNA_RELEASE_TAG" "$RUNA_RELEASE_TAG" "$GITHUB_SHA"
+          fi
           gitsign verify \
             --certificate-identity=https://github.com/Runa-Laboratories/runa-lib-ts/.github/workflows/release.yml@refs/heads/main \
             --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
             "$RUNA_RELEASE_TAG"
-          git push origin "refs/tags/$RUNA_RELEASE_TAG"
+          if [ "$RUNA_VERIFY_ONLY" != "true" ]; then
+            git push origin "refs/tags/$RUNA_RELEASE_TAG"
+          fi
 
   admission:
     name: release-admission
@@ -167,7 +182,7 @@ jobs:
       - name: Verify independent authority run identity
         run: npm run release:authority:run:verify
         env:
-          GH_TOKEN: ${{ secrets.RUNA_AUTHORITY_READ_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
           RUNA_AUTHORITY_RUN_ID: ${{ inputs.authority_run_id }}
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
@@ -175,7 +190,7 @@ jobs:
           name: ${{ needs.phase-a.outputs.authority_artifact }}
           path: authority-input
           run-id: ${{ inputs.authority_run_id }}
-          github-token: ${{ secrets.RUNA_AUTHORITY_READ_TOKEN }}
+          github-token: ${{ github.token }}
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
           name: npm-release-candidate
@@ -202,7 +217,7 @@ jobs:
     runs-on: ubuntu-22.04
     environment: npm
     permissions:
-      contents: read
+      contents: write
       id-token: write
       attestations: write
       artifact-metadata: write
@@ -239,16 +254,68 @@ jobs:
       - id: mapping
         run: node scripts/resolve-release-channel.mjs
       - run: npm run release:registry:preflight
+        env:
+          RUNA_VERIFY_ONLY: ${{ inputs.recovery_mode }}
       - id: attest
         # v4, resolved from the official annotated tag on 2026-08-02.
         uses: actions/attest-build-provenance@0f67c3f4856b2e3261c31976d6725780e5e4c373
         with:
           subject-path: release-artifacts/${{ needs.admission.outputs.filename }}
-      - run: npm publish "release-artifacts/${{ needs.admission.outputs.filename }}" --provenance --access public --registry https://registry.npmjs.org/ --tag "${{ steps.mapping.outputs.dist_tag }}"
-      - run: npm run release:postpublish:verify
+      - name: Create draft GitHub Release and upload exact pre-promotion assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUNA_RELEASE_TAG: ts-v${{ inputs.version }}
+          RUNA_ATTESTATION_BUNDLE: ${{ steps.attest.outputs.bundle-path }}
+        run: |
+          if ! gh release view "$RUNA_RELEASE_TAG" >/dev/null 2>&1; then
+            gh release create "$RUNA_RELEASE_TAG" --draft --verify-tag --title "$RUNA_RELEASE_TAG"
+          fi
+          gh release upload "$RUNA_RELEASE_TAG" --clobber \
+            "release-artifacts/${{ needs.admission.outputs.filename }}" \
+            release-artifacts/release-manifest-core.json \
+            release-artifacts/release-manifest-envelope.json \
+            evidence/sbom.cdx.json \
+            "$RUNA_ATTESTATION_BUNDLE"
+      - name: Re-download and verify every GitHub Release asset before npm promotion
+        run: npm run release:assets:verify
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUNA_RELEASE_TAG: ts-v${{ inputs.version }}
+          RUNA_RELEASE_ASSETS_JSON: '["release-artifacts/${{ needs.admission.outputs.filename }}","release-artifacts/release-manifest-core.json","release-artifacts/release-manifest-envelope.json","evidence/sbom.cdx.json","${{ steps.attest.outputs.bundle-path }}"]'
+      - if: inputs.recovery_mode == false
+        run: npm publish "release-artifacts/${{ needs.admission.outputs.filename }}" --provenance --access public --registry https://registry.npmjs.org/ --tag "${{ steps.mapping.outputs.dist_tag }}"
+      - name: Persist exact uploaded-unverified state before final promotion checks
+        run: npm run release:postpublish:verify
+        env:
+          RUNA_VERIFY_UPLOADED_ONLY: '1'
+          RUNA_REGISTRY_TAG: ${{ steps.mapping.outputs.dist_tag }}
+          RUNA_ATTESTATION_BUNDLE: ${{ steps.attest.outputs.bundle-path }}
+          GH_TOKEN: ${{ github.token }}
+      - name: Verify final registry, provenance, and promotion state
+        run: npm run release:postpublish:verify
         env:
           RUNA_ATTESTATION_BUNDLE: ${{ steps.attest.outputs.bundle-path }}
           GH_TOKEN: ${{ github.token }}
+      - name: Publish final verified release envelope and receipt
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUNA_RELEASE_TAG: ts-v${{ inputs.version }}
+        run: |
+          gh release upload "$RUNA_RELEASE_TAG" \
+            release-artifacts/release-manifest-envelope.json \
+            evidence/postpublish-receipt.json --clobber
+      - name: Re-download and verify final GitHub Release state
+        run: npm run release:assets:verify
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUNA_RELEASE_TAG: ts-v${{ inputs.version }}
+          RUNA_RELEASE_ASSETS_JSON: '["release-artifacts/${{ needs.admission.outputs.filename }}","release-artifacts/release-manifest-core.json","release-artifacts/release-manifest-envelope.json","evidence/sbom.cdx.json","${{ steps.attest.outputs.bundle-path }}","evidence/postpublish-receipt.json"]'
+      - name: Promote verified GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUNA_RELEASE_TAG: ts-v${{ inputs.version }}
+        run: |
+          gh release edit "$RUNA_RELEASE_TAG" --draft=false
       - if: failure()
         run: npm run release:recovery:plan
       - if: always()
@@ -259,4 +326,5 @@ jobs:
             evidence/*.intoto.jsonl
             evidence/postpublish-receipt.json
             evidence/release-recovery-plan.json
+            release-artifacts/release-manifest-envelope.json
           if-no-files-found: warn

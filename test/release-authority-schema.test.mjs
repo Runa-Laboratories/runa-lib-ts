@@ -12,6 +12,15 @@ const common = {
   expires_at: "2026-07-30T00:30:00.000Z",
 };
 const digest = "a".repeat(64);
+const tool = {
+  name: "cyclonedx-cli", version: "0.32.0",
+  sha256: "454879e6a4a405c8a13bff49b8982adcb0596f3019b26b0811c66e4d7f0783e1",
+};
+const schemaSha256s = {
+  ".runa/schemas/cyclonedx-1.6.schema.json": "3e92dddbc30cf7f6a02b80f0942b1a4cfd4fb1c26f1dfc4310afa9d613cafb93",
+  ".runa/schemas/jsf-0.82.schema.json": "8bae002c25e723db7ee1f26afde680ae1a2b1a8f6b4b4b0fd65dc3becb090aae",
+  ".runa/schemas/spdx.schema.json": "baa9d3bd1ed57b6751b0887edead6b5063ff53ff7429cf85d476c6c94af0166e",
+};
 
 test("trusted signatures cannot substitute for closed release-role semantics", () => {
   const valid = {
@@ -35,6 +44,7 @@ test("trusted signatures cannot substitute for closed release-role semantics", (
     "sbom-validation": {
       ...common, candidate_sha256: digest, sbom_sha256: digest,
       artifact_subject_sha256: digest, dependency_closure_sha256: digest,
+      local_validation_sha256: digest, schema_sha256s: schemaSha256s, tool,
       bom_format: "CycloneDX", spec_version: "1.6",
     },
     "external-interfaces": {
@@ -58,6 +68,9 @@ test("trusted SBOM authority is bound to exact local bytes and closure", () => {
   const candidate = "a".repeat(64);
   const closure = "b".repeat(64);
   const sbomBytes = Buffer.from('{"bomFormat":"CycloneDX"}\n');
+  const localValidationBytes = Buffer.from(`${JSON.stringify({
+    status: "PASS", schema_sha256s: schemaSha256s, tool,
+  })}\n`);
   const payload = {
     status: "PASS",
     issued_at: "2026-08-01T00:00:00Z",
@@ -65,7 +78,10 @@ test("trusted SBOM authority is bound to exact local bytes and closure", () => {
     candidate_sha256: candidate,
     artifact_subject_sha256: candidate,
     dependency_closure_sha256: closure,
+    local_validation_sha256: createHash("sha256").update(localValidationBytes).digest("hex"),
     sbom_sha256: createHash("sha256").update(sbomBytes).digest("hex"),
+    schema_sha256s: schemaSha256s,
+    tool,
     bom_format: "CycloneDX",
     spec_version: "1.6",
   };
@@ -78,6 +94,7 @@ test("trusted SBOM authority is bound to exact local bytes and closure", () => {
     candidateSha256: candidate,
     sbomBytes,
     runtimeClosure,
+    localValidationBytes,
   }), true);
   for (const mutate of [
     (_value, context) => { context.sbomBytes = Buffer.from("changed"); },
@@ -89,6 +106,7 @@ test("trusted SBOM authority is bound to exact local bytes and closure", () => {
       candidateSha256: candidate,
       sbomBytes,
       runtimeClosure: structuredClone(runtimeClosure),
+      localValidationBytes,
     };
     mutate(value, context);
     assert.throws(() => validateSbomEvidenceBinding(value, context));

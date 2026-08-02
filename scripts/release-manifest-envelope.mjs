@@ -23,7 +23,12 @@ export function validateReleaseManifestEnvelope(envelope, {
     ].sort());
     assert.equal(state.sequence, index + 1);
     assert.equal(state.previous_state_sha256, previous);
-    assert.match(state.state, /^(?:authority-admitted|registry-verified)$/u);
+    assert.match(state.state,
+      /^(?:authority-admitted|uploaded-unverified|registry-verified)$/u);
+    const expectedState = [
+      "authority-admitted", "uploaded-unverified", "registry-verified",
+    ][index];
+    assert.equal(state.state, expectedState);
     assert.equal(state.receipt_sha256s !== null &&
       typeof state.receipt_sha256s === "object", true);
     for (const digest of Object.values(state.receipt_sha256s)) {

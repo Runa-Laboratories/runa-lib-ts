@@ -42,35 +42,40 @@
     {
       "id": "TS-REL-008",
       "gate": "requirement-test-map",
-      "reason": "Mandatory requirements or acceptance tests remain NOT_RUN."
+      "reason": "Missing or invalid evidence: evidence/external-acceptance.json"
     },
     {
       "id": "TS-REL-009",
+      "gate": "requirement-test-map",
+      "reason": "Mandatory requirements or acceptance tests remain NOT_RUN."
+    },
+    {
+      "id": "TS-REL-010",
       "gate": "compatibility-matrix",
       "reason": "Missing or invalid evidence: evidence/compatibility-matrix.json"
     },
     {
-      "id": "TS-REL-010",
+      "id": "TS-REL-011",
       "gate": "repository-controls",
       "reason": "Missing or invalid evidence: evidence/repository-controls.json"
     },
     {
-      "id": "TS-REL-011",
+      "id": "TS-REL-012",
       "gate": "cross-language",
       "reason": "Missing or invalid evidence: evidence/cross-language.json"
     },
     {
-      "id": "TS-REL-012",
+      "id": "TS-REL-013",
       "gate": "publication-readiness",
       "reason": "Missing or invalid evidence: evidence/publication-readiness.json"
     },
     {
-      "id": "TS-REL-013",
+      "id": "TS-REL-014",
       "gate": "sbom-validation",
       "reason": "No accepted release trust root is configured."
     },
     {
-      "id": "TS-REL-014",
+      "id": "TS-REL-015",
       "gate": "external-release-interfaces",
       "reason": "No accepted release trust root is configured."
     }

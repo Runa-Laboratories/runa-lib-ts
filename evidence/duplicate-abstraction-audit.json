@@ -2,7 +2,7 @@
   "schema_version": 2,
   "status": "PASS",
   "method": "scripts/verify-duplicate-abstractions.mjs",
-  "audited_source_sha256": "4b79a3b690b0ddf62eaefc9c79ab8129067b9d89d2e24648b52db9098877df52",
+  "audited_source_sha256": "e446881b24fbaa1a2baa263b78dbd8ff90c590057a564c5fb1ba2bee4c8ac84a",
   "audited_files": [
     "src/client.ts",
     "src/config.ts",
@@ -61,6 +61,7 @@
     "scripts/verify-dependencies.mjs",
     "scripts/verify-docs.mjs",
     "scripts/verify-duplicate-abstractions.mjs",
+    "scripts/verify-github-release-assets.mjs",
     "scripts/verify-local-release-gates.mjs",
     "scripts/verify-pack.mjs",
     "scripts/verify-performance.mjs",
@@ -142,15 +143,17 @@
         "scripts/verify-compatibility.mjs",
         "scripts/verify-contract.mjs",
         "scripts/verify-duplicate-abstractions.mjs",
+        "scripts/verify-github-release-assets.mjs",
         "scripts/verify-local-release-gates.mjs",
         "scripts/verify-pack.mjs",
         "scripts/verify-performance.mjs",
         "scripts/verify-postpublish.mjs",
         "scripts/verify-pretag-release-gates.mjs",
+        "scripts/verify-registry-version-absent.mjs",
         "scripts/verify-release-smoke.mjs"
       ],
       "observed": {
-        "sha256_call_sites": 31
+        "sha256_call_sites": 35
       },
       "rationale": "Release tools are independently executable trust-boundary gates; their one-line SHA-256 calculations remain local and compare the same candidate rather than sharing mutable evidence state."
     },
