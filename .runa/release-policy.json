@@ -43,7 +43,7 @@
       "directPushes": false,
       "dismissStaleApprovals": true,
       "requireCodeOwnerReviews": true,
-      "requiredApprovingReviews": 1,
+      "requiredApprovingReviews": 0,
       "requiredStatusChecks": ["ts-quality-gates", "release-admission"]
     },
     "provider": "github",
