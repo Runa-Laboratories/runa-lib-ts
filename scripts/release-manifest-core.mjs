@@ -36,6 +36,8 @@ export async function createReleaseManifestCore({
     handoffRoot, "release-artifacts/candidate.json")).toString("utf8"));
   const packageJson = JSON.parse((await readBytes(
     repositoryRoot, "package.json")).toString("utf8"));
+  const compatibilityCatalog = JSON.parse((await readBytes(
+    repositoryRoot, "compatibility/ts-050-evidence-v1.json")).toString("utf8"));
   assert.equal(candidate.package, packageJson.name);
   assert.equal(candidate.version, packageJson.version);
   const evidenceFiles = [
@@ -71,6 +73,11 @@ export async function createReleaseManifestCore({
       filename: candidate.filename,
       sha256: candidate.sha256,
       source_commit: candidate.source_commit,
+    },
+    release: {
+      tag: `ts-v${candidate.version}`,
+      semver_class: candidate.version.includes("-") ? "prerelease" : "stable",
+      compatibility_matrix_revision: compatibilityCatalog.catalog_revision,
     },
     inputs: {
       changelog_sha256: sha256(await readBytes(repositoryRoot, "CHANGELOG.md")),

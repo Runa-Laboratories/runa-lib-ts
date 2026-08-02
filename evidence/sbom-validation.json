@@ -1,7 +1,10 @@
 {
   "schema_version": 1,
   "status": "BLOCKED",
-  "candidate_sha256": "0674b6808331db4ffbf4637404780be322f2e2f14ceffeb1752ad4ae9139e831",
+  "candidate_sha256": "60c42a842b05a573e51b7c0e5d81e1d1bf65196953b6976067d07e959519fd78",
+  "artifact_subject_sha256": "60c42a842b05a573e51b7c0e5d81e1d1bf65196953b6976067d07e959519fd78",
+  "sbom_sha256": "67319ca43d920919e53f0baffe9aaaba7b796cd82ff90aaa373e8d3ac24ea6c5",
+  "dependency_closure_sha256": "f42a6dd2b10f03b785533919ec20a55d1a0a334675ffc7793072b4d52aaa97ce",
   "local_structural_checks": "PASS",
   "required_validator": "cyclonedx-cli validate --input-format json",
   "reason": "The accepted CycloneDX 1.6 schema and validator receipt are not configured locally."

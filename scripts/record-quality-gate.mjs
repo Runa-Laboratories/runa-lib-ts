@@ -1,4 +1,5 @@
 import { readFile, writeFile } from "node:fs/promises";
+import { execFileSync } from "node:child_process";
 import { validateRequirementTestMap } from "./evidence-policy.mjs";
 
 const required = [
@@ -7,19 +8,23 @@ const required = [
   ["requirement-test-map", "evidence/requirement-test-map.json"],
 ];
 const blockers = [];
-let commitSha = process.env.GITHUB_SHA ?? null;
-if (commitSha === null) {
-  try {
-    const candidate = JSON.parse(
-      await readFile("release-artifacts/candidate.json", "utf8"),
-    );
-    if (candidate.source_tree_clean === true &&
-        typeof candidate.source_commit === "string") {
-      commitSha = candidate.source_commit;
-    }
-  } catch {
-    // A local quality run may precede candidate construction.
+const commitSha = process.env.GITHUB_SHA ?? execFileSync(
+  "git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim();
+try {
+  const candidate = JSON.parse(
+    await readFile("release-artifacts/candidate.json", "utf8"),
+  );
+  if (candidate.source_tree_clean !== true || candidate.source_commit !== commitSha) {
+    blockers.push({
+      gate: "candidate-identity",
+      evidence: "release-artifacts/candidate.json",
+    });
   }
+} catch {
+  blockers.push({
+    gate: "candidate-identity",
+    evidence: "release-artifacts/candidate.json",
+  });
 }
 for (const [gate, file] of required) {
   try {
