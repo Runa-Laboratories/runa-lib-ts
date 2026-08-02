@@ -5,6 +5,7 @@ import {
   validateSbomEvidenceBinding,
   validateTrustedRolePayload,
 } from "./release-authority-schema.mjs";
+import { validateApprovedLicense } from "./license-policy.mjs";
 import {
   resolveReleaseChannel,
   validateReleaseMapping,
@@ -83,9 +84,16 @@ if (provenance !== undefined && provenance.status !== "APPROVED") {
 if (provenance !== undefined && provenance.projection_sha256 !== projectionSha) {
   blockers.push({ gate: "canonical-contract-provenance", reason: "Projection digest does not match provenance." });
 }
-const license = await readFile("LICENSE", "utf8");
-if (license.startsWith("NON-GA LICENSE PLACEHOLDER")) {
-  blockers.push({ gate: "license-approval", reason: "LICENSE remains the non-GA placeholder." });
+try {
+  validateApprovedLicense(
+    await readFile("LICENSE", "utf8"),
+    JSON.parse(await readFile("package.json", "utf8")),
+  );
+} catch {
+  blockers.push({
+    gate: "license-approval",
+    reason: "The approved Apache-2.0 license or package metadata is invalid.",
+  });
 }
 const candidate = await readJson("release-artifacts/candidate.json", "candidate-identity");
 if (candidate !== undefined) {
