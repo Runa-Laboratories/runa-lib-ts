@@ -18,6 +18,11 @@ test("release workflow is one protected dispatch with pinned signing and at-most
   assert.match(workflow, /actions: read/u);
   assert.match(workflow, /node scripts\/verify-ci-run\.mjs/u);
   assert.doesNotMatch(workflow, /RUNA_RELEASE_AUTHORITY_BUNDLE_BASE64/u);
+  assert.doesNotMatch(workflow, /RUNA_AUTHORITY_READ_TOKEN|personal.access.token|github.app/iu);
+  assert.match(workflow, /gh release create/u);
+  assert.match(workflow, /gh release upload/u);
+  assert.match(workflow, /release:assets:verify/u);
+  assert.match(workflow, /gh release edit/u);
   const phaseA = workflow.indexOf("  phase-a:");
   const signTag = workflow.indexOf("  sign-tag:");
   const admission = workflow.indexOf("  admission:");

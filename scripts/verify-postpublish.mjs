@@ -20,6 +20,8 @@ const release = resolveReleaseChannel(mapping, candidate.version);
 const bundle = process.env.RUNA_ATTESTATION_BUNDLE ??
   `evidence/${candidate.filename}.intoto.jsonl`;
 const receiptPath = "evidence/postpublish-receipt.json";
+const uploadedOnly = process.env.RUNA_VERIFY_UPLOADED_ONLY === "1";
+const registryTag = process.env.RUNA_REGISTRY_TAG ?? release.dist_tag;
 await mkdir("evidence", { recursive: true });
 const transitions = ["published-unverified"];
 const writeState = async (state, extra = {}) => writeFile(receiptPath,
@@ -51,7 +53,7 @@ try {
   ], { encoding: "utf8" });
   assert.equal(tagsResult.status, 0, "R-053-11: dist-tag retrieval failed");
   const tags = JSON.parse(tagsResult.stdout);
-  assert.equal(tags[release.dist_tag], candidate.version);
+  assert.equal(tags[registryTag], candidate.version);
   const response = await fetch(metadata.dist.tarball, { redirect: "error" });
   assert.equal(response.ok, true);
   const registryBytes = Buffer.from(await response.arrayBuffer());
@@ -76,8 +78,30 @@ try {
     await readFile(bundle, "utf8"),
     candidate,
   ), true);
-  transitions.push("registry-verified");
-  transitions.push("handoff");
+  if (uploadedOnly) {
+    const uploadedReceipt = {
+      schema_version: 1,
+      state: "uploaded-unverified",
+      package_name: mapping.package_name,
+      version: candidate.version,
+      dist_tag: registryTag,
+      candidate_sha256: candidate.sha256,
+      registry_tarball_sha256: registrySha256,
+      registry_metadata_verified: true,
+      provenance_verified: true,
+      github_attestations_api_verified: true,
+      attestation_bundle: bundle,
+      transitions,
+    };
+    await writeFile(receiptPath, `${JSON.stringify(uploadedReceipt, null, 2)}\n`);
+    await appendReleaseManifestState("uploaded-unverified", {
+      postpublish: receiptPath,
+      attestation: bundle,
+    });
+    console.log(`postpublish upload verification: PASS (${candidate.version}, ${registryTag})`);
+  } else {
+    transitions.push("registry-verified");
+    transitions.push("handoff");
   const receipt = {
     schema_version: 1,
     state: "handoff",
@@ -92,13 +116,14 @@ try {
     attestation_bundle: bundle,
     transitions,
   };
-  assert.equal(validatePostpublishReceipt(receipt, candidate, mapping), true);
-  await writeFile(receiptPath, `${JSON.stringify(receipt, null, 2)}\n`);
-  await appendReleaseManifestState("registry-verified", {
-    postpublish: receiptPath,
-    attestation: bundle,
-  });
-  console.log(`postpublish: PASS (${candidate.version}, ${release.dist_tag})`);
+    assert.equal(validatePostpublishReceipt(receipt, candidate, mapping), true);
+    await writeFile(receiptPath, `${JSON.stringify(receipt, null, 2)}\n`);
+    await appendReleaseManifestState("registry-verified", {
+      postpublish: receiptPath,
+      attestation: bundle,
+    });
+    console.log(`postpublish: PASS (${candidate.version}, ${release.dist_tag})`);
+  }
 } catch (error) {
   await writeState(transitions.at(-1), {
     status: "BLOCKED",

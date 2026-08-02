@@ -17,11 +17,16 @@ test("release manifest envelope is append-only and rejects core/state tamper", (
     release_manifest_core_sha256: "a".repeat(64),
     candidate_sha256: "b".repeat(64),
     states: [first, {
-      sequence: 2, state: "registry-verified",
+      sequence: 2, state: "uploaded-unverified",
       previous_state_sha256: digest(first),
       receipt_sha256s: { registry: "d".repeat(64) },
+    }, {
+      sequence: 3, state: "registry-verified",
+      previous_state_sha256: null,
+      receipt_sha256s: { registry: "e".repeat(64) },
     }],
   };
+  envelope.states[2].previous_state_sha256 = digest(envelope.states[1]);
   assert.equal(validateReleaseManifestEnvelope(envelope, {
     coreSha256: "a".repeat(64), candidateSha256: "b".repeat(64),
   }), true);

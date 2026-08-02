@@ -25,6 +25,8 @@ assert.equal(response.status, 200, "Release-authority run lookup failed.");
 const run = await response.json();
 assert.equal(run.id, Number(runId));
 assert.equal(run.repository?.full_name, expected.repository);
+assert.equal(run.repository?.private, false,
+  "Independent release-authority artifacts must be retrieved from a public repository without PAT/App credentials.");
 assert.equal(run.path, expected.workflow);
 assert.equal(run.event, expected.event);
 assert.equal(run.head_branch, expected.branch);
