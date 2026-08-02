@@ -8,55 +8,8 @@ const sources = [
 ];
 const rows = [];
 const acceptanceTestIds = new Set();
-const verified = new Map(Object.entries({
-  "TC-020-01": "scripts/verify-surface.mjs + scripts/verify-pack.mjs",
-  "TC-020-03": "build output inspection + scripts/verify-security.mjs",
-  "TC-020-05": "scripts/verify-pack.mjs + dynamic release license gate",
-  "TC-021-01": "scripts/verify-contract.mjs + test/transport.test.mjs",
-  "TC-021-02": "test/transport.test.mjs",
-  "TC-021-03": "test/core.test.mjs",
-  "TC-021-05": "scripts/verify-surface.mjs + import probe",
-  "TC-021-06": "scripts/verify-security.mjs",
-  "TC-022-02": "test/core.test.mjs",
-  "TC-022-03": "test/transport.test.mjs",
-  "TC-022-04": "test/core.test.mjs + test/types/public-surface.mts",
-  "TC-022-05": "test/core.test.mjs",
-  "TC-022-06": "test/core.test.mjs",
-  "TC-022-07": "test/resources.test.mjs",
-  "TC-022-08": "test/core.test.mjs",
-  "TC-023-01": "test/core.test.mjs",
-  "TC-023-04": "test/core.test.mjs",
-  "TC-023-05": "test/core.test.mjs",
-  "TC-023-06": "test/core.test.mjs",
-  "TC-024-01": "scripts/verify-surface.mjs + test/core.test.mjs",
-  "TC-024-02": "test/core.test.mjs",
-  "TC-024-03": "test/transport.test.mjs",
-  "TC-024-05": "test/resources.test.mjs",
-  "TC-025-01": "test/transport.test.mjs",
-  "TC-025-02": "test/transport.test.mjs",
-  "TC-025-03": "test/transport.test.mjs",
-  "TC-025-04": "test/transport.test.mjs",
-  "TC-025-05": "test/transport.test.mjs",
-  "TC-025-06": "test/transport.test.mjs",
-  "TC-025-07": "test/transport.test.mjs",
-  "TC-026-01": "test/resilience.test.mjs",
-  "TC-026-02": "test/resilience.test.mjs",
-  "TC-026-07": "test/resilience.test.mjs",
-  "TC-027-02": "test/resources.test.mjs",
-  "TC-027-07": "test/resources.test.mjs",
-  "TC-027-10": "test/resources.test.mjs",
-  "TC-035-01": "test/resources.test.mjs",
-  "TC-035-03": "test/resources.test.mjs",
-  "TC-036-01": "test/resources.test.mjs",
-  "TC-037-01": "test/resources.test.mjs",
-  "TC-039-01": "test/resilience.test.mjs",
-  "TC-040-01": "scripts/verify-security.mjs",
-  "TC-048-01": "npm run docs:api + scripts/verify-docs.mjs",
-  "TC-049-01": "scripts/verify-docs.mjs",
-  "TC-049-06": "scripts/verify-docs.mjs",
-  "TC-051-03": "scripts/verify-pack.mjs",
-  "TC-051-06": "scripts/verify-security.mjs"
-}));
+const requirementIds = new Set();
+const sourceFiles = [];
 for (const source of sources) {
   for (const file of (await readdir(source.root)).filter((name) => /^PRD-\d+.*\.md$/.test(name)).sort()) {
     const text = await readFile(path.join(source.root, file), "utf8");
@@ -67,8 +20,21 @@ for (const source of sources) {
     const tests = [...new Set(text.match(/TC-\d{3}-\d{2}/g) ?? [])]
       .filter((id) => id.slice(3, 6) === owner)
       .sort();
+    if (requirements.length === 0 || tests.length === 0) {
+      throw new Error(`${file} has no owner-scoped requirements or acceptance tests.`);
+    }
+    sourceFiles.push({
+      file: `prds/libs/${source.scope === "typescript" ? "typescript" : "shared"}/${file}`,
+      sha256: createHash("sha256").update(text).digest("hex"),
+      requirement_count: requirements.length,
+      acceptance_test_count: tests.length,
+    });
     for (const test of tests) acceptanceTestIds.add(test);
     for (const requirement of requirements) {
+      if (requirementIds.has(requirement)) {
+        throw new Error(`Duplicate requirement identifier: ${requirement}`);
+      }
+      requirementIds.add(requirement);
       rows.push({
         requirement,
         scope: source.scope,
@@ -80,8 +46,8 @@ for (const source of sources) {
     }
   }
 }
-if (rows.length !== 984 || acceptanceTestIds.size !== 522) {
-  throw new Error(`Trace catalog mismatch: ${rows.length} requirements and ${acceptanceTestIds.size} acceptance tests.`);
+if (sourceFiles.length === 0 || rows.length === 0 || acceptanceTestIds.size === 0) {
+  throw new Error("Trace catalog is empty.");
 }
 const receipted = new Map();
 const receiptOracles = [
@@ -134,7 +100,8 @@ await writeFile("evidence/requirement-test-map.json", `${JSON.stringify({
     ? "PASS"
     : "BLOCKED",
   generated_from: ["prds/libs/shared", "prds/libs/typescript"],
-  source_digest: createHash("sha256").update(JSON.stringify(rows)).digest("hex"),
+  source_digest: createHash("sha256").update(JSON.stringify(sourceFiles)).digest("hex"),
+  source_files: sourceFiles,
   requirement_count: rows.length,
   acceptance_test_count: acceptanceTestIds.size,
   requirement_status_summary: {

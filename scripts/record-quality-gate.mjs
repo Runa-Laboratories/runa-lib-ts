@@ -24,14 +24,15 @@ if (commitSha === null) {
 for (const [gate, file] of required) {
   try {
     const evidence = JSON.parse(await readFile(file, "utf8"));
-    if (evidence.status !== "PASS") blockers.push({ gate, evidence: file });
+    let valid = evidence.status === "PASS";
     if (gate === "requirement-test-map") {
       try {
         validateRequirementTestMap(evidence);
       } catch {
-        blockers.push({ gate, evidence: file });
+        valid = false;
       }
     }
+    if (!valid) blockers.push({ gate, evidence: file });
   } catch {
     blockers.push({ gate, evidence: file });
   }
