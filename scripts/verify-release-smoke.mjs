@@ -53,7 +53,7 @@ const json = (value, status = 200) => new Response(JSON.stringify(value), {
 });
 const fetch = async (url, init) => {
   const parsed = new URL(url);
-  assert.equal(parsed.origin, "https://sdk.example.invalid");
+  assert.equal(parsed.origin, "https://api.runacode.io");
   const route = parsed.pathname;
   if (route === "/v1/me" && init.method === "GET") {
     return json({ id: userId, email: "sdk@example.invalid",
@@ -81,7 +81,7 @@ const fetch = async (url, init) => {
 const started = performance.now();
 const runa = new Runa({
   apiKey: ["runa", "sk", "synthetic"].join("_"),
-  baseUrl: "https://sdk.example.invalid",
+  baseUrl: "https://api.runacode.io",
   fetch
 });
 try {

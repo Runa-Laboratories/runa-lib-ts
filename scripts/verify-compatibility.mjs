@@ -73,7 +73,7 @@ try {
   const heapBefore = process.memoryUsage().heapUsed;
   const client = new sdk.Runa({
     apiKey: "runa_sk_synthetic",
-    baseUrl: "https://sdk.example.invalid",
+    baseUrl: "https://api.runacode.io",
     fetch: async () => new Response(JSON.stringify({
       id: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
       email: "sdk@example.invalid",

@@ -7,7 +7,7 @@ import { API_KEY, jsonResponse, meFixture } from "./helpers.mjs";
 function config(fetch, hooks = {}) {
   return Object.freeze({
     apiKey: API_KEY,
-    baseUrl: "https://sdk.example.invalid",
+    baseUrl: "https://api.runacode.io",
     fetch,
     apiKeySource: "constructor",
     baseUrlSource: "constructor",

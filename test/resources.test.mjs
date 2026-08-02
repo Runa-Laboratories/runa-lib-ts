@@ -22,12 +22,12 @@ test("PRD-027 managers are lazy, stable and client-owned", async () => {
   };
   const first = new Runa({
     apiKey: API_KEY,
-    baseUrl: "https://one.example.invalid",
+    baseUrl: "https://api.runacode.io",
     fetch,
   });
   const second = new Runa({
     apiKey: API_KEY,
-    baseUrl: "https://two.example.invalid",
+    baseUrl: "https://api.runacode.io",
     fetch,
   });
   assert.equal(first.sessions, first.sessions);
@@ -56,7 +56,7 @@ test("PRD-029/031/032 preserve collection order and snapshot identity rules", as
   };
   const runa = new Runa({
     apiKey: API_KEY,
-    baseUrl: "https://sdk.example.invalid",
+    baseUrl: "https://api.runacode.io",
     fetch,
   });
   const listed = await runa.sessions.list();
@@ -83,7 +83,7 @@ test("PRD-031 preserves snapshot on refresh failure", async () => {
   let call = 0;
   const runa = new Runa({
     apiKey: API_KEY,
-    baseUrl: "https://sdk.example.invalid",
+    baseUrl: "https://api.runacode.io",
     fetch: async () => {
       call += 1;
       return call === 1
@@ -120,7 +120,7 @@ test("PRD-033/034/035 keep exec/checkpoint/open cache-neutral", async () => {
   };
   const runa = new Runa({
     apiKey: API_KEY,
-    baseUrl: "https://sdk.example.invalid",
+    baseUrl: "https://api.runacode.io",
     fetch,
   });
   const session = await runa.sessions.get(SESSION_ID);
@@ -136,7 +136,7 @@ test("PRD-035 rejects hostile open capability without retaining it", async () =>
   const invalid = `https://${upstreamName()}.example.invalid/__runa/auth?t=value`;
   const runa = new Runa({
     apiKey: API_KEY,
-    baseUrl: "https://sdk.example.invalid",
+    baseUrl: "https://api.runacode.io",
     fetch: async (url) =>
       new URL(url).pathname.endsWith("/open")
         ? jsonResponse({ url: invalid })
@@ -158,7 +158,7 @@ test("PRD-036/037 return plain fresh values and both workspace variants", async 
   let assigned = true;
   const runa = new Runa({
     apiKey: API_KEY,
-    baseUrl: "https://sdk.example.invalid",
+    baseUrl: "https://api.runacode.io",
     fetch: async (url) => {
       const path = new URL(url).pathname;
       if (path === "/v1/records") return jsonResponse([recordFixture(), recordFixture()]);
@@ -193,7 +193,7 @@ test("PRD-013/022 fail closed on protected wire content without truncation", asy
   let index = 0;
   const runa = new Runa({
     apiKey: API_KEY,
-    baseUrl: "https://sdk.example.invalid",
+    baseUrl: "https://api.runacode.io",
     fetch: async () => jsonResponse(responses[index++]),
   });
   for (const operation of [
@@ -217,7 +217,7 @@ test("PRD-027 close waits for admitted work and blocks later work", async () => 
   let calls = 0;
   const runa = new Runa({
     apiKey: API_KEY,
-    baseUrl: "https://sdk.example.invalid",
+    baseUrl: "https://api.runacode.io",
     fetch: async () => {
       calls += 1;
       return await new Promise((resolve) => {
