@@ -27,17 +27,27 @@ const exact = [
   "contract_provenance",
   "cross_language",
   "external_release_interfaces",
+  "approval_receipt",
   "publication_readiness",
   "repository_controls",
   "sbom_validation",
   "schema_version",
-  "trust_policy",
 ].sort();
 assert.equal(bundle.schema_version, 1);
 assert.deepEqual(Object.keys(bundle).sort(), exact);
 
 const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");
-const candidate = JSON.parse(await readFile("release-artifacts/candidate.json", "utf8"));
+let trustPolicy;
+try {
+  trustPolicy = JSON.parse(
+    await readFile("governance/release-trust.json", "utf8"),
+  );
+} catch {
+  console.log("release authority import: BLOCKED (no accepted trust root)");
+  process.exit(0);
+}
+const candidateBytes = await readFile("release-artifacts/candidate.json");
+const candidate = JSON.parse(candidateBytes.toString("utf8"));
 const releaseMapping = JSON.parse(
   await readFile("governance/release-mapping.json", "utf8"),
 );
@@ -59,6 +69,10 @@ assert.equal(validateContractProvenance(bundle.contract_provenance, {
 assert.equal(bundle.contract_provenance.status, "APPROVED");
 
 const entries = [
+  ["approval_receipt", "approval", "release-approval",
+    (payload) => payload.candidate_sha256 === candidate.sha256 &&
+      payload.artifact_sha256 === candidate.sha256 &&
+      payload.candidate_manifest_sha256 === hash(candidateBytes)],
   ["repository_controls", "repository-controls", "repository-controls",
     (payload) => payload.commit_sha === candidate.source_commit],
   ["cross_language", "cross-language", "cross-language",
@@ -77,9 +91,9 @@ const entries = [
 const retained = [];
 for (const [field, role, filename, binding] of entries) {
   const envelope = bundle[field];
-  const payload = verifyTrustedEnvelope(envelope, bundle.trust_policy, role);
+  const payload = verifyTrustedEnvelope(envelope, trustPolicy, role);
   assert.notEqual(payload, undefined, `Invalid trusted ${field} evidence.`);
-  if (["publication", "sbom-validation", "external-interfaces"].includes(role)) {
+  if (["approval", "publication", "sbom-validation", "external-interfaces"].includes(role)) {
     assert.equal(validateTrustedRolePayload(role, payload), true);
   }
   assert.equal(binding(payload), true, `Mismatched ${field} candidate binding.`);
@@ -92,10 +106,7 @@ for (const [field, role, filename, binding] of entries) {
   }
   retained.push([`evidence/${filename}.json`, envelope]);
 }
-await mkdir("governance", { recursive: true });
 await mkdir("evidence", { recursive: true });
-await writeFile("governance/release-trust.json",
-  `${JSON.stringify(bundle.trust_policy, null, 2)}\n`);
 await writeFile("contracts/runa-sdk-contract.provenance.json",
   `${JSON.stringify(bundle.contract_provenance, null, 2)}\n`);
 for (const [filename, envelope] of retained) {

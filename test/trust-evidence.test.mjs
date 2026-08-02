@@ -38,3 +38,43 @@ test("release trust accepts valid evidence and rejects tamper, stale, and wrong 
   assert.equal(verifyTrustedEnvelope({ ...envelope, signature: "not-base64!" },
     policy, "compatibility", now), undefined);
 });
+
+test("an authority bundle cannot bootstrap trust with its own alien key", () => {
+  const accepted = generateKeyPairSync("ed25519");
+  const alien = generateKeyPairSync("ed25519");
+  const now = Date.parse("2026-07-30T12:00:00Z");
+  const payload = {
+    status: "PASS",
+    issued_at: "2026-07-30T11:55:00Z",
+    expires_at: "2026-07-30T12:05:00Z",
+    candidate_sha256: "a".repeat(64),
+  };
+  const envelope = {
+    schema_version: 1,
+    key_id: "alien",
+    payload,
+    signature: sign(
+      null,
+      Buffer.from(JSON.stringify(payload)),
+      alien.privateKey,
+    ).toString("base64"),
+  };
+  const policy = (publicKey) => ({
+    schema_version: 1,
+    maximum_validity_ms: 3_600_000,
+    keys: [{
+      key_id: "alien",
+      role: "publication",
+      algorithm: "Ed25519",
+      public_key_pem: publicKey.export({ type: "spki", format: "pem" }),
+    }],
+  });
+  assert.equal(
+    verifyTrustedEnvelope(envelope, policy(alien.publicKey), "publication", now),
+    payload,
+  );
+  assert.equal(
+    verifyTrustedEnvelope(envelope, policy(accepted.publicKey), "publication", now),
+    undefined,
+  );
+});
