@@ -4,6 +4,7 @@ import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { npmSpawnSync } from "./npm-process.mjs";
+import { validateSbomWithPinnedTools } from "./sbom-validation.mjs";
 
 const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const candidate = JSON.parse(await readFile("release-artifacts/candidate.json", "utf8"));
@@ -58,6 +59,7 @@ for (let run = 0; run < 2; run += 1) {
 assert.equal(closures[0], closures[1]);
 assert.equal(installs[0].lock_sha256, installs[1].lock_sha256);
 const sbom = {
+  $schema: "http://cyclonedx.org/schema/bom-1.6.schema.json",
   bomFormat: "CycloneDX",
   specVersion: "1.6",
   serialNumber: `urn:uuid:${candidate.sha256.slice(0, 8)}-${candidate.sha256.slice(8, 12)}-${candidate.sha256.slice(12, 16)}-${candidate.sha256.slice(16, 20)}-${candidate.sha256.slice(20, 32)}`,
@@ -83,6 +85,12 @@ assert.equal(sbom.specVersion, "1.6");
 await mkdir("evidence", { recursive: true });
 const sbomBytes = Buffer.from(`${JSON.stringify(sbom, null, 2)}\n`);
 await writeFile("evidence/sbom.cdx.json", sbomBytes);
+const sbomLocalValidation = await validateSbomWithPinnedTools(
+  "evidence/sbom.cdx.json",
+  process.env.RUNA_CYCLONEDX_CLI ?? "cyclonedx-cli",
+);
+await writeFile("evidence/sbom-local-validation.json",
+  `${JSON.stringify(sbomLocalValidation, null, 2)}\n`);
 await writeFile("evidence/sbom-validation.json", `${JSON.stringify({
   schema_version: 1,
   status: "BLOCKED",
@@ -91,8 +99,9 @@ await writeFile("evidence/sbom-validation.json", `${JSON.stringify({
   sbom_sha256: hash(sbomBytes),
   dependency_closure_sha256: closures[0],
   local_structural_checks: "PASS",
-  required_validator: "cyclonedx-cli validate --input-format json",
-  reason: "The accepted CycloneDX 1.6 schema and validator receipt are not configured locally.",
+  local_validation_sha256: hash(Buffer.from(`${JSON.stringify(sbomLocalValidation, null, 2)}\n`)),
+  required_validator: "cyclonedx-cli@0.32.0 validate --input-format json --input-version v1_6",
+  reason: "Local version-controlled schema and pinned CLI validation passed; independent authority signature remains required.",
 }, null, 2)}\n`);
 await writeFile("evidence/runtime-closure.json", `${JSON.stringify({
   schema_version: 1, status: "PASS", candidate_sha256: candidate.sha256,

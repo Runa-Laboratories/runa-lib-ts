@@ -293,6 +293,7 @@ if (sbomValidation !== undefined && candidate !== undefined) {
       candidateSha256: candidate.sha256,
       sbomBytes: await readFile("evidence/sbom.cdx.json"),
       runtimeClosure: closure,
+      localValidationBytes: await readFile("evidence/sbom-local-validation.json"),
     });
   } catch {
     blockers.push({ gate: "sbom-validation", reason: "SBOM validation is not bound to exact local SBOM and closure evidence." });

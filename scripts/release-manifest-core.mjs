@@ -6,7 +6,25 @@ import path from "node:path";
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
 
 export function canonicalizeJson(value) {
-  if (value === null || typeof value === "boolean" || typeof value === "string") {
+  const validateUnicode = (text) => {
+    for (let index = 0; index < text.length; index += 1) {
+      const code = text.charCodeAt(index);
+      if (code >= 0xd800 && code <= 0xdbff) {
+        const next = text.charCodeAt(index + 1);
+        assert(next >= 0xdc00 && next <= 0xdfff,
+          "RFC 8785/I-JSON forbids unpaired Unicode surrogates");
+        index += 1;
+      } else {
+        assert.equal(code >= 0xdc00 && code <= 0xdfff, false,
+          "RFC 8785/I-JSON forbids unpaired Unicode surrogates");
+      }
+    }
+  };
+  if (value === null || typeof value === "boolean") {
+    return JSON.stringify(value);
+  }
+  if (typeof value === "string") {
+    validateUnicode(value);
     return JSON.stringify(value);
   }
   if (typeof value === "number") {
@@ -19,8 +37,10 @@ export function canonicalizeJson(value) {
   assert.equal(typeof value, "object");
   const prototype = Object.getPrototypeOf(value);
   assert.equal(prototype === Object.prototype || prototype === null, true);
-  return `{${Object.keys(value).sort().map((key) =>
-    `${JSON.stringify(key)}:${canonicalizeJson(value[key])}`).join(",")}}`;
+  return `{${Object.keys(value).sort().map((key) => {
+    validateUnicode(key);
+    return `${JSON.stringify(key)}:${canonicalizeJson(value[key])}`;
+  }).join(",")}}`;
 }
 
 export const EXPECTED_RELEASE_POLICY = Object.freeze({
@@ -48,8 +68,8 @@ export const EXPECTED_RELEASE_POLICY = Object.freeze({
   },
   sbom: {
     format: "CycloneDX 1.6 JSON",
-    schemaPath: null,
-    verifier: "external-authority-required",
+    schemaPath: ".runa/schemas/cyclonedx-1.6.schema.json",
+    verifier: "cyclonedx-cli@0.32.0 validate --input-format json --input-version v1_6",
   },
   sourceControl: {
     branchProtection: {
@@ -109,6 +129,7 @@ export async function createReleaseManifestCore({
     "requirement-test-map.json",
     "runtime-closure.json",
     "sbom.cdx.json",
+    "sbom-local-validation.json",
   ];
   const evidence = {};
   for (const file of evidenceFiles) {

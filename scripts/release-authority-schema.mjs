@@ -56,15 +56,26 @@ export function validateTrustedRolePayload(role, payload) {
     exact(payload, [
       "artifact_subject_sha256", "bom_format", "candidate_sha256",
       "dependency_closure_sha256", "expires_at", "issued_at",
-      "sbom_sha256", "spec_version", "status",
+      "local_validation_sha256", "sbom_sha256", "schema_sha256s",
+      "spec_version", "status", "tool",
     ]);
     for (const field of [
       "artifact_subject_sha256", "candidate_sha256",
       "dependency_closure_sha256", "sbom_sha256",
+      "local_validation_sha256",
     ]) sha256(payload[field], field);
     assert.equal(payload.artifact_subject_sha256, payload.candidate_sha256);
     assert.equal(payload.bom_format, "CycloneDX");
     assert.equal(payload.spec_version, "1.6");
+    assert.deepEqual(payload.tool, {
+      name: "cyclonedx-cli", version: "0.32.0",
+      sha256: "454879e6a4a405c8a13bff49b8982adcb0596f3019b26b0811c66e4d7f0783e1",
+    });
+    assert.deepEqual(payload.schema_sha256s, {
+      ".runa/schemas/cyclonedx-1.6.schema.json": "3e92dddbc30cf7f6a02b80f0942b1a4cfd4fb1c26f1dfc4310afa9d613cafb93",
+      ".runa/schemas/jsf-0.82.schema.json": "8bae002c25e723db7ee1f26afde680ae1a2b1a8f6b4b4b0fd65dc3becb090aae",
+      ".runa/schemas/spdx.schema.json": "baa9d3bd1ed57b6751b0887edead6b5063ff53ff7429cf85d476c6c94af0166e",
+    });
   } else if (role === "external-interfaces") {
     exact(payload, [
       "candidate_sha256", "expires_at", "github_attestations_api_required",
@@ -87,6 +98,7 @@ export function validateSbomEvidenceBinding(payload, {
   candidateSha256,
   sbomBytes,
   runtimeClosure,
+  localValidationBytes,
 }) {
   validateTrustedRolePayload("sbom-validation", payload);
   assert.equal(payload.candidate_sha256, candidateSha256);
@@ -95,6 +107,12 @@ export function validateSbomEvidenceBinding(payload, {
     payload.sbom_sha256,
     createHash("sha256").update(sbomBytes).digest("hex"),
   );
+  assert.equal(payload.local_validation_sha256,
+    createHash("sha256").update(localValidationBytes).digest("hex"));
+  const localValidation = JSON.parse(localValidationBytes.toString("utf8"));
+  assert.equal(localValidation.status, "PASS");
+  assert.deepEqual(payload.schema_sha256s, localValidation.schema_sha256s);
+  assert.deepEqual(payload.tool, localValidation.tool);
   assert.equal(runtimeClosure.status, "PASS");
   assert.equal(runtimeClosure.candidate_sha256, candidateSha256);
   sha256(runtimeClosure.closure_sha256, "runtimeClosure.closure_sha256");

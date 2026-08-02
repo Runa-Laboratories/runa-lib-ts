@@ -14,10 +14,12 @@ import {
   validateReleaseMapping,
 } from "./postpublish-policy.mjs";
 
+const preflightOnly = process.env.RUNA_AUTHORITY_PREFLIGHT === "1";
+const authorityInput = process.env.RUNA_AUTHORITY_INPUT_DIR ?? "authority-input";
 let bundle;
 try {
   bundle = JSON.parse(await readFile(
-    "authority-input/release-authority-bundle.json", "utf8",
+    `${authorityInput}/release-authority-bundle.json`, "utf8",
   ));
 } catch {
   throw new Error("Independently downloaded release authority bundle is missing or invalid.");
@@ -75,6 +77,7 @@ const releaseChannel = resolveReleaseChannel(releaseMapping, candidate.version);
 const projection = await readFile("contracts/runa-sdk.projection.json");
 const openapi = await readFile("contracts/runa-api.openapi.json");
 const sbomBytes = await readFile("evidence/sbom.cdx.json");
+const sbomLocalValidationBytes = await readFile("evidence/sbom-local-validation.json");
 const runtimeClosure = JSON.parse(
   await readFile("evidence/runtime-closure.json", "utf8"),
 );
@@ -146,18 +149,22 @@ for (const [field, role, filename, binding] of entries) {
       candidateSha256: candidate.sha256,
       sbomBytes,
       runtimeClosure,
+      localValidationBytes: sbomLocalValidationBytes,
     }), true);
   }
   retained.push([`evidence/${filename}.json`, envelope]);
 }
-await mkdir("evidence", { recursive: true });
-await writeFile("contracts/runa-sdk-contract.provenance.json",
-  `${JSON.stringify(bundle.contract_provenance, null, 2)}\n`);
-for (const [filename, envelope] of retained) {
-  await writeFile(filename, `${JSON.stringify(envelope, null, 2)}\n`);
+if (!preflightOnly) {
+  await mkdir("evidence", { recursive: true });
+  await writeFile("contracts/runa-sdk-contract.provenance.json",
+    `${JSON.stringify(bundle.contract_provenance, null, 2)}\n`);
+  for (const [filename, envelope] of retained) {
+    await writeFile(filename, `${JSON.stringify(envelope, null, 2)}\n`);
+  }
+  await appendReleaseManifestState("authority-admitted", Object.fromEntries(
+    retained.map(([filename]) => [
+      filename.split("/").at(-1).replace(/\.json$/u, ""), filename,
+    ]),
+  ));
 }
-await appendReleaseManifestState("authority-admitted", Object.fromEntries(
-  retained.filter(([filename]) => filename !== "evidence/acceptance-results.json")
-    .map(([filename]) => [filename.split("/").at(-1).replace(/\.json$/u, ""), filename]),
-));
-console.log(`release authority import: PASS (${candidate.sha256})`);
+console.log(`release authority ${preflightOnly ? "preflight" : "import"}: PASS (${candidate.sha256})`);
