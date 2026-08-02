@@ -18,7 +18,7 @@ if (process.env.RUNA_VERIFY_ONLY !== "true") {
   });
   console.log(`registry preflight: PASS (${candidate.version} is unpublished)`);
 } else {
-  const endpoint = `${mapping.registry.replace(/\/$/u, "")}/@runa%2fsdk/${candidate.version}`;
+  const endpoint = `${mapping.registry.replace(/\/$/u, "")}/@runa_laboratories%2fsdk/${candidate.version}`;
   const response = await fetch(endpoint, { redirect: "error" });
   if (response.status !== 200) throw new Error("Verify-only recovery requires an existing exact version.");
   const metadata = await response.json();

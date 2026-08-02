@@ -26,24 +26,29 @@ let failure = null;
 let metrics = null;
 let compatibilityStatus = "PASS";
 let performanceStatus = "BLOCKED";
+let probe = "clean-room-setup";
 try {
   await mkdir(cache);
   await writeFile(path.join(workspace, "package.json"), `${JSON.stringify({
     name: "runa-compatibility-clean-room", version: "0.0.0",
     private: true, type: "module",
-    dependencies: { "@runa/sdk": `file:${archivePath.replaceAll("\\", "/")}` }
+    dependencies: { "@runa_laboratories/sdk": `file:${archivePath.replaceAll("\\", "/")}` }
   })}\n`);
+  probe = "isolated-offline-lockfile";
   let result = runNpm(["install", "--package-lock-only", "--ignore-scripts", "--offline",
     "--cache", cache, "--no-audit", "--no-fund"]);
-  assert.equal(result.status, 0);
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  probe = "isolated-offline-install";
   result = runNpm(["ci", "--ignore-scripts", "--offline", "--cache", cache, "--no-audit", "--no-fund"]);
-  assert.equal(result.status, 0);
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  probe = "root-esm-import";
   const imported = spawnSync(process.execPath, ["--input-type=module", "-e",
-    "import('@runa/sdk').then(m=>{if(Object.keys(m).sort().join(',')!=='ApiError,CommandError,ConfigError,Runa,RunaError,Session,stderrText,stdoutText')process.exit(2)})"],
+    "import('@runa_laboratories/sdk').then(m=>{if(Object.keys(m).sort().join(',')!=='ApiError,CommandError,ConfigError,Runa,RunaError,Session,stderrText,stdoutText')process.exit(2)})"],
     { cwd: workspace, encoding: "utf8" });
-  assert.equal(imported.status, 0);
+  assert.equal(imported.status, 0, imported.stderr || imported.stdout);
+  probe = "declarations";
   await writeFile(path.join(workspace, "consumer.mts"),
-    "import { Runa, stdoutText } from '@runa/sdk'; import type { AssignedWorkspace } from '@runa/sdk'; const r: Runa = new Runa({apiKey: 'runa_sk_synthetic'}); const x: true = (null as unknown as AssignedWorkspace).assigned; void stdoutText; void r;\n");
+    "import { Runa, stdoutText } from '@runa_laboratories/sdk'; import type { AssignedWorkspace } from '@runa_laboratories/sdk'; const r: Runa = new Runa({apiKey: 'runa_sk_synthetic'}); const x: true = (null as unknown as AssignedWorkspace).assigned; void stdoutText; void r;\n");
   await writeFile(path.join(workspace, "tsconfig.json"), JSON.stringify({
     compilerOptions: {
       target: "ES2022", module: "NodeNext", moduleResolution: "NodeNext", strict: true,
@@ -54,23 +59,13 @@ try {
   const tsc = spawnSync(process.execPath,
     [path.resolve("node_modules/typescript/bin/tsc"), "--project", path.join(workspace, "tsconfig.json")],
     { cwd: workspace, encoding: "utf8" });
-  assert.equal(tsc.status, 0);
-  const installed = JSON.parse(await readFile(path.join(workspace, "node_modules/@runa/sdk/package.json"), "utf8"));
+  assert.equal(tsc.status, 0, tsc.stderr || tsc.stdout);
+  probe = "package-surface";
+  const installed = JSON.parse(await readFile(path.join(workspace, "node_modules/@runa_laboratories/sdk/package.json"), "utf8"));
   assert.deepEqual(Object.keys(installed.exports), ["."]);
   assert.equal(installed.sideEffects, false);
-  const importStarted = performance.now();
-  const sdk = await import(new URL(`file://${path.join(workspace, "node_modules/@runa/sdk/dist/index.js").replaceAll("\\", "/")}`));
-  const importMs = performance.now() - importStarted;
-  const construction = [];
-  for (let index = 0; index < 20; index += 1) {
-    const started = performance.now();
-    const client = new sdk.Runa({ apiKey: "runa_sk_synthetic" });
-    construction.push(performance.now() - started);
-    await client.close();
-  }
-  construction.sort((left, right) => left - right);
-  const request = [];
-  const heapBefore = process.memoryUsage().heapUsed;
+  probe = "runtime-smoke";
+  const sdk = await import(new URL(`file://${path.join(workspace, "node_modules/@runa_laboratories/sdk/dist/index.js").replaceAll("\\", "/")}`));
   const client = new sdk.Runa({
     apiKey: "runa_sk_synthetic",
     baseUrl: "https://api.runacode.io",
@@ -80,29 +75,15 @@ try {
       workspace: { assigned: false, waitlist_position: 0 }
     }), { status: 200, headers: { "content-type": "application/json" } })
   });
-  for (let index = 0; index < 20; index += 1) {
-    const started = performance.now();
-    await client.me();
-    request.push(performance.now() - started);
-  }
+  const account = await client.me();
+  assert.equal(account.workspace.assigned, false);
   await client.close();
-  request.sort((left, right) => left - right);
-  metrics = {
-    tarball_bytes: archive.byteLength,
-    import_ms: importMs,
-    construction_p95_ms: construction[18],
-    request_p95_ms: request[18],
-    allocation_delta_bytes: Math.max(0, process.memoryUsage().heapUsed - heapBefore)
-  };
-  assert(metrics.tarball_bytes <= catalog.profile.metrics.payload.cap);
-  assert(metrics.import_ms <= catalog.profile.metrics.import.cap);
-  assert(metrics.construction_p95_ms <= catalog.profile.metrics.construction.cap);
-  assert(metrics.request_p95_ms <= catalog.profile.metrics.request_overhead.cap);
-  assert(metrics.allocation_delta_bytes <= catalog.profile.metrics.allocation_delta.cap);
-  const readme = await readFile(path.join(workspace, "node_modules/@runa/sdk/README.md"), "utf8");
-  assert.match(readme, /npm install @runa\/sdk/);
+  probe = "readme";
+  const readme = await readFile(path.join(workspace, "node_modules/@runa_laboratories/sdk/README.md"), "utf8");
+  assert.match(readme, /npm install @runa_laboratories\/sdk/);
+  probe = "tree-shaking";
   await writeFile(path.join(workspace, "bundle-entry.mjs"),
-    "export { stdoutText } from '@runa/sdk';\n");
+    "export { stdoutText } from '@runa_laboratories/sdk';\n");
   const bundleResult = await bundle({
     absWorkingDir: workspace,
     entryPoints: ["bundle-entry.mjs"],
@@ -114,25 +95,32 @@ try {
     metafile: true,
     write: true
   });
-  assert.equal(Object.keys(bundleResult.metafile.inputs).some((input) =>
-    input.replaceAll("\\", "/").endsWith("/dist/client.js")), false);
+  const emittedInputs = Object.values(bundleResult.metafile.outputs)
+    .flatMap((output) => Object.entries(output.inputs));
+  const clientBytes = emittedInputs
+    .filter(([input]) => input.replaceAll("\\", "/").endsWith("/dist/client.js"))
+    .reduce((total, [, contribution]) => total + contribution.bytesInOutput, 0);
+  assert.equal(clientBytes, 0);
+  probe = "performance-receipt";
   const performanceRun = spawnSync(process.execPath, [
     "scripts/verify-performance.mjs", "--artifact", archivePath,
   ], { cwd: path.resolve("."), encoding: "utf8", timeout: 180_000 });
-  assert.equal(performanceRun.status, 0);
-  const performance = JSON.parse(
+  assert.equal(performanceRun.status, 0, performanceRun.stderr || performanceRun.stdout);
+  const performanceReceipt = JSON.parse(
     await readFile("evidence/performance-local.json", "utf8"),
   );
-  assert.equal(performance.status, "PASS");
-  assert.equal(performance.identity.artifact_sha256, candidate.sha256);
-  assert.equal(performance.identity.matrix_cell, cell.id);
+  assert.equal(performanceReceipt.status, "PASS");
+  assert.equal(performanceReceipt.identity.artifact_sha256, candidate.sha256);
+  assert.equal(performanceReceipt.identity.matrix_cell, cell.id);
   performanceStatus = "PASS";
-  metrics = performance.metrics;
+  metrics = performanceReceipt.metrics;
   status = "PASS";
-} catch {
+} catch (error) {
   status = "FAIL";
   compatibilityStatus = "FAIL";
-  failure = "compatibility-probe";
+  const reason = error instanceof Error ? error.message : String(error);
+  failure = `${probe}: ${reason}`;
+  console.error(`compatibility: FAIL (${failure})`);
 } finally {
   await mkdir("evidence/compatibility-receipts", { recursive: true });
   await writeFile(`evidence/compatibility-receipts/${cell.id}.json`, `${JSON.stringify({

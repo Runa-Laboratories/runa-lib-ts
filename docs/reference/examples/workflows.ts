@@ -1,5 +1,5 @@
-import { Runa } from "@runa/sdk";
-import type { Session } from "@runa/sdk";
+import { Runa } from "@runa_laboratories/sdk";
+import type { Session } from "@runa_laboratories/sdk";
 
 declare const runa: Runa;
 declare const session: Session;

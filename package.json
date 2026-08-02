@@ -1,6 +1,6 @@
 {
-  "name": "@runa/sdk",
-  "version": "0.1.0",
+  "name": "@runa_laboratories/sdk",
+  "version": "0.0.0-bootstrap.0",
   "description": "The official TypeScript SDK for Runa.",
   "repository": {
     "type": "git",
@@ -38,6 +38,7 @@
     "docs:api": "npm run build && typedoc --options docs/reference.config.json && node scripts/generate-api-docs.mjs",
     "lint": "node scripts/lint.mjs",
     "contract:verify": "node scripts/verify-contract.mjs",
+    "prd:verify": "node scripts/verify-prd-catalog.mjs",
     "surface:verify": "node scripts/verify-surface.mjs",
     "docs:verify": "node scripts/verify-docs.mjs",
     "security:verify": "node scripts/verify-security.mjs",
@@ -69,12 +70,12 @@
     "release:recovery:plan": "node scripts/plan-release-recovery.mjs",
     "release:recovery:verify": "node scripts/verify-release-recovery.mjs",
     "evidence": "node scripts/build-evidence.mjs",
-    "quality": "npm run lint && npm run typecheck && npm run contract:verify && npm test && npm run docs:api && npm run surface:verify && npm run docs:verify && npm run security:verify && npm run dependencies:verify && npm run duplicates:verify && npm run pack:verify && npm run performance:verify && npm run evidence",
+    "quality": "npm run lint && npm run typecheck && npm run contract:verify && npm run prd:verify && npm test && npm run docs:api && npm run surface:verify && npm run docs:verify && npm run security:verify && npm run dependencies:verify && npm run duplicates:verify && npm run pack:verify && npm run performance:verify && npm run evidence",
     "prepack": "npm run build"
   },
   "devDependencies": {
     "@types/node": "22.15.3",
-    "ajv": "8.17.1",
+    "ajv": "8.20.0",
     "ajv-formats": "3.0.1",
     "esbuild": "0.25.5",
     "typedoc": "0.28.20",

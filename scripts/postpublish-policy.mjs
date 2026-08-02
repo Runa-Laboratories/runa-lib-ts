@@ -7,7 +7,7 @@ export function validateReleaseMapping(mapping) {
   ].sort());
   assert.equal(mapping.schema_version, 1);
   assert.equal(mapping.policy_id, "TS-053-RELEASE-MAPPING-V1");
-  assert.equal(mapping.package_name, "@runa/sdk");
+  assert.equal(mapping.package_name, "@runa_laboratories/sdk");
   assert.equal(mapping.registry, "https://registry.npmjs.org");
   assert.equal(mapping.tag_prefix, "ts-v");
   assert.deepEqual(mapping.postpublish_states, [

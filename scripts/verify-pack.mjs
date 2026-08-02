@@ -32,12 +32,12 @@ try {
   await writeFile(path.join(workspace, "package.json"), `${JSON.stringify({
     private: true,
     type: "module",
-    dependencies: { "@runa/sdk": `file:${archive.replaceAll("\\", "/")}` }
+    dependencies: { "@runa_laboratories/sdk": `file:${archive.replaceAll("\\", "/")}` }
   })}\n`);
   const install = npmRun(["install", "--ignore-scripts", "--no-audit", "--no-fund"], { cwd: workspace });
   assert.equal(install.status, 0);
   const probe = spawnSync(process.execPath, ["--input-type=module", "-e",
-    "import('@runa/sdk').then(m=>{if(Object.keys(m).length!==8)process.exit(2)})"], {
+    "import('@runa_laboratories/sdk').then(m=>{if(Object.keys(m).length!==8)process.exit(2)})"], {
     cwd: workspace, encoding: "utf8"
   });
   assert.equal(probe.status, 0);

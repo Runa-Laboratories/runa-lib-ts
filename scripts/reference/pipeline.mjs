@@ -1,8 +1,9 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { spawnSync } from "node:child_process";
-import { mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { loadPrdCatalog } from "../prd-catalog.mjs";
 import {
   claimRegistry,
   conceptualPages,
@@ -137,20 +138,16 @@ const extractExample = (source, marker) => {
   return source.slice(startIndex + start.length, endIndex).trim();
 };
 
+const prdRequirementIds = new Set(
+  (await loadPrdCatalog()).sources.flatMap((source) => source.requirements),
+);
+
 const validateContractReference = async (contractRef) => {
   const match = /^PRD-(\d{3})#(R-\d{3}-\d{2})$/.exec(contractRef);
   if (match === null) throw new Error("R-048-07: malformed contract reference");
-  const roots = ["shared", "typescript"];
-  let found = false;
-  for (const root of roots) {
-    const directory = path.resolve("../../prds/libs", root);
-    for (const file of await readdir(directory)) {
-      if (!file.startsWith(`PRD-${match[1]}`) || !file.endsWith(".md")) continue;
-      const text = await readFile(path.join(directory, file), "utf8");
-      if (new RegExp(`\\| ${match[2].replaceAll("-", "\\-")} \\|`).test(text)) found = true;
-    }
+  if (!prdRequirementIds.has(match[2])) {
+    throw new Error("R-048-07: unknown contract reference");
   }
-  if (!found) throw new Error("R-048-07: unknown contract reference");
 };
 
 const parseSourceTags = (text) => {

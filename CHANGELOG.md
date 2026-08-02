@@ -4,7 +4,7 @@
 
 SemVer class: initial minor release.
 
-- Additions: initial ESM-only `@runa/sdk` client, session and record managers, typed errors, deterministic resilience, and generated API reference.
+- Additions: initial ESM-only `@runa_laboratories/sdk` client, session and record managers, typed errors, deterministic resilience, and generated API reference.
 - Fixes: none; this is the initial release candidate.
 - Deprecations: none.
 - Removals: none.

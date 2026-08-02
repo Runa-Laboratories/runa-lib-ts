@@ -13,6 +13,7 @@ const packageJson = JSON.parse(await readFile("package.json", "utf8"));
 assert.equal(catalog.catalog_revision, "TS-050-EVIDENCE-V1");
 assert.equal(catalog.matrix.length, 6);
 assert.equal(catalog.profile.metrics.import.samples, 20);
+assert.equal(catalog.profile.request_warmup_invocations, 100);
 assert.equal(catalog.profile.metrics.retained_memory_delta.batches, 5);
 assert.equal(catalog.profile.metrics.retained_memory_delta.cycles_per_batch, 100);
 assert.equal(catalog.reuse_fixture.sequential_calls, 10);
@@ -67,14 +68,14 @@ try {
     version: "0.0.0",
     private: true,
     type: "module",
-    dependencies: { "@runa/sdk": `file:${artifactPath.replaceAll("\\", "/")}` },
+    dependencies: { "@runa_laboratories/sdk": `file:${artifactPath.replaceAll("\\", "/")}` },
   })}\n`);
   const install = npmSpawnSync([
     "install", "--ignore-scripts", "--offline", "--cache", cache,
     "--no-audit", "--no-fund",
   ], { cwd: workspace });
   assert.equal(install.status, 0, "R-050-03: isolated profile install failed");
-  const packageRoot = path.join(workspace, "node_modules", "@runa", "sdk");
+  const packageRoot = path.join(workspace, "node_modules", "@runa_laboratories", "sdk");
   const sdk = await import(pathToFileURL(path.join(packageRoot, "dist", "index.js")));
   const seam = await import(pathToFileURL(
     path.join(packageRoot, "dist", "internal", "performance-seam.js"),
@@ -93,7 +94,11 @@ try {
   const key = ["runa", "sk", "synthetic"].join("_");
   const requestSamples = [];
   const allocationSamples = [];
-  for (let warmup = 0; warmup < 25; warmup += 1) {
+  for (
+    let warmup = 0;
+    warmup < catalog.profile.request_warmup_invocations;
+    warmup += 1
+  ) {
     const client = new sdk.Runa({
       apiKey: key,
       baseUrl: "https://api.runacode.io",
@@ -243,6 +248,11 @@ try {
     assert.equal(value.profile.isolated_import_runs, 20, "R-050-09: import sample mismatch");
     assert.equal(value.profile.isolated_construction_runs, 20, "R-050-09: construction sample mismatch");
     assert.equal(value.profile.isolated_request_invocations, 20, "R-050-10: request sample mismatch");
+    assert.equal(
+      value.profile.request_warmup_invocations,
+      catalog.profile.request_warmup_invocations,
+      "R-050-10: request warm-up mismatch",
+    );
     assert.equal(value.profile.sequential_calls, 10, "R-050-11: reuse fixture mismatch");
     assert.equal(value.profile.cleanup_calls, 2, "R-050-12: cleanup fixture mismatch");
     assert.equal(value.profile.leak_batches, 5, "R-050-12: leak batch mismatch");
@@ -252,7 +262,10 @@ try {
     assert(value.metrics.import_p95_ms <= caps.import.cap, "R-050-09: import cap");
     assert(value.metrics.construction_p95_ms <= caps.construction.cap, "R-050-09: construction cap");
     assert(value.metrics.request_overhead_p95_ms <= caps.request_overhead.cap, "R-050-10: request cap");
-    assert(value.metrics.allocation_delta_bytes_max <= caps.allocation_delta.cap, "R-050-10: allocation cap");
+    assert(
+      value.metrics.allocation_delta_bytes_max <= caps.allocation_delta.cap,
+      `R-050-10: allocation cap (observed ${value.metrics.allocation_delta_bytes_max}, cap ${caps.allocation_delta.cap})`,
+    );
     assert(value.metrics.connection_establishments <= caps.connection_establishments.cap, "R-050-11: reuse cap");
     assert(value.metrics.retained_memory_delta_bytes_p95 <= caps.retained_memory_delta.cap, "R-050-12: retained-memory cap");
     for (const resource of [
@@ -298,6 +311,7 @@ try {
       isolated_import_runs: 20,
       isolated_construction_runs: 20,
       isolated_request_invocations: 20,
+      request_warmup_invocations: catalog.profile.request_warmup_invocations,
       sequential_calls: 10,
       cleanup_calls: 2,
       leak_batches: 5,
@@ -324,6 +338,7 @@ try {
     ["catalog", (value) => { value.identity.catalog_sha256 = "0".repeat(64); }],
     ["tool", (value) => { value.tools.esbuild = "0.0.0"; }],
     ["profile-fact", (value) => { delete value.profile.isolated_request_invocations; }],
+    ["warmup", (value) => { value.profile.request_warmup_invocations = 99; }],
     ["sequence", (value) => { value.profile.sequential_calls = 9; }],
     ["cleanup-sequence", (value) => { value.profile.cleanup_calls = 1; }],
     ["cycles", (value) => { value.profile.cycles_per_batch = 99; }],

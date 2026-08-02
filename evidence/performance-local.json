@@ -2,8 +2,8 @@
   "schema_version": 1,
   "status": "PASS",
   "identity": {
-    "artifact_sha256": "efe1bc34088ae2946c8a1e7dd5bd9517d521a8f851f9ed2052497214a4b447a5",
-    "catalog_sha256": "aa502e0df11c142f21e6d251abb0965f5996abcc183e0b7e82f409ad84f7537f",
+    "artifact_sha256": "beecdc02ef8efa38cc02968912e42ad42b7c61131414296c3418bca4f1265a15",
+    "catalog_sha256": "cd52a60ba3c71da47d4ddf2b9a41c1e98cc93b7d443c5e44eeee0340840fded5",
     "catalog_revision": "TS-050-EVIDENCE-V1",
     "matrix_cell": null,
     "environment_classification": "local-non-matrix"
@@ -28,19 +28,20 @@
     "isolated_import_runs": 20,
     "isolated_construction_runs": 20,
     "isolated_request_invocations": 20,
+    "request_warmup_invocations": 100,
     "sequential_calls": 10,
     "cleanup_calls": 2,
     "leak_batches": 5,
     "cycles_per_batch": 100
   },
   "metrics": {
-    "tarball_bytes": 36635,
-    "import_p95_ms": 38.131,
-    "construction_p95_ms": 0.5078000000000031,
-    "request_overhead_p95_ms": 0.005799999999908323,
-    "allocation_delta_bytes_max": 2800,
+    "tarball_bytes": 37570,
+    "import_p95_ms": 46.754599999999996,
+    "construction_p95_ms": 0.49670000000000414,
+    "request_overhead_p95_ms": 0.008100000000922591,
+    "allocation_delta_bytes_max": 122760,
     "connection_establishments": 1,
-    "retained_memory_delta_bytes_p95": 829392,
+    "retained_memory_delta_bytes_p95": 690792,
     "openConnections": 0,
     "poolEntries": 0,
     "timers": 0,
@@ -86,6 +87,10 @@
     },
     {
       "name": "profile-fact",
+      "status": "REJECTED"
+    },
+    {
+      "name": "warmup",
       "status": "REJECTED"
     },
     {
