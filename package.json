@@ -49,6 +49,7 @@
     "performance:verify": "npm run build && node scripts/verify-performance.mjs",
     "release:readiness": "node scripts/release-readiness.mjs",
     "release:candidate": "node scripts/build-release-candidate.mjs",
+    "release:manifest:core": "node scripts/build-release-manifest-core.mjs",
     "release:local-gates": "node scripts/verify-local-release-gates.mjs",
     "release:smoke": "node scripts/verify-release-smoke.mjs",
     "release:authority:import": "node scripts/import-release-authority.mjs",

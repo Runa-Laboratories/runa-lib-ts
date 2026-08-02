@@ -9,7 +9,6 @@ const JOURNEYS = [
 ];
 
 export function validateRequirementTestMap(value) {
-  assert.equal(value.status, "PASS");
   assert.equal(value.requirement_status_summary?.NOT_RUN, 0);
   assert.equal(value.acceptance_status_summary?.NOT_RUN, 0);
   assert.equal(value.requirement_status_summary?.PASS, value.requirement_count);

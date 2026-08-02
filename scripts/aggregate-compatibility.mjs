@@ -1,13 +1,18 @@
 import { readdir, readFile, writeFile } from "node:fs/promises";
 import { createPrivateKey, sign } from "node:crypto";
+import path from "node:path";
 
+const handoffRoot = process.env.RUNA_HANDOFF_ROOT ?? ".";
 const catalog = JSON.parse(await readFile("compatibility/ts-050-evidence-v1.json", "utf8"));
-const candidate = JSON.parse(await readFile("release-artifacts/candidate.json", "utf8"));
-const files = await readdir("evidence/compatibility-receipts");
+const candidate = JSON.parse(await readFile(
+  path.join(handoffRoot, "release-artifacts/candidate.json"), "utf8"));
+const receiptRoot = path.join(handoffRoot, "evidence/compatibility-receipts");
+const files = await readdir(receiptRoot);
 const cells = [];
 for (const expected of catalog.matrix) {
   if (!files.includes(`${expected.id}.json`)) throw new Error(`Missing receipt: ${expected.id}`);
-  const receipt = JSON.parse(await readFile(`evidence/compatibility-receipts/${expected.id}.json`, "utf8"));
+  const receipt = JSON.parse(await readFile(
+    path.join(receiptRoot, `${expected.id}.json`), "utf8"));
   if (!["PASS", "BLOCKED"].includes(receipt.status) ||
       receipt.compatibility_status !== "PASS" ||
       receipt.candidate_sha256 !== candidate.sha256 ||
@@ -33,7 +38,7 @@ if (typeof keyId !== "string" || typeof privateKeyPem !== "string") {
 }
 const signature = sign(null, Buffer.from(JSON.stringify(payload)),
   createPrivateKey(privateKeyPem)).toString("base64");
-await writeFile("evidence/compatibility-matrix.json", `${JSON.stringify({
+await writeFile(path.join(handoffRoot, "evidence/compatibility-matrix.json"), `${JSON.stringify({
   schema_version: 1, key_id: keyId, payload, signature
 }, null, 2)}\n`);
 console.log(`compatibility matrix: ${status} (${cells.filter((cell) => cell.status === "PASS").length}/6 release-complete)`);

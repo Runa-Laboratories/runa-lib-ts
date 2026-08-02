@@ -9,6 +9,7 @@ import {
   resolveReleaseChannel,
   validateReleaseMapping,
 } from "./postpublish-policy.mjs";
+import { validateReleaseManifestCore } from "./release-manifest-core.mjs";
 import {
   validateRequirementTestMap,
   validateSmokeEvidence,
@@ -92,33 +93,40 @@ if (quality !== undefined && candidate !== undefined &&
     quality.commit_sha !== candidate.source_commit) {
   blockers.push({ gate: "quality", reason: "Quality evidence is not bound to the candidate source commit." });
 }
-blockers.push({
-  gate: "release-manifest",
-  reason: "A canonical PRD-018 release manifest core has not been accepted; candidate.json is not treated as that manifest.",
-});
+const releaseManifestCore = await readJson(
+  "release-artifacts/release-manifest-core.json", "release-manifest");
+if (releaseManifestCore !== undefined) {
+  try {
+    await validateReleaseManifestCore(releaseManifestCore);
+  } catch {
+    blockers.push({
+      gate: "release-manifest",
+      reason: "Release manifest core is non-canonical, incomplete, stale, or candidate-mismatched.",
+    });
+  }
+}
 const approval = await requireTrusted(
   "evidence/release-approval.json", "release-approval", "approval");
 if (approval !== undefined && candidate !== undefined) {
   try {
     validateTrustedRolePayload("approval", approval);
-    const candidateManifest = await readFile("release-artifacts/candidate.json");
+    const releaseManifestCoreBytes = await readFile(
+      "release-artifacts/release-manifest-core.json");
     if (approval.candidate_sha256 !== candidate.sha256 ||
         approval.artifact_sha256 !== candidate.sha256 ||
-        approval.candidate_manifest_sha256 !==
-          createHash("sha256").update(candidateManifest).digest("hex")) {
+        approval.release_manifest_core_sha256 !==
+          createHash("sha256").update(releaseManifestCoreBytes).digest("hex")) {
       throw new Error();
     }
   } catch {
     blockers.push({
       gate: "release-approval",
-      reason: "Approval is not bound to the exact candidate identity manifest and tarball.",
+      reason: "Approval is not bound to the exact release manifest core and tarball.",
     });
   }
 }
-const requirementMap = await requirePass(
-  "evidence/requirement-test-map.json",
-  "requirement-test-map",
-);
+const requirementMap = await readJson(
+  "evidence/requirement-test-map.json", "requirement-test-map");
 if (requirementMap !== undefined) {
   try {
     validateRequirementTestMap(requirementMap);

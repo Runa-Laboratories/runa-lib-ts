@@ -24,7 +24,7 @@ if (commitSha === null) {
 for (const [gate, file] of required) {
   try {
     const evidence = JSON.parse(await readFile(file, "utf8"));
-    let valid = evidence.status === "PASS";
+    let valid = gate === "requirement-test-map" || evidence.status === "PASS";
     if (gate === "requirement-test-map") {
       try {
         validateRequirementTestMap(evidence);

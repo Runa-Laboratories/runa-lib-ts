@@ -17,7 +17,7 @@ test("trusted signatures cannot substitute for closed release-role semantics", (
   const valid = {
     approval: {
       ...common, candidate_sha256: digest, artifact_sha256: digest,
-      candidate_manifest_sha256: digest, approval_decision: "APPROVE",
+      release_manifest_core_sha256: digest, approval_decision: "APPROVE",
       approver_role: "release-owner", policy_id: "TS-RELEASE-V1",
     },
     publication: {

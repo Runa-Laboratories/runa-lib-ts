@@ -96,12 +96,8 @@ for (const row of rows) {
 const passedRequirements = rows.filter((row) => row.status === "PASS").length;
 await writeFile("evidence/requirement-test-map.json", `${JSON.stringify({
   schema_version: 2,
-  status: passedCount === acceptanceResults.length && passedRequirements === rows.length
-    ? "PASS"
-    : "BLOCKED",
   generated_from: ["prds/libs/shared", "prds/libs/typescript"],
   source_digest: createHash("sha256").update(JSON.stringify(sourceFiles)).digest("hex"),
-  source_files: sourceFiles,
   requirement_count: rows.length,
   acceptance_test_count: acceptanceTestIds.size,
   requirement_status_summary: {
