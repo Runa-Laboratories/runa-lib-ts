@@ -14,7 +14,20 @@ const common = (payload) => {
 export function validateTrustedRolePayload(role, payload) {
   assert.equal(payload !== null && typeof payload === "object", true);
   common(payload);
-  if (role === "publication") {
+  if (role === "approval") {
+    exact(payload, [
+      "approval_decision", "approver_role", "artifact_sha256",
+      "candidate_manifest_sha256", "candidate_sha256", "expires_at",
+      "issued_at", "policy_id", "status",
+    ]);
+    sha256(payload.artifact_sha256, "artifact_sha256");
+    sha256(payload.candidate_sha256, "candidate_sha256");
+    sha256(payload.candidate_manifest_sha256, "candidate_manifest_sha256");
+    assert.equal(payload.artifact_sha256, payload.candidate_sha256);
+    assert.equal(payload.approval_decision, "APPROVE");
+    assert.match(payload.approver_role, /^[A-Za-z0-9._-]+$/);
+    assert.match(payload.policy_id, /^[A-Za-z0-9._-]+$/);
+  } else if (role === "publication") {
     exact(payload, [
       "candidate_sha256", "dist_tag", "expires_at", "issued_at",
       "oidc_trusted_publisher", "package_name", "provenance_attestation_required",

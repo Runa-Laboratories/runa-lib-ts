@@ -4,6 +4,7 @@ import { test } from "vitest";
 import {
   TAG_CERTIFICATE_IDENTITY,
   TAG_ISSUER,
+  gitsignVerifyArgs,
   validateReleaseTagIdentity,
 } from "../scripts/release-tag-policy.mjs";
 
@@ -15,7 +16,6 @@ const valid = () => ({
   tagObjectType: "tag",
   tagCommit: commit,
   workflowCommit: commit,
-  verificationOutput: `${TAG_ISSUER}\n${TAG_CERTIFICATE_IDENTITY}`,
 });
 
 test("PRD-053 release tag admission rejects every identity mutation", () => {
@@ -23,13 +23,17 @@ test("PRD-053 release tag admission rejects every identity mutation", () => {
     expectedTag: "ts-v0.1.0",
     tagCommit: commit,
   });
+  assert.deepEqual(gitsignVerifyArgs("ts-v0.1.0"), [
+    "verify",
+    `--certificate-identity=${TAG_CERTIFICATE_IDENTITY}`,
+    `--certificate-oidc-issuer=${TAG_ISSUER}`,
+    "ts-v0.1.0",
+  ]);
   for (const mutate of [
     (value) => { value.refName = "ts-v0.1.1"; },
     (value) => { value.refType = "branch"; },
     (value) => { value.tagObjectType = "commit"; },
     (value) => { value.tagCommit = "b".repeat(40); },
-    (value) => { value.verificationOutput = TAG_CERTIFICATE_IDENTITY; },
-    (value) => { value.verificationOutput = TAG_ISSUER; },
   ]) {
     const candidate = valid();
     mutate(candidate);

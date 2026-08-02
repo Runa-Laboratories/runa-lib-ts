@@ -48,7 +48,7 @@ const requireTrusted = async (file, gate, role) => {
     blockers.push({ gate, reason: "Evidence signature, role, status, or freshness is invalid." });
     return undefined;
   }
-  if (["publication", "sbom-validation", "external-interfaces"].includes(role)) {
+  if (["approval", "publication", "sbom-validation", "external-interfaces"].includes(role)) {
     try {
       validateTrustedRolePayload(role, payload);
     } catch {
@@ -91,6 +91,29 @@ const quality = await requirePass("evidence/quality-gate.json", "quality");
 if (quality !== undefined && candidate !== undefined &&
     quality.commit_sha !== candidate.source_commit) {
   blockers.push({ gate: "quality", reason: "Quality evidence is not bound to the candidate source commit." });
+}
+blockers.push({
+  gate: "release-manifest",
+  reason: "A canonical PRD-018 release manifest core has not been accepted; candidate.json is not treated as that manifest.",
+});
+const approval = await requireTrusted(
+  "evidence/release-approval.json", "release-approval", "approval");
+if (approval !== undefined && candidate !== undefined) {
+  try {
+    validateTrustedRolePayload("approval", approval);
+    const candidateManifest = await readFile("release-artifacts/candidate.json");
+    if (approval.candidate_sha256 !== candidate.sha256 ||
+        approval.artifact_sha256 !== candidate.sha256 ||
+        approval.candidate_manifest_sha256 !==
+          createHash("sha256").update(candidateManifest).digest("hex")) {
+      throw new Error();
+    }
+  } catch {
+    blockers.push({
+      gate: "release-approval",
+      reason: "Approval is not bound to the exact candidate identity manifest and tarball.",
+    });
+  }
 }
 const requirementMap = await requirePass(
   "evidence/requirement-test-map.json",
