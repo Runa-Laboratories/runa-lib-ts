@@ -54,6 +54,7 @@
     "release:smoke": "node scripts/verify-release-smoke.mjs",
     "release:authority:import": "node scripts/import-release-authority.mjs",
     "release:tag:verify": "node scripts/verify-release-tag.mjs",
+    "release:ci:admission": "node scripts/verify-ci-release-admission.mjs",
     "release:registry:preflight": "node scripts/verify-registry-version-absent.mjs",
     "release:postpublish:verify": "node scripts/verify-postpublish.mjs",
     "release:recovery:plan": "node scripts/plan-release-recovery.mjs",

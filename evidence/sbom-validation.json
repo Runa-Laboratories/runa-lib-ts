@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "status": "BLOCKED",
-  "candidate_sha256": "60c42a842b05a573e51b7c0e5d81e1d1bf65196953b6976067d07e959519fd78",
-  "artifact_subject_sha256": "60c42a842b05a573e51b7c0e5d81e1d1bf65196953b6976067d07e959519fd78",
-  "sbom_sha256": "67319ca43d920919e53f0baffe9aaaba7b796cd82ff90aaa373e8d3ac24ea6c5",
+  "candidate_sha256": "efe1bc34088ae2946c8a1e7dd5bd9517d521a8f851f9ed2052497214a4b447a5",
+  "artifact_subject_sha256": "efe1bc34088ae2946c8a1e7dd5bd9517d521a8f851f9ed2052497214a4b447a5",
+  "sbom_sha256": "21f69fe4c583b9770fd7f91e56069fae330581343b5a0c910fe5ad88f7bd6d2d",
   "dependency_closure_sha256": "f42a6dd2b10f03b785533919ec20a55d1a0a334675ffc7793072b4d52aaa97ce",
   "local_structural_checks": "PASS",
   "required_validator": "cyclonedx-cli validate --input-format json",
