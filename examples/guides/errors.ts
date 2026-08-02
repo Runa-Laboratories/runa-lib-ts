@@ -1,4 +1,4 @@
-import { ApiError, ConfigError, Runa } from "@runa/sdk";
+import { ApiError, ConfigError, Runa } from "@runa_laboratories/sdk";
 
 try {
   const runa = new Runa();

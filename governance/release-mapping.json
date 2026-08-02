@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "policy_id": "TS-053-RELEASE-MAPPING-V1",
-  "package_name": "@runa/sdk",
+  "package_name": "@runa_laboratories/sdk",
   "registry": "https://registry.npmjs.org",
   "tag_prefix": "ts-v",
   "channels": {

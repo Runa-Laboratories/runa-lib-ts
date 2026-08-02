@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
 import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
+import { loadPrdCatalog } from "./prd-catalog.mjs";
 
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
 
@@ -33,17 +34,14 @@ export async function computeTestEvidenceBinding() {
     "package.json", "package-lock.json", "tsconfig.json", "tsconfig.build.json",
     "tsconfig.type-tests.json", "vitest.config.ts",
   ];
-  const prdFiles = [
-    ...await filesBelow("../../prds/libs/shared", (file) => file.endsWith(".md")),
-    ...await filesBelow("../../prds/libs/typescript", (file) => file.endsWith(".md")),
-  ];
+  const prdCatalog = await loadPrdCatalog();
   const packageJson = JSON.parse(await readFile("package.json", "utf8"));
   return {
     source_commit: process.env.GITHUB_SHA ?? execFileSync(
       "git", ["rev-parse", "HEAD"], { encoding: "utf8" },
     ).trim(),
     test_input_sha256: await digestFiles(implementationFiles),
-    prd_source_sha256: await digestFiles(prdFiles),
+    prd_source_sha256: prdCatalog.digest,
     package_lock_sha256: sha256(await readFile("package-lock.json")),
     toolchain: {
       node: process.version,

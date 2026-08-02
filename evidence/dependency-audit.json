@@ -8,13 +8,13 @@
   "licenses": {
     "status": "PASS",
     "counts": {
-      "MIT": 67,
+      "MIT": 72,
       "Python-2.0": 1,
       "BSD-2-Clause": 1,
       "Apache-2.0": 3,
+      "BSD-3-Clause": 2,
       "BlueOak-1.0.0": 1,
-      "ISC": 3,
-      "BSD-3-Clause": 1
+      "ISC": 3
     }
   },
   "vulnerabilities": {

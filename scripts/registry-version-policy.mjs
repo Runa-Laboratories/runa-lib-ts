@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 
 export function registryVersionUrl(registry, packageName, version) {
   assert.equal(registry, "https://registry.npmjs.org");
-  assert.equal(packageName, "@runa/sdk");
+  assert.equal(packageName, "@runa_laboratories/sdk");
   assert.match(version, /^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/);
   return `${registry}/${encodeURIComponent(packageName)}/${encodeURIComponent(version)}`;
 }

@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "cell_id": "ts050-node24-windows-x64",
+  "candidate_sha256": "beecdc02ef8efa38cc02968912e42ad42b7c61131414296c3418bca4f1265a15",
+  "node": "24.4.1",
+  "npm": "11.4.2",
+  "platform": "win32",
+  "arch": "x64",
+  "probes": [
+    "isolated-offline-install",
+    "root-esm",
+    "declarations",
+    "tree-shaking",
+    "readme",
+    "package-surface"
+  ],
+  "compatibility_status": "PASS",
+  "performance_status": "PASS",
+  "performance_receipt": "evidence/performance-local.json",
+  "metrics": {
+    "tarball_bytes": 37570,
+    "import_p95_ms": 33.2073,
+    "construction_p95_ms": 0.41919999999999646,
+    "request_overhead_p95_ms": 0.003899999999703141,
+    "allocation_delta_bytes_max": 123520,
+    "connection_establishments": 1,
+    "retained_memory_delta_bytes_p95": 1401288,
+    "openConnections": 0,
+    "poolEntries": 0,
+    "timers": 0,
+    "callbackRegistrations": 0,
+    "lifecycleRegistrations": 0,
+    "startup_dispatches": 0,
+    "startup_connection_attempts": 0,
+    "startup_session_operations": 0,
+    "startup_hidden_transport_creations": 0
+  },
+  "failure": null
+}

@@ -45,7 +45,7 @@ export function validateTrustedRolePayload(role, payload) {
       "registry", "registry_retrieval_required", "status", "version",
     ]);
     sha256(payload.candidate_sha256, "candidate_sha256");
-    assert.equal(payload.package_name, "@runa/sdk");
+    assert.equal(payload.package_name, "@runa_laboratories/sdk");
     assert.match(payload.version, /^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/);
     assert.equal(payload.registry, "https://registry.npmjs.org");
     assert.match(payload.dist_tag, /^(?:latest|next|beta|rc)$/);

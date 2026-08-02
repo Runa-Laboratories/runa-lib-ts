@@ -13,6 +13,14 @@ const TARGETS = new Map<number, ReadonlySet<number>>([
   [27, new Set([49_230_145])],
 ]);
 
+// Vendor names and domains must be detected even when embedded in a larger
+// string. Generic upstream vocabulary is token-aware so ordinary English words
+// that merely contain the same character sequence do not become false positives.
+const SUBSTRING_TARGETS = new Map<number, ReadonlySet<number>>([
+  [5, new Set([1_098_742_058])],
+  [9, new Set([3_847_020_951, 3_847_084_439])],
+]);
+
 function decodeEscapes(value: string): string {
   let result = value;
   try {
@@ -39,8 +47,43 @@ function decodeEscapes(value: string): string {
         default:
           return code;
       }
-    })
-    .toLowerCase();
+    });
+}
+
+function isAsciiLetterOrDigit(code: number): boolean {
+  return (
+    (code >= 0x30 && code <= 0x39) ||
+    (code >= 0x41 && code <= 0x5a) ||
+    (code >= 0x61 && code <= 0x7a)
+  );
+}
+
+function isLowerAsciiOrDigit(code: number): boolean {
+  return (
+    (code >= 0x30 && code <= 0x39) ||
+    (code >= 0x61 && code <= 0x7a)
+  );
+}
+
+function isUpperAscii(code: number): boolean {
+  return code >= 0x41 && code <= 0x5a;
+}
+
+function hasTokenBoundaries(value: string, start: number, length: number): boolean {
+  const end = start + length;
+  const first = value.charCodeAt(start);
+  const last = value.charCodeAt(end - 1);
+  const before = value.charCodeAt(start - 1);
+  const after = value.charCodeAt(end);
+  const leftBoundary =
+    start === 0 ||
+    !isAsciiLetterOrDigit(before) ||
+    (isLowerAsciiOrDigit(before) && isUpperAscii(first));
+  const rightBoundary =
+    end === value.length ||
+    !isAsciiLetterOrDigit(after) ||
+    (isLowerAsciiOrDigit(last) && isUpperAscii(after));
+  return leftBoundary && rightBoundary;
 }
 
 function polynomial(value: string, start: number, length: number): number {
@@ -53,11 +96,18 @@ function polynomial(value: string, start: number, length: number): number {
 }
 
 export function containsProhibitedMarker(value: string): boolean {
-  const normalized = decodeEscapes(value);
+  const decoded = decodeEscapes(value);
+  const normalized = decoded.toLowerCase();
   for (const [length, targets] of TARGETS) {
     if (normalized.length < length) continue;
     let hash = polynomial(normalized, 0, length);
-    if (targets.has(hash)) return true;
+    if (
+      targets.has(hash) &&
+      (SUBSTRING_TARGETS.get(length)?.has(hash) ??
+        hasTokenBoundaries(decoded, 0, length))
+    ) {
+      return true;
+    }
     let power = 1;
     for (let index = 1; index < length; index += 1) {
       power = Math.imul(power, BASE) >>> 0;
@@ -67,7 +117,13 @@ export function containsProhibitedMarker(value: string): boolean {
       const incoming = normalized.charCodeAt(index);
       hash = Math.imul((hash - Math.imul(outgoing, power)) >>> 0, BASE);
       hash = (hash + incoming) >>> 0;
-      if (targets.has(hash)) return true;
+      if (
+        targets.has(hash) &&
+        (SUBSTRING_TARGETS.get(length)?.has(hash) ??
+          hasTokenBoundaries(decoded, index - length + 1, length))
+      ) {
+        return true;
+      }
     }
   }
   return false;
