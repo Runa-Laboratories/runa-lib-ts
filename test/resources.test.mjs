@@ -14,7 +14,7 @@ import {
   upstreamName,
 } from "./helpers.mjs";
 
-test("PRD-027 managers are lazy, stable and client-owned", async () => {
+test("TC-027-02 managers are lazy, stable and client-owned", async () => {
   let calls = 0;
   const fetch = async () => {
     calls += 1;
@@ -79,7 +79,7 @@ test("PRD-029/031/032 preserve collection order and snapshot identity rules", as
   await runa.close();
 });
 
-test("PRD-031 preserves snapshot on refresh failure", async () => {
+test("TC-031-04 preserves snapshot on refresh failure", async () => {
   let call = 0;
   const runa = new Runa({
     apiKey: API_KEY,
@@ -101,7 +101,7 @@ test("PRD-031 preserves snapshot on refresh failure", async () => {
   await runa.close();
 });
 
-test("PRD-033/034/035 keep exec/checkpoint/open cache-neutral", async () => {
+test("TC-033-05 keeps exec/checkpoint/open cache-neutral", async () => {
   const fetch = async (url) => {
     const path = new URL(url).pathname;
     if (path.endsWith("/exec")) {
@@ -132,7 +132,7 @@ test("PRD-033/034/035 keep exec/checkpoint/open cache-neutral", async () => {
   await runa.close();
 });
 
-test("PRD-035 rejects hostile open capability without retaining it", async () => {
+test("TC-035-04 rejects hostile open capability without retaining it", async () => {
   const invalid = `https://${upstreamName()}.example.invalid/__runa/auth?t=value`;
   const runa = new Runa({
     apiKey: API_KEY,
@@ -154,7 +154,7 @@ test("PRD-035 rejects hostile open capability without retaining it", async () =>
   await runa.close();
 });
 
-test("PRD-036/037 return plain fresh values and both workspace variants", async () => {
+test("TC-036-06 returns plain fresh values and both workspace variants", async () => {
   let assigned = true;
   const runa = new Runa({
     apiKey: API_KEY,
@@ -183,7 +183,7 @@ test("PRD-036/037 return plain fresh values and both workspace variants", async 
   await runa.close();
 });
 
-test("PRD-013/022 fail closed on protected wire content without truncation", async () => {
+test("TC-013-08 fails closed on protected wire content without truncation", async () => {
   const protectedValue = upstreamName();
   const responses = [
     [recordFixture({ detail: { nested_key: [protectedValue] } })],
@@ -212,7 +212,7 @@ test("PRD-013/022 fail closed on protected wire content without truncation", asy
   await runa.close();
 });
 
-test("PRD-027 close waits for admitted work and blocks later work", async () => {
+test("TC-027-10 close waits for admitted work and blocks later work", async () => {
   let resolveFetch;
   let calls = 0;
   const runa = new Runa({

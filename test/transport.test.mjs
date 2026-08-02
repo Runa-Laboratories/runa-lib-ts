@@ -44,7 +44,7 @@ function operationFetch(captures) {
   };
 }
 
-test("PRD-021/025/028-037 dispatch exactly 13 canonical operations", async () => {
+test("TC-008-01 dispatches exactly 13 canonical operations", async () => {
   const captures = [];
   const runa = new Runa({
     apiKey: API_KEY,
@@ -129,7 +129,7 @@ test("PRD-021/025/028-037 dispatch exactly 13 canonical operations", async () =>
   await runa.close();
 });
 
-test("PRD-024/025 exact status, media, redirect and error mapping", async () => {
+test("TC-024-03 maps exact status, media, redirect and errors", async () => {
   const scenarios = [
     {
       response: new Response("", { status: 404 }),
@@ -172,7 +172,7 @@ test("PRD-024/025 exact status, media, redirect and error mapping", async () => 
   }
 });
 
-test("PRD-025 selects the exact global fetch when no callable is injected", async () => {
+test("TC-025-02 selects the exact global fetch when no callable is injected", async () => {
   const originalFetch = globalThis.fetch;
   let calls = 0;
   const selected = async (url, init) => {
@@ -192,7 +192,7 @@ test("PRD-025 selects the exact global fetch when no callable is injected", asyn
   }
 });
 
-test("PRD-025/040 cancel every rejected response body without awaiting it", async () => {
+test("TC-040-02 cancels every rejected response body without awaiting it", async () => {
   for (const responseInit of [
     { status: 500, headers: { "content-type": "application/json" } },
     { status: 302, headers: { location: "https://redirect.example.invalid" } },
@@ -219,7 +219,7 @@ test("PRD-025/040 cancel every rejected response body without awaiting it", asyn
   }
 });
 
-test("PRD-025/040 enforce the response cap and invalid UTF-8", async () => {
+test("TC-040-04 enforces the response cap and invalid UTF-8", async () => {
   const over = new Uint8Array(8_388_609);
   over.fill(0x20);
   for (const response of [
@@ -278,7 +278,7 @@ test("PRD-025/026 overflow remains terminal when stream cancellation never settl
   await runa.close();
 });
 
-test("PRD-030/033 reject local invalid values before I/O", async () => {
+test("TC-025-07 rejects local invalid values before I/O", async () => {
   let dispatches = 0;
   const runa = new Runa({
     apiKey: API_KEY,
@@ -317,7 +317,7 @@ test("PRD-030/033 reject local invalid values before I/O", async () => {
   await runa.close();
 });
 
-test("PRD-028 snapshots caller-owned create arrays before dispatch", async () => {
+test("TC-028-03 snapshots caller-owned create arrays before dispatch", async () => {
   let capturedBody;
   let release;
   const fetch = async (_url, init) => {
