@@ -2,7 +2,7 @@
   "schema_version": 2,
   "status": "PASS",
   "method": "scripts/verify-duplicate-abstractions.mjs",
-  "audited_source_sha256": "adc7afabef50555ea298715ab4dd2e9623e12dcbf8a77e263f75e637893ff3d4",
+  "audited_source_sha256": "5900d5bde8e4ad0201e72d0b304752f6f1f2580bd8b430a72593f9f3b1c135db",
   "audited_files": [
     "src/domain.ts",
     "src/client.ts",
@@ -74,7 +74,7 @@
         "scripts/verify-local-release-gates.mjs"
       ],
       "observed": {
-        "sha256_call_sites": 6
+        "sha256_call_sites": 7
       },
       "rationale": "Release tools are independently executable trust-boundary gates; their one-line SHA-256 calculations remain local and compare the same candidate rather than sharing mutable evidence state."
     },
