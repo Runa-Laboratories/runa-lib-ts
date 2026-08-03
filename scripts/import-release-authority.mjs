@@ -1,7 +1,10 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { validateContractProvenance } from "./contract-generation.mjs";
+import {
+  loadCanonicalContractIdentity,
+  validateAuthorityContractProvenance,
+} from "./canonical-contract-identity.mjs";
 import { validateExternalAcceptancePayload } from "./acceptance-receipts.mjs";
 import { appendReleaseManifestState } from "./release-manifest-envelope.mjs";
 import { verifyTrustedEnvelope } from "./trusted-evidence.mjs";
@@ -105,8 +108,7 @@ const releaseMapping = JSON.parse(
 );
 validateReleaseMapping(releaseMapping);
 const releaseChannel = resolveReleaseChannel(releaseMapping, candidate.version);
-const projection = await readFile("contracts/runa-sdk.projection.json");
-const openapi = await readFile("contracts/runa-api.openapi.json");
+const contractIdentity = await loadCanonicalContractIdentity();
 const sbomBytes = await readFile("evidence/sbom.cdx.json");
 const sbomLocalValidationBytes = await readFile("evidence/sbom-local-validation.json");
 const runtimeClosure = JSON.parse(
@@ -115,14 +117,9 @@ const runtimeClosure = JSON.parse(
 const requirementMap = JSON.parse(
   await readFile("evidence/requirement-test-map.json", "utf8"),
 );
-const canonical = (await readFile("contracts/runa-api.openapi.sha256", "utf8"))
-  .trim().split(/\s+/, 1)[0];
-assert.equal(validateContractProvenance(bundle.contract_provenance, {
-  canonical,
-  projection: hash(projection),
-  openapi: hash(openapi),
-}), true);
-assert.equal(bundle.contract_provenance.status, "APPROVED");
+assert.equal(validateAuthorityContractProvenance(
+  bundle.contract_provenance, contractIdentity,
+), true);
 
 const entries = [
   ["approval_receipt", "approval", "release-approval",
@@ -136,7 +133,8 @@ const entries = [
   ["repository_controls", "repository-controls", "repository-controls",
     (payload) => payload.commit_sha === candidate.source_commit],
   ["cross_language", "cross-language", "cross-language",
-    (payload) => payload.canonical_contract_sha256 === canonical &&
+    (payload) => payload.canonical_contract_sha256 ===
+      contractIdentity.canonicalContractSha256 &&
       payload.candidate_sha256 === candidate.sha256 &&
       payload.candidate_source_commit === candidate.source_commit &&
       payload.typescript_artifact.sha256 === candidate.sha256 &&
@@ -195,8 +193,6 @@ for (const [field, role, filename, binding] of entries) {
 assert.equal(validateAuthorityPayloadRelations(payloads, bundle.contract_provenance), true);
 if (!preflightOnly) {
   await mkdir("evidence", { recursive: true });
-  await writeFile("contracts/runa-sdk-contract.provenance.json",
-    `${JSON.stringify(bundle.contract_provenance, null, 2)}\n`);
   for (const [filename, envelope] of retained) {
     await writeFile(filename, `${JSON.stringify(envelope, null, 2)}\n`);
   }

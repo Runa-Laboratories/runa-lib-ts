@@ -76,6 +76,11 @@ test("release workflow is one protected dispatch with pinned signing and at-most
   );
   const immutableTag = signTagBody.indexOf("git tag -s");
   assert.equal(signTagFreshness >= 0 && signTagFreshness < immutableTag, true);
+  const gitAuthentication = signTagBody.indexOf("gh auth setup-git");
+  const tagPush = signTagBody.indexOf('git push origin "refs/tags/$RUNA_RELEASE_TAG"');
+  assert.match(signTagBody, /GH_TOKEN: \$\{\{ github\.token \}\}/u);
+  assert.match(signTagBody, /persist-credentials: false/u);
+  assert.equal(gitAuthentication > immutableTag && gitAuthentication < tagPush, true);
   assert.match(signTagBody, /name: pretag-authority-evidence/u);
   assert.match(signTagBody,
     /RUNA_EXPECTED_AUTHORITY_BUNDLE_SHA256: \$\{\{ needs\.phase-a\.outputs\.authority_bundle_sha256 \}\}/u);

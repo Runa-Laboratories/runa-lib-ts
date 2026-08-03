@@ -81,9 +81,9 @@ function timeoutFailure(): DOMException {
 }
 
 function renderPath(template: string, id?: string): string {
-  if (template.includes("{id}")) {
+  if (template.includes(":id")) {
     if (id === undefined) throw new TypeError("Invalid session ID.");
-    return template.replace("{id}", id);
+    return template.replace(":id", id);
   }
   if (id !== undefined) throw new TypeError("Invalid session ID.");
   return template;
