@@ -134,6 +134,7 @@ jobs:
           echo "$RUNNER_TEMP/gitsign-bin" >> "$GITHUB_PATH"
       - name: Create and verify immutable release tag
         env:
+          GH_TOKEN: ${{ github.token }}
           GITSIGN_TOKEN_PROVIDER: github-actions
           RUNA_RELEASE_TAG: ts-v${{ inputs.version }}
           RUNA_AUTHORITY_INPUT_DIR: authority-preflight
@@ -153,6 +154,7 @@ jobs:
             --certificate-identity=https://github.com/Runa-Laboratories/runa-lib-ts/.github/workflows/release.yml@refs/heads/main \
             --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
             "$RUNA_RELEASE_TAG"
+          gh auth setup-git
           git push origin "refs/tags/$RUNA_RELEASE_TAG"
 
   admission:
