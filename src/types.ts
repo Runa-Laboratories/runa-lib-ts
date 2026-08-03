@@ -23,6 +23,18 @@ export type SessionStatus =
  */
 export type SessionAgent = "claude-code" | "codex" | "openclaw";
 
+/** Public outbound network policy mode. */
+export type OutboundPolicyMode = "allowlist" | "denylist";
+
+/**
+ * Outbound network policy applied when the session is created.
+ * Empty host arrays are explicit and retain the selected mode's semantics.
+ */
+export interface OutboundPolicy {
+  readonly mode: OutboundPolicyMode;
+  readonly hosts: readonly string[];
+}
+
 /**
  * Immutable public observation of a session.
  * @runa-contract sessionsnapshot-summary PRD-022#R-022-02
@@ -65,8 +77,12 @@ export interface SessionCreateOptions {
   readonly vcpus?: number;
   /** Optional memory quantity in mebibytes. */
   readonly memoryMiB?: number;
-  /** Optional ordered host allowlist copied into the create request. */
+  /** Legacy ordered host allow list copied into the create request.
+   * @deprecated Use `outboundPolicy` with mode `allowlist`.
+   */
   readonly allowedHosts?: readonly string[];
+  /** Optional allow-list or deny-list policy copied into the create request. */
+  readonly outboundPolicy?: OutboundPolicy;
   /** Optional runtime port included in session creation. */
   readonly runtimePort?: number;
 }

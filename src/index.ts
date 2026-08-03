@@ -18,6 +18,8 @@ export type {
   Me,
   OpaqueWireValue,
   OpenSessionResult,
+  OutboundPolicy,
+  OutboundPolicyMode,
   Record,
   RunaConfig,
   SessionAgent,

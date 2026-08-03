@@ -171,7 +171,7 @@ function createBody(
   const source = options as SessionCreateOptions &
     globalThis.Record<string, unknown>;
   if (Object.keys(source).some((key) =>
-    !["agent", "vcpus", "memoryMiB", "allowedHosts", "runtimePort"].includes(key)
+    !["agent", "vcpus", "memoryMiB", "allowedHosts", "outboundPolicy", "runtimePort"].includes(key)
   )) {
     throw new TypeError("Invalid session create options.");
   }
@@ -206,6 +206,32 @@ function createBody(
       throw new TypeError("Invalid session create options.");
     }
     body.allowed_hosts = Object.freeze([...source.allowedHosts]);
+  }
+  if (source.allowedHosts !== undefined && source.outboundPolicy !== undefined) {
+    throw new TypeError("Invalid session create options.");
+  }
+  if (own(source, "outboundPolicy") && source.outboundPolicy !== undefined) {
+    const policy = source.outboundPolicy as unknown;
+    if (policy === null || typeof policy !== "object" || Array.isArray(policy)) {
+      throw new TypeError("Invalid session create options.");
+    }
+    const record = policy as globalThis.Record<string, unknown>;
+    const hosts = record.hosts;
+    const hostPattern = /^(?:\*\.)?(?![0-9]{1,3}(?:\.[0-9]{1,3}){3}$)[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)+$/;
+    if (
+      Object.keys(record).some((key) => !["mode", "hosts"].includes(key)) ||
+      !["allowlist", "denylist"].includes(record.mode as string) ||
+      !Array.isArray(hosts) ||
+      hosts.length > 128 ||
+      hosts.some((host) => typeof host !== "string" || host.length < 3 || host.length > 253 || !hostPattern.test(host)) ||
+      new Set(hosts).size !== hosts.length
+    ) {
+      throw new TypeError("Invalid session create options.");
+    }
+    body.outbound_policy = Object.freeze({
+      mode: record.mode,
+      hosts: Object.freeze([...hosts]),
+    });
   }
   if (own(source, "runtimePort") && source.runtimePort !== undefined) {
     if (!Number.isInteger(source.runtimePort) || source.runtimePort < 1 || source.runtimePort > 65_535) {
