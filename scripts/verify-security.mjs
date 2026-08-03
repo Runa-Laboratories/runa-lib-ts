@@ -3,11 +3,15 @@ import path from "node:path";
 import { containsProhibitedMarker } from "../dist/internal/boundary-policy.js";
 
 const ignored = new Set([".git", "node_modules", "coverage"]);
+const canonicalContractRoot = path.resolve("contracts");
 const files = [];
 async function walk(directory) {
   for (const entry of await readdir(directory, { withFileTypes: true })) {
     if (ignored.has(entry.name) || entry.name.endsWith(".tgz")) continue;
     const target = path.join(directory, entry.name);
+    // The immutable submodule is separately verified by contract:verify. Its
+    // accepted source PRD intentionally documents a synthetic Bearer example.
+    if (path.resolve(target) === canonicalContractRoot) continue;
     if (entry.isDirectory()) await walk(target);
     else files.push(target);
   }

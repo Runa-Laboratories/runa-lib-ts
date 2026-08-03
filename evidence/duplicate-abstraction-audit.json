@@ -2,7 +2,7 @@
   "schema_version": 2,
   "status": "PASS",
   "method": "scripts/verify-duplicate-abstractions.mjs",
-  "audited_source_sha256": "46f935087d3b2315a08bbc454a66da381699f181001ad6920f74ca939b9a8189",
+  "audited_source_sha256": "b75f42d69da6f9ead747b1eccf8c7f75e0f07cc8bcc52d13c6f65b85fd80087a",
   "audited_files": [
     "src/client.ts",
     "src/config.ts",
@@ -160,6 +160,7 @@
         "scripts/sbom-validation.mjs",
         "scripts/test-evidence-binding.mjs",
         "scripts/trusted-evidence.mjs",
+        "scripts/verify-authority-configuration.mjs",
         "scripts/verify-compatibility.mjs",
         "scripts/verify-contract.mjs",
         "scripts/verify-controlled-provenance.mjs",
@@ -176,7 +177,7 @@
         "scripts/verify-release-smoke.mjs"
       ],
       "observed": {
-        "sha256_call_sites": 47
+        "sha256_call_sites": 48
       },
       "rationale": "Release tools are independently executable trust-boundary gates; their one-line SHA-256 calculations remain local and compare the same candidate rather than sharing mutable evidence state."
     },
