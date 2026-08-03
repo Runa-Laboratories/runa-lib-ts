@@ -90,7 +90,7 @@ jobs:
           RUNA_AUTHORITY_INPUT_DIR: authority-preflight
       - name: Verify all local non-approval gates before tagging
         run: npm run release:pretag:verify
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: pretag-authority-evidence
           path: |
@@ -218,7 +218,7 @@ jobs:
       - id: candidate
         run: echo "filename=$(node -p 'require(\"./release-artifacts/candidate.json\").filename')" >> "$GITHUB_OUTPUT"
       - run: npm run release:readiness
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: admitted-npm-release-candidate
           path: |
@@ -281,7 +281,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           RUNA_RELEASE_TAG: ts-v${{ inputs.version }}
           RUNA_RELEASE_ASSETS_JSON: '["release-artifacts/${{ needs.admission.outputs.filename }}","release-artifacts/release-manifest-core.json","release-artifacts/release-manifest-envelope.authority-admitted.json","release-artifacts/release-manifest-envelope.provenance-attested.json","evidence/sbom.cdx.json","evidence/${{ needs.admission.outputs.filename }}.intoto.jsonl"]'
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: staged-npm-release-candidate
           path: |
@@ -344,7 +344,7 @@ jobs:
       - if: failure()
         run: npm run release:recovery:plan
       - if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: npm-published-verification
           path: |
@@ -392,7 +392,7 @@ jobs:
           RUNA_RELEASE_TAG: ts-v${{ inputs.version }}
         run: gh release edit "$RUNA_RELEASE_TAG" --draft=false
       - if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: npm-postpublish-receipts
           path: |

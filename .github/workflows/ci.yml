@@ -36,7 +36,7 @@ jobs:
       - run: npm run release:local-gates
       - run: npm run release:smoke
       - run: node scripts/record-quality-gate.mjs
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         if: always()
         with:
           name: npm-release-candidate-base
@@ -73,7 +73,7 @@ jobs:
         with:
           name: npm-release-candidate-base
       - run: npm run compatibility:verify
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: compatibility-${{ matrix.id }}
           path: evidence/compatibility-receipts/${{ matrix.id }}.json
@@ -143,7 +143,7 @@ jobs:
           RUNA_ATTESTATION_ID: ${{ steps.attest.outputs.attestation-id }}
           RUNA_ATTESTATION_URL: ${{ steps.attest.outputs.attestation-url }}
       - run: npm run release:manifest:core
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: npm-release-candidate
           path: |
