@@ -57,6 +57,7 @@
     "release:authority:import": "node scripts/import-release-authority.mjs",
     "release:authority:download": "node scripts/download-public-authority-bundle.mjs",
     "release:authority:run:verify": "node scripts/verify-authority-run.mjs",
+    "release:authority:freshness:verify": "node scripts/revalidate-authority-freshness.mjs",
     "release:authority:config:verify": "node scripts/verify-authority-configuration.mjs",
     "release:context:verify": "node scripts/verify-public-release-context.mjs",
     "release:pretag:verify": "node scripts/verify-pretag-release-gates.mjs",

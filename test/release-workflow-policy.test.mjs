@@ -68,6 +68,17 @@ test("release workflow is one protected dispatch with pinned signing and at-most
   assert.match(workflow, /asset-staging:\s*\n\s+needs: admission/u);
   assert.match(workflow, /publish:\s*\n\s+needs: \[phase-a, asset-staging\]/u);
   assert.match(workflow, /release-promotion:\s*\n\s+needs: publish/u);
+  const signTagBody = workflow.slice(
+    workflow.indexOf("  sign-tag:"), workflow.indexOf("  admission:"),
+  );
+  const signTagFreshness = signTagBody.indexOf(
+    "npm run release:authority:freshness:verify",
+  );
+  const immutableTag = signTagBody.indexOf("git tag -s");
+  assert.equal(signTagFreshness >= 0 && signTagFreshness < immutableTag, true);
+  assert.match(signTagBody, /name: pretag-authority-evidence/u);
+  assert.match(signTagBody,
+    /RUNA_EXPECTED_AUTHORITY_BUNDLE_SHA256: \$\{\{ needs\.phase-a\.outputs\.authority_bundle_sha256 \}\}/u);
   const assetBody = workflow.slice(
     workflow.indexOf("  asset-staging:"), workflow.indexOf("  publish:"),
   );

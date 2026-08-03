@@ -397,7 +397,7 @@ test("detached v2 authenticates raw bytes and rejects duplicate JSON keys", () =
     Date.parse("2026-08-02T12:10:00.000Z"), validRun()), /unique producer JSON/u);
 });
 
-test("authority evidence is rejected when a publish queue outlives freshness", () => {
+test("authority evidence is rejected when sign-tag or publish queues outlive freshness", () => {
   const fixture = signedAssets();
   assert.throws(() => verifyAuthorityAssets(fixture.assets, fixture.trust,
     Date.parse("2026-08-02T12:31:00.000Z"), validRun()), /JCS signature/u);

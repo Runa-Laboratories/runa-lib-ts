@@ -89,6 +89,14 @@ jobs:
           RUNA_AUTHORITY_INPUT_DIR: authority-preflight
       - name: Verify all local non-approval gates before tagging
         run: npm run release:pretag:verify
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: pretag-authority-evidence
+          path: |
+            authority-preflight/
+            evidence/authority-run.json
+          if-no-files-found: error
+          retention-days: 1
       - id: candidate
         run: echo "filename=$(node -p 'require(\"./release-artifacts/candidate.json\").filename')" >> "$GITHUB_OUTPUT"
       - name: Pre-tag registry absence check
@@ -98,6 +106,7 @@ jobs:
     needs: phase-a
     runs-on: ubuntu-22.04
     permissions:
+      actions: read
       contents: write
       id-token: write
     steps:
@@ -109,6 +118,12 @@ jobs:
         with:
           go-version: '1.25.9'
           cache: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 22.17.1
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: pretag-authority-evidence
       - name: Install pinned gitsign
         run: |
           mkdir -p "$RUNNER_TEMP/gitsign-bin"
@@ -118,12 +133,18 @@ jobs:
         env:
           GITSIGN_TOKEN_PROVIDER: github-actions
           RUNA_RELEASE_TAG: ts-v${{ inputs.version }}
+          RUNA_AUTHORITY_INPUT_DIR: authority-preflight
+          RUNA_EXPECTED_AUTHORITY_BUNDLE_SHA256: ${{ needs.phase-a.outputs.authority_bundle_sha256 }}
+          RUNA_EXPECTED_AUTHORITY_HEAD_SHA: ${{ needs.phase-a.outputs.authority_head_sha }}
+          RUNA_EXPECTED_AUTHORITY_RUN_ID: ${{ needs.phase-a.outputs.authority_run_id }}
+          RUNA_EXPECTED_AUTHORITY_RUN_ATTEMPT: ${{ needs.phase-a.outputs.authority_run_attempt }}
         run: |
           git fetch --no-tags origin main
           test "$(git rev-parse origin/main)" = "$GITHUB_SHA"
           git config --local gpg.format x509
           git config --local gpg.x509.program gitsign
           test -z "$(git ls-remote --tags origin "refs/tags/$RUNA_RELEASE_TAG")"
+          npm run release:authority:freshness:verify
           git tag -s -m "Release $RUNA_RELEASE_TAG" "$RUNA_RELEASE_TAG" "$GITHUB_SHA"
           gitsign verify \
             --certificate-identity=https://github.com/Runa-Laboratories/runa-lib-ts/.github/workflows/release.yml@refs/heads/main \
