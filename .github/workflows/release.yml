@@ -42,6 +42,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
           ref: ${{ github.sha }}
+          submodules: recursive
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: 22.17.1
@@ -113,7 +114,9 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           fetch-depth: 0
+          persist-credentials: false
           ref: ${{ github.sha }}
+          submodules: recursive
       - uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c
         with:
           go-version: '1.25.9'
@@ -168,6 +171,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
           ref: refs/tags/ts-v${{ inputs.version }}
+          submodules: recursive
       - uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c
         with:
           go-version: '1.25.9'
@@ -234,6 +238,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
           ref: refs/tags/ts-v${{ inputs.version }}
+          submodules: recursive
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: 22.17.1
@@ -299,6 +304,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
           ref: refs/tags/ts-v${{ inputs.version }}
+          submodules: recursive
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: 22.17.1
@@ -356,6 +362,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
           ref: refs/tags/ts-v${{ inputs.version }}
+          submodules: recursive
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: 22.17.1
