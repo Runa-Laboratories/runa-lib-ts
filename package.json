@@ -82,6 +82,6 @@
     "esbuild": "0.25.5",
     "typedoc": "0.28.20",
     "typescript": "5.8.3",
-    "vitest": "3.2.7"
+    "vitest": "4.1.10"
   }
 }
