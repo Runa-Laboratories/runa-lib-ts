@@ -42,6 +42,11 @@ invalid higher-precedence value is an error; it never falls through.
 `Session.open()` returns a short-lived sensitive value. Use it only for the
 immediate handoff and do not print, persist, cache, or fetch it automatically.
 
+Session creation accepts `outboundPolicy` with mode `"allowlist"` or
+`"denylist"` and up to 128 exact or leading-wildcard domains. An empty list is
+explicit. The legacy `allowedHosts` option remains supported but cannot be sent
+together with `outboundPolicy`. See the [network policy guide](docs/guides/network-policy.md).
+
 See [guides](docs/guides/README.md) and the generated
 [API reference](docs/api/README.md). Public errors have fixed safe messages:
 `ConfigError`, `ApiError`, and the non-constructible `CommandError` marker.

@@ -383,6 +383,50 @@ Accepted agent identifier for a session.
 type SessionAgent = "claude-code" | "codex" | "openclaw"
 ```
 
+<a id="outboundpolicymode"></a>
+## OutboundPolicyMode
+
+Accepted outbound network policy mode.
+
+**Kind:** type
+
+**Signature**
+
+```ts
+type OutboundPolicyMode = "allowlist" | "denylist"
+```
+
+<a id="outboundpolicy"></a>
+## OutboundPolicy
+
+Explicit allow-list or deny-list policy for session creation.
+
+**Kind:** type
+
+**Signature**
+
+```ts
+interface OutboundPolicy
+```
+
+### Public members
+
+#### mode
+
+Selected allow-list or deny-list policy mode.
+
+```ts
+mode: OutboundPolicyMode
+```
+
+#### hosts
+
+Ordered exact-domain or leading-wildcard rules for the selected mode.
+
+```ts
+hosts: readonly string[]
+```
+
 <a id="sessioncreateoptions"></a>
 ## SessionCreateOptions
 
@@ -428,6 +472,14 @@ Optional ordered host allowlist copied into the create request.
 
 ```ts
 allowedHosts?: readonly string[]
+```
+
+#### outboundPolicy
+
+Optional explicit outbound network policy copied into the create request.
+
+```ts
+outboundPolicy?: OutboundPolicy
 ```
 
 #### runtimePort

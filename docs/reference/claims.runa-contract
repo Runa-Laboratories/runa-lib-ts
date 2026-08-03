@@ -7,6 +7,8 @@
 @runa-contract session-summary PRD-031#R-031-01
 @runa-contract sessionsmanager-summary PRD-027#R-027-01
 @runa-contract sessionagent-summary PRD-022#R-022-02
+@runa-contract outboundpolicymode-summary PRD-028#R-028-01
+@runa-contract outboundpolicy-summary PRD-028#R-028-01
 @runa-contract sessioncreateoptions-summary PRD-028#R-028-01
 @runa-contract sessionsnapshot-summary PRD-022#R-022-02
 @runa-contract sessionstatus-summary PRD-022#R-022-02

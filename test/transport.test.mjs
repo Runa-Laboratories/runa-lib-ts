@@ -327,6 +327,11 @@ test("TC-025-07 rejects local invalid values before I/O", async () => {
     ["ok", { memoryMiB: 511 }],
     ["ok", { allowedHosts: [""] }],
     ["ok", { allowedHosts: Array(129).fill("example.invalid") }],
+    ["ok", { allowedHosts: ["example.invalid"], outboundPolicy: { mode: "allowlist", hosts: [] } }],
+    ["ok", { outboundPolicy: { mode: "permit", hosts: [] } }],
+    ["ok", { outboundPolicy: { mode: "denylist", hosts: ["EXAMPLE.COM"] } }],
+    ["ok", { outboundPolicy: { mode: "denylist", hosts: ["example.com", "example.com"] } }],
+    ["ok", { outboundPolicy: { mode: "denylist", hosts: Array(129).fill("example.invalid") } }],
     ["ok", { runtimePort: 65_536 }],
     ["ok", { unknown: true }],
   ]) {
@@ -361,6 +366,23 @@ test("PRD-028 snapshots caller-owned create arrays before dispatch", async () =>
     name: "snapshot",
     allowed_hosts: ["first.example.invalid"],
   });
+  await runa.close();
+});
+
+test("serializes explicit outbound allow and deny policies without provider fields", async () => {
+  const bodies = [];
+  const runa = new Runa({ apiKey: API_KEY, fetch: async (_url, init) => {
+    bodies.push(JSON.parse(init.body));
+    return jsonResponse(sessionFixture(), 201);
+  } });
+  const hosts = ["tracking.example.com", "*.phishing.test"];
+  await runa.sessions.create("deny", { outboundPolicy: { mode: "denylist", hosts } });
+  hosts[0] = "changed.example.com";
+  await runa.sessions.create("allow-empty", { outboundPolicy: { mode: "allowlist", hosts: [] } });
+  assert.deepEqual(bodies, [
+    { name: "deny", outbound_policy: { mode: "denylist", hosts: ["tracking.example.com", "*.phishing.test"] } },
+    { name: "allow-empty", outbound_policy: { mode: "allowlist", hosts: [] } },
+  ]);
   await runa.close();
 });
 

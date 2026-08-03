@@ -20,6 +20,8 @@
     "Me",
     "OpaqueWireValue",
     "OpenSessionResult",
+    "OutboundPolicy",
+    "OutboundPolicyMode",
     "Record",
     "RecordsManager",
     "RunaConfig",
