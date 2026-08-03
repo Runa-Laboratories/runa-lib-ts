@@ -418,6 +418,45 @@
     "operations": []
   },
   {
+    "name": "OutboundPolicy",
+    "kind": "type",
+    "declarationKind": "interface",
+    "page": "Sessions.md",
+    "source": "dist/index.d.ts",
+    "signature": "interface OutboundPolicy",
+    "members": [
+      {
+        "name": "mode",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "mode: OutboundPolicyMode"
+        ]
+      },
+      {
+        "name": "hosts",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "hosts: readonly string[]"
+        ]
+      }
+    ],
+    "operations": []
+  },
+  {
+    "name": "OutboundPolicyMode",
+    "kind": "type",
+    "declarationKind": "type",
+    "page": "Sessions.md",
+    "source": "dist/index.d.ts",
+    "signature": "type OutboundPolicyMode = \"allowlist\" | \"denylist\"",
+    "members": [],
+    "operations": []
+  },
+  {
     "name": "Record",
     "kind": "type",
     "declarationKind": "interface",
@@ -915,6 +954,15 @@
         "readonly": true,
         "signatures": [
           "allowedHosts?: readonly string[]"
+        ]
+      },
+      {
+        "name": "outboundPolicy",
+        "kind": "property",
+        "optional": true,
+        "readonly": true,
+        "signatures": [
+          "outboundPolicy?: OutboundPolicy"
         ]
       },
       {

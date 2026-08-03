@@ -165,6 +165,32 @@
       "status": "PASS"
     },
     {
+      "name": "OutboundPolicyMode",
+      "kind": "type",
+      "page": "Sessions.md",
+      "anchor": "outboundpolicymode",
+      "signature": "type OutboundPolicyMode = \"allowlist\" | \"denylist\"",
+      "documentation": "complete",
+      "examples": [],
+      "contractRefs": [
+        "PRD-028#R-028-01"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "OutboundPolicy",
+      "kind": "type",
+      "page": "Sessions.md",
+      "anchor": "outboundpolicy",
+      "signature": "interface OutboundPolicy",
+      "documentation": "complete",
+      "examples": [],
+      "contractRefs": [
+        "PRD-028#R-028-01"
+      ],
+      "status": "PASS"
+    },
+    {
       "name": "SessionCreateOptions",
       "kind": "type",
       "page": "Sessions.md",
@@ -486,6 +512,22 @@
       "fragment": "summary",
       "contractRefs": [
         "PRD-022#R-022-02"
+      ]
+    },
+    {
+      "claimId": "outboundpolicymode-summary",
+      "subjectKey": "OutboundPolicyMode",
+      "fragment": "summary",
+      "contractRefs": [
+        "PRD-028#R-028-01"
+      ]
+    },
+    {
+      "claimId": "outboundpolicy-summary",
+      "subjectKey": "OutboundPolicy",
+      "fragment": "summary",
+      "contractRefs": [
+        "PRD-028#R-028-01"
       ]
     },
     {

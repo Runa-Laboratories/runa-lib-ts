@@ -14,7 +14,7 @@ import {
 
 const requiredPageOwnership = Object.freeze({
   "Core.md": Object.freeze(["Runa", "RunaConfig"]),
-  "Sessions.md": Object.freeze(["Session", "SessionsManager", "SessionAgent", "SessionCreateOptions", "SessionSnapshot", "SessionStatus", "ExecOptions", "ExecResult", "Acknowledgement", "OpenSessionResult"]),
+  "Sessions.md": Object.freeze(["Session", "SessionsManager", "SessionAgent", "OutboundPolicyMode", "OutboundPolicy", "SessionCreateOptions", "SessionSnapshot", "SessionStatus", "ExecOptions", "ExecResult", "Acknowledgement", "OpenSessionResult"]),
   "Account-and-records.md": Object.freeze(["Me", "Workspace", "AssignedWorkspace", "UnassignedWorkspace", "EstimatedUsage", "RecordsManager", "Record"]),
   "Shared.md": Object.freeze(["ConfigError", "ApiError", "CommandError", "RunaError", "OpaqueWireValue", "stdoutText", "stderrText"]),
 });
@@ -363,11 +363,13 @@ const memberDescriptions = Object.freeze({
   list: "Lists the complete public collection for this manager.",
   me: "Reads the caller profile and workspace state.",
   memoryMiB: "Memory quantity in mebibytes.",
+  mode: "Selected allow-list or deny-list policy mode.",
   message: "Fixed safe English public error message.",
   name: "Public name returned by the API or supplied for an operation.",
   note: "Explanatory estimated-usage note returned by the API.",
   ok: "Literal true acknowledgement of successful completion.",
   open: "Acquires and returns a validated session handoff without using it automatically.",
+  outboundPolicy: "Optional explicit outbound network policy copied into the create request.",
   pause: "Pauses the owning session and refreshes only that handle after success.",
   records: "Stable records manager owned by this client.",
   refresh: "Refreshes this handle from the canonical session item read.",
@@ -387,6 +389,7 @@ const memberDescriptions = Object.freeze({
   stop: "Stops the owning session and refreshes only that handle after success.",
   summary: "Safe record summary returned by the API.",
   timeoutSecs: "Optional integer execution timeout in seconds.",
+  hosts: "Ordered exact-domain or leading-wildcard rules for the selected mode.",
   tracing: "Optional caller-owned tracing sink.",
   updatedAt: "RFC 3339 last-update timestamp returned by the API.",
   url: "Validated runtime or handoff URL returned to the caller.",
@@ -550,7 +553,7 @@ const validateLinks = (files) => {
 
 const validateModel = (model, expectedNames) => {
   assert.deepEqual(model.entries.map((item) => item.name).sort(), expectedNames);
-  assert.equal(new Set(model.entries.map((item) => item.name)).size, 26);
+  assert.equal(new Set(model.entries.map((item) => item.name)).size, 28);
   for (const entry of model.entries) {
     assert.equal(curation[entry.name].page, entry.page);
     assert.equal(entry.signature.length > 3, true);
@@ -653,7 +656,7 @@ export async function runReferencePipeline({ write = true } = {}) {
   const reflection = JSON.parse(await readFile("docs/.reflection.json", "utf8"));
   const surface = JSON.parse(await readFile("evidence/export-snapshot.json", "utf8"));
   const expectedNames = [...surface.runtime_exports, ...surface.type_exports].sort();
-  assert.equal(expectedNames.length, 26);
+  assert.equal(expectedNames.length, 28);
   assert.deepEqual(Object.keys(curation).sort(), expectedNames);
   const reflectedRoots = (reflection.children ?? []).filter((entry) =>
     expectedNames.includes(entry.name));

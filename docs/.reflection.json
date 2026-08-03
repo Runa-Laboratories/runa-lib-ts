@@ -5220,12 +5220,23 @@
 						"kind": "text",
 						"text": "Public outbound network policy mode."
 					}
+				],
+				"blockTags": [
+					{
+						"tag": "@runa-contract",
+						"content": [
+							{
+								"kind": "text",
+								"text": "outboundpolicymode-summary PRD-028#R-028-01"
+							}
+						]
+					}
 				]
 			},
 			"sources": [
 				{
 					"fileName": "dist/types.d.ts",
-					"line": 17,
+					"line": 20,
 					"character": 12
 				}
 			],
@@ -5255,6 +5266,17 @@
 						"kind": "text",
 						"text": "Outbound network policy applied when the session is created.\nEmpty host arrays are explicit and retain the selected mode's semantics."
 					}
+				],
+				"blockTags": [
+					{
+						"tag": "@runa-contract",
+						"content": [
+							{
+								"kind": "text",
+								"text": "outboundpolicy-summary PRD-028#R-028-01"
+							}
+						]
+					}
 				]
 			},
 			"children": [
@@ -5266,10 +5288,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Selected allow-list or deny-list policy mode."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 23,
+							"line": 28,
 							"character": 13
 						}
 					],
@@ -5288,10 +5318,18 @@
 					"flags": {
 						"isReadonly": true
 					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Ordered exact-domain or leading-wildcard rules for the selected mode."
+							}
+						]
+					},
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 24,
+							"line": 30,
 							"character": 13
 						}
 					],
@@ -5320,7 +5358,7 @@
 			"sources": [
 				{
 					"fileName": "dist/types.d.ts",
-					"line": 22,
+					"line": 26,
 					"character": 17
 				}
 			]
@@ -5370,7 +5408,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 32,
+							"line": 38,
 							"character": 13
 						}
 					],
@@ -5398,7 +5436,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 34,
+							"line": 40,
 							"character": 13
 						}
 					],
@@ -5426,7 +5464,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 36,
+							"line": 42,
 							"character": 13
 						}
 					],
@@ -5454,7 +5492,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 38,
+							"line": 44,
 							"character": 13
 						}
 					],
@@ -5483,7 +5521,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 40,
+							"line": 46,
 							"character": 13
 						}
 					],
@@ -5513,7 +5551,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 42,
+							"line": 48,
 							"character": 13
 						}
 					],
@@ -5541,7 +5579,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 44,
+							"line": 50,
 							"character": 13
 						}
 					],
@@ -5569,7 +5607,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 46,
+							"line": 52,
 							"character": 13
 						}
 					],
@@ -5599,7 +5637,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 48,
+							"line": 54,
 							"character": 13
 						}
 					],
@@ -5627,7 +5665,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 50,
+							"line": 56,
 							"character": 13
 						}
 					],
@@ -5655,7 +5693,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 52,
+							"line": 58,
 							"character": 13
 						}
 					],
@@ -5683,7 +5721,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 54,
+							"line": 60,
 							"character": 13
 						}
 					],
@@ -5715,7 +5753,7 @@
 			"sources": [
 				{
 					"fileName": "dist/types.d.ts",
-					"line": 30,
+					"line": 36,
 					"character": 17
 				}
 			]
@@ -5766,7 +5804,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 62,
+							"line": 68,
 							"character": 13
 						}
 					],
@@ -5797,7 +5835,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 64,
+							"line": 70,
 							"character": 13
 						}
 					],
@@ -5826,7 +5864,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 66,
+							"line": 72,
 							"character": 13
 						}
 					],
@@ -5845,7 +5883,12 @@
 						"isReadonly": true
 					},
 					"comment": {
-						"summary": [],
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Legacy ordered host allow list copied into the create request."
+							}
+						],
 						"blockTags": [
 							{
 								"tag": "@deprecated",
@@ -5877,7 +5920,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 68,
+							"line": 76,
 							"character": 13
 						}
 					],
@@ -5913,7 +5956,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 70,
+							"line": 78,
 							"character": 13
 						}
 					],
@@ -5944,7 +5987,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 72,
+							"line": 80,
 							"character": 13
 						}
 					],
@@ -5970,7 +6013,7 @@
 			"sources": [
 				{
 					"fileName": "dist/types.d.ts",
-					"line": 60,
+					"line": 66,
 					"character": 17
 				}
 			]
@@ -6021,7 +6064,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 80,
+							"line": 88,
 							"character": 13
 						}
 					],
@@ -6050,7 +6093,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 82,
+							"line": 90,
 							"character": 13
 						}
 					],
@@ -6072,7 +6115,7 @@
 			"sources": [
 				{
 					"fileName": "dist/types.d.ts",
-					"line": 78,
+					"line": 86,
 					"character": 17
 				}
 			]
@@ -6122,7 +6165,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 90,
+							"line": 98,
 							"character": 13
 						}
 					],
@@ -6150,7 +6193,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 92,
+							"line": 100,
 							"character": 13
 						}
 					],
@@ -6178,7 +6221,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 94,
+							"line": 102,
 							"character": 13
 						}
 					],
@@ -6206,7 +6249,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 96,
+							"line": 104,
 							"character": 13
 						}
 					],
@@ -6234,7 +6277,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 98,
+							"line": 106,
 							"character": 13
 						}
 					],
@@ -6262,7 +6305,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 100,
+							"line": 108,
 							"character": 13
 						}
 					],
@@ -6288,7 +6331,7 @@
 			"sources": [
 				{
 					"fileName": "dist/types.d.ts",
-					"line": 88,
+					"line": 96,
 					"character": 17
 				}
 			]
@@ -6338,7 +6381,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 108,
+							"line": 116,
 							"character": 13
 						}
 					],
@@ -6359,7 +6402,7 @@
 			"sources": [
 				{
 					"fileName": "dist/types.d.ts",
-					"line": 106,
+					"line": 114,
 					"character": 17
 				}
 			]
@@ -6409,7 +6452,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 116,
+							"line": 124,
 							"character": 13
 						}
 					],
@@ -6430,7 +6473,7 @@
 			"sources": [
 				{
 					"fileName": "dist/types.d.ts",
-					"line": 114,
+					"line": 122,
 					"character": 17
 				}
 			]
@@ -6480,7 +6523,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 124,
+							"line": 132,
 							"character": 13
 						}
 					],
@@ -6508,7 +6551,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 126,
+							"line": 134,
 							"character": 13
 						}
 					],
@@ -6536,7 +6579,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 128,
+							"line": 136,
 							"character": 13
 						}
 					],
@@ -6564,7 +6607,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 130,
+							"line": 138,
 							"character": 13
 						}
 					],
@@ -6592,7 +6635,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 132,
+							"line": 140,
 							"character": 13
 						}
 					],
@@ -6620,7 +6663,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 134,
+							"line": 142,
 							"character": 13
 						}
 					],
@@ -6646,7 +6689,7 @@
 			"sources": [
 				{
 					"fileName": "dist/types.d.ts",
-					"line": 122,
+					"line": 130,
 					"character": 17
 				}
 			]
@@ -6696,7 +6739,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 142,
+							"line": 150,
 							"character": 13
 						}
 					],
@@ -6724,7 +6767,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 144,
+							"line": 152,
 							"character": 13
 						}
 					],
@@ -6752,7 +6795,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 146,
+							"line": 154,
 							"character": 13
 						}
 					],
@@ -6775,7 +6818,7 @@
 			"sources": [
 				{
 					"fileName": "dist/types.d.ts",
-					"line": 140,
+					"line": 148,
 					"character": 17
 				}
 			]
@@ -6825,7 +6868,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 154,
+							"line": 162,
 							"character": 13
 						}
 					],
@@ -6853,7 +6896,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 156,
+							"line": 164,
 							"character": 13
 						}
 					],
@@ -6884,7 +6927,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 158,
+							"line": 166,
 							"character": 13
 						}
 					],
@@ -6907,7 +6950,7 @@
 			"sources": [
 				{
 					"fileName": "dist/types.d.ts",
-					"line": 152,
+					"line": 160,
 					"character": 17
 				}
 			]
@@ -6957,7 +7000,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 166,
+							"line": 174,
 							"character": 13
 						}
 					],
@@ -6985,7 +7028,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 168,
+							"line": 176,
 							"character": 13
 						}
 					],
@@ -7014,7 +7057,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 170,
+							"line": 178,
 							"character": 13
 						}
 					],
@@ -7037,7 +7080,7 @@
 			"sources": [
 				{
 					"fileName": "dist/types.d.ts",
-					"line": 164,
+					"line": 172,
 					"character": 17
 				}
 			]
@@ -7070,7 +7113,7 @@
 			"sources": [
 				{
 					"fileName": "dist/types.d.ts",
-					"line": 176,
+					"line": 184,
 					"character": 12
 				}
 			],
@@ -7137,7 +7180,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 183,
+							"line": 191,
 							"character": 13
 						}
 					],
@@ -7165,7 +7208,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 185,
+							"line": 193,
 							"character": 13
 						}
 					],
@@ -7193,7 +7236,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 187,
+							"line": 195,
 							"character": 13
 						}
 					],
@@ -7218,7 +7261,7 @@
 			"sources": [
 				{
 					"fileName": "dist/types.d.ts",
-					"line": 181,
+					"line": 189,
 					"character": 17
 				}
 			]
@@ -7269,7 +7312,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 253,
+							"line": 261,
 							"character": 13
 						}
 					],
@@ -7298,7 +7341,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 255,
+							"line": 263,
 							"character": 13
 						}
 					],
@@ -7327,7 +7370,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 257,
+							"line": 265,
 							"character": 13
 						}
 					],
@@ -7365,7 +7408,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 259,
+							"line": 267,
 							"character": 13
 						}
 					],
@@ -7586,7 +7629,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 261,
+							"line": 269,
 							"character": 13
 						}
 					],
@@ -7621,7 +7664,7 @@
 					"sources": [
 						{
 							"fileName": "dist/types.d.ts",
-							"line": 263,
+							"line": 271,
 							"character": 13
 						}
 					],
@@ -7653,7 +7696,7 @@
 			"sources": [
 				{
 					"fileName": "dist/types.d.ts",
-					"line": 251,
+					"line": 259,
 					"character": 17
 				}
 			]

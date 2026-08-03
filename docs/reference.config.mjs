@@ -1,6 +1,6 @@
 const pages = Object.freeze({
   "Core.md": ["Runa", "RunaConfig"],
-  "Sessions.md": ["Session", "SessionsManager", "SessionAgent", "SessionCreateOptions", "SessionSnapshot", "SessionStatus", "ExecOptions", "ExecResult", "Acknowledgement", "OpenSessionResult"],
+  "Sessions.md": ["Session", "SessionsManager", "SessionAgent", "OutboundPolicyMode", "OutboundPolicy", "SessionCreateOptions", "SessionSnapshot", "SessionStatus", "ExecOptions", "ExecResult", "Acknowledgement", "OpenSessionResult"],
   "Account-and-records.md": ["Me", "Workspace", "AssignedWorkspace", "UnassignedWorkspace", "EstimatedUsage", "RecordsManager", "Record"],
   "Shared.md": ["ConfigError", "ApiError", "CommandError", "RunaError", "OpaqueWireValue", "stdoutText", "stderrText"],
 });
@@ -15,6 +15,8 @@ const summaries = Object.freeze({
   Session: "Client-owned session handle with an immutable current snapshot and bounded operations.",
   SessionsManager: "Client-owned entry point for creating, listing, and retrieving sessions.",
   SessionAgent: "Accepted agent identifier for a session.",
+  OutboundPolicyMode: "Accepted outbound network policy mode.",
+  OutboundPolicy: "Explicit allow-list or deny-list policy for session creation.",
   SessionCreateOptions: "Optional resources and network policy supplied during session creation.",
   SessionSnapshot: "Immutable public observation of a session.",
   SessionStatus: "Documented session status returned by the API.",
@@ -44,6 +46,8 @@ const entryContracts = Object.freeze({
   Session: "PRD-031#R-031-01",
   SessionsManager: "PRD-027#R-027-01",
   SessionAgent: "PRD-022#R-022-02",
+  OutboundPolicyMode: "PRD-028#R-028-01",
+  OutboundPolicy: "PRD-028#R-028-01",
   SessionCreateOptions: "PRD-028#R-028-01",
   SessionSnapshot: "PRD-022#R-022-02",
   SessionStatus: "PRD-022#R-022-02",

@@ -23,15 +23,21 @@ export type SessionStatus =
  */
 export type SessionAgent = "claude-code" | "codex" | "openclaw";
 
-/** Public outbound network policy mode. */
+/**
+ * Public outbound network policy mode.
+ * @runa-contract outboundpolicymode-summary PRD-028#R-028-01
+ */
 export type OutboundPolicyMode = "allowlist" | "denylist";
 
 /**
  * Outbound network policy applied when the session is created.
  * Empty host arrays are explicit and retain the selected mode's semantics.
+ * @runa-contract outboundpolicy-summary PRD-028#R-028-01
  */
 export interface OutboundPolicy {
+  /** Selected allow-list or deny-list policy mode. */
   readonly mode: OutboundPolicyMode;
+  /** Ordered exact-domain or leading-wildcard rules for the selected mode. */
   readonly hosts: readonly string[];
 }
 
