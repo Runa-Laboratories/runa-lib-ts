@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "maximum_validity_ms": 3600000,
+  "keys": [
+    {
+      "key_id": "runa-release-authority-2026-08-02-v1",
+      "role": "release-authority",
+      "algorithm": "Ed25519",
+      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAEaKrnO/nYq8tTF1XUFoLT0f0O347Mivm1uQ/xlUN4PY=\n-----END PUBLIC KEY-----\n"
+    },
+    {
+      "key_id": "runa-release-authority-2026-08-02-v1",
+      "role": "approval",
+      "algorithm": "Ed25519",
+      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAEaKrnO/nYq8tTF1XUFoLT0f0O347Mivm1uQ/xlUN4PY=\n-----END PUBLIC KEY-----\n"
+    },
+    {
+      "key_id": "runa-release-authority-2026-08-02-v1",
+      "role": "version-classification",
+      "algorithm": "Ed25519",
+      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAEaKrnO/nYq8tTF1XUFoLT0f0O347Mivm1uQ/xlUN4PY=\n-----END PUBLIC KEY-----\n"
+    },
+    {
+      "key_id": "runa-release-authority-2026-08-02-v1",
+      "role": "repository-controls",
+      "algorithm": "Ed25519",
+      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAEaKrnO/nYq8tTF1XUFoLT0f0O347Mivm1uQ/xlUN4PY=\n-----END PUBLIC KEY-----\n"
+    },
+    {
+      "key_id": "runa-release-authority-2026-08-02-v1",
+      "role": "cross-language",
+      "algorithm": "Ed25519",
+      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAEaKrnO/nYq8tTF1XUFoLT0f0O347Mivm1uQ/xlUN4PY=\n-----END PUBLIC KEY-----\n"
+    },
+    {
+      "key_id": "runa-release-authority-2026-08-02-v1",
+      "role": "publication",
+      "algorithm": "Ed25519",
+      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAEaKrnO/nYq8tTF1XUFoLT0f0O347Mivm1uQ/xlUN4PY=\n-----END PUBLIC KEY-----\n"
+    },
+    {
+      "key_id": "runa-release-authority-2026-08-02-v1",
+      "role": "sbom-validation",
+      "algorithm": "Ed25519",
+      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAEaKrnO/nYq8tTF1XUFoLT0f0O347Mivm1uQ/xlUN4PY=\n-----END PUBLIC KEY-----\n"
+    },
+    {
+      "key_id": "runa-release-authority-2026-08-02-v1",
+      "role": "external-interfaces",
+      "algorithm": "Ed25519",
+      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAEaKrnO/nYq8tTF1XUFoLT0f0O347Mivm1uQ/xlUN4PY=\n-----END PUBLIC KEY-----\n"
+    },
+    {
+      "key_id": "runa-release-authority-2026-08-02-v1",
+      "role": "acceptance-results",
+      "algorithm": "Ed25519",
+      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAEaKrnO/nYq8tTF1XUFoLT0f0O347Mivm1uQ/xlUN4PY=\n-----END PUBLIC KEY-----\n"
+    }
+  ]
+}

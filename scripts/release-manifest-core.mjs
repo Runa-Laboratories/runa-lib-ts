@@ -3,6 +3,7 @@ import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { validateAttestationJsonl } from "./attestation-bundle.mjs";
+import { loadCanonicalContractIdentity } from "./canonical-contract-identity.mjs";
 
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
 
@@ -51,8 +52,14 @@ export const EXPECTED_RELEASE_POLICY = Object.freeze({
     packageAccess: "public",
   },
   releaseAuthority: {
-    status: "unconfigured",
-    authority: null,
+    status: "configured",
+    authority: {
+      repository: "Runa-Laboratories/runa-release-authority",
+      workflow: ".github/workflows/release-authority.yml",
+      artifact: "release-authority-bundle",
+      branch: "main",
+      event: "workflow_dispatch",
+    },
   },
   postPublishRecovery: {
     status: "configured",
@@ -122,6 +129,7 @@ export async function createReleaseManifestCore({
     repositoryRoot, "compatibility/ts-050-evidence-v1.json")).toString("utf8"));
   const releasePolicy = JSON.parse((await readBytes(
     repositoryRoot, ".runa/release-policy.json")).toString("utf8"));
+  const contractIdentity = await loadCanonicalContractIdentity(repositoryRoot);
   assert.deepEqual(releasePolicy, EXPECTED_RELEASE_POLICY);
   assert.equal(candidate.package, packageJson.name);
   assert.equal(candidate.version, packageJson.version);
@@ -219,6 +227,17 @@ export async function createReleaseManifestCore({
       source_commit: candidate.source_commit,
       build_started_at: candidate.build_started_at,
       build_finished_at: candidate.build_finished_at,
+    },
+    contract: {
+      repository: "Runa-Laboratories/runa-sdk-contract",
+      approved_checkout: contractIdentity.approvedCheckout,
+      canonical_ref: contractIdentity.canonicalRef,
+      canonical_contract_sha256: contractIdentity.canonicalContractSha256,
+      snapshot_sha256: contractIdentity.snapshotSha256,
+      projection_sha256: contractIdentity.projectionSha256,
+      generator_sha256: contractIdentity.generatorSha256,
+      artifact_manifest_sha256: contractIdentity.artifactManifestSha256,
+      generated_manifest_sha256: contractIdentity.generatedManifestSha256,
     },
     release: {
       tag: `ts-v${candidate.version}`,

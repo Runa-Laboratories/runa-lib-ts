@@ -19,6 +19,7 @@ import {
   validateRequirementTestMapWithReceipts,
   validateSmokeEvidence,
 } from "./evidence-policy.mjs";
+import { loadCanonicalContractIdentity } from "./canonical-contract-identity.mjs";
 
 const blockers = [];
 const releasePolicy = JSON.parse(await readFile(".runa/release-policy.json", "utf8"));
@@ -78,15 +79,16 @@ const requireTrusted = async (file, gate, role) => {
   }
   return payload;
 };
-const projection = await readFile("contracts/runa-sdk.projection.json");
-const projectionSha = createHash("sha256").update(projection).digest("hex");
-const provenance = await readJson("contracts/runa-sdk-contract.provenance.json", "canonical-contract-provenance");
-if (provenance !== undefined && provenance.status !== "APPROVED") {
-  blockers.push({ gate: "canonical-contract-provenance", reason: "Canonical repository provenance is not approved." });
+let contractIdentity;
+try {
+  contractIdentity = await loadCanonicalContractIdentity();
+} catch {
+  blockers.push({
+    gate: "canonical-contract-provenance",
+    reason: "Commit-pinned canonical contract identity is missing or invalid.",
+  });
 }
-if (provenance !== undefined && provenance.projection_sha256 !== projectionSha) {
-  blockers.push({ gate: "canonical-contract-provenance", reason: "Projection digest does not match provenance." });
-}
+const projectionSha = contractIdentity?.projectionSha256 ?? null;
 try {
   validateApprovedLicense(
     await readFile("LICENSE", "utf8"),
@@ -254,11 +256,11 @@ if (repository !== undefined && candidate !== undefined && repository.commit_sha
   blockers.push({ gate: "repository-controls", reason: "Repository-control evidence is not bound to the candidate source commit." });
 }
 const crossLanguage = await requireTrusted("evidence/cross-language.json", "cross-language", "cross-language");
-if (crossLanguage !== undefined && provenance !== undefined && candidate !== undefined) {
+if (crossLanguage !== undefined && contractIdentity !== undefined && candidate !== undefined) {
   if (authorityRun === undefined) {
     authorityRun = await readJson("evidence/authority-run.json", "release-authority-run");
   }
-  if (crossLanguage.canonical_contract_sha256 !== provenance.canonical_contract_sha256 ||
+  if (crossLanguage.canonical_contract_sha256 !== contractIdentity.canonicalContractSha256 ||
       crossLanguage.candidate_sha256 !== candidate.sha256 ||
       crossLanguage.candidate_source_commit !== candidate.source_commit ||
       crossLanguage.typescript_artifact.sha256 !== candidate.sha256 ||
@@ -339,7 +341,7 @@ if (externalInterfaces !== undefined && candidate !== undefined &&
 if ([approval, versionClassification, repository, crossLanguage, publication,
   sbomValidation, externalInterfaces, externalAcceptance].every(
   (payload) => payload !== undefined,
-) && provenance !== undefined) {
+) && contractIdentity !== undefined) {
   try {
     validateAuthorityPayloadRelations({
       approval_receipt: approval,
@@ -350,7 +352,7 @@ if ([approval, versionClassification, repository, crossLanguage, publication,
       sbom_validation: sbomValidation,
       external_release_interfaces: externalInterfaces,
       acceptance_results: externalAcceptance,
-    }, provenance);
+    }, { canonical_contract_sha256: contractIdentity.canonicalContractSha256 });
   } catch {
     blockers.push({
       gate: "release-authority-relations",

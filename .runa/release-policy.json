@@ -5,8 +5,14 @@
     "packageAccess": "public"
   },
   "releaseAuthority": {
-    "status": "unconfigured",
-    "authority": null
+    "status": "configured",
+    "authority": {
+      "repository": "Runa-Laboratories/runa-release-authority",
+      "workflow": ".github/workflows/release-authority.yml",
+      "artifact": "release-authority-bundle",
+      "branch": "main",
+      "event": "workflow_dispatch"
+    }
   },
   "postPublishRecovery": {
     "status": "configured",
