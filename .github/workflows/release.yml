@@ -32,6 +32,10 @@ jobs:
       filename: ${{ steps.candidate.outputs.filename }}
       authority_repository: ${{ steps.authority.outputs.repository }}
       authority_artifact: ${{ steps.authority.outputs.artifact }}
+      authority_bundle_sha256: ${{ steps.authority_bundle.outputs.bundle_sha256 }}
+      authority_head_sha: ${{ steps.authority_bundle.outputs.head_sha }}
+      authority_run_id: ${{ steps.authority_bundle.outputs.run_id }}
+      authority_run_attempt: ${{ steps.authority_bundle.outputs.run_attempt }}
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
@@ -62,7 +66,6 @@ jobs:
       - name: Verify independent authority run identity before tagging
         run: npm run release:authority:run:verify
         env:
-          GH_TOKEN: ${{ github.token }}
           RUNA_AUTHORITY_RUN_ID: ${{ inputs.authority_run_id }}
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
@@ -73,13 +76,12 @@ jobs:
         env:
           RUNA_REQUESTED_VERSION: ${{ inputs.version }}
         run: node -e "const c=require('./release-artifacts/candidate.json');if(c.source_commit!==process.env.GITHUB_SHA||c.version!==process.env.RUNA_REQUESTED_VERSION||c.source_tree_clean!==true)process.exit(1)"
-      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
-        with:
-          repository: ${{ steps.authority.outputs.repository }}
-          name: ${{ steps.authority.outputs.artifact }}
-          path: authority-preflight
-          run-id: ${{ inputs.authority_run_id }}
-          github-token: ${{ github.token }}
+      - name: Retrieve public signed release-authority assets without credentials
+        id: authority_bundle
+        run: npm run release:authority:download
+        env:
+          RUNA_AUTHORITY_RUN_ID: ${{ inputs.authority_run_id }}
+          RUNA_AUTHORITY_INPUT_DIR: authority-preflight
       - name: Verify non-approval authority evidence and bindings before tagging
         run: npm run release:authority:import
         env:
@@ -87,6 +89,14 @@ jobs:
           RUNA_AUTHORITY_INPUT_DIR: authority-preflight
       - name: Verify all local non-approval gates before tagging
         run: npm run release:pretag:verify
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: pretag-authority-evidence
+          path: |
+            authority-preflight/
+            evidence/authority-run.json
+          if-no-files-found: error
+          retention-days: 1
       - id: candidate
         run: echo "filename=$(node -p 'require(\"./release-artifacts/candidate.json\").filename')" >> "$GITHUB_OUTPUT"
       - name: Pre-tag registry absence check
@@ -96,6 +106,7 @@ jobs:
     needs: phase-a
     runs-on: ubuntu-22.04
     permissions:
+      actions: read
       contents: write
       id-token: write
     steps:
@@ -107,6 +118,12 @@ jobs:
         with:
           go-version: '1.25.9'
           cache: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 22.17.1
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: pretag-authority-evidence
       - name: Install pinned gitsign
         run: |
           mkdir -p "$RUNNER_TEMP/gitsign-bin"
@@ -116,12 +133,18 @@ jobs:
         env:
           GITSIGN_TOKEN_PROVIDER: github-actions
           RUNA_RELEASE_TAG: ts-v${{ inputs.version }}
+          RUNA_AUTHORITY_INPUT_DIR: authority-preflight
+          RUNA_EXPECTED_AUTHORITY_BUNDLE_SHA256: ${{ needs.phase-a.outputs.authority_bundle_sha256 }}
+          RUNA_EXPECTED_AUTHORITY_HEAD_SHA: ${{ needs.phase-a.outputs.authority_head_sha }}
+          RUNA_EXPECTED_AUTHORITY_RUN_ID: ${{ needs.phase-a.outputs.authority_run_id }}
+          RUNA_EXPECTED_AUTHORITY_RUN_ATTEMPT: ${{ needs.phase-a.outputs.authority_run_attempt }}
         run: |
           git fetch --no-tags origin main
           test "$(git rev-parse origin/main)" = "$GITHUB_SHA"
           git config --local gpg.format x509
           git config --local gpg.x509.program gitsign
           test -z "$(git ls-remote --tags origin "refs/tags/$RUNA_RELEASE_TAG")"
+          npm run release:authority:freshness:verify
           git tag -s -m "Release $RUNA_RELEASE_TAG" "$RUNA_RELEASE_TAG" "$GITHUB_SHA"
           gitsign verify \
             --certificate-identity=https://github.com/Runa-Laboratories/runa-lib-ts/.github/workflows/release.yml@refs/heads/main \
@@ -167,15 +190,15 @@ jobs:
       - name: Verify independent authority run identity
         run: npm run release:authority:run:verify
         env:
-          GH_TOKEN: ${{ github.token }}
           RUNA_AUTHORITY_RUN_ID: ${{ inputs.authority_run_id }}
-      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
-        with:
-          repository: ${{ needs.phase-a.outputs.authority_repository }}
-          name: ${{ needs.phase-a.outputs.authority_artifact }}
-          path: authority-input
-          run-id: ${{ inputs.authority_run_id }}
-          github-token: ${{ github.token }}
+      - name: Retrieve public signed release-authority assets without credentials
+        run: npm run release:authority:download
+        env:
+          RUNA_AUTHORITY_RUN_ID: ${{ inputs.authority_run_id }}
+          RUNA_AUTHORITY_INPUT_DIR: authority-input
+          RUNA_EXPECTED_AUTHORITY_BUNDLE_SHA256: ${{ needs.phase-a.outputs.authority_bundle_sha256 }}
+          RUNA_EXPECTED_AUTHORITY_HEAD_SHA: ${{ needs.phase-a.outputs.authority_head_sha }}
+          RUNA_EXPECTED_AUTHORITY_RUN_ATTEMPT: ${{ needs.phase-a.outputs.authority_run_attempt }}
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
           name: npm-release-candidate
@@ -195,6 +218,7 @@ jobs:
           path: |
             release-artifacts/
             evidence/
+            authority-input/
           if-no-files-found: error
 
   asset-staging:
@@ -256,10 +280,11 @@ jobs:
           path: |
             release-artifacts/
             evidence/
+            authority-input/
           if-no-files-found: error
 
   publish:
-    needs: asset-staging
+    needs: [phase-a, asset-staging]
     runs-on: ubuntu-22.04
     environment: npm
     outputs:
@@ -286,6 +311,15 @@ jobs:
       - id: mapping
         run: node scripts/resolve-release-channel.mjs
       - run: npm run release:registry:preflight
+      - name: Revalidate exact authority bytes, identity, bindings, and freshness
+        run: npm run release:authority:import
+        env:
+          RUNA_AUTHORITY_PREFLIGHT: '1'
+          RUNA_AUTHORITY_INPUT_DIR: authority-input
+          RUNA_EXPECTED_AUTHORITY_BUNDLE_SHA256: ${{ needs.phase-a.outputs.authority_bundle_sha256 }}
+          RUNA_EXPECTED_AUTHORITY_HEAD_SHA: ${{ needs.phase-a.outputs.authority_head_sha }}
+          RUNA_EXPECTED_AUTHORITY_RUN_ID: ${{ needs.phase-a.outputs.authority_run_id }}
+          RUNA_EXPECTED_AUTHORITY_RUN_ATTEMPT: ${{ needs.phase-a.outputs.authority_run_attempt }}
       - run: npm publish "release-artifacts/${{ needs.asset-staging.outputs.filename }}" --provenance --access public --registry https://registry.npmjs.org/ --tag "${{ steps.mapping.outputs.dist_tag }}"
       - name: Persist exact uploaded-unverified state before final promotion checks
         run: npm run release:postpublish:verify
