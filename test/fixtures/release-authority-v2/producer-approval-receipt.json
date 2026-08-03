@@ -1,0 +1,13 @@
+{
+  "approval_decision": "APPROVE",
+  "approver_identity": "github-actor-id:1234567",
+  "approver_login": "runa-release-owner",
+  "approver_role": "release-owner",
+  "artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "candidate_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "expires_at": "2026-08-02T12:30:00.000Z",
+  "issued_at": "2026-08-02T12:00:00.000Z",
+  "policy_id": "RUNA-RELEASE-V1",
+  "release_manifest_core_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+  "status": "PASS"
+}

@@ -34,6 +34,16 @@ test("release workflow is one protected dispatch with pinned signing and at-most
     ciRetain < ciCore, true);
   assert.match(workflow, /evidence\/\$\{\{ needs\.admission\.outputs\.filename \}\}\.intoto\.jsonl/u);
   assert.doesNotMatch(workflow, /RUNA_AUTHORITY_READ_TOKEN|personal.access.token|github.app/iu);
+  assert.equal((workflow.match(/release:authority:download/gu) ?? []).length, 2);
+  assert.doesNotMatch(workflow,
+    /repository: \$\{\{ (?:steps|needs)\.phase-a\.outputs\.authority_repository \}\}/u);
+  const authoritySteps = workflow.match(
+    /- name: (?:Verify independent authority run identity(?: before tagging)?|Retrieve public signed release-authority assets without credentials)[\s\S]*?(?=\n\s+- (?:name|uses|run|id):)/gu,
+  ) ?? [];
+  assert.equal(authoritySteps.length, 4);
+  for (const step of authoritySteps) {
+    assert.doesNotMatch(step, /GH_TOKEN|github-token|RUNA_AUTHORITY_READ_TOKEN/u);
+  }
   assert.match(workflow, /gh release create/u);
   assert.match(workflow, /gh release upload/u);
   assert.match(workflow, /release:assets:verify/u);
@@ -56,8 +66,19 @@ test("release workflow is one protected dispatch with pinned signing and at-most
   assert.match(workflow, /sign-tag:\s*\n\s+needs: phase-a/u);
   assert.match(workflow, /admission:\s*\n\s+name: release-admission\s*\n\s+needs: \[phase-a, sign-tag\]/u);
   assert.match(workflow, /asset-staging:\s*\n\s+needs: admission/u);
-  assert.match(workflow, /publish:\s*\n\s+needs: asset-staging/u);
+  assert.match(workflow, /publish:\s*\n\s+needs: \[phase-a, asset-staging\]/u);
   assert.match(workflow, /release-promotion:\s*\n\s+needs: publish/u);
+  const signTagBody = workflow.slice(
+    workflow.indexOf("  sign-tag:"), workflow.indexOf("  admission:"),
+  );
+  const signTagFreshness = signTagBody.indexOf(
+    "npm run release:authority:freshness:verify",
+  );
+  const immutableTag = signTagBody.indexOf("git tag -s");
+  assert.equal(signTagFreshness >= 0 && signTagFreshness < immutableTag, true);
+  assert.match(signTagBody, /name: pretag-authority-evidence/u);
+  assert.match(signTagBody,
+    /RUNA_EXPECTED_AUTHORITY_BUNDLE_SHA256: \$\{\{ needs\.phase-a\.outputs\.authority_bundle_sha256 \}\}/u);
   const assetBody = workflow.slice(
     workflow.indexOf("  asset-staging:"), workflow.indexOf("  publish:"),
   );
@@ -77,6 +98,15 @@ test("release workflow is one protected dispatch with pinned signing and at-most
   const publish = workflow.indexOf("npm publish");
   assert.equal(preflight >= 0 && preflight < provenance &&
     provenance < assets && assets < publish, true);
+  const publishRevalidation = workflow.indexOf(
+    "Revalidate exact authority bytes, identity, bindings, and freshness",
+  );
+  assert.equal(publishRevalidation >= 0 && publishRevalidation < publish, true);
+  assert.match(workflow,
+    /authority_bundle_sha256: \$\{\{ steps\.authority_bundle\.outputs\.bundle_sha256 \}\}/u);
+  assert.equal((workflow.match(/authority-input\//gu) ?? []).length >= 2, true);
+  assert.match(workflow,
+    /RUNA_EXPECTED_AUTHORITY_BUNDLE_SHA256: \$\{\{ needs\.phase-a\.outputs\.authority_bundle_sha256 \}\}/u);
   assert.match(ci, /release-admission:\s*\n\s+name: release-admission/u);
   assert.match(ci, /name: release-admission\s*\n\s+needs: \[candidate, compatibility\]/u);
   assert.match(ci, /npm run release:ci:admission/u);
