@@ -13,9 +13,9 @@ test("canonical contract identity binds the gitlink and every release input", as
   assert.deepEqual(identity, {
     approvedCheckout: "ffac863592620c6519072e447c6b6073092ea299",
     artifactManifestSha256: "109ddbdb95e11aa4824dfcfbcf0cd2eff46c717caaea6ec2042d256c899f401c",
-    canonicalContractSha256: "be686d0e1246365d7fde6aa2a9b7ff027ea18e74801ed00340d634ef8921f433",
-    canonicalRef: "fc7a377cedc8f8d6d2300b6a632f79e3a70fb376",
-    generatedManifestSha256: "89b8668e65fad55027671b29bd31815f72e745e92d476ec9b53cfec1432c7dc0",
+    canonicalContractSha256: "6ebdc83d6136ac3f7372ce3f6c890169cf4584b10ca10ce94b44d7150869e54d",
+    canonicalRef: "259e8d9f6f3afda94120777d1a03999c9713b4bd",
+    generatedManifestSha256: "bd487d047abf107b7ba3e791171230ec2888464995398b4e1af71c3dd90f087e",
     generatorSha256: "75de6242dde7fccfc9251d371020c5dc5ffb96a65399647b6d54d2c8850202e1",
     openapiSha256: "e4c7a55fe7f857e00a28e5926f04c9ad0d7205ec8c7bcf4863c721c7c8b732d9",
     projectionSha256: "7a41d941210d85820f0d0dbbef66842ec3fff7cd6b8ca47ef557d98955bf489a",

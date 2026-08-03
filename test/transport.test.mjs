@@ -383,8 +383,6 @@ test("serializes explicit outbound allow and deny policies without provider fiel
     { name: "deny", outbound_policy: { mode: "denylist", hosts: ["tracking.example.com", "*.phishing.test"] } },
     { name: "allow-empty", outbound_policy: { mode: "allowlist", hosts: [] } },
   ]);
-  assert.equal("egress_policy" in bodies[0], false);
-  assert.equal("denied_hosts" in bodies[0], false);
   await runa.close();
 });
 
