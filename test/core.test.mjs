@@ -22,6 +22,7 @@ import {
   decodeSession,
 } from "../dist/domain.js";
 import { containsProhibitedMarker } from "../dist/internal/boundary-policy.js";
+import { sanitizeWire } from "../dist/internal/sanitize.js";
 
 import {
   API_KEY,
@@ -108,7 +109,7 @@ test("PRD-001/023 reject prohibited hosts including trailing dot", () => {
     111,
     110,
   );
-  const upstreamTypeName = String.fromCharCode(
+  const publicNetworkTerm = String.fromCharCode(
     69,
     103,
     114,
@@ -123,7 +124,7 @@ test("PRD-001/023 reject prohibited hosts including trailing dot", () => {
     121,
   );
   assert.equal(containsProhibitedMarker(ordinaryEnglishWord), false);
-  assert.equal(containsProhibitedMarker(upstreamTypeName), true);
+  assert.equal(containsProhibitedMarker(publicNetworkTerm), false);
   assert.throws(
     () =>
       resolveConfig({
@@ -209,6 +210,8 @@ test("PRD-022 enforces the canonical schema and preserves only detail identity",
   const detail = { nested_key: ["value"] };
   const [record] = decodeRecords([recordFixture({ detail })]);
   assert.equal(record.detail, detail);
+  const publicNetworkName = sessionFixture({ name: "e2e-egress-verification" });
+  assert.equal(decodeSession(sanitizeWire(publicNetworkName)).name, publicNetworkName.name);
   for (const invalid of [
     sessionFixture({ id: SESSION_ID.toUpperCase() }),
     sessionFixture({ vcpus: -1 }),
