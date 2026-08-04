@@ -1,6 +1,7 @@
 import type {
-  Acknowledgement, ExecResult, Me, OpenSessionResult, Record, SessionAgent,
-  SessionSnapshot, SessionStatus
+  Acknowledgement, AgentAuthenticationMethod, AgentAuthenticationState,
+  AgentAuthenticationStatus, ExecResult, Me, OpenSessionResult, Record,
+  SessionAgent, SessionSnapshot, SessionStatus
 } from "./types.js";
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
@@ -10,6 +11,13 @@ const OPEN_URL = /^https:\/\/[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.runacode\.clo
 const RFC3339 = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.\d+)?(?:Z|([+-])(\d{2}):(\d{2}))$/;
 const STATUSES = new Set<SessionStatus>(["creating", "running", "paused", "suspended", "stopped", "deleted", "error"]);
 const AGENTS = new Set<SessionAgent>(["claude-code", "codex", "openclaw"]);
+const AUTHENTICATION_METHODS = new Set<AgentAuthenticationMethod>([
+  "none", "interactive_login", "api_key",
+]);
+const AUTHENTICATION_STATES = new Set<AgentAuthenticationState>([
+  "not_applicable", "installing", "login_required", "authenticated",
+  "configured", "unavailable",
+]);
 
 export class DecodeFailure {
   readonly kind = "decode_failure";
@@ -119,6 +127,33 @@ export function decodeOpen(value: unknown): OpenSessionResult {
     malformed();
   }
   return Object.freeze({ url });
+}
+export function decodeAgentAuthenticationStatus(
+  value: unknown,
+): AgentAuthenticationStatus {
+  const source = object(value);
+  exact(source, ["agent", "method", "state"]);
+  const method = string(source.method);
+  const state = string(source.state);
+  if (!AUTHENTICATION_METHODS.has(method as AgentAuthenticationMethod) ||
+      !AUTHENTICATION_STATES.has(state as AgentAuthenticationState)) malformed();
+  const validPair = method === "none"
+    ? state === "not_applicable"
+    : method === "interactive_login"
+      ? ["installing", "login_required", "authenticated", "unavailable"].includes(state)
+      : ["installing", "configured", "unavailable"].includes(state);
+  if (!validPair) malformed();
+  let agent: SessionAgent | null = null;
+  if (source.agent !== null) {
+    const candidate = string(source.agent);
+    if (!AGENTS.has(candidate as SessionAgent)) malformed();
+    agent = candidate as SessionAgent;
+  }
+  return Object.freeze({
+    agent,
+    method: method as AgentAuthenticationMethod,
+    state: state as AgentAuthenticationState,
+  });
 }
 export function decodeRecords(value: unknown): readonly Record[] {
   if (!Array.isArray(value)) malformed();

@@ -2,7 +2,7 @@
   "schema_version": 2,
   "status": "PASS",
   "method": "scripts/verify-duplicate-abstractions.mjs",
-  "audited_source_sha256": "d806214afb65033af63df8a6cf0b56b823bdd2faa52d0d4e3d3c3c932ab33069",
+  "audited_source_sha256": "9326cd0f5be2f2c2c87dd336ed58d44455022543f18bf7ce02141f1984159a41",
   "audited_files": [
     "src/client.ts",
     "src/config.ts",
@@ -98,6 +98,7 @@
       "observed": {
         "decoder_exports": [
           "decodeAcknowledgement",
+          "decodeAgentAuthenticationStatus",
           "decodeExec",
           "decodeMe",
           "decodeOpen",

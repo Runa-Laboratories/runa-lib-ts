@@ -7,6 +7,9 @@
 @runa-contract session-summary PRD-031#R-031-01
 @runa-contract sessionsmanager-summary PRD-027#R-027-01
 @runa-contract sessionagent-summary PRD-022#R-022-02
+@runa-contract agentauthenticationmethod-summary PRD-022#R-022-02
+@runa-contract agentauthenticationstate-summary PRD-022#R-022-02
+@runa-contract agentauthenticationstatus-summary PRD-022#R-022-02
 @runa-contract outboundpolicymode-summary PRD-028#R-028-01
 @runa-contract outboundpolicy-summary PRD-028#R-028-01
 @runa-contract sessioncreateoptions-summary PRD-028#R-028-01
@@ -74,6 +77,9 @@
 @runa-contract session-open-description PRD-035#R-035-01
 @runa-contract session-open-returns PRD-035#R-035-01
 @runa-contract session-open-example PRD-035#R-035-01
+@runa-contract session-authenticationstatus-description PRD-031#R-031-01
+@runa-contract session-authenticationstatus-returns PRD-031#R-031-01
+@runa-contract session-authenticationstatus-example PRD-031#R-031-01
 @runa-contract stdouttext-stdouttext-description PRD-022#R-022-02
 @runa-contract stdouttext-stdouttext-returns PRD-022#R-022-02
 @runa-contract stderrtext-stderrtext-description PRD-022#R-022-02
@@ -108,3 +114,4 @@
 @runa-contract session-exec-throws-api PRD-024#R-024-03
 @runa-contract session-checkpoint-throws-api PRD-024#R-024-03
 @runa-contract session-open-throws-api PRD-024#R-024-03
+@runa-contract session-authenticationstatus-throws-api PRD-024#R-024-03

@@ -11,6 +11,9 @@ export { stderrText, stdoutText } from "./text.js";
 export type { RecordsManager, SessionsManager } from "./client.js";
 export type {
   Acknowledgement,
+  AgentAuthenticationMethod,
+  AgentAuthenticationState,
+  AgentAuthenticationStatus,
   AssignedWorkspace,
   EstimatedUsage,
   ExecOptions,

@@ -92,7 +92,7 @@ function signedAssets() {
       candidate_source_commit: headSha,
       candidate_set_digest: `sha256:${candidateSetDigest}`,
       canonical_contract_sha256: digest("e"),
-      conformance_counts: { fixtures: 12, modes: 3, operations: 13 },
+      conformance_counts: { fixtures: 12, modes: 3, operations: 14 },
       conformance_verdict_sha256: digest("f"),
       python_artifacts: {
         candidate_manifest_sha256: digest("1"), candidate_run_id: 44,

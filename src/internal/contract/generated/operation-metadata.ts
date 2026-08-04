@@ -1,4 +1,4 @@
-// @generated {"contract_id":"runa-sdk-contract","generator_path":"tools/runa-contract-generator.mjs","generator_sha256":"75de6242dde7fccfc9251d371020c5dc5ffb96a65399647b6d54d2c8850202e1","generator_version":"0.2.0","snapshot_path":"runa-sdk-contract.snapshot.json","snapshot_sha256":"a5dd2ebb2c0cc509051774e3d184386cf5d9f845865267d8ba38278cb47ad6a4","snapshot_version":"1.1.0"}
+// @generated {"contract_id":"runa-sdk-contract","generator_path":"tools/runa-contract-generator.mjs","generator_sha256":"75de6242dde7fccfc9251d371020c5dc5ffb96a65399647b6d54d2c8850202e1","generator_version":"0.2.0","snapshot_path":"runa-sdk-contract.snapshot.json","snapshot_sha256":"327c6ccc6a4572929ff737bc8b1af6bd3189e139548af632245ce93118368298","snapshot_version":"1.2.0"}
 export const GENERATED_OPERATIONS = {
   "me.get": {
     "hasRequestBody": false,
@@ -14,6 +14,16 @@ export const GENERATED_OPERATIONS = {
     "operationKey": "records.list",
     "pathParameters": [],
     "pathTemplate": "/v1/records",
+    "successStatus": 200
+  },
+  "sessions.agentAuth": {
+    "hasRequestBody": false,
+    "method": "GET",
+    "operationKey": "sessions.agentAuth",
+    "pathParameters": [
+      "id"
+    ],
+    "pathTemplate": "/v1/sessions/:id/agent-auth",
     "successStatus": 200
   },
   "sessions.checkpoint": {

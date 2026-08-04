@@ -35,12 +35,14 @@ invalid higher-precedence value is an error; it never falls through.
 ## Resources
 
 - `runa.sessions.create(name, options)`, `list()`, and `get(id)`
-- `Session` lifecycle methods, `exec()`, `checkpoint()`, and `open()`
+- `Session` lifecycle methods, `exec()`, `checkpoint()`, `authenticationStatus()`, and `open()`
 - `runa.records.list()`
 - `runa.me()`
 
 `Session.open()` returns a short-lived sensitive value. Use it only for the
 immediate handoff and do not print, persist, cache, or fetch it automatically.
+`Session.authenticationStatus()` returns only the selected agent, method, and
+strict state; it never returns terminal output, account identity, or secrets.
 
 Session creation accepts `outboundPolicy` with mode `"allowlist"` or
 `"denylist"` and up to 128 exact or leading-wildcard domains. An empty list is

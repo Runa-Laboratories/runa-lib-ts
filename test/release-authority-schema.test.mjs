@@ -79,7 +79,7 @@ test("trusted signatures cannot substitute for closed release-role semantics", (
         candidate_source_commit: "a".repeat(40),
         candidate_set_digest: `sha256:${candidateSet}`,
         canonical_contract_sha256: "e".repeat(64),
-        conformance_counts: { fixtures: 1, modes: 3, operations: 13 },
+        conformance_counts: { fixtures: 1, modes: 3, operations: 14 },
         conformance_verdict_sha256: "f".repeat(64),
         python_artifacts: {
           candidate_manifest_sha256: "1".repeat(64), candidate_run_id: 2,

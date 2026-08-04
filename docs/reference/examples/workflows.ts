@@ -71,3 +71,11 @@ await session.checkpoint("before-change");
 // example:session-open
 await session.open();
 // end-example
+
+// example:session-authentication-status
+const authentication = await session.authenticationStatus();
+if (authentication.state === "login_required") {
+  const handoff = await session.open();
+  void handoff; // Pass to the user's browser; never log or persist it.
+}
+// end-example
