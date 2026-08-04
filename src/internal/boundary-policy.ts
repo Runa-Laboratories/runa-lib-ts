@@ -1,7 +1,6 @@
 const BASE = 257;
 const TARGETS = new Map<number, ReadonlySet<number>>([
   [5, new Set([1_098_742_058])],
-  [6, new Set([136_129_161])],
   [9, new Set([3_847_020_951, 3_847_084_439, 1_161_608_401])],
   [10, new Set([2_179_956_528, 2_895_058_756])],
   [11, new Set([3_928_627_619])],
