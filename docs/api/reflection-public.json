@@ -20,6 +20,64 @@
     "operations": []
   },
   {
+    "name": "AgentAuthenticationMethod",
+    "kind": "type",
+    "declarationKind": "type",
+    "page": "Sessions.md",
+    "source": "dist/index.d.ts",
+    "signature": "type AgentAuthenticationMethod = \"none\" | \"interactive_login\" | \"api_key\"",
+    "members": [],
+    "operations": []
+  },
+  {
+    "name": "AgentAuthenticationState",
+    "kind": "type",
+    "declarationKind": "type",
+    "page": "Sessions.md",
+    "source": "dist/index.d.ts",
+    "signature": "type AgentAuthenticationState = \"not_applicable\" | \"installing\" | \"login_required\" | \"authenticated\" | \"configured\" | \"unavailable\"",
+    "members": [],
+    "operations": []
+  },
+  {
+    "name": "AgentAuthenticationStatus",
+    "kind": "type",
+    "declarationKind": "interface",
+    "page": "Sessions.md",
+    "source": "dist/index.d.ts",
+    "signature": "interface AgentAuthenticationStatus",
+    "members": [
+      {
+        "name": "agent",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "agent: SessionAgent | null"
+        ]
+      },
+      {
+        "name": "method",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "method: AgentAuthenticationMethod"
+        ]
+      },
+      {
+        "name": "state",
+        "kind": "property",
+        "optional": false,
+        "readonly": true,
+        "signatures": [
+          "state: AgentAuthenticationState"
+        ]
+      }
+    ],
+    "operations": []
+  },
+  {
     "name": "ApiError",
     "kind": "runtime",
     "declarationKind": "class",
@@ -829,6 +887,15 @@
         "signatures": [
           "open(): Promise<OpenSessionResult>"
         ]
+      },
+      {
+        "name": "authenticationStatus",
+        "kind": "method",
+        "optional": false,
+        "readonly": false,
+        "signatures": [
+          "authenticationStatus(): Promise<AgentAuthenticationStatus>"
+        ]
       }
     ],
     "operations": [
@@ -899,6 +966,13 @@
         "signature": "open(): Promise<OpenSessionResult>",
         "parameters": [],
         "returns": "Promise<OpenSessionResult>"
+      },
+      {
+        "operationKey": "Session#authenticationStatus",
+        "name": "authenticationStatus",
+        "signature": "authenticationStatus(): Promise<AgentAuthenticationStatus>",
+        "parameters": [],
+        "returns": "Promise<AgentAuthenticationStatus>"
       }
     ]
   },

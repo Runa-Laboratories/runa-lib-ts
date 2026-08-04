@@ -21,6 +21,15 @@ export function sessionFixture(overrides = {}) {
   };
 }
 
+export function agentAuthenticationFixture(overrides = {}) {
+  return {
+    agent: "codex",
+    method: "interactive_login",
+    state: "authenticated",
+    ...overrides,
+  };
+}
+
 export function meFixture(assigned = true) {
   return assigned
     ? {

@@ -3,6 +3,7 @@ import { assertUuid } from "./domain.js";
 import type { ClientPort } from "./internal/client-port.js";
 import type {
   Acknowledgement,
+  AgentAuthenticationStatus,
   ExecOptions,
   ExecResult,
   OpenSessionResult,
@@ -287,6 +288,25 @@ export class Session {
     return (await this.#owner.invoke("sessions.open", {
       id,
     })) as OpenSessionResult;
+  }
+
+  /**
+   * Reads the secret-free authentication status of this session's agent.
+   * Use {@link open} to obtain the terminal handoff when interactive login is required.
+   * @returns The strict agent authentication method and state.
+   * @throws ApiError when the API rejects the operation or returns an invalid response.
+   * @example docs/reference/examples/workflows.ts#session-authentication-status
+   * @runa-contract session-authenticationstatus-description PRD-031#R-031-01
+   * @runa-contract session-authenticationstatus-returns PRD-031#R-031-01
+   * @runa-contract session-authenticationstatus-throws-api PRD-024#R-024-03
+   * @runa-contract session-authenticationstatus-example PRD-031#R-031-01
+   */
+  async authenticationStatus(): Promise<AgentAuthenticationStatus> {
+    const id = this.#snapshot.id;
+    assertUuid(id);
+    return (await this.#owner.invoke("sessions.agentAuth", {
+      id,
+    })) as AgentAuthenticationStatus;
   }
 }
 

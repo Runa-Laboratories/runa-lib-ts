@@ -5,6 +5,7 @@ type CanonicalOperationDescriptor =
   (typeof GENERATED_OPERATIONS)[OperationKey];
 type ResponseKind =
   | "acknowledgement"
+  | "agent-authentication-status"
   | "exec"
   | "me"
   | "open"
@@ -21,6 +22,7 @@ export type OperationDescriptor = CanonicalOperationDescriptor & {
 const RESPONSE_KINDS = Object.freeze({
   "me.get": "me",
   "records.list": "records",
+  "sessions.agentAuth": "agent-authentication-status",
   "sessions.checkpoint": "acknowledgement",
   "sessions.create": "session",
   "sessions.delete": "acknowledgement",

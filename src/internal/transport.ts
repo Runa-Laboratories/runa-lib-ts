@@ -4,6 +4,7 @@ import { TextDecoder } from "node:util";
 import type { EffectiveConfig } from "../config.js";
 import {
   decodeAcknowledgement,
+  decodeAgentAuthenticationStatus,
   decodeExec,
   decodeMe,
   decodeOpen,
@@ -15,6 +16,7 @@ import {
 import { ApiError, ConfigError } from "../errors.js";
 import type {
   Acknowledgement,
+  AgentAuthenticationStatus,
   ExecResult,
   Me,
   OpenSessionResult,
@@ -34,6 +36,7 @@ const READS = new Set<OperationKey>([
   "me.get",
   "sessions.list",
   "sessions.get",
+  "sessions.agentAuth",
   "records.list",
 ]);
 
@@ -46,6 +49,7 @@ export interface DispatchInput {
 
 export type DispatchResult =
   | Acknowledgement
+  | AgentAuthenticationStatus
   | ExecResult
   | Me
   | OpenSessionResult
@@ -246,6 +250,8 @@ async function disposition(
     switch (descriptor.responseKind) {
       case "acknowledgement":
         return decodeAcknowledgement(value);
+      case "agent-authentication-status":
+        return decodeAgentAuthenticationStatus(value);
       case "exec":
         return decodeExec(value);
       case "me":

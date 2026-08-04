@@ -24,6 +24,40 @@ export type SessionStatus =
 export type SessionAgent = "claude-code" | "codex" | "openclaw";
 
 /**
+ * Authentication method selected for the session agent.
+ * @runa-contract agentauthenticationmethod-summary PRD-022#R-022-02
+ */
+export type AgentAuthenticationMethod =
+  | "none"
+  | "interactive_login"
+  | "api_key";
+
+/**
+ * Secret-free authentication state reported for the session agent.
+ * @runa-contract agentauthenticationstate-summary PRD-022#R-022-02
+ */
+export type AgentAuthenticationState =
+  | "not_applicable"
+  | "installing"
+  | "login_required"
+  | "authenticated"
+  | "configured"
+  | "unavailable";
+
+/**
+ * Secret-free authentication status for the selected session agent.
+ * @runa-contract agentauthenticationstatus-summary PRD-022#R-022-02
+ */
+export interface AgentAuthenticationStatus {
+  /** Selected agent, or null when the session has no agent. */
+  readonly agent: SessionAgent | null;
+  /** Authentication method configured for the agent. */
+  readonly method: AgentAuthenticationMethod;
+  /** Current strict authentication state. */
+  readonly state: AgentAuthenticationState;
+}
+
+/**
  * Public outbound network policy mode.
  * @runa-contract outboundpolicymode-summary PRD-028#R-028-01
  */
@@ -221,6 +255,7 @@ export interface Me {
 export type OperationKey =
   | "me.get"
   | "records.list"
+  | "sessions.agentAuth"
   | "sessions.checkpoint"
   | "sessions.create"
   | "sessions.delete"

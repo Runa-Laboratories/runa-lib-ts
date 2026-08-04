@@ -103,6 +103,11 @@
           "operationKey": "Session#open",
           "sourcePath": "docs/reference/examples/workflows.ts",
           "testId": "TC-048-EXAMPLE-SESSION_OPEN"
+        },
+        {
+          "operationKey": "Session#authenticationStatus",
+          "sourcePath": "docs/reference/examples/workflows.ts",
+          "testId": "TC-048-EXAMPLE-SESSION_AUTHENTICATION_STATUS"
         }
       ],
       "contractRefs": [
@@ -157,6 +162,45 @@
       "page": "Sessions.md",
       "anchor": "sessionagent",
       "signature": "type SessionAgent = \"claude-code\" | \"codex\" | \"openclaw\"",
+      "documentation": "complete",
+      "examples": [],
+      "contractRefs": [
+        "PRD-022#R-022-02"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "AgentAuthenticationMethod",
+      "kind": "type",
+      "page": "Sessions.md",
+      "anchor": "agentauthenticationmethod",
+      "signature": "type AgentAuthenticationMethod = \"none\" | \"interactive_login\" | \"api_key\"",
+      "documentation": "complete",
+      "examples": [],
+      "contractRefs": [
+        "PRD-022#R-022-02"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "AgentAuthenticationState",
+      "kind": "type",
+      "page": "Sessions.md",
+      "anchor": "agentauthenticationstate",
+      "signature": "type AgentAuthenticationState = \"not_applicable\" | \"installing\" | \"login_required\" | \"authenticated\" | \"configured\" | \"unavailable\"",
+      "documentation": "complete",
+      "examples": [],
+      "contractRefs": [
+        "PRD-022#R-022-02"
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "AgentAuthenticationStatus",
+      "kind": "type",
+      "page": "Sessions.md",
+      "anchor": "agentauthenticationstatus",
+      "signature": "interface AgentAuthenticationStatus",
       "documentation": "complete",
       "examples": [],
       "contractRefs": [
@@ -509,6 +553,30 @@
     {
       "claimId": "sessionagent-summary",
       "subjectKey": "SessionAgent",
+      "fragment": "summary",
+      "contractRefs": [
+        "PRD-022#R-022-02"
+      ]
+    },
+    {
+      "claimId": "agentauthenticationmethod-summary",
+      "subjectKey": "AgentAuthenticationMethod",
+      "fragment": "summary",
+      "contractRefs": [
+        "PRD-022#R-022-02"
+      ]
+    },
+    {
+      "claimId": "agentauthenticationstate-summary",
+      "subjectKey": "AgentAuthenticationState",
+      "fragment": "summary",
+      "contractRefs": [
+        "PRD-022#R-022-02"
+      ]
+    },
+    {
+      "claimId": "agentauthenticationstatus-summary",
+      "subjectKey": "AgentAuthenticationStatus",
       "fragment": "summary",
       "contractRefs": [
         "PRD-022#R-022-02"
@@ -1083,6 +1151,30 @@
       ]
     },
     {
+      "claimId": "session-authenticationstatus-description",
+      "subjectKey": "Session#authenticationStatus",
+      "fragment": "description",
+      "contractRefs": [
+        "PRD-031#R-031-01"
+      ]
+    },
+    {
+      "claimId": "session-authenticationstatus-returns",
+      "subjectKey": "Session#authenticationStatus",
+      "fragment": "returns",
+      "contractRefs": [
+        "PRD-031#R-031-01"
+      ]
+    },
+    {
+      "claimId": "session-authenticationstatus-example",
+      "subjectKey": "Session#authenticationStatus",
+      "fragment": "example",
+      "contractRefs": [
+        "PRD-031#R-031-01"
+      ]
+    },
+    {
       "claimId": "stdouttext-stdouttext-description",
       "subjectKey": "stdoutText#stdoutText",
       "fragment": "description",
@@ -1353,6 +1445,14 @@
       "contractRefs": [
         "PRD-024#R-024-03"
       ]
+    },
+    {
+      "claimId": "session-authenticationstatus-throws-api",
+      "subjectKey": "Session#authenticationStatus",
+      "fragment": "throws.ApiError",
+      "contractRefs": [
+        "PRD-024#R-024-03"
+      ]
     }
   ],
   "errorMatrix": [
@@ -1553,6 +1653,19 @@
         {
           "errorType": "ApiError",
           "conditionClaimId": "session-open-throws-api",
+          "contractRefs": [
+            "PRD-024#R-024-03"
+          ]
+        }
+      ]
+    },
+    {
+      "operationKey": "Session#authenticationStatus",
+      "disposition": "accepted",
+      "cases": [
+        {
+          "errorType": "ApiError",
+          "conditionClaimId": "session-authenticationstatus-throws-api",
           "contractRefs": [
             "PRD-024#R-024-03"
           ]

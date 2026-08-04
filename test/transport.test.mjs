@@ -6,6 +6,7 @@ import {
   API_KEY,
   RECORD_ID,
   SESSION_ID,
+  agentAuthenticationFixture,
   jsonResponse,
   meFixture,
   openUrl,
@@ -39,12 +40,15 @@ function operationFetch(captures) {
     if (path.endsWith("/checkpoint") || init.method === "DELETE") {
       return jsonResponse({ ok: true });
     }
+    if (path.endsWith("/agent-auth")) {
+      return jsonResponse(agentAuthenticationFixture());
+    }
     if (path.endsWith("/open")) return jsonResponse({ url: openUrl() });
     return jsonResponse(sessionFixture());
   };
 }
 
-test("PRD-021/025/028-037 dispatch exactly 13 canonical operations", async () => {
+test("PRD-021/025/028-037 dispatch exactly 14 canonical operations", async () => {
   const captures = [];
   const runa = new Runa({
     apiKey: API_KEY,
@@ -73,9 +77,14 @@ test("PRD-021/025/028-037 dispatch exactly 13 canonical operations", async () =>
   assert.equal(exec.exitCode, 7);
   await session.checkpoint("checkpoint name");
   await session.open();
+  assert.deepEqual(await session.authenticationStatus(), {
+    agent: "codex",
+    method: "interactive_login",
+    state: "authenticated",
+  });
   await session.delete();
 
-  assert.equal(captures.length, 13);
+  assert.equal(captures.length, 14);
   assert.deepEqual(
     captures.map(({ target, init }) => `${init.method} ${target.pathname}`),
     [
@@ -91,6 +100,7 @@ test("PRD-021/025/028-037 dispatch exactly 13 canonical operations", async () =>
       `POST /v1/sessions/${SESSION_ID}/exec`,
       `POST /v1/sessions/${SESSION_ID}/checkpoint`,
       `POST /v1/sessions/${SESSION_ID}/open`,
+      `GET /v1/sessions/${SESSION_ID}/agent-auth`,
       `DELETE /v1/sessions/${SESSION_ID}`,
     ],
   );
@@ -126,6 +136,47 @@ test("PRD-021/025/028-037 dispatch exactly 13 canonical operations", async () =>
   const singleBody = JSON.parse(captures.at(-1).init.body);
   assert.deepEqual(singleBody, { command: "single", args: [] });
   assert.equal(RECORD_ID, (await runa.records.list())[0].id);
+  await runa.close();
+});
+
+test("agent authentication status is closed, strict, and secret-free", async () => {
+  const invalid = [
+    agentAuthenticationFixture({ method: "oauth" }),
+    agentAuthenticationFixture({ state: "unknown" }),
+    agentAuthenticationFixture({ method: "api_key", state: "authenticated" }),
+    agentAuthenticationFixture({ method: "interactive_login", state: "configured" }),
+    agentAuthenticationFixture({ method: "none", state: "installing" }),
+    agentAuthenticationFixture({ agent: "other" }),
+    agentAuthenticationFixture({ token: "must-not-be-exposed" }),
+    { method: "none", state: "not_applicable" },
+  ];
+  for (const payload of invalid) {
+    const runa = new Runa({
+      apiKey: API_KEY,
+      fetch: async (url) => new URL(url).pathname.endsWith("/agent-auth")
+        ? jsonResponse(payload)
+        : jsonResponse(sessionFixture()),
+    });
+    const session = await runa.sessions.get(SESSION_ID);
+    await assert.rejects(
+      session.authenticationStatus(),
+      (error) => error instanceof ApiError && error.code === "malformed_response",
+    );
+    await runa.close();
+  }
+
+  const runa = new Runa({
+    apiKey: API_KEY,
+    fetch: async (url) => new URL(url).pathname.endsWith("/agent-auth")
+      ? jsonResponse({ agent: null, method: "none", state: "not_applicable" })
+      : jsonResponse(sessionFixture()),
+  });
+  const session = await runa.sessions.get(SESSION_ID);
+  assert.deepEqual(await session.authenticationStatus(), {
+    agent: null,
+    method: "none",
+    state: "not_applicable",
+  });
   await runa.close();
 });
 

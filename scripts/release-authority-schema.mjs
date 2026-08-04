@@ -96,7 +96,7 @@ export function validateTrustedRolePayload(role, payload) {
     assert(Number.isSafeInteger(payload.conformance_counts.fixtures) &&
       payload.conformance_counts.fixtures > 0);
     assert.equal(payload.conformance_counts.modes, 3);
-    assert.equal(payload.conformance_counts.operations, 13);
+    assert.equal(payload.conformance_counts.operations, 14);
     artifact(payload.typescript_artifact, "typescript");
     exact(payload.python_artifacts, [
       "candidate_manifest_sha256", "candidate_run_id", "sdist", "source_commit", "wheel",

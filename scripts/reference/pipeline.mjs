@@ -14,7 +14,7 @@ import {
 
 const requiredPageOwnership = Object.freeze({
   "Core.md": Object.freeze(["Runa", "RunaConfig"]),
-  "Sessions.md": Object.freeze(["Session", "SessionsManager", "SessionAgent", "OutboundPolicyMode", "OutboundPolicy", "SessionCreateOptions", "SessionSnapshot", "SessionStatus", "ExecOptions", "ExecResult", "Acknowledgement", "OpenSessionResult"]),
+  "Sessions.md": Object.freeze(["Session", "SessionsManager", "SessionAgent", "AgentAuthenticationMethod", "AgentAuthenticationState", "AgentAuthenticationStatus", "OutboundPolicyMode", "OutboundPolicy", "SessionCreateOptions", "SessionSnapshot", "SessionStatus", "ExecOptions", "ExecResult", "Acknowledgement", "OpenSessionResult"]),
   "Account-and-records.md": Object.freeze(["Me", "Workspace", "AssignedWorkspace", "UnassignedWorkspace", "EstimatedUsage", "RecordsManager", "Record"]),
   "Shared.md": Object.freeze(["ConfigError", "ApiError", "CommandError", "RunaError", "OpaqueWireValue", "stdoutText", "stderrText"]),
 });
@@ -338,6 +338,7 @@ const memberDescriptions = Object.freeze({
   allowedHosts: "Optional ordered host allowlist copied into the create request.",
   apiKey: "Optional constructor API key selected before environment or explicit-file sources.",
   assigned: "Literal discriminator for the workspace assignment variant.",
+  authenticationStatus: "Reads the secret-free authentication status of this session's agent.",
   baseUrl: "Optional explicit canonical Runa API origin.",
   checkpoint: "Creates one named checkpoint through the owning session handle.",
   close: "Closes this client after already admitted work completes.",
@@ -365,6 +366,7 @@ const memberDescriptions = Object.freeze({
   memoryMiB: "Memory quantity in mebibytes.",
   mode: "Selected allow-list or deny-list policy mode.",
   message: "Fixed safe English public error message.",
+  method: "Authentication method selected for the session agent.",
   name: "Public name returned by the API or supplied for an operation.",
   note: "Explanatory estimated-usage note returned by the API.",
   ok: "Literal true acknowledgement of successful completion.",
@@ -381,6 +383,7 @@ const memberDescriptions = Object.freeze({
   slug: "Validated runtime slug returned for the session.",
   snapshot: "Current immutable snapshot owned by this session handle.",
   start: "Starts the owning session and refreshes only that handle after success.",
+  state: "Strict secret-free authentication state of the session agent.",
   status: "Documented session status or HTTP status, according to the owning declaration.",
   stderr: "Complete buffered standard-error text returned by execution.",
   stderrTruncated: "Whether the returned standard-error text was truncated.",
@@ -417,6 +420,7 @@ const returnDescriptions = Object.freeze({
   "Session#exec": "The complete buffered execution result.",
   "Session#checkpoint": "An acknowledgement whose ok member is literal true.",
   "Session#open": "A validated handoff result returned without automatic use.",
+  "Session#authenticationStatus": "The strict agent authentication method and state.",
   "stdoutText#stdoutText": "The stdout string when present with the correct type, otherwise undefined.",
   "stderrText#stderrText": "The stderr string when present with the correct type, otherwise undefined.",
   "ConfigError#constructor": "A safe configuration error instance.",
@@ -553,7 +557,7 @@ const validateLinks = (files) => {
 
 const validateModel = (model, expectedNames) => {
   assert.deepEqual(model.entries.map((item) => item.name).sort(), expectedNames);
-  assert.equal(new Set(model.entries.map((item) => item.name)).size, 28);
+  assert.equal(new Set(model.entries.map((item) => item.name)).size, 31);
   for (const entry of model.entries) {
     assert.equal(curation[entry.name].page, entry.page);
     assert.equal(entry.signature.length > 3, true);
@@ -656,7 +660,7 @@ export async function runReferencePipeline({ write = true } = {}) {
   const reflection = JSON.parse(await readFile("docs/.reflection.json", "utf8"));
   const surface = JSON.parse(await readFile("evidence/export-snapshot.json", "utf8"));
   const expectedNames = [...surface.runtime_exports, ...surface.type_exports].sort();
-  assert.equal(expectedNames.length, 28);
+  assert.equal(expectedNames.length, 31);
   assert.deepEqual(Object.keys(curation).sort(), expectedNames);
   const reflectedRoots = (reflection.children ?? []).filter((entry) =>
     expectedNames.includes(entry.name));
