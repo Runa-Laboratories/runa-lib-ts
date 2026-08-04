@@ -120,6 +120,7 @@ test("PRD-021/025/028-037 dispatch exactly 14 canonical operations", async () =>
   assert.deepEqual(createBody, {
     name: "worker",
     agent: "codex",
+    background: true,
     vcpus: 2,
     memory_mib: 4096,
     allowed_hosts: ["example.invalid"],
@@ -136,6 +137,37 @@ test("PRD-021/025/028-037 dispatch exactly 14 canonical operations", async () =>
   const singleBody = JSON.parse(captures.at(-1).init.body);
   assert.deepEqual(singleBody, { command: "single", args: [] });
   assert.equal(RECORD_ID, (await runa.records.list())[0].id);
+  await runa.close();
+});
+
+test("interactive creates default to background and preserve explicit control", async () => {
+  const bodies = [];
+  const runa = new Runa({
+    apiKey: API_KEY,
+    fetch: async (_url, init) => {
+      if (init.method === "GET") {
+        return jsonResponse(sessionFixture({ status: "running" }));
+      }
+      bodies.push(JSON.parse(init.body));
+      return jsonResponse(sessionFixture({ status: "creating" }), 201);
+    },
+  });
+
+  const codex = await runa.sessions.create("codex", { agent: "codex" });
+  const claude = await runa.sessions.create("claude", { agent: "claude-code" });
+  await runa.sessions.create("legacy", { agent: "codex", background: false });
+  await runa.sessions.create("openclaw", { agent: "openclaw" });
+
+  assert.equal(codex.snapshot.status, "creating");
+  assert.equal(claude.snapshot.status, "creating");
+  assert.deepEqual(bodies, [
+    { name: "codex", agent: "codex", background: true },
+    { name: "claude", agent: "claude-code", background: true },
+    { name: "legacy", agent: "codex", background: false },
+    { name: "openclaw", agent: "openclaw" },
+  ]);
+  assert.equal(await codex.refresh(), codex);
+  assert.equal(codex.snapshot.status, "running");
   await runa.close();
 });
 
@@ -384,6 +416,7 @@ test("TC-025-07 rejects local invalid values before I/O", async () => {
     ["ok", { outboundPolicy: { mode: "denylist", hosts: ["example.com", "example.com"] } }],
     ["ok", { outboundPolicy: { mode: "denylist", hosts: Array(129).fill("example.invalid") } }],
     ["ok", { runtimePort: 65_536 }],
+    ["ok", { background: "true" }],
     ["ok", { unknown: true }],
   ]) {
     await assert.rejects(runa.sessions.create(name, options), TypeError);

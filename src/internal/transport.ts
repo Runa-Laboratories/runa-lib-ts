@@ -274,12 +274,19 @@ async function disposition(
 }
 
 function deadlineFor(operationKey: OperationKey, timeoutSecs?: number): number {
+  if (operationKey === "sessions.agentAuth") return 30_000;
   if (READS.has(operationKey)) return 10_000;
   if (operationKey === "sessions.create") return 90_000;
   if (operationKey === "sessions.exec") {
     return (timeoutSecs ?? 120) * 1_000 + 15_000;
   }
   return 60_000;
+}
+
+function totalDeadlineFor(operationKey: OperationKey, timeoutSecs?: number): number {
+  if (operationKey === "sessions.agentAuth") return 90_000;
+  if (READS.has(operationKey)) return 30_000;
+  return deadlineFor(operationKey, timeoutSecs);
 }
 
 function uniformDelay(cap: number, randomUint32: () => number): number {
@@ -359,7 +366,7 @@ export class FetchTransport {
     );
     observer.start();
     const startedAt = this.#runtime.now();
-    const totalDeadline = READS.has(operationKey) ? 30_000 : deadlineFor(operationKey, input.timeoutSecs);
+    const totalDeadline = totalDeadlineFor(operationKey, input.timeoutSecs);
     const maximumAttempts = READS.has(operationKey) ? 3 : 1;
     const callerSignal = input.signal;
     let attempt = 0;

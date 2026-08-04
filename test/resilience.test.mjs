@@ -2,7 +2,13 @@ import assert from "node:assert/strict";
 import { test } from "vitest";
 
 import { FetchTransport } from "../dist/internal/transport.js";
-import { API_KEY, jsonResponse, meFixture } from "./helpers.mjs";
+import {
+  API_KEY,
+  SESSION_ID,
+  agentAuthenticationFixture,
+  jsonResponse,
+  meFixture,
+} from "./helpers.mjs";
 
 function config(fetch, hooks = {}) {
   return Object.freeze({
@@ -18,12 +24,17 @@ function config(fetch, hooks = {}) {
 function deterministicRuntime(randomValues = []) {
   let now = 0;
   const delays = [];
+  const deadlines = [];
   let index = 0;
   return {
+    deadlines,
     delays,
     runtime: {
       now: () => now,
-      timer: () => ({ cancel() {} }),
+      timer: (_callback, delay) => {
+        deadlines.push(delay);
+        return { cancel() {} };
+      },
       sleep: async (delay) => {
         delays.push(delay);
         now += delay;
@@ -33,6 +44,24 @@ function deterministicRuntime(randomValues = []) {
     },
   };
 }
+
+test("agent-auth receives a dedicated 30-second attempt deadline", async () => {
+  const authRuntime = deterministicRuntime();
+  const authTransport = new FetchTransport(
+    config(async () => jsonResponse(agentAuthenticationFixture())),
+    authRuntime.runtime,
+  );
+  await authTransport.execute("sessions.agentAuth", { id: SESSION_ID });
+  assert.deepEqual(authRuntime.deadlines, [30_000]);
+
+  const regularRuntime = deterministicRuntime();
+  const regularTransport = new FetchTransport(
+    config(async () => jsonResponse(meFixture())),
+    regularRuntime.runtime,
+  );
+  await regularTransport.execute("me.get");
+  assert.deepEqual(regularRuntime.deadlines, [10_000]);
+});
 
 test("PRD-009/026 retry only pre-response reads with unbiased mapping", async () => {
   let calls = 0;

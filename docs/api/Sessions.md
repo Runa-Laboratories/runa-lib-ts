@@ -348,7 +348,7 @@ Invokes the accepted public `create` operation owned by `SessionsManager`.
 **Returns:** A client-owned handle for the created session.
 
 - **name:** Session name containing between one and eighty characters.
-- **options:** Optional agent, resource, host, and runtime-port settings.
+- **options:** Optional agent, background, resource, host, and runtime-port settings.
 
 **Throws**
 
@@ -357,7 +357,8 @@ Invokes the accepted public `create` operation owned by `SessionsManager`.
 **Example**
 
 ```ts
-await runa.sessions.create("worker", { agent: "codex" });
+const created = await runa.sessions.create("worker", { agent: "codex" });
+if (created.snapshot.status === "creating") await created.refresh();
 ```
 
 Source: [docs/reference/examples/workflows.ts](../reference/examples/workflows.ts) - Test: `TC-048-EXAMPLE-SESSIONS_CREATE`
@@ -525,7 +526,7 @@ hosts: readonly string[]
 <a id="sessioncreateoptions"></a>
 ## SessionCreateOptions
 
-Optional resources and network policy supplied during session creation.
+Optional agent provisioning, resources, and network policy supplied during session creation.
 
 **Kind:** type
 
@@ -543,6 +544,14 @@ Selected session agent, when the API returned or the caller supplied one.
 
 ```ts
 agent?: SessionAgent
+```
+
+#### background
+
+Whether creation may return while session provisioning is still in progress.
+
+```ts
+background?: boolean
 ```
 
 #### vcpus
