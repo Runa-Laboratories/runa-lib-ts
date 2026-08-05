@@ -20,7 +20,7 @@ const summaries = Object.freeze({
   AgentAuthenticationStatus: "Secret-free authentication status of a session agent.",
   OutboundPolicyMode: "Accepted outbound network policy mode.",
   OutboundPolicy: "Explicit allow-list or deny-list policy for session creation.",
-  SessionCreateOptions: "Optional resources and network policy supplied during session creation.",
+  SessionCreateOptions: "Optional agent provisioning, resources, and network policy supplied during session creation.",
   SessionSnapshot: "Immutable public observation of a session.",
   SessionStatus: "Documented session status returned by the API.",
   ExecOptions: "Optional working directory and timeout for buffered execution.",

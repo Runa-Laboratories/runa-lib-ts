@@ -44,6 +44,14 @@ immediate handoff and do not print, persist, cache, or fetch it automatically.
 `Session.authenticationStatus()` returns only the selected agent, method, and
 strict state; it never returns terminal output, account identity, or secrets.
 
+Claude Code and Codex sessions use interactive subscription login by default.
+Their create request sends `background: true`, so creation can immediately
+return a session whose status is `"creating"`. Poll `session.refresh()` until
+the session becomes `"running"`, then inspect `authenticationStatus()` and use
+`open()` when sign-in is required. Pass `{ background: false }` explicitly to
+request the legacy synchronous create behavior. OpenClaw keeps the existing
+omission behavior unless `background` is provided explicitly.
+
 Session creation accepts `outboundPolicy` with mode `"allowlist"` or
 `"denylist"` and up to 128 exact or leading-wildcard domains. An empty list is
 explicit. The legacy `allowedHosts` option remains supported but cannot be sent

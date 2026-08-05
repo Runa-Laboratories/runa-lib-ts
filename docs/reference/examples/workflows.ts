@@ -25,7 +25,8 @@ await runa.records.list();
 // end-example
 
 // example:sessions-create
-await runa.sessions.create("worker", { agent: "codex" });
+const created = await runa.sessions.create("worker", { agent: "codex" });
+if (created.snapshot.status === "creating") await created.refresh();
 // end-example
 
 // example:sessions-list

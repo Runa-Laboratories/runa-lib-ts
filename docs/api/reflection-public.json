@@ -1004,6 +1004,15 @@
         ]
       },
       {
+        "name": "background",
+        "kind": "property",
+        "optional": true,
+        "readonly": true,
+        "signatures": [
+          "background?: boolean"
+        ]
+      },
+      {
         "name": "vcpus",
         "kind": "property",
         "optional": true,

@@ -107,12 +107,18 @@ export interface SessionSnapshot {
 }
 
 /**
- * Optional resources and network policy supplied during session creation.
+ * Optional agent provisioning, resources, and network policy supplied during session creation.
  * @runa-contract sessioncreateoptions-summary PRD-028#R-028-01
  */
 export interface SessionCreateOptions {
   /** Optional selected session agent. */
   readonly agent?: SessionAgent;
+  /**
+   * Whether creation should return while the machine is still being prepared.
+   * Defaults to `true` for interactive Claude Code and Codex sessions. Pass
+   * `false` to request the legacy synchronous creation behavior explicitly.
+   */
+  readonly background?: boolean;
   /** Optional virtual CPU quantity. */
   readonly vcpus?: number;
   /** Optional memory quantity in mebibytes. */
