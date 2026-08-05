@@ -2,7 +2,7 @@
   "schema_version": 2,
   "status": "PASS",
   "method": "scripts/verify-duplicate-abstractions.mjs",
-  "audited_source_sha256": "1337ade8f792408bc69c97e2b0c4de0102b3c8e1c4cc1a7ffdcda99061b832f5",
+  "audited_source_sha256": "3703cd69fd9866589573154b1e92d92764456978282e10f06a302b5f894a1d0d",
   "audited_files": [
     "src/client.ts",
     "src/config.ts",

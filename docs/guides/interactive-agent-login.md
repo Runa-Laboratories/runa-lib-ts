@@ -25,3 +25,9 @@ The create call sends `background: true` automatically for `"claude-code"`
 and `"codex"`. Pass `background: false` to request synchronous creation, or
 set it explicitly for another agent. A background create may return status
 `"creating"`; `refresh()` is the supported polling mechanism.
+
+Synchronous creation can legitimately use the platform's 25-minute durable
+provisioning lease and its five-minute recovery window. The SDK therefore
+allows 31 minutes for `sessions.create` before timing out. Prefer the default
+background flow for interactive agents so callers receive a session handle
+immediately.

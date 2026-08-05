@@ -273,10 +273,16 @@ async function disposition(
   }
 }
 
+// The producer owns a 25-minute provisioning lease plus a five-minute recovery
+// grace window. Explicit `background: false` creation keeps the request open,
+// so the client must observe both phases. The extra minute covers final
+// serialization and network jitter.
+const SESSION_CREATE_DEADLINE_MS = 31 * 60 * 1_000;
+
 function deadlineFor(operationKey: OperationKey, timeoutSecs?: number): number {
   if (operationKey === "sessions.agentAuth") return 30_000;
   if (READS.has(operationKey)) return 10_000;
-  if (operationKey === "sessions.create") return 90_000;
+  if (operationKey === "sessions.create") return SESSION_CREATE_DEADLINE_MS;
   if (operationKey === "sessions.exec") {
     return (timeoutSecs ?? 120) * 1_000 + 15_000;
   }
