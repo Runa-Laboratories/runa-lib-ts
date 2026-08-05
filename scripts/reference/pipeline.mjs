@@ -339,6 +339,7 @@ const memberDescriptions = Object.freeze({
   apiKey: "Optional constructor API key selected before environment or explicit-file sources.",
   assigned: "Literal discriminator for the workspace assignment variant.",
   authenticationStatus: "Reads the secret-free authentication status of this session's agent.",
+  background: "Whether creation may return while session provisioning is still in progress.",
   baseUrl: "Optional explicit canonical Runa API origin.",
   checkpoint: "Creates one named checkpoint through the owning session handle.",
   close: "Closes this client after already admitted work completes.",
@@ -430,7 +431,7 @@ const returnDescriptions = Object.freeze({
 const parameterDescriptions = Object.freeze({
   "Runa#constructor.config": "Optional client configuration resolved under the documented precedence rules.",
   "SessionsManager#create.name": "Session name containing between one and eighty characters.",
-  "SessionsManager#create.options": "Optional agent, resource, host, and runtime-port settings.",
+  "SessionsManager#create.options": "Optional agent, background, resource, host, and runtime-port settings.",
   "SessionsManager#get.id": "Exact canonical lowercase session UUID.",
   "Session#exec.command": "Non-empty command string or non-empty ordered string argument vector.",
   "Session#exec.options": "Optional working directory and integer timeout.",

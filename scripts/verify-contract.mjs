@@ -12,10 +12,10 @@ import path from "node:path";
 import { promisify } from "node:util";
 
 const execute = promisify(execFile);
-const CANONICAL_CONTRACT_COMMIT = "18cf8ff7d343ccbdbfac1493937bf20f49b238b6";
-const CANONICAL_SNAPSHOT_SHA256 = "327c6ccc6a4572929ff737bc8b1af6bd3189e139548af632245ce93118368298";
-const CANONICAL_ARTIFACT_MANIFEST_SHA256 = "ff86b646a624063876a28ac5c8766e0b2e52f94f16d94993f5db13d3e24c7507";
-const CANONICAL_PROJECTION_SHA256 = "1b6078b566428fcdb21e1913a1fa012955a5a7ab5dac9b429d1f2bac45aa679b";
+const CANONICAL_CONTRACT_COMMIT = "bb772a134e7722ee9cfe3df9cfc27bc59df03090";
+const CANONICAL_SNAPSHOT_SHA256 = "497ad3bfd712d7ed0c55289e94808435a924fd5cc909f1ab0620f860a6ebfc98";
+const CANONICAL_ARTIFACT_MANIFEST_SHA256 = "42a36fb04b8d770b16769b064711ab153894d76df96414bca201719d2849a18c";
+const CANONICAL_PROJECTION_SHA256 = "998c10514ce704435e36569243a0e158f5267cecd4be669c2f01e79838484e80";
 const CANONICAL_GENERATOR_SHA256 = "75de6242dde7fccfc9251d371020c5dc5ffb96a65399647b6d54d2c8850202e1";
 const generatedRoot = path.resolve("src/internal/contract/generated");
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");

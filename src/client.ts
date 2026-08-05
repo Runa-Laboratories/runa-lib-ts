@@ -30,7 +30,7 @@ export interface SessionsManager {
   /**
    * Creates one session and returns its client-owned handle.
    * @param name Session name containing between one and eighty characters.
-   * @param options Optional agent, resource, host, and runtime-port settings.
+   * @param options Optional agent, background, resource, host, and runtime-port settings.
    * @returns A client-owned handle for the created session.
    * @throws ApiError when the API rejects the operation or returns an invalid response.
    * @example docs/reference/examples/workflows.ts#sessions-create
@@ -171,7 +171,7 @@ function createBody(
   const source = options as SessionCreateOptions &
     globalThis.Record<string, unknown>;
   if (Object.keys(source).some((key) =>
-    !["agent", "vcpus", "memoryMiB", "allowedHosts", "outboundPolicy", "runtimePort"].includes(key)
+    !["agent", "background", "vcpus", "memoryMiB", "allowedHosts", "outboundPolicy", "runtimePort"].includes(key)
   )) {
     throw new TypeError("Invalid session create options.");
   }
@@ -188,6 +188,14 @@ function createBody(
       throw new TypeError("Invalid session create options.");
     }
     body.agent = source.agent;
+  }
+  if (own(source, "background") && source.background !== undefined) {
+    if (typeof source.background !== "boolean") {
+      throw new TypeError("Invalid session create options.");
+    }
+    body.background = source.background;
+  } else if (source.agent === "claude-code" || source.agent === "codex") {
+    body.background = true;
   }
   if (own(source, "vcpus") && source.vcpus !== undefined) {
     if (!Number.isInteger(source.vcpus) || source.vcpus < 1 || source.vcpus > 8) {
