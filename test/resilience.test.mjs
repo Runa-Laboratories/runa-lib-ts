@@ -203,11 +203,13 @@ test("PRD-039 emits exact safe retry order and isolates failing hooks", async ()
 
 test("PRD-008 deadline remains authoritative while streaming a response", async () => {
   let fireDeadline;
+  let configuredDeadline;
   let dispatches = 0;
   const runtime = {
     now: () => 0,
-    timer(callback) {
+    timer(callback, delay) {
       fireDeadline = callback;
+      configuredDeadline = delay;
       return { cancel() {} };
     },
     sleep: async () => {},
@@ -241,6 +243,7 @@ test("PRD-008 deadline remains authoritative while streaming a response", async 
     (error) => error instanceof DOMException && error.name === "TimeoutError",
   );
   assert.equal(dispatches, 1);
+  assert.equal(configuredDeadline, 31 * 60 * 1_000);
 });
 
 test("PRD-008 timeout cancels a response body that hangs after headers", async () => {
