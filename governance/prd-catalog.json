@@ -6,22 +6,22 @@
     "prds/libs/typescript"
   ],
   "source_count": 57,
-  "requirement_count": 992,
-  "acceptance_test_count": 530,
+  "requirement_count": 994,
+  "acceptance_test_count": 532,
   "sources": [
     {
       "file": "prds/libs/shared/PRD-001-sdk-boundary-and-laws.md",
       "scope": "shared-applicable",
-      "sha256": "cb068159e502be7ae2f0a5c009c42c2e33ccfc95f7d1f6376f4af67d5c2946b5",
-      "requirement_count": 19,
-      "acceptance_test_count": 11
+      "sha256": "348fc79343577ff52cce4d896a910d7a1e81cf284c94f34d478e8f93587ee438",
+      "requirement_count": 20,
+      "acceptance_test_count": 12
     },
     {
       "file": "prds/libs/shared/PRD-002-rest-contract-baseline.md",
       "scope": "shared-applicable",
-      "sha256": "65a649fbeb569103703a92dea12110b8697fe95d4e3c4beddf5f818647058776",
-      "requirement_count": 25,
-      "acceptance_test_count": 20
+      "sha256": "3d0dd27fff5f613bb137731e7f8c678b90deaf352cfa93b138111b3ca199ea55",
+      "requirement_count": 26,
+      "acceptance_test_count": 21
     },
     {
       "file": "prds/libs/shared/PRD-003-contract-binding-and-schema-provenance.md",

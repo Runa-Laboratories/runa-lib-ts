@@ -11,15 +11,15 @@ import {
 test("canonical contract identity binds the gitlink and every release input", async () => {
   const identity = await loadCanonicalContractIdentity();
   assert.deepEqual(identity, {
-    approvedCheckout: "18cf8ff7d343ccbdbfac1493937bf20f49b238b6",
-    artifactManifestSha256: "ff86b646a624063876a28ac5c8766e0b2e52f94f16d94993f5db13d3e24c7507",
-    canonicalContractSha256: "30af2ff539ee69ac72364bff81ebd8ec42f517a1a061a4a2714086ee44fb2ea5",
-    canonicalRef: "286bdb84448b61f2f8142bc27daae48ad78cdf63",
-    generatedManifestSha256: "3b086a9ce20ae1222374b416a16a456069f2ddf2c124edad15c2baf165218e09",
+    approvedCheckout: "bb772a134e7722ee9cfe3df9cfc27bc59df03090",
+    artifactManifestSha256: "42a36fb04b8d770b16769b064711ab153894d76df96414bca201719d2849a18c",
+    canonicalContractSha256: "15669543eef00971c51d0d58ac34f2d6f367bb3f2b4b78acfd5981c55c4973b1",
+    canonicalRef: "31ac7cee07007143a41f704569ce6d59e230e276",
+    generatedManifestSha256: "3e0ef590f62b1460f8f49b1c93b23bce3f65ace1c99eee8cb3b53bcec65e0a31",
     generatorSha256: "75de6242dde7fccfc9251d371020c5dc5ffb96a65399647b6d54d2c8850202e1",
-    openapiSha256: "1a5f589aa60eff78e19c95df6c410e80d65dc1e7cf0421b196b6c201e73ba925",
-    projectionSha256: "1b6078b566428fcdb21e1913a1fa012955a5a7ab5dac9b429d1f2bac45aa679b",
-    snapshotSha256: "327c6ccc6a4572929ff737bc8b1af6bd3189e139548af632245ce93118368298",
+    openapiSha256: "a89f77203956f45e4e14f80c2b3ce02fcb4e435eaefe22b9515290caf58992a8",
+    projectionSha256: "998c10514ce704435e36569243a0e158f5267cecd4be669c2f01e79838484e80",
+    snapshotSha256: "497ad3bfd712d7ed0c55289e94808435a924fd5cc909f1ab0620f860a6ebfc98",
   });
 
   const normalized = {
